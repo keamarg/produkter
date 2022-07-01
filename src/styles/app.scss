@@ -1,0 +1,7 @@
+//import bootstrap css (før det andet)
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Import partials
+@import "colors";
+@import "variables";
+@import "style"; // alle andre type styles, opdel evt. i flere partials efter behov

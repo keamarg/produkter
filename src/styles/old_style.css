@@ -1,0 +1,400 @@
+/* style.css: overriding existing scss classes with important, since it is not possible to recompile due to CDN */
+
+/* css til at undgå at cms css'et vises som enormt småt */
+
+/*Lagt i index.html*/
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  background-color: #212121 !important;
+
+  /* color: #233249 !important; */
+}
+
+iframe {
+  width: 100%;
+  border: 2px solid #ccc;
+}
+
+[v-cloak] {
+  display: none;
+}
+/*Lagt i index.html*/
+
+/*Text*/
+h5,
+p {
+  color: white;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* Style buttons */
+
+.btn-custom-product {
+  background-color: #f8f9fa !important;
+  border: none !important;
+  color: #343a40 !important;
+  /* padding: 0.5rem !important; */
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  border-radius: 1rem !important;
+}
+
+.btn-custom-product:hover {
+  background-color: #343a40 !important;
+  color: #f8f9fa !important;
+}
+
+.btn-custom-product i {
+  color: #343a40;
+}
+
+.btn-custom-product:hover i {
+  color: #f8f9fa;
+}
+
+.btn-search {
+  color: #f8f9fa !important;
+}
+
+.btn-search:hover {
+  color: #343a40 !important;
+}
+
+.btn-custom-nav {
+  color: #eb5045 !important;
+  background-color: white !important;
+  border-color: white !important;
+  font-weight: bold !important;
+  border: 0px !important;
+
+  /* text-transform: uppercase !important; */
+}
+
+.btn-custom-nav:hover {
+  background-color: #eb5045 !important;
+  color: white !important;
+}
+
+.btn-custom-nav:active {
+  background-color: #eb5045 !important;
+  color: white !important;
+  border: 0px !important;
+}
+
+.btn-custom-nav:focus {
+  outline: none !important;
+}
+
+.carousel-indicators {
+  z-index: 1 !important;
+  position: relative;
+}
+
+/* rykker navbar helt til venstre */
+/* .row {
+    --bs-gutter-x: 0rem !important;
+  } */
+
+.rounded-custom {
+  border-radius: 10px;
+}
+
+.carousel img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 30rem;
+  width: 100%;
+}
+.carousel-caption {
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-caption:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+}
+
+/* .carousel-caption p {
+    transition: all 0.2s ease-in-out;
+  } */
+
+/* .carousel-caption:hover p {
+    color: #ea4e44 !important;
+  } */
+
+/* Cards */
+.card-text {
+  font-size: 1rem;
+}
+/* .embed-responsive .card-img-top {
+    object-fit: cover;
+    object-position: center; 
+  } */
+
+.card-img-top {
+  height: 20rem;
+  object-fit: cover;
+  object-position: center;
+}
+.card {
+  transition: all 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.05);
+  /* color: #ea4e44 !important; */
+}
+
+.card:hover .card-title {
+  color: #eb5045 !important;
+}
+
+/* Multi carousel */
+/* Tried this, did not work: https://www.codeply.com/p/0CWffz76Q9 */
+
+/* Icons sidebar */
+
+.sidebar-icons {
+  color: #ced4da;
+  font-size: 4rem;
+  line-height: 5rem;
+}
+
+.sidebar-icons:hover {
+  color: white;
+}
+.tooltip-inner {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 2rem;
+  opacity: 0.6;
+}
+/* 
+  .tooltip.top .tooltip-arrow {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.4 !important;
+  }
+  
+  .tooltip.right .tooltip-arrow {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.4 !important;
+  }
+  
+  .tooltip.bottom .tooltip-arrow {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.4 !important;
+  }
+  
+  .tooltip.left .tooltip-arrow {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.4 !important;
+  } */
+
+/* .sidebar-text {
+    color: #ced4da;
+    font-size: 2rem;
+    line-height: 5rem;
+  } */
+
+.sidebar-icon-like:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\f415";
+  color: white;
+  opacity: 0.5;
+  transition: all 0.6s ease-in-out;
+}
+
+.sidebar-icon-like:hover:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\f415";
+  color: white;
+  opacity: 1;
+}
+
+.sidebar-icon-archive:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\F10C";
+  color: white;
+  opacity: 0.5;
+  transition: all 0.6s ease-in-out;
+}
+
+.sidebar-icon-archive:hover:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\F10C";
+  color: white;
+  opacity: 1;
+}
+
+.sidebar-icon-share:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\F52D";
+  color: white;
+  opacity: 0.5;
+  transition: all 0.6s ease-in-out;
+}
+
+.sidebar-icon-share:hover:before {
+  font-family: Arial, Helvetica, sans-serif;
+  content: "\F52D";
+  color: white;
+  opacity: 1;
+}
+
+/* .sidebar-icon-like:hover:before {
+    font-family: Arial, Helvetica, sans-serif;
+    content: "Likes";
+    opacity: 0.4;
+  } */
+
+/* .sidebar-icon-archive:before {
+    content: "\f417";
+    color: white;
+    opacity: 1;
+    transition: all 2s ease-in-out;
+  }
+  
+  .sidebar-icon-archive:hover:before {
+    content: "Arkiv";
+    opacity: 0.4;
+  } */
+
+/* @keyframes changeContent {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      content: "Likes";
+    }
+  }
+  
+  .sidebar-icon-like:before {
+    content: "\F417";
+    transition: all 0.2s linear;
+    animation-direction: reverse;
+  }
+  .sidebar-icon-like:hover:before {
+    animation-fill-mode: forwards;
+    animation: changeContent 0.5s linear forwards;
+  } */
+
+/* .product {
+    text-align: left;
+    color: white;
+    font-size: 16px;
+    min-height: 60rem;
+  } */
+
+/* custom media queries*/
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .carousel-indicators button {
+    left: 3rem;
+    position: relative;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .carousel-indicators button {
+    left: 4rem;
+    position: relative;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .carousel-indicators button {
+    left: 4rem;
+    position: relative;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .carousel-indicators button {
+    left: 6rem;
+    position: relative;
+  }
+}
+
+/*transitions*/
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.iframediv {
+  border: 3rem solid rgba(0, 0, 0, 0) !important;
+  filter: drop-shadow(0 0 5rem rgba(0, 0, 0, 1)) !important;
+}
+
+/*search bar options*/
+.dropdown {
+  position: relative !important;
+  /* display: inline-block !important; */
+}
+.dropdown-content {
+  /* display: none; */
+  position: absolute !important;
+  background-color: rgba(256, 256, 256, 0.8) !important;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2) !important;
+  z-index: 2 !important;
+  font-size: 1.2rem !important;
+  cursor: pointer !important;
+  border-radius: 0.25rem !important;
+}
+.dropdown-content p {
+  color: #343a40 !important;
+  padding: 0.2rem !important;
+  text-decoration: none !important;
+  display: block !important;
+  z-index: 2 !important;
+}
+
+.dropdown-content p:hover {
+  background-color: #ddd;
+}
+
+.likeheart {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 3;
+  color: #eb5045;
+}
+
+.likeheart:hover:before {
+  content: "\F770";
+}
+
+.unlikeheart {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 3;
+}
+
+.unlikeheart:hover:before {
+  /* content: "\F415"; */
+  color: #eb5045;
+}
