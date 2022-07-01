@@ -1,3 +1,4 @@
+//app.vue
 <template>
   <div id="app" class="px-3 py-2 px-sm-5">
     <TopBar :products="products" @updateSearchQuery="updateSearchQuery" />
