@@ -4,11 +4,10 @@
       <div class="navbar-brand p-0 pb-2 d-flex align-items-center">
         <img
           src="https://bibliotek.kea.dk/images/KEAprodukter/KEA_logo_EN_Web_red.png"
-          :style="imgcss"
           class="logo d-inline"
           alt=""
         />
-        <p :style="titlecss" class="d-inline ps-2 m-0">Produkter</p>
+        <p class="navbar-title d-inline ps-2 m-0">Produkter</p>
       </div>
     </router-link>
     <div class="d-flex w-50">
@@ -56,19 +55,19 @@ export default {
   },
   data() {
     return {
-      imgcss: {
-        width: "8rem", // 12
-        "text-align": "left",
-        // "padding-bottom": "1rem",
-      },
-      titlecss: {
-        color: "white",
-        "text-transform": "none",
-        // "margin-bottom": "0.7rem",
-        "font-size": "1.2rem", //2
-        // "padding-bottom": "0rem",
-        // "margin-bottom": "0rem",
-      },
+      // imgcss: {
+      //   width: "8rem", // 12
+      //   "text-align": "left",
+      //   // "padding-bottom": "1rem",
+      // },
+      // titlecss: {
+      //   color: "white",
+      //   "text-transform": "none",
+      //   // "margin-bottom": "0.7rem",
+      //   "font-size": "1.2rem", //2
+      //   // "padding-bottom": "0rem",
+      //   // "margin-bottom": "0rem",
+      // },
       searchQuery: null,
       // keywords: [],
       filteredKeywords: [],

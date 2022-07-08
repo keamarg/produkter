@@ -1,6 +1,13 @@
 <template>
-  <div class="row row-cols-1 row-cols-lg-5 g-4">
-    <div class="col" v-for="card in productsList" :id="card.id" :key="card.id">
+  <div
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6"
+  >
+    <div
+      class="col mb-4"
+      v-for="card in productsList"
+      :id="card.id"
+      :key="card.id"
+    >
       <div class="card text-white bg-dark border-2 h-100">
         <i
           @click="like($event, card)"
@@ -39,7 +46,7 @@ export default {
       if (this.displayAll) {
         productsList = this.products;
       } else {
-        productsList = this.products.slice(0, 10);
+        productsList = this.products.slice(0, 6);
       }
       return productsList;
     },

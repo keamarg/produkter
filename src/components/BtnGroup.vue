@@ -18,7 +18,7 @@
           >
             <button
               type="button"
-              class="btn btn-primary btn-custom-nav me-3 mb-2 mt-2 py-1 px-2 rounded-pill"
+              class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
             >
               {{ material }}
             </button>
@@ -38,7 +38,7 @@
           >
             <button
               type="button"
-              class="btn btn-primary btn-custom-nav me-3 py-1 px-2 rounded-pill"
+              class="btn btn-primary btn-custom-nav me-1 me-sm-3 py-1 px-1 px-sm-2 rounded-pill"
             >
               {{ category }}
             </button>

@@ -25,8 +25,12 @@
             <div class="mb-3 text-start">
               <p pb-5>Del produktet via...</p>
               <br />
-              <p>Facebook&nbsp;</p>
-              <p>Twitter&nbsp;</p>
+              <a :href="getFBUrl" target="_blank">
+                <i class="bi bi-facebook"></i>
+              </a>
+              &nbsp;
+              <a :href="getTwitterUrl"><i class="bi bi-twitter"></i></a>
+
               <p>Instagram&nbsp;</p>
               <p>LinkedIn&nbsp;</p>
               <p>Mail</p>
@@ -35,7 +39,7 @@
           <div class="modal-footer text-start">
             <p>Eller kopier linket</p>
             <br />
-            {{ "https://projekter.kea.dk/keaprodukter/dist/#" + $route.path }}
+            {{ getCurrentUrl }}
             <button
               type="button"
               class="btn btn-primary"
@@ -49,6 +53,43 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {},
+  data() {
+    return {};
+  },
+  computed: {
+    getCurrentUrl() {
+      return `https://projekter.kea.dk/keaprodukter/dist/#${this.$route.path}`;
+    },
+    getFBUrl() {
+      return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+        1,
+        this.$route.path.length
+      )}&quote=Check out this cool product from KEA!`;
+    },
+    getTwitterUrl() {
+      return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+        1,
+        this.$route.path.length
+      )}`;
+    },
+    getLinkedInUrl() {
+      return `https://twitter.com/intent/tweet?text=...!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+        1,
+        this.$route.path.length
+      )}`;
+    },
+  },
+  methods: {
+    log(item) {
+      console.log(item);
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 p {

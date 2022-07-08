@@ -158,6 +158,21 @@ a {
 /* Multi carousel */
 /* Tried this, did not work: https://www.codeply.com/p/0CWffz76Q9 */
 
+/*Navbar*/
+.navbar-brand img {
+  width: 8rem; // 12
+  text-align: left;
+  // "padding-bottom": "1rem",
+}
+.navbar-title {
+  color: white;
+  text-transform: noneM;
+  // "margin-bottom": "0.7rem",
+  font-size: "1.2rem"; //2
+  // "padding-bottom": "0rem",
+  // "margin-bottom": "0rem",
+}
+
 /* Icons sidebar */
 
 .sidebar-icons {
@@ -241,6 +256,7 @@ a {
 }
 
 .sidebar-icon-share:hover:before {
+  cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;
   content: "\F52D";
   color: white;
@@ -297,28 +313,37 @@ a {
 
 /* custom media queries*/
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .carousel-indicators button {
-    left: 3rem;
-    position: relative;
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 576px) {
+  // .carousel-indicators button {
+  //   left: 3rem;
+  //   position: relative;
+  // }
+  .btn-custom-nav {
+    font-size: 0.5rem;
+  }
+  .navbar-brand {
+    font-size: 0.8rem;
+  }
+  .navbar-brand img {
+    width: 6rem; // 12
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .carousel-indicators button {
-    left: 4rem;
-    position: relative;
-  }
+  // .carousel-indicators button {
+  //   left: 4rem;
+  //   position: relative;
+  // }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .carousel-indicators button {
-    left: 4rem;
-    position: relative;
-  }
+  // .carousel-indicators button {
+  //   left: 4rem;
+  //   position: relative;
+  // }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -327,10 +352,10 @@ a {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .carousel-indicators button {
-    left: 6rem;
-    position: relative;
-  }
+  // .carousel-indicators button {
+  //   left: 6rem;
+  //   position: relative;
+  // }
 }
 
 /*transitions*/
