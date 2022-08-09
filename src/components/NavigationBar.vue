@@ -7,7 +7,7 @@
           class="logo d-inline"
           alt=""
         />
-        <p class="navbar-title d-inline ps-2 m-0">Products</p>
+        <p class="navbar-title d-inline ps-2 m-0">Produkter</p>
       </div>
     </router-link>
     <div class="d-flex w-50">

@@ -83,7 +83,7 @@ export default {
       console.log(item);
     },
     homePage() {
-      console.log(this.$route.path);
+      // console.log(this.$route.path);
       if (
         this.$route.path == "/" ||
         this.$route.path == "/home" ||

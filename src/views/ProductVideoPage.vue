@@ -1,9 +1,9 @@
 <template>
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div v-if="products[getIndex()]" class="row align-items-center">
-      <div class="col mt-5 p-5 rounded-custom align-items-center" :style="css">
+      <div class="col pt-3 p-5 rounded-custom align-items-center" :style="css">
         <h1>{{ products[getIndex()].title }}</h1>
-        <div class="iframediv ratio ratio-16x9 rounded-custom">
+        <div class="iframediv ratio ratio-16x9 rounded-custom mt-3">
           <iframe
             class="rounded-custom"
             :src="videosrc"
@@ -39,7 +39,7 @@ export default {
           "), no-repeat",
         backgroundSize: "cover",
         fontSize: "10px", //16
-        minHeight: "60rem",
+        minHeight: "35rem",
       };
     },
   },

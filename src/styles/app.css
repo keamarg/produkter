@@ -11126,7 +11126,6 @@ body {
 }
 
 iframe {
-  width: 100%;
   border: 2px solid #ccc;
 }
 
@@ -11449,8 +11448,8 @@ a {
 }
 
 .iframediv {
-  border: 3rem solid rgba(0, 0, 0, 0);
-  filter: drop-shadow(0 0 5rem black);
+  max-height: 27rem;
+  max-width: 48rem;
 }
 
 /*search bar options*/

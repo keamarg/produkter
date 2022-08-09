@@ -9,7 +9,7 @@ body {
 }
 
 iframe {
-  width: 100%;
+  // width: 100%;
   border: 2px solid #ccc;
 }
 
@@ -370,8 +370,12 @@ a {
   opacity: 0;
 }
 .iframediv {
-  border: 3rem solid rgba(0, 0, 0, 0);
-  filter: drop-shadow(0 0 5rem rgba(0, 0, 0, 1));
+  // border: 3rem solid rgba(0, 0, 0, 0);
+  // filter: drop-shadow(0 0 5rem rgba(0, 0, 0, 1));
+  // height: 100%;
+  // width: 50rem;
+  max-height: 27rem;
+  max-width: 48rem;
 }
 
 /*search bar options*/

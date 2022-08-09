@@ -49,7 +49,7 @@ export default {
           "), no-repeat",
         backgroundSize: "cover",
         fontSize: "16px",
-        minHeight: "60rem",
+        minHeight: "35rem",
       };
     },
   },
