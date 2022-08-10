@@ -1,3 +1,6 @@
+// giver CORS problemer ved brug: cmp-v2.js:147 Uncaught DOMException: Blocked a
+frame with origin "https://projekter.kea.dk" from accessing a cross-origin
+frame.
 <template>
   <div class="share-this">
     <!-- This is the placement code ShareThis provides. -->

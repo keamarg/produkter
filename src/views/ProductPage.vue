@@ -26,7 +26,6 @@
           >
         </div>
         <!-- <ShareThis /> -->
-        <ShareThis />
         <div class="col-lg-5"></div>
       </div>
     </div>
@@ -34,12 +33,11 @@
 </template>
 
 <script>
-import ShareThis from "@/components/ShareThis";
+// import ShareThis from "@/components/ShareThis";
 
 export default {
   name: "ProductPage",
-  components: { ShareThis },
-
+  // components: { ShareThis },
   props: ["products", "loading"],
   computed: {
     articlesrc() {
