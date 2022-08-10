@@ -25,6 +25,8 @@
             ><i class="bi bi-file-earmark-pdf"></i>&nbsp; Hent artikel</a
           >
         </div>
+        <!-- <ShareThis /> -->
+        <ShareThis />
         <div class="col-lg-5"></div>
       </div>
     </div>
@@ -32,8 +34,12 @@
 </template>
 
 <script>
+import ShareThis from "@/components/ShareThis";
+
 export default {
   name: "ProductPage",
+  components: { ShareThis },
+
   props: ["products", "loading"],
   computed: {
     articlesrc() {

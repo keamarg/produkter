@@ -1,4 +1,5 @@
-// inspireret af https://therichpost.com/vue-3-bootstrap-5-modal-popup-form/
+// inspireret af https://therichpost.com/vue-3-bootstrap-5-modal-popup-form/ og
+https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-platform-1l4f
 
 <template>
   <div class="container">
@@ -30,7 +31,10 @@
               </a>
               &nbsp;
               <a :href="getTwitterUrl"><i class="bi bi-twitter"></i></a>
-
+              &nbsp;
+              <a :href="getLinkedInUrl"><i class="bi bi-linkedin"></i></a>
+              &nbsp;
+              <a :href="getInstagramUrl"><i class="bi bi-linkedin"></i></a>
               <p>Instagram&nbsp;</p>
               <p>LinkedIn&nbsp;</p>
               <p>Mail</p>
@@ -77,7 +81,13 @@ export default {
       )}`;
     },
     getLinkedInUrl() {
-      return `https://twitter.com/intent/tweet?text=...!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+        1,
+        this.$route.path.length
+      )}`;
+    },
+    getInstagramUrl() {
+      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
         1,
         this.$route.path.length
       )}`;

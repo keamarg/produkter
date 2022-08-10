@@ -13,8 +13,7 @@
     "bootstrap-icons": "^1.8.3",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.16",
-    "vue-social-sharing": "^4.0.0-alpha4"
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
