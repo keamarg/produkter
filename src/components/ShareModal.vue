@@ -29,7 +29,6 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <a
                 class="twIcon me-3 ms-3"
                 target="_blank"
-                type="button"
                 data-bs-dismiss="modal"
                 @click="openSocial('tw')"
               >
@@ -38,7 +37,6 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <a
                 class="fbIcon me-3"
                 target="_blank"
-                type="button"
                 data-bs-dismiss="modal"
                 @click="openSocial('fb')"
               >
@@ -47,7 +45,6 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <a
                 class="liIcon me-3"
                 target="_blank"
-                type="button"
                 data-bs-dismiss="modal"
                 @click="openSocial('li')"
               >
