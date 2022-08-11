@@ -4,7 +4,9 @@
       <div class="col pt-3 p-5 rounded-custom align-items-center" :style="css">
         <h1>{{ products[getIndex()].title }}</h1>
         <div class="iframediv ratio ratio-16x9 rounded-custom mt-3">
+          {{ log(products[getIndex()].video) }}
           <iframe
+            v-if="products[getIndex()].video != 'none'"
             class="rounded-custom"
             :src="videosrc"
             frameborder="0"
@@ -12,6 +14,20 @@
             allowfullscreen
           >
           </iframe>
+          <video
+            v-else-if="products[getIndex()].video2"
+            width="320"
+            height="240"
+            autoplay
+            controls
+            class="rounded-custom"
+          >
+            <source
+              src="https://bibliotek.kea.dk/images/Studie/video/algoritmeforstaaelse.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>

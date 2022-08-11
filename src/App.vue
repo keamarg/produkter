@@ -1,6 +1,7 @@
 //app.vue
 <template>
   <div id="app" class="px-3 py-2 px-sm-5">
+    <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" @updateSearchQuery="updateSearchQuery" />
     <div class="row mb-5">
       <SideBar />

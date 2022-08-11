@@ -11143,6 +11143,26 @@ a {
   text-decoration: none;
 }
 
+.fbIcon {
+  color: #4267b2;
+}
+
+.twIcon {
+  color: #1da1f2;
+}
+
+.liIcon {
+  color: #0a66c2;
+}
+
+.mailIcon {
+  color: #343a40;
+}
+
+a > i {
+  font-size: 2rem;
+}
+
 /*Lagt i index.html*/
 /* Style buttons */
 .btn-custom-product {
@@ -11191,10 +11211,12 @@ a {
   color: white;
 }
 
-.btn-custom-nav:active {
+.btn-custom-nav:active,
+.btn-custom-nav:focus {
   background-color: #eb5045;
   color: white;
   border: 0px;
+  box-shadow: none;
 }
 
 .btn-custom-nav:focus {
@@ -11432,6 +11454,10 @@ a {
     width: 6rem;
   }
 }
+div.modal-body {
+  padding: 0;
+}
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
 /* Medium devices (landscape tablets, 768px and up) */
 /* Large devices (laptops/desktops, 992px and up) */

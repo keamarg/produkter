@@ -24,32 +24,60 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           </div>
           <div class="modal-body">
             <div class="mb-3 text-start">
-              <p pb-5>Del produktet via...</p>
+              <!-- <p pb-5>Del produktet via...</p> -->
               <br />
-              <a :href="getFBUrl" target="_blank">
+              <a
+                class="twIcon me-3 ms-3"
+                target="_blank"
+                type="button"
+                data-bs-dismiss="modal"
+                @click="openSocial('tw')"
+              >
+                <i class="bi bi-twitter"></i>
+              </a>
+              <a
+                class="fbIcon me-3"
+                target="_blank"
+                type="button"
+                data-bs-dismiss="modal"
+                @click="openSocial('fb')"
+              >
                 <i class="bi bi-facebook"></i>
               </a>
-              &nbsp;
-              <a :href="getTwitterUrl"><i class="bi bi-twitter"></i></a>
-              &nbsp;
-              <a :href="getLinkedInUrl"><i class="bi bi-linkedin"></i></a>
-              &nbsp;
-              <a :href="getInstagramUrl"><i class="bi bi-linkedin"></i></a>
-              <p>Instagram&nbsp;</p>
-              <p>LinkedIn&nbsp;</p>
-              <p>Mail</p>
+              <a
+                class="liIcon me-3"
+                target="_blank"
+                type="button"
+                data-bs-dismiss="modal"
+                @click="openSocial('li')"
+              >
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a
+                class="mailIcon"
+                :href="
+                  'mailto:?subject=Kea vidensprodukter&body=' + getCurrentUrl
+                "
+              >
+                <i class="bi bi-envelope-fill"></i>
+              </a>
             </div>
           </div>
           <div class="modal-footer text-start">
-            <p>Eller kopier linket</p>
+            <textarea
+              id="myInput"
+              rows="1"
+              readonly
+              v-model="getCurrentUrl"
+            ></textarea>
             <br />
-            {{ getCurrentUrl }}
             <button
               type="button"
               class="btn btn-primary"
               data-bs-dismiss="modal"
+              @click="copyToClipboard"
             >
-              Copy
+              Kopier link
             </button>
           </div>
         </div>
@@ -86,16 +114,52 @@ export default {
         this.$route.path.length
       )}`;
     },
-    getInstagramUrl() {
-      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
-        1,
-        this.$route.path.length
-      )}`;
-    },
   },
   methods: {
     log(item) {
       console.log(item);
+    },
+    openSocial(media) {
+      let width = 600;
+      let height = 400;
+      let url = "";
+      console.log(media);
+      if (media == "fb") {
+        url = this.getFBUrl;
+      } else if (media == "tw") {
+        url = this.getTwitterUrl;
+      } else {
+        url = this.getLinkedInUrl;
+        console.log(url);
+      }
+      window.open(
+        url,
+        "targetWindow",
+        `toolbar=no,location=0,top=100,left=${
+          (window.innerWidth - width) / 2
+        },status=no,menubar=no,scrollbars=yes,resizable=yes,width=${width},height=${height}`
+      );
+      return false;
+    },
+    //virker ikke i iframe
+    // copyToClipboard() {
+    //   /* Get the text field */
+    //   let copyText = document.getElementById("myInput");
+
+    //   /* Select the text field */
+    //   copyText.select();
+    //   copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    //   /* Copy the text inside the text field */
+    //   navigator.clipboard.writeText(copyText.value);
+
+    //   /* Alert the copied text */
+    //   alert("Copied the text: " + copyText.value);
+    // },
+    //deprecated, men virker i iFrame
+    copyToClipboard() {
+      document.querySelector("#myInput").select();
+      document.execCommand("copy");
     },
   },
 };
@@ -105,5 +169,11 @@ export default {
 p {
   color: black;
   display: inline;
+}
+textarea {
+  width: 100%;
+  resize: none;
+  border: none;
+  font-size: 0.8rem;
 }
 </style>
