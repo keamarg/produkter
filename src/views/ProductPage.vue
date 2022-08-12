@@ -2,6 +2,13 @@
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div v-if="products[getIndex()]" class="row align-items-center">
       <div class="col pt-3 product p-5 rounded-custom" :style="css">
+        <span
+          type="button"
+          class="d-flex justify-content-end back-arrow"
+          @click="$router.go(-1)"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </span>
         <div class="col-lg-7 producttext rounded-custom">
           <h1>{{ products[getIndex()].title }}</h1>
           <p>{{ products[getIndex()].text }}</p>
@@ -24,6 +31,27 @@
             download
             ><i class="bi bi-file-earmark-pdf"></i>&nbsp; Hent artikel</a
           >
+          <div class="mt-5">
+            <span class="me-3">Keywords</span>
+            <router-link
+              v-for="item in products[getIndex()].keywords"
+              :key="item"
+              :to="{
+                name: 'Results',
+                params: { id: item.toLowerCase() },
+              }"
+            >
+              <button
+                type="button"
+                class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
+              >
+                {{ item }}
+              </button>
+              <!-- <p v-for="item in products[getIndex()].keywords" :key="item">
+              {{ item }}
+            </p> -->
+            </router-link>
+          </div>
         </div>
         <!-- <ShareThis /> -->
         <div class="col-lg-5"></div>

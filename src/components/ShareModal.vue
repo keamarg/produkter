@@ -53,8 +53,9 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <a
                 class="mailIcon"
                 :href="
-                  'mailto:?subject=Kea vidensprodukter&body=' + getCurrentUrl
+                  'mailto:%20?subject=Kea vidensprodukter&body=' + getCurrentUrl
                 "
+                target="_top"
               >
                 <i class="bi bi-envelope-fill"></i>
               </a>
@@ -127,7 +128,6 @@ export default {
         url = this.getTwitterUrl;
       } else {
         url = this.getLinkedInUrl;
-        console.log(url);
       }
       window.open(
         url,

@@ -2,6 +2,13 @@
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div v-if="products[getIndex()]" class="row align-items-center">
       <div class="col pt-3 p-5 rounded-custom align-items-center" :style="css">
+        <span
+          type="button"
+          class="d-flex justify-content-end back-arrow"
+          @click="$router.go(-1)"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </span>
         <h1>{{ products[getIndex()].title }}</h1>
         <div class="iframediv ratio ratio-16x9 rounded-custom mt-3">
           {{ log(products[getIndex()].video) }}

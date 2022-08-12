@@ -11162,8 +11162,12 @@ a {
 }
 
 .mailIcon {
-  color: #343a40;
+  color: primary;
   font-size: 2rem;
+}
+
+.back-arrow {
+  font-size: 1.5rem;
 }
 
 /*Lagt i index.html*/
