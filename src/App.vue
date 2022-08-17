@@ -59,7 +59,7 @@ export default {
       loading: true,
       products: [],
       fetchUrl:
-        "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/6186840000007387/e-services/6286839990007387/portfolios?limit=500&offset=0&apikey=l8xxf96f99c580364be08333d1a57b4af036",
+        "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
     };
   },
   computed: {
@@ -88,7 +88,7 @@ export default {
       if (
         this.$route.path == "/" ||
         this.$route.path == "/home" ||
-        this.$route.path == "/keaprodukter/dist/"
+        this.$route.path == "/keaprodukter/"
       ) {
         return true;
       } else {

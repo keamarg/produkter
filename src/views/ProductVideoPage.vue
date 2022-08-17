@@ -29,10 +29,7 @@
             controls
             class="rounded-custom"
           >
-            <source
-              src="https://bibliotek.kea.dk/images/Studie/video/algoritmeforstaaelse.mp4"
-              type="video/mp4"
-            />
+            <source :src="videosrc2" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -51,6 +48,10 @@ export default {
       return `https://www.youtube.com/embed/${
         this.products[this.getIndex()].video
       }?autoplay=1`;
+    },
+    videosrc2() {
+      // console.log(this.$route.params);
+      return this.products[this.getIndex()].video2;
     },
     css() {
       return {

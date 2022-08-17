@@ -92,22 +92,22 @@ export default {
   },
   computed: {
     getCurrentUrl() {
-      return `https://projekter.kea.dk/keaprodukter/dist/#${this.$route.path}`;
+      return `https://projekter.kea.dk/keaprodukter/#${this.$route.path}`;
     },
     getFBUrl() {
-      return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+      return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
         1,
         this.$route.path.length
       )}&quote=Check out this cool product from KEA!`;
     },
     getTwitterUrl() {
-      return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+      return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
         1,
         this.$route.path.length
       )}`;
     },
     getLinkedInUrl() {
-      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2Fdist%2F%23%2F${this.$route.path.slice(
+      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
         1,
         this.$route.path.length
       )}`;
