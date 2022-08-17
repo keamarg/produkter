@@ -42,12 +42,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] Indikation af hvilke emneord en artikel har i sig
 
-** udvid det så der kan være flere “materialeknapper” **
+**Udvid det så der kan være flere “materialeknapper”**
 
 - [ ] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
 - [ ] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
 
-** Nice to have: **
+**Nice to have:**
 
 - [ ] vue tooltips til sidebar ikoner
 - [ ] Krydsning af knapper (f.eks. e-bøger OG Teknik)
@@ -62,7 +62,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] Udskift value1 og value2 variable med sigende navne
 - [ ] fælles funktioner til components, f.eks. getIndex (som de der allerede er refaktoreret til assets/common.js)
 
-## Ikke teknisk.:
+## Ikke teknisk:
 
 - [ ] Beskrivelse af sitet
 - [ ] Beskrivelse til FB/LI/TW inkl. godt "card image"
@@ -86,13 +86,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Arbejdsgang (alt køres fra projektmappe):
 
-** Kør fra localhost **
+**Kør fra localhost**
 
 1. Åben projekt i editor ( f.eks. vscode (code .))
 2. Kør localhost fra terminal (npm run serve)
 3. Sæt SASS op til at overvåge ændringer i css (sass --watch src/styles)
 
-** Push til production **
+**Push til production**
 
 1. Build fra terminal (npm run build)
 2. Add, commit, push til GitHub
