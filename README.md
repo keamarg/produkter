@@ -44,8 +44,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 **Udvid det så der kan være flere “materialeknapper”**
 
-- [ ] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
-- [ ] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
+- [x] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
+- [x] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
 
 **Nice to have:**
 

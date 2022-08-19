@@ -23,14 +23,20 @@
               <i class="bi bi-play-circle"></i>&nbsp; Afspil video
             </button>
           </router-link>
-          <a
-            v-if="products[getIndex()].article"
-            :href="articlesrc"
-            target="_blank"
-            class="btn btn-custom-product rounded-custom me-4 mt-5"
-            download
-            ><i class="bi bi-file-earmark-pdf"></i>&nbsp; Hent artikel</a
+          <template
+            v-for="(item, index) in Object.keys(products[getIndex()].article)"
+            :key="item"
           >
+            <a
+              v-if="index % 2 == 0"
+              :href="products[getIndex()].article[item]"
+              target="_blank"
+              class="btn btn-custom-product rounded-custom me-4 mt-5"
+              download
+              ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
+              {{ products[getIndex()].article[index + 1] }}</a
+            >
+          </template>
           <div class="mt-5">
             <span class="me-3">Keywords</span>
             <router-link
