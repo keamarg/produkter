@@ -1,6 +1,6 @@
 //app.vue
 <template>
-  <div id="app" class="px-3 py-2 px-sm-5">
+  <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="endScroll">
     <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" />
     <div class="row mb-5">
@@ -58,13 +58,17 @@ export default {
       title: process.env.VUE_APP_TITLE,
       loading: true,
       products: [],
-      fetchUrl:
-        // "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-        "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      offSet: 0,
+      // fetchUrl:
+      //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
       // "http://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
     };
   },
   computed: {
+    fetchUrl() {
+      return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=18&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
+    },
     currentPath() {
       store.path = this.$route.path;
       return this.$route.path;
@@ -103,6 +107,21 @@ export default {
       //   (product, index) => (product.index = index)
       // );
       this.filteredList = filteredList;
+    },
+    endScroll() {
+      window.onscroll = () => {
+        if (
+          window.innerHeight + window.scrollY + 1 >=
+          document.body.offsetHeight
+        ) {
+          console.log("end reached");
+          // this.offSet = this.offSet + 6;
+          console.log(this.offSet);
+          this.fetchData(this.fetchUrl);
+        } else {
+          console.log("end not reached");
+        }
+      };
     },
   },
   created() {},
