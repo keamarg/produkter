@@ -11,9 +11,9 @@
         </span>
         <h1>{{ products[getIndex()].title }}</h1>
         <div class="iframediv ratio ratio-16x9 rounded-custom mt-3">
-          {{ log(products[getIndex()].video) }}
+          <!-- {{ log(products[getIndex()].video) }} -->
           <iframe
-            v-if="products[getIndex()].video != 'none'"
+            v-if="products[getIndex()].video[0] != 'none'"
             class="rounded-custom"
             :src="videosrc"
             frameborder="0"
@@ -22,7 +22,7 @@
           >
           </iframe>
           <video
-            v-else-if="products[getIndex()].video2"
+            v-else-if="products[getIndex()].video2[0]"
             width="320"
             height="240"
             autoplay
@@ -46,12 +46,12 @@ export default {
     videosrc() {
       // console.log(this.$route.params);
       return `https://www.youtube.com/embed/${
-        this.products[this.getIndex()].video
+        this.products[this.getIndex()].video[0]
       }?autoplay=1`;
     },
     videosrc2() {
       // console.log(this.$route.params);
-      return this.products[this.getIndex()].video2;
+      return this.products[this.getIndex()].video2[0];
     },
     css() {
       return {

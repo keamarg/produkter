@@ -16,11 +16,15 @@
             :to="{ name: 'ProductVideo', params: { id: $route.params.id } }"
           >
             <button
-              v-if="products[getIndex()].video"
+              v-if="
+                products[getIndex()].video[0] != 'none' ||
+                products[getIndex()].video2[0] != 'none'
+              "
               type="button"
               class="btn btn-custom-product rounded-custom me-4 mt-5"
             >
-              <i class="bi bi-play-circle"></i>&nbsp; Afspil video
+              <i class="bi bi-play-circle"></i>&nbsp;
+              {{ products[getIndex()].video[1] }}
             </button>
           </router-link>
           <template

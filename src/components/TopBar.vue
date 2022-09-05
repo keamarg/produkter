@@ -2,10 +2,7 @@
   <div class="container-fluid p-0">
     <div class="row align-items-center">
       <div class="col-xl-6">
-        <NavigationBar
-          :products="products"
-          @updateSearchQuery="updateSearchQuery"
-        />
+        <NavigationBar :products="products" />
       </div>
       <div class="col-xl-6">
         <BtnGroup :materials="materials" />
@@ -57,9 +54,9 @@ export default {
     log(item) {
       console.log(item);
     },
-    updateSearchQuery(value1, value2) {
-      this.$emit("updateSearchQuery", value1, value2);
-    },
+    // updateSearchQuery(value1, value2) {
+    //   this.$emit("updateSearchQuery", value1, value2);
+    // },
   },
 };
 </script>

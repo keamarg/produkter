@@ -42,10 +42,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] Indikation af hvilke emneord en artikel har i sig
 
+- [x] String sammenligning i søgefelt skal være case insensitive
+
 **Udvid det så der kan være flere “materialeknapper”**
 
 - [x] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
 - [x] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
+
+## Bugs:
+
+- [x] Localstorage "likes" forsvinder pludseligt på refresh
 
 **Nice to have:**
 

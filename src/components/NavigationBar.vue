@@ -94,7 +94,7 @@ export default {
       this.products.map((product) =>
         product.keywords.map((keyword) => {
           if (!keywords.includes(keyword)) {
-            keywords.push(keyword);
+            keywords.push(keyword.toLowerCase());
           }
         })
       );

@@ -2,7 +2,7 @@
 <template>
   <div id="app" class="px-3 py-2 px-sm-5">
     <!-- <div class="sharethis-inline-share-buttons"></div> -->
-    <TopBar :products="products" @updateSearchQuery="updateSearchQuery" />
+    <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />
       <div
@@ -59,7 +59,9 @@ export default {
       loading: true,
       products: [],
       fetchUrl:
+        // "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
         "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      // "http://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
     };
   },
   computed: {
@@ -95,12 +97,12 @@ export default {
         return false;
       }
     },
-    updateSearchQuery(value1, value2) {
-      // console.log(value2);
-      // this.filteredList = value2.map(
+    updateSearchQuery(searchQuery, filteredList) {
+      console.log(filteredList);
+      // this.filteredList = filteredList.map(
       //   (product, index) => (product.index = index)
       // );
-      this.filteredList = value2;
+      this.filteredList = filteredList;
     },
   },
   created() {},

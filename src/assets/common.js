@@ -45,24 +45,7 @@ export const parseProducts = function parseProducts(data) {
   }
   // Object.assign for at beholde reactivity
   const parsedProduct = [];
-  // this.products[this.products.length] = Object.assign({}, parsedProduct, {
-  //   author: parsedData[0][0],
-  //   title: parsedData[1][0],
-  //   subtitle: parsedData[2][0],
-  //   text: parsedData[3][0],
-  //   keywords: parsedData[4],
-  //   author2: parsedData[5][0],
-  //   author3: parsedData[6][0],
-  //   links: parsedData[7][0],
-  //   video: parsedData[8][0],
-  //   video2: parsedData[9][0],
-  //   img1: parsedData[10][0],
-  //   img2: parsedData[11][0],
-  //   img3: parsedData[12][0],
-  //   article: parsedData[13][0],
-  //   id: data.mms_id,
-  //   liked: localStorage.getItem(parsedData[1][0]),
-  // });
+
   this.products[this.products.length] = Object.assign({}, parsedProduct, {
     author: parsedData[1][0],
     title: parsedData[2][0],
@@ -72,16 +55,14 @@ export const parseProducts = function parseProducts(data) {
     author2: parsedData[6][0],
     author3: parsedData[7][0],
     links: parsedData[8][0],
-    video: parsedData[9][0],
-    video2: parsedData[10][0],
+    video: parsedData[9],
+    video2: parsedData[10],
     img1: parsedData[11][0],
     img2: parsedData[12][0],
     img3: parsedData[13][0],
     article: parsedData[14],
-    // article: parsedData[14][0],
-    // article2: parsedData[15][0],
+
     id: data.mms_id,
-    liked: localStorage.getItem(parsedData[1][0]),
+    liked: localStorage.getItem(parsedData[2][0]),
   });
-  // console.log("parsed: " + parsedData[0][0]);
 };
