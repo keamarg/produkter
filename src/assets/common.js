@@ -1,17 +1,26 @@
 export const fetchData = async function fetchData(url) {
   try {
     //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
+    console.log("loading products");
     const response = await fetch(url, {
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();
 
-    const productLinks = data.portfolio.map((product, index) => {
-      let linkList = [];
-      return (linkList[index] = {
-        link: product.resource_metadata.mms_id.link,
-      });
-    });
+    // Ændret til "reduce" funktionen nedenfor, for at filtrere uønskede produkter fra
+    // const productLinks = data.portfolio.map((product, index) => {
+    //   let linkList = [];
+    //   return (linkList[index] = {
+    //     link: product.resource_metadata.mms_id.link,
+    //   });
+    // });
+
+    const productLinks = data.portfolio.reduce((result, product) => {
+      if (product.resource_metadata.title !== "Dilemmaspil.") {
+        result.push({ link: product.resource_metadata.mms_id.link });
+      }
+      return result;
+    }, []);
 
     //bruger productLinks til at hente products ind
     productLinks.map(async (link) => {

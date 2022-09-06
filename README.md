@@ -51,14 +51,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Bugs:
 
-- [x] Localstorage "likes" forsvinder pludseligt på refresh
+- [x] bug1a Localstorage "likes" forsvinder pludseligt på refresh
+- [x] bug1b Alle relevante produkter skal loade under likes og søgninger
 
 **Nice to have:**
 
 - [ ] vue tooltips til sidebar ikoner
 - [ ] Krydsning af knapper (f.eks. e-bøger OG Teknik)
 - [ ] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
-- [ ] Dynamisk loading af produkter m. infinite scroll (https://cs50.harvard.edu/web/2020/weeks/6/) ca. 19 minutter inde /31 er snapsen
+- [x] Dynamisk loading af produkter m. infinite scroll (https://cs50.harvard.edu/web/2020/weeks/6/) ca. 19 minutter inde /31 er snapsen
+- [ ] Dynamisk loading til mobil (virker ikke med onscroll)
+- [ ] "Featured" liste til forsiden (markeret via felt i Alma?)
+- [x] "Down arrow" til at indikere, at der kan loades mere
 
 ## Optimeringer:
 

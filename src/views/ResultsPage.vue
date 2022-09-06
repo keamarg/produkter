@@ -6,6 +6,7 @@
       <CardGroup
         v-if="filteredProducts.length > 0"
         :products="filteredProducts"
+        :displayAll="displayAll"
       />
       <h5 v-else>ingen resultater</h5>
     </div>
@@ -20,6 +21,11 @@ export default {
     CardGroup,
   },
   props: ["products", "loading"],
+  data() {
+    return {
+      displayAll: true,
+    };
+  },
   computed: {
     // tjekker om produktet i søgningen findes i produktlisten (slice sørger for, at også søgninger på f.eks. "pod" stadig viser podcasts)
     filteredProducts() {

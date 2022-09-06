@@ -1,6 +1,6 @@
 //app.vue
 <template>
-  <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="endScroll">
+  <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="handleWheel">
     <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" />
     <div class="row mb-5">
@@ -59,6 +59,7 @@ export default {
       loading: true,
       products: [],
       offSet: 0,
+      waitWithFetch: false,
       // fetchUrl:
       //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
       //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
@@ -67,7 +68,7 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=18&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
+      return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
     },
     currentPath() {
       store.path = this.$route.path;
@@ -108,20 +109,27 @@ export default {
       // );
       this.filteredList = filteredList;
     },
-    endScroll() {
-      window.onscroll = () => {
-        if (
-          window.innerHeight + window.scrollY + 1 >=
-          document.body.offsetHeight
-        ) {
-          console.log("end reached");
-          // this.offSet = this.offSet + 6;
-          console.log(this.offSet);
+    handleWheel() {
+      // console.log(this.firstScroll);
+      // window.onscroll = () => {
+      if (
+        window.innerHeight + window.scrollY + 10 >=
+        document.body.offsetHeight
+      ) {
+        if (!this.waitWithFetch) {
+          this.waitWithFetch = true;
+          this.offSet = this.offSet = 12;
           this.fetchData(this.fetchUrl);
-        } else {
-          console.log("end not reached");
+          setTimeout(() => {
+            if (this.fetchData.length == 0) {
+              console.log("no more products");
+            } else {
+              this.waitWithFetch = false;
+            }
+          }, 2000);
+          console.log(this.fetchData.length);
         }
-      };
+      }
     },
   },
   created() {},

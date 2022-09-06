@@ -6,7 +6,7 @@
       </p>
       <span v-else>
         <p>Dine "likes"...</p>
-        <CardGroup :products="filteredProducts" />
+        <CardGroup :products="filteredProducts" :displayAll="displayAll" />
       </span>
     </div>
   </div>
@@ -21,6 +21,11 @@ export default {
     CardGroup,
   },
   props: ["products", "loading"],
+  data() {
+    return {
+      displayAll: true,
+    };
+  },
   computed: {
     filteredProducts() {
       // console.log(this.products.filter((product) => product.liked));
