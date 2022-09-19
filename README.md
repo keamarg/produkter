@@ -48,6 +48,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
 - [x] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
+- [ ] Dynamisk loading af produkter på mobil devices
 
 ## Bugs:
 

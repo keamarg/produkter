@@ -3,6 +3,7 @@
   <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="handleWheel">
     <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" />
+    <!-- <div style="color: white">test: {{ fetchTestData }}</div> -->
     <div class="row mb-5">
       <SideBar />
       <div
@@ -60,10 +61,11 @@ export default {
       products: [],
       offSet: 0,
       waitWithFetch: false,
+      fetchTestData: [],
       // fetchUrl:
       //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
       //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      // "http://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      // "https://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
     };
   },
   computed: {
@@ -87,6 +89,23 @@ export default {
     },
   },
   methods: {
+    fetchTest() {
+      fetch("http://localhost:3000", {
+        headers: {
+          // "Access-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.text())
+        .then((data) => JSON.parse(data))
+        .then((data) => {
+          // this.fetchTestData = data;
+          console.log(data);
+          // console.log(this.fetchTestData);
+          this.parseProducts(data);
+        });
+    },
     log(item) {
       console.log(item);
     },
@@ -118,7 +137,7 @@ export default {
       ) {
         if (!this.waitWithFetch) {
           this.waitWithFetch = true;
-          this.offSet = this.offSet = 12;
+          this.offSet = this.offSet + 12;
           this.fetchData(this.fetchUrl);
           setTimeout(() => {
             if (this.fetchData.length == 0) {
@@ -134,7 +153,8 @@ export default {
   },
   created() {},
   mounted() {
-    this.fetchData(this.fetchUrl);
+    this.fetchTest();
+    // this.fetchData(this.fetchUrl);
   },
 };
 </script>

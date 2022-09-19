@@ -40,12 +40,12 @@
           alt="..."
           @load="onImgLoad"
         />
-        <router-link :to="{ name: 'Product', params: { id: product.id } }">
+        <!-- <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <div class="carousel-caption d-block border-0 rounded-custom">
             <h5>{{ product.author }}</h5>
             <p>{{ product.title }}</p>
           </div>
-        </router-link>
+        </router-link> -->
       </div>
     </div>
     <button
