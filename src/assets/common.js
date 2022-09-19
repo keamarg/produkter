@@ -3,7 +3,11 @@ export const fetchData = async function fetchData(url) {
     //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
     console.log("loading products");
     const response = await fetch(url, {
-      headers: { "Content-type": "application/json" },
+      headers: {
+        // "Content-type": "application/json",
+        // // Authorization: `apikey ${api_key}`,
+        Accept: "application/json",
+      },
     });
     const data = await response.json();
 
