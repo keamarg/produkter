@@ -1,7 +1,7 @@
 export const fetchData = async function fetchData(url) {
   try {
     //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
-    console.log("loading products");
+    // console.log("loading products");
     const response = await fetch(url, {
       headers: {
         // "Content-type": "application/json",
@@ -19,19 +19,28 @@ export const fetchData = async function fetchData(url) {
     //   });
     // });
 
-    const productLinks = data.portfolio.reduce((result, product) => {
+    const productList = data.portfolio.reduce((result, product) => {
       if (product.resource_metadata.title !== "Dilemmaspil.") {
-        result.push({ link: product.resource_metadata.mms_id.link });
+        // console.log(product.resource_metadata.mms_id);
+        result.push({ value: product.resource_metadata.mms_id.value });
       }
       return result;
     }, []);
 
-    //bruger productLinks til at hente products ind
-    productLinks.map(async (link) => {
-      const response = await fetch(link.link, {
-        headers: { "Content-type": "application/json" },
-      });
+    //bruger productList til at hente products ind
+    productList.map(async (product) => {
+      // console.log(product.value);
+      const response = await fetch(
+        "http://89.34.18.61:8081/product/" + product.value,
+        {
+          headers: {
+            // "Content-type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
       const data = await response.json();
+      // console.log(data);
       this.parseProducts(data);
     });
     this.loading = false;

@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return "http://127.0.0.1:8081";
+      return "http://89.34.18.61:8081/productlist";
       // return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
     },
     currentPath() {
@@ -119,7 +119,7 @@ export default {
       ) {
         if (!this.waitWithFetch) {
           this.waitWithFetch = true;
-          this.offSet = this.offSet = 12;
+          this.offSet = 12;
           this.fetchData(this.fetchUrl);
           setTimeout(() => {
             if (this.fetchData.length == 0) {

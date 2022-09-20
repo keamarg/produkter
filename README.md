@@ -43,6 +43,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Indikation af hvilke emneord en artikel har i sig
 
 - [x] String sammenligning i søgefelt skal være case insensitive
+- [ ] Fix github branches, dvs. find ud af at smelte "old-project-state" ind, hvis det er det vi ender med at bruge.
 
 **Udvid det så der kan være flere “materialeknapper”**
 
@@ -63,6 +64,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] Dynamisk loading til mobil (virker ikke med onscroll)
 - [ ] "Featured" liste til forsiden (markeret via felt i Alma?)
 - [x] "Down arrow" til at indikere, at der kan loades mere
+
+## Node bugs (almaproxy):
+
+- [x] Http CORS issues
+- [ ] Https CORS issues (se mail fra René)
+- [ ] Sesssion issues (kan f.eks. ses, når man loader produkter; hvis man refresher kan starter den ikke forfra med "offset" når den henter ind). Forsøgt løst server side, men tror vi er nødt til at finde en front end løsning på problemet.
 
 ## Optimeringer:
 
