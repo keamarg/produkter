@@ -43,7 +43,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Indikation af hvilke emneord en artikel har i sig
 
 - [x] String sammenligning i søgefelt skal være case insensitive
-- [ ] Fix github branches, dvs. find ud af at smelte "old-project-state" ind, hvis det er det vi ender med at bruge.
+- [x] Fix github branches, dvs. find ud af at smelte "old-project-state" ind, hvis det er det vi ender med at bruge.
 
 **Udvid det så der kan være flere “materialeknapper”**
 
