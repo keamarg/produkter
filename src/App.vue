@@ -68,8 +68,8 @@ export default {
   },
   computed: {
     fetchUrl() {
-      // return "https://projekter.kea.dk/almaproxy/productlist";
-      return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
+      return "https://projekter.kea.dk/almaproxy/productlist";
+      // return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
     },
     currentPath() {
       store.path = this.$route.path;
@@ -119,16 +119,16 @@ export default {
       ) {
         if (!this.waitWithFetch) {
           this.waitWithFetch = true;
-          this.offSet = 12;
-          this.fetchData(this.fetchUrl);
-          setTimeout(() => {
-            if (this.fetchData.length == 0) {
-              console.log("no more products");
-            } else {
-              this.waitWithFetch = false;
-            }
-          }, 2000);
-          console.log(this.fetchData.length);
+          // this.offSet = 12;
+          // this.fetchData(this.fetchUrl);
+          // setTimeout(() => {
+          //   if (this.fetchData.length == 0) {
+          //     console.log("no more products");
+          //   } else {
+          //     this.waitWithFetch = false;
+          //   }
+          // }, 4000);
+          console.log("Fetched!");
         }
       }
     },
