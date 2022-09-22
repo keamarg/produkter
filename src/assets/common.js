@@ -31,7 +31,7 @@ export const fetchData = async function fetchData(url) {
     productList.map(async (product) => {
       // console.log(product.value);
       const response = await fetch(
-        "http://89.34.18.61:8081/product/" + product.value,
+        "https://projekter.kea.dk/almaproxy/" + product.value,
         {
           headers: {
             // "Content-type": "application/json",

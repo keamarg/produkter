@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return "http://89.34.18.61:8081/productlist";
+      return "https://projekter.kea.dk/almaproxy/";
       // return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
     },
     currentPath() {
