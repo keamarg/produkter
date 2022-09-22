@@ -21,7 +21,7 @@ export const fetchData = async function fetchData(url) {
 
     const productList = data.portfolio.reduce((result, product) => {
       if (product.resource_metadata.title !== "Dilemmaspil.") {
-        // console.log(product.resource_metadata.mms_id);
+        console.log(product.resource_metadata.mms_id);
         result.push({ value: product.resource_metadata.mms_id.value });
       }
       return result;
@@ -31,7 +31,7 @@ export const fetchData = async function fetchData(url) {
     productList.map(async (product) => {
       // console.log(product.value);
       const response = await fetch(
-        "https://projekter.kea.dk/almaproxy/" + product.value,
+        "https://projekter.kea.dk/almaproxy/product/" + product.value,
         {
           headers: {
             // "Content-type": "application/json",
