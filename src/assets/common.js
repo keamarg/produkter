@@ -1,14 +1,19 @@
-export const fetchData = async function fetchData(url) {
+// export const fetchData = async function fetchData(url) {
+export const fetchData = async function fetchData() {
   try {
     //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
     // console.log("loading products");
-    const response = await fetch(url, {
-      headers: {
-        // "Content-type": "application/json",
-        // // Authorization: `apikey ${api_key}`,
-        Accept: "application/json",
-      },
-    });
+    // const response = await fetch(url, {
+    const response = await fetch(
+      "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=100&offset=0",
+      {
+        headers: {
+          // "Content-type": "application/json",
+          // // Authorization: `apikey ${api_key}`,
+          Accept: "application/json",
+        },
+      }
+    );
     const data = await response.json();
 
     // Ændret til "reduce" funktionen nedenfor, for at filtrere uønskede produkter fra
@@ -20,18 +25,26 @@ export const fetchData = async function fetchData(url) {
     // });
 
     const productList = data.portfolio.reduce((result, product) => {
-      if (product.resource_metadata.title !== "Dilemmaspil.") {
-        // console.log(product.resource_metadata.mms_id);
-        result.push({ value: product.resource_metadata.mms_id.value });
-      }
+      // console.log(product.resource_metadata.title);
+      // if (product.resource_metadata.title !== "Dilemmaspil.") {
+      // console.log(product.resource_metadata);
+      result.push({
+        value: product.resource_metadata.mms_id.value,
+        title: product.resource_metadata.title,
+      });
+      // }
       return result;
     }, []);
 
-    //bruger productList til at hente products ind
-    productList.map(async (product) => {
-      // console.log(product.value);
+    //filtrerer uønskede portfolios (f.eks. "Dilemmaspil.") fra
+    const filteredProductList = productList.filter(
+      (product) => product.title !== "Dilemmaspil."
+    );
+    // console.log(filteredProductList);
+    //bruger filteredProductList til at hente products ind
+    filteredProductList.map(async (product) => {
       const response = await fetch(
-        "https://projekter.kea.dk/almaproxy/product/" + product.value,
+        "https://projekter.kea.dk/almaproxy/almaws/v1/bibs/" + product.value,
         {
           headers: {
             // "Content-type": "application/json",
