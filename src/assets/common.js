@@ -1,11 +1,9 @@
-// export const fetchData = async function fetchData(url) {
-export const fetchData = async function fetchData() {
+export const fetchProductCount = async function fetchProductCount() {
   try {
-    //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
-    // console.log("loading products");
-    // const response = await fetch(url, {
+    //henter antallet af produkter
+    console.log("fetching length of list");
     const response = await fetch(
-      "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=100&offset=0",
+      "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387",
       {
         headers: {
           // "Content-type": "application/json",
@@ -14,6 +12,28 @@ export const fetchData = async function fetchData() {
         },
       }
     );
+    const data = await response.json();
+    let result = data.portfolios.value;
+    // console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// export const fetchData = async function fetchData(url) {
+export const fetchData = async function fetchData(url) {
+  try {
+    //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
+    console.log("fetching products");
+    // const response = await fetch(url, {
+    const response = await fetch(url, {
+      headers: {
+        // "Content-type": "application/json",
+        // // Authorization: `apikey ${api_key}`,
+        Accept: "application/json",
+      },
+    });
     const data = await response.json();
 
     // Ændret til "reduce" funktionen nedenfor, for at filtrere uønskede produkter fra

@@ -37,7 +37,11 @@
 
 <script>
 import { store } from "./assets/store.js";
-import { fetchData, parseProducts } from "./assets/common.js";
+import {
+  fetchProductCount,
+  fetchData,
+  parseProducts,
+} from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
 import CardGroup from "@/components/CardGroup.vue";
 import SideBar from "@/components/SideBar.vue";
@@ -52,6 +56,7 @@ export default {
   data() {
     return {
       store,
+      fetchProductCount: fetchProductCount,
       fetchData: fetchData,
       parseProducts: parseProducts,
       filteredList: [],
@@ -60,17 +65,20 @@ export default {
       products: [],
       offSet: 0,
       waitWithFetch: false,
+      allFetched: false,
+      productCount: 0,
       // fetchUrl:
       //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
       //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
       // "http://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      //     "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=6&offset=0",
     };
   },
   computed: {
-    // fetchUrl() {
-    //   return "https://projekter.kea.dk/almaproxy/productlist";
-    //   // return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
-    // },
+    fetchUrl() {
+      // return "https://projekter.kea.dk/almaproxy/productlist";
+      return `https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
+    },
     currentPath() {
       store.path = this.$route.path;
       return this.$route.path;
@@ -117,26 +125,29 @@ export default {
         window.innerHeight + window.scrollY + 10 >=
         document.body.offsetHeight
       ) {
-        if (!this.waitWithFetch) {
+        // console.log(this.productCount);
+        if (!this.waitWithFetch && !this.allFetched) {
           this.waitWithFetch = true;
-          // this.offSet = 12;
-          // this.fetchData(this.fetchUrl);
-          // setTimeout(() => {
-          //   if (this.fetchData.length == 0) {
-          //     console.log("no more products");
-          //   } else {
-          //     this.waitWithFetch = false;
-          //   }
-          // }, 4000);
-          console.log("Fetched!");
+          this.offSet = this.offSet + 12;
+          this.fetchData(this.fetchUrl);
+          setTimeout(() => {
+            console.log(this.productCount);
+            if (this.offSet > this.productCount) {
+              console.log("no more products");
+              this.allFetched = true;
+            } else {
+              this.waitWithFetch = false;
+            }
+          }, 2000);
+          // console.log("Fetched!");
         }
       }
     },
   },
   created() {},
-  mounted() {
-    // this.fetchData(this.fetchUrl);
-    this.fetchData();
+  async mounted() {
+    this.fetchData(this.fetchUrl);
+    this.productCount = await this.fetchProductCount();
   },
 };
 </script>
