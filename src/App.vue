@@ -1,7 +1,6 @@
 //app.vue
 <template>
   <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="handleWheel">
-    <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />
@@ -67,16 +66,10 @@ export default {
       waitWithFetch: false,
       allFetched: false,
       productCount: 0,
-      // fetchUrl:
-      //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      // "http://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      //     "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=6&offset=0",
     };
   },
   computed: {
     fetchUrl() {
-      // return "https://projekter.kea.dk/almaproxy/productlist";
       return `https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
@@ -112,26 +105,20 @@ export default {
       }
     },
     updateSearchQuery(searchQuery, filteredList) {
-      console.log(filteredList);
-      // this.filteredList = filteredList.map(
-      //   (product, index) => (product.index = index)
-      // );
+      // console.log(filteredList);
       this.filteredList = filteredList;
     },
     handleWheel() {
-      // console.log(this.firstScroll);
-      // window.onscroll = () => {
       if (
         window.innerHeight + window.scrollY + 10 >=
         document.body.offsetHeight
       ) {
-        // console.log(this.productCount);
         if (!this.waitWithFetch && !this.allFetched) {
           this.waitWithFetch = true;
           this.offSet = this.offSet + 12;
           this.fetchData(this.fetchUrl);
           setTimeout(() => {
-            console.log(this.productCount);
+            // console.log(this.productCount);
             if (this.offSet > this.productCount) {
               console.log("no more products");
               this.allFetched = true;

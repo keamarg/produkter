@@ -43,6 +43,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Indikation af hvilke emneord en artikel har i sig
 
 - [x] String sammenligning i søgefelt skal være case insensitive
+
 - [x] Fix github branches, dvs. find ud af at smelte "old-project-state" ind, hvis det er det vi ender med at bruge.
 
 **Udvid det så der kan være flere “materialeknapper”**
@@ -58,6 +59,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 **Nice to have:**
 
 - [ ] vue tooltips til sidebar ikoner
+- [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
 - [ ] Krydsning af knapper (f.eks. e-bøger OG Teknik)
 - [ ] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
 - [x] Dynamisk loading af produkter m. infinite scroll (https://cs50.harvard.edu/web/2020/weeks/6/) ca. 19 minutter inde /31 er snapsen
@@ -67,12 +69,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Node bugs (almaproxy):
 
+- [ ] Endpoint kræver fysisk sti på serveren (kan muligvis fixes med router)
 - [x] Http CORS issues
-- [ ] Https CORS issues (se mail fra René)
-- [ ] Sesssion issues (kan f.eks. ses, når man loader produkter; hvis man refresher kan starter den ikke forfra med "offset" når den henter ind). Forsøgt løst server side, men tror vi er nødt til at finde en front end løsning på problemet.
+- [x] Https CORS issues (se mail fra René)
+- [x] Sesssion issues (kan f.eks. ses, når man loader produkter; hvis man refresher kan starter den ikke forfra med "offset" når den henter ind). Forsøgt løst server side, men tror vi er nødt til at finde en front end løsning på problemet.
 
 ## Optimeringer:
 
+- [ ] oprydning i node proxy kode
+- [ ] oprydning i front end kode
 - [ ] css optimering (scoped? partials?)
 - [ ] refactor css (scoped?)
 - [ ] fade overgang til cards i bunden af forsiden (ved tryk på hjem)

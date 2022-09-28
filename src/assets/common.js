@@ -1,58 +1,40 @@
+//henter antallet af produkter (bruges til at sørge for, at fetchData ikke kører hvis alle produkter er hentet)
 export const fetchProductCount = async function fetchProductCount() {
   try {
-    //henter antallet af produkter
-    console.log("fetching length of list");
+    // console.log("fetching length of list");
     const response = await fetch(
       "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387",
       {
         headers: {
-          // "Content-type": "application/json",
-          // // Authorization: `apikey ${api_key}`,
           Accept: "application/json",
         },
       }
     );
     const data = await response.json();
     let result = data.portfolios.value;
-    // console.log(result);
     return result;
   } catch (error) {
     console.error(error);
   }
 };
 
-// export const fetchData = async function fetchData(url) {
+//henter productLinks ind fra den aktuelle portfolioliste, så de kan bruges til at hente products
 export const fetchData = async function fetchData(url) {
   try {
-    //henter productLinks ind fra den aktuelle portfolio, så de kan bruges til at hente products
-    console.log("fetching products");
-    // const response = await fetch(url, {
+    // console.log("fetching products");
     const response = await fetch(url, {
       headers: {
-        // "Content-type": "application/json",
-        // // Authorization: `apikey ${api_key}`,
         Accept: "application/json",
       },
     });
     const data = await response.json();
 
-    // Ændret til "reduce" funktionen nedenfor, for at filtrere uønskede produkter fra
-    // const productLinks = data.portfolio.map((product, index) => {
-    //   let linkList = [];
-    //   return (linkList[index] = {
-    //     link: product.resource_metadata.mms_id.link,
-    //   });
-    // });
-
+    //bygger simpelt array af produkter ud fra den hentede liste (brugte map i tidligere version)
     const productList = data.portfolio.reduce((result, product) => {
-      // console.log(product.resource_metadata.title);
-      // if (product.resource_metadata.title !== "Dilemmaspil.") {
-      // console.log(product.resource_metadata);
       result.push({
         value: product.resource_metadata.mms_id.value,
         title: product.resource_metadata.title,
       });
-      // }
       return result;
     }, []);
 
@@ -60,31 +42,28 @@ export const fetchData = async function fetchData(url) {
     const filteredProductList = productList.filter(
       (product) => product.title !== "Dilemmaspil."
     );
-    // console.log(filteredProductList);
+
     //bruger filteredProductList til at hente products ind
     filteredProductList.map(async (product) => {
       const response = await fetch(
         "https://projekter.kea.dk/almaproxy/almaws/v1/bibs/" + product.value,
         {
           headers: {
-            // "Content-type": "application/json",
             Accept: "application/json",
           },
         }
       );
       const data = await response.json();
-      // console.log(data);
       this.parseProducts(data);
     });
     this.loading = false;
-    // console.log(this.products);
   } catch (error) {
     console.error(error);
   }
 };
 
+// parse xml inspireret af https://www.c-sharpcorner.com/blogs/get-data-from-xml-content-using-javascript burde nok udskiftes med en Vue version, som bruger virtual DOM
 export const parseProducts = function parseProducts(data) {
-  // parse xml inspireret af https://www.c-sharpcorner.com/blogs/get-data-from-xml-content-using-javascript burde nok udskiftes med en Vue version, som bruger virtual DOM
   let parser = new DOMParser();
   let xmlDoc = parser.parseFromString(data.anies, "text/xml");
 
