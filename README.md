@@ -44,7 +44,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] String sammenligning i søgefelt skal være case insensitive
 
-- [x] Fix github branches, dvs. find ud af at smelte "old-project-state" ind, hvis det er det vi ender med at bruge.
+- [x] Fix github branches, dvs. find ud af at smelte "old-project-state/keaproxy" ind, hvis det er det vi ender med at bruge.
+
+- [x] Merge "old-project-state/keaproxy" til master (https://stackoverflow.com/questions/161813/how-do-i-resolve-merge-conflicts-in-a-git-repository).
 
 **Udvid det så der kan være flere “materialeknapper”**
 
@@ -89,6 +91,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [ ] Beskrivelse af sitet
 - [ ] Beskrivelse til FB/LI/TW inkl. godt "card image"
+- [ ] Alma template - endelig form
 
 ## Ændre midlertidige addresser mm.:
 
