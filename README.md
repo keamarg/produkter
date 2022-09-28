@@ -80,7 +80,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Optimeringer:
 
 - [ ] oprydning i node proxy kode
-- [ ] oprydning i front end kode
 - [ ] css optimering (scoped? partials?)
 - [ ] refactor css (scoped?)
 - [ ] fade overgang til cards i bunden af forsiden (ved tryk på hjem)
