@@ -30,7 +30,7 @@ export default {
   computed: {},
   methods: {
     handleWheel() {
-      console.log(this.divHeight);
+      // console.log(this.divHeight);
       this.displayChevron =
         window.innerHeight + window.scrollY + 10 <= document.body.offsetHeight;
     },

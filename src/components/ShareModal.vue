@@ -121,7 +121,7 @@ export default {
       let width = 600;
       let height = 400;
       let url = "";
-      console.log(media);
+      // console.log(media);
       if (media == "fb") {
         url = this.getFBUrl;
       } else if (media == "tw") {

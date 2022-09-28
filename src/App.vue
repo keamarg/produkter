@@ -1,9 +1,7 @@
 //app.vue
 <template>
   <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="handleWheel">
-    <!-- <div class="sharethis-inline-share-buttons"></div> -->
     <TopBar :products="products" />
-    <!-- <div style="color: white">test: {{ fetchTestData }}</div> -->
     <div class="row mb-5">
       <SideBar />
       <div
@@ -38,7 +36,11 @@
 
 <script>
 import { store } from "./assets/store.js";
-import { fetchData, parseProducts } from "./assets/common.js";
+import {
+  fetchProductCount,
+  fetchData,
+  parseProducts,
+} from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
 import CardGroup from "@/components/CardGroup.vue";
 import SideBar from "@/components/SideBar.vue";
@@ -53,6 +55,7 @@ export default {
   data() {
     return {
       store,
+      fetchProductCount: fetchProductCount,
       fetchData: fetchData,
       parseProducts: parseProducts,
       filteredList: [],
@@ -61,16 +64,12 @@ export default {
       products: [],
       offSet: 0,
       waitWithFetch: false,
-      fetchTestData: [],
-      // fetchUrl:
-      //   "https://api-eu.hosted.exlibrisgroup.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      //   "https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=22&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
-      // "https://almaproxy.me:5555/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=500&offset=0&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3",
+      allFetched: false,
     };
   },
   computed: {
     fetchUrl() {
-      return `https://alma-proxy.herokuapp.com/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}&apikey=l8xx1d07986de63b4d0289d5bac8374d99c3`;
+      return `https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
       store.path = this.$route.path;
@@ -89,23 +88,6 @@ export default {
     },
   },
   methods: {
-    fetchTest() {
-      fetch("http://localhost:3000", {
-        headers: {
-          // "Access-Control-Allow-Origin": "*",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.text())
-        .then((data) => JSON.parse(data))
-        .then((data) => {
-          // this.fetchTestData = data;
-          console.log(data);
-          // console.log(this.fetchTestData);
-          this.parseProducts(data);
-        });
-    },
     log(item) {
       console.log(item);
     },
@@ -122,39 +104,36 @@ export default {
       }
     },
     updateSearchQuery(searchQuery, filteredList) {
-      console.log(filteredList);
-      // this.filteredList = filteredList.map(
-      //   (product, index) => (product.index = index)
-      // );
+      // console.log(filteredList);
       this.filteredList = filteredList;
     },
     handleWheel() {
-      // console.log(this.firstScroll);
-      // window.onscroll = () => {
       if (
         window.innerHeight + window.scrollY + 10 >=
         document.body.offsetHeight
       ) {
-        if (!this.waitWithFetch) {
+        if (!this.waitWithFetch && !this.allFetched) {
           this.waitWithFetch = true;
           this.offSet = this.offSet + 12;
           this.fetchData(this.fetchUrl);
           setTimeout(() => {
-            if (this.fetchData.length == 0) {
+            // console.log(this.productCount);
+            if (this.offSet > this.productCount) {
               console.log("no more products");
+              this.allFetched = true;
             } else {
               this.waitWithFetch = false;
             }
           }, 2000);
-          console.log(this.fetchData.length);
+          // console.log("Fetched!");
         }
       }
     },
   },
   created() {},
-  mounted() {
-    this.fetchTest();
-    // this.fetchData(this.fetchUrl);
+  async mounted() {
+    this.fetchData(this.fetchUrl);
+    this.productCount = await this.fetchProductCount();
   },
 };
 </script>
