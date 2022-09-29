@@ -4,6 +4,7 @@ export const fetchProductCount = async function fetchProductCount() {
     // console.log("fetching length of list");
     const response = await fetch(
       "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387",
+      // "http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387",
       {
         headers: {
           Accept: "application/json",
@@ -44,9 +45,18 @@ export const fetchData = async function fetchData(url) {
     );
 
     //bruger filteredProductList til at hente products ind
+
+    // filteredProductList.map(async (product) => {
+    //   const response = await fetch("https://projekter.kea.dk/almaproxy", {
+    //     headers: {
+    //       Accept: "application/json",
+    //       "X-almaEndpoint": `/almaws/v1/bibs/${product.value}`,
+    //     },
+    //   });
     filteredProductList.map(async (product) => {
       const response = await fetch(
         "https://projekter.kea.dk/almaproxy/almaws/v1/bibs/" + product.value,
+        // "http://localhost:8081/almaproxy/almaws/v1/bibs/" + product.value,
         {
           headers: {
             Accept: "application/json",
@@ -54,6 +64,7 @@ export const fetchData = async function fetchData(url) {
         }
       );
       const data = await response.json();
+      // console.log(data);
       this.parseProducts(data);
     });
     this.loading = false;
