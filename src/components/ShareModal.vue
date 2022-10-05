@@ -148,6 +148,8 @@ export default {
       } else if (media == "li") {
         url = this.getLinkedInUrl;
       }
+
+      // giver en fejl når det kører fra en iframe, men virker (Unsafe attempt to initiate navigation for frame with origin 'https://www.linkedin.com')
       window.open(
         url,
         "targetWindow",
