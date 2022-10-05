@@ -92,25 +92,44 @@ export default {
   },
   computed: {
     getCurrentUrl() {
-      return `https://projekter.kea.dk/keaprodukter/#${this.$route.path}`;
+      // return `https://projekter.kea.dk/keaprodukter/#${this.$route.path}`;
+      if (this.$route.path == "/") {
+        return `https://bibliotek.kea.dk/produkter`;
+      } else {
+        return `https://bibliotek.kea.dk/produkter?productid=${this.$route.path.slice(
+          1
+        )}`;
+      }
     },
     getFBUrl() {
-      return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
-        1,
-        this.$route.path.length
-      )}&quote=Check out this cool product from KEA!`;
+      if (this.$route.path == "/") {
+        return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
+      } else {
+        return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+          1,
+          this.$route.path.length
+        )}&quote=Check out this cool product from KEA!`;
+      }
     },
     getTwitterUrl() {
-      return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
-        1,
-        this.$route.path.length
-      )}`;
+      if (this.$route.path == "/") {
+        return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
+      } else {
+        return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+          1,
+          this.$route.path.length
+        )}`;
+      }
     },
     getLinkedInUrl() {
-      return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fprojekter.kea.dk%2Fkeaprodukter%2F%23%2F${this.$route.path.slice(
-        1,
-        this.$route.path.length
-      )}`;
+      if (this.$route.path == "/") {
+        return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
+      } else {
+        return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+          1,
+          this.$route.path.length
+        )}`;
+      }
     },
   },
   methods: {
@@ -126,7 +145,7 @@ export default {
         url = this.getFBUrl;
       } else if (media == "tw") {
         url = this.getTwitterUrl;
-      } else {
+      } else if (media == "li") {
         url = this.getLinkedInUrl;
       }
       window.open(
