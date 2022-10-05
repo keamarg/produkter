@@ -149,7 +149,7 @@ export default {
         url = this.getLinkedInUrl;
       }
 
-      // giver en fejl når det kører fra en iframe, men virker (Unsafe attempt to initiate navigation for frame with origin 'https://www.linkedin.com')
+      // giver en fejl når det kører fra en iframe, men virker, kan nok løses med noget a la det her: https://javascript.info/cross-window-communication (Unsafe attempt to initiate navigation for frame with origin 'https://www.linkedin.com')
       window.open(
         url,
         "targetWindow",

@@ -71,7 +71,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 **Nice to have:**
 
-- [ ] ved sharing, link direkte til hovedsiden i stedet for ifram siden (kan måske løses a la det her https://stackoverflow.com/questions/41946851/directly-link-to-page-with-specific-content-loaded-in-iframe eller det her: https://stackoverflow.com/questions/32790086/using-a-javascript-function-to-load-a-page-in-an-iframe)
+- [x] ved sharing, link direkte til hovedsiden i stedet for iframe siden (kan måske løses a la det her https://stackoverflow.com/questions/41946851/directly-link-to-page-with-specific-content-loaded-in-iframe eller det her: https://stackoverflow.com/questions/32790086/using-a-javascript-function-to-load-a-page-in-an-iframe)
 - [ ] vue tooltips til sidebar ikoner
 - [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
 - [ ] Krydsning af knapper (f.eks. e-bøger OG Teknik)
