@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return `https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
+      return `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
       // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
