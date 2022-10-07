@@ -56,7 +56,7 @@ export const fetchData = async function fetchData(url) {
     filteredProductList.map(async (product) => {
       const response = await fetch(
         // "https://projekter.kea.dk/almaproxy/almaws/v1/bibs/" + product.value,
-        `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaproxy/almaws/v1/bibs/${product.value}`,
+        `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/bibs/${product.value}`,
         {
           headers: {
             Accept: "application/json",

@@ -2,13 +2,31 @@
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div v-if="products[getIndex()]" class="row align-items-center">
       <div class="col pt-3 product p-5 rounded-custom" :style="css">
-        <span
-          type="button"
-          class="d-flex justify-content-end back-arrow"
-          @click="$router.go(-1)"
-        >
-          <i class="bi bi-arrow-left"></i>
-        </span>
+        <div class="row">
+          <span class="col">
+            <i
+              @click="like($event, products[getIndex()])"
+              class="product-icon"
+              :class="
+                products[getIndex()].liked
+                  ? 'bi bi-heart-fill likeheart'
+                  : 'bi bi-heart unlikeheart'
+              "
+            ></i>
+            <i
+              class="bi bi-share m-3 product-icon"
+              data-bs-toggle="modal"
+              data-bs-target="#shareModal"
+              title="Del"
+            ></i>
+          </span>
+          <span class="col d-flex justify-content-end">
+            <i
+              class="bi bi-arrow-left product-icon"
+              @click="$router.go(-1)"
+            ></i>
+          </span>
+        </div>
         <div class="col-lg-7 producttext rounded-custom">
           <h1>{{ products[getIndex()].title }}</h1>
           <p>{{ products[getIndex()].text }}</p>
@@ -48,7 +66,7 @@
               :key="item"
               :to="{
                 name: 'Results',
-                params: { id: item.toLowerCase() },
+                params: { id: item.toLowerCase(), type: `keyword` },
               }"
             >
               <button
@@ -62,8 +80,58 @@
             </p> -->
             </router-link>
           </div>
+          <div class="mt-5">
+            <span class="me-3">Ophav</span>
+            <router-link
+              :to="{
+                name: 'Results',
+                params: {
+                  id: products[getIndex()].author.toLowerCase(),
+                  type: `author`,
+                },
+              }"
+            >
+              <button
+                type="button"
+                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+              >
+                {{ products[getIndex()].author }}
+              </button>
+            </router-link>
+            <router-link
+              :to="{
+                name: 'Results',
+                params: {
+                  id: products[getIndex()].author2.toLowerCase(),
+                  type: `author`,
+                },
+              }"
+            >
+              <button
+                type="button"
+                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+              >
+                {{ products[getIndex()].author2 }}
+              </button>
+            </router-link>
+            <router-link
+              :to="{
+                name: 'Results',
+                params: {
+                  id: products[getIndex()].author3.toLowerCase(),
+                  type: `author`,
+                },
+              }"
+            >
+              <button
+                type="button"
+                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+              >
+                {{ products[getIndex()].author3 }}
+              </button>
+            </router-link>
+          </div>
         </div>
-        <!-- <ShareThis /> -->
         <div class="col-lg-5"></div>
       </div>
     </div>
@@ -72,10 +140,12 @@
 
 <script>
 // import ShareThis from "@/components/ShareThis";
+// import ShareModal from "@/components/ShareModal.vue";
 
 export default {
   name: "ProductPage",
   // components: { ShareThis },
+  // components: ShareModal,
   props: ["products", "loading"],
   computed: {
     articlesrc() {
@@ -109,6 +179,17 @@ export default {
       return this.products
         .map((object) => object.id)
         .indexOf(this.$route.params.id);
+    },
+    like(event, product) {
+      product.liked = !product.liked;
+      if (product.liked == true) {
+        localStorage.setItem(product.title, product.liked);
+      } else {
+        localStorage.removeItem(product.title);
+      }
+      // console.log(card.liked);
+      // console.log(card);
+      // console.log(event.target, card.id);
     },
   },
   created() {

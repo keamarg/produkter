@@ -13,8 +13,8 @@
           @click="like($event, card)"
           :class="
             card.liked
-              ? 'bi bi-heart-fill likeheart'
-              : 'bi bi-heart unlikeheart'
+              ? 'bi bi-heart-fill likeheart likeheart-card'
+              : 'bi bi-heart unlikeheart unlikeheart-card'
           "
         ></i>
         <router-link :to="{ name: 'Product', params: { id: card.id } }">

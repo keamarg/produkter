@@ -11166,8 +11166,16 @@ a {
   font-size: 2rem;
 }
 
-.back-arrow {
-  font-size: 1.5rem;
+.product-icon {
+  opacity: 0.8;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.product-icon:hover {
+  opacity: 1;
+  font-size: 1.6rem;
+  cursor: pointer;
 }
 
 /*Lagt i index.html*/
@@ -11227,6 +11235,33 @@ a {
 }
 
 .btn-custom-nav:focus {
+  outline: none;
+}
+
+.btn-custom-author {
+  color: #343a40;
+  background-color: white;
+  border-color: white;
+  font-weight: bold;
+  border: 0px;
+  font-size: 0.7rem;
+  /* text-transform: uppercase !important; */
+}
+
+.btn-custom-author:hover {
+  background-color: #343a40;
+  color: white;
+}
+
+.btn-custom-author:active,
+.btn-custom-author:focus {
+  background-color: #343a40;
+  color: white;
+  border: 0px;
+  box-shadow: none;
+}
+
+.btn-custom-author:focus {
   outline: none;
 }
 
@@ -11515,6 +11550,10 @@ div.modal-body {
 }
 
 .likeheart {
+  color: #eb5045;
+}
+
+.likeheart-card {
   position: absolute;
   top: 0.5rem;
   right: 1rem;
@@ -11526,7 +11565,7 @@ div.modal-body {
   content: "\f770";
 }
 
-.unlikeheart {
+.unlikeheart-card {
   position: absolute;
   top: 0.5rem;
   right: 1rem;

@@ -67,7 +67,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
 - [ ] henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
 - [ ] søgefelt på mobil giver ikke forslag
-- [ ] tilbagepil farver hele linjen under produkt i safari
+- [x] tilbagepil farver hele linjen under produkt i safari
+- [ ] Bug eller ej? Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
+- [ ] Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald)
 
 **Nice to have:**
 
