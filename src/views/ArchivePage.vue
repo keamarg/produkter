@@ -3,7 +3,7 @@
 <template>
   <div class="p-3 mb-3" @mousewheel="handleWheel">
     <div class="row align-items-center">
-      <p>Alle KEA produkter...</p>
+      <p>Alle {{ productcount }} KEA produkter...</p>
       <CardGroup :products="products" :displayAll="displayAll" />
     </div>
     <div v-if="displayChevron" class="bounce">
@@ -20,7 +20,7 @@ export default {
   components: {
     CardGroup,
   },
-  props: ["products", "loading"],
+  props: ["products", "loading", "productcount"],
   data() {
     return {
       displayAll: true,

@@ -74,41 +74,80 @@ export default {
     };
   },
   computed: {
+    // filteredList() {
+    //   if (this.searchQuery)
+    //     return this.products.filter((product) =>
+    //       product.keywords.some(
+    //         (keyword) =>
+    //           keyword.slice(0, this.searchQuery.length).toLowerCase() ==
+    //           this.searchQuery.toLowerCase()
+    //       )
+    //     );
+    //   else {
+    //     return null;
+    //   }
+    // },
+
+    //liste over produkter filtreret på author og keyword
     filteredList() {
-      if (this.searchQuery)
-        return this.products.filter((product) =>
+      if (this.searchQuery) {
+        //filtrer efter author
+        let authors = this.products.filter(
+          (product) =>
+            product.author.slice(0, this.searchQuery.length).toLowerCase() ==
+              this.searchQuery.toLowerCase() ||
+            product.author2.slice(0, this.searchQuery.length).toLowerCase() ==
+              this.searchQuery.toLowerCase() ||
+            product.author3.slice(0, this.searchQuery.length).toLowerCase() ==
+              this.searchQuery.toLowerCase()
+        );
+
+        //filtrer efter keyword
+        let keywords = this.products.filter((product) =>
           product.keywords.some(
             (keyword) =>
               keyword.slice(0, this.searchQuery.length).toLowerCase() ==
               this.searchQuery.toLowerCase()
           )
         );
-      else {
+        // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
+        const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
+        return collectedAndFiltered;
+      } else {
         return null;
       }
     },
 
     //lav liste af unikke keywords til brug under dynamisk søgning
     keywordList() {
-      let keywords = [];
-      this.products.map((product) =>
+      let keywordList = [];
+      this.products.map((product) => {
         product.keywords.map((keyword) => {
-          if (!keywords.includes(keyword)) {
-            keywords.push(keyword.toLowerCase());
+          if (!keywordList.includes(keyword)) {
+            keywordList.push(keyword.toLowerCase());
           }
-        })
-      );
-      return keywords;
+        });
+        if (!keywordList.includes(product.author.toLowerCase())) {
+          keywordList.push(product.author.toLowerCase());
+        }
+        if (!keywordList.includes(product.author2.toLowerCase())) {
+          keywordList.push(product.author2.toLowerCase());
+        }
+        if (!keywordList.includes(product.author3.toLowerCase())) {
+          keywordList.push(product.author3.toLowerCase());
+        }
+      });
+      return keywordList;
     },
 
     //filtrer keyword listen efter søgefeltet
     keywordSearchFilter() {
-      let keywords = this.keywordList.filter(
-        (keyword) =>
-          keyword.slice(0, this.searchQuery.length) ==
-          this.searchQuery.slice(0, this.searchQuery.length)
+      let keywords = this.keywordList.filter((keyword) =>
+        // keyword.slice(0, this.searchQuery.length) ==
+        // this.searchQuery.slice(0, this.searchQuery.length)
+        keyword.includes(this.searchQuery)
       );
-      return keywords;
+      return keywords.sort().slice(0, 10);
     },
   },
   methods: {

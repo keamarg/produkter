@@ -20,7 +20,7 @@ export default {
   components: {
     CardGroup,
   },
-  props: ["products", "loading"],
+  props: ["products", "loading", "productcount"],
   data() {
     return {
       displayAll: true,
@@ -41,17 +41,56 @@ export default {
     //     return null;
     //   }
     // },
+    // filteredProducts() {
+    //   // console.log(this.$route.params.id);
+    //   // console.log(this.$route.params.type);
+    //   //filtrer efter ophav
+    //   if (this.$route.params.kind == "author") {
+    //     console.log("in #1", this.$route.params.kind);
+    //     return this.products.filter(
+    //       (product) =>
+    //         product.author.toLowerCase() ==
+    //           this.$route.params.id.toLowerCase() ||
+    //         product.author2.toLowerCase() ==
+    //           this.$route.params.id.toLowerCase() ||
+    //         product.author3.toLowerCase() == this.$route.params.id.toLowerCase()
+    //     );
+    //     //filtrer efter keyword
+    //   } else if (this.$route.params.id) {
+    //     console.log("in #2");
+    //     return this.products.filter((product) =>
+    //       product.keywords.some(
+    //         (keyword) =>
+    //           keyword.slice(0, this.$route.params.id.length).toLowerCase() ==
+    //           this.$route.params.id.toLowerCase()
+    //       )
+    //     );
+    //   } else {
+    //     return null;
+    //   }
+    // },
     filteredProducts() {
-      // console.log(this.$route.params.id);
-      // console.log(this.$route.params.type);
+      //filtrer efter ophav
       if (this.$route.params.id) {
-        return this.products.filter((product) =>
+        let authors = this.products.filter(
+          (product) =>
+            product.author.toLowerCase() ==
+              this.$route.params.id.toLowerCase() ||
+            product.author2.toLowerCase() ==
+              this.$route.params.id.toLowerCase() ||
+            product.author3.toLowerCase() == this.$route.params.id.toLowerCase()
+        );
+        //filtrer efter keyword
+        let keywords = this.products.filter((product) =>
           product.keywords.some(
             (keyword) =>
               keyword.slice(0, this.$route.params.id.length).toLowerCase() ==
               this.$route.params.id.toLowerCase()
           )
         );
+        // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
+        const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
+        return collectedAndFiltered;
       } else {
         return null;
       }

@@ -36,6 +36,10 @@ const router = createRouter({
       name: "Results",
       path: "/results/:id",
       component: ResultsPage,
+      props: {
+        // kind: "author",
+        default: true,
+      },
     },
 
     {

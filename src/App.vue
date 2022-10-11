@@ -15,6 +15,7 @@
         class="col"
         :products="products"
         :loading="loading"
+        :productcount="productCount"
         v-slot="{ Component, route }"
       >
         <transition name="fade" mode="out-in">
@@ -69,7 +70,7 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
+      return `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=30&offset=${this.offSet}`;
       // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
@@ -107,29 +108,32 @@ export default {
     updateSearchQuery(searchQuery, filteredList) {
       // console.log(filteredList);
       this.filteredList = filteredList;
+      // this.kind = searchQuery.kind;
     },
-    handleWheel() {
-      if (
-        window.innerHeight + window.scrollY + 10 >=
-        document.body.offsetHeight
-      ) {
-        if (!this.waitWithFetch && !this.allFetched) {
-          this.waitWithFetch = true;
-          this.offSet = this.offSet + 12;
-          this.fetchData(this.fetchUrl);
-          setTimeout(() => {
-            // console.log(this.productCount);
-            if (this.offSet > this.productCount) {
-              console.log("no more products");
-              this.allFetched = true;
-            } else {
-              this.waitWithFetch = false;
-            }
-          }, 2000);
-          // console.log("Fetched!");
-        }
-      }
-    },
+
+    //håndterer løbende indhentning af produkter - deaktiveret, da alle produkter foreløbigt hentes ind
+    // handleWheel() {
+    //   if (
+    //     window.innerHeight + window.scrollY + 10 >=
+    //     document.body.offsetHeight
+    //   ) {
+    //     if (!this.waitWithFetch && !this.allFetched) {
+    //       this.waitWithFetch = true;
+    //       this.offSet = this.offSet + 12;
+    //       this.fetchData(this.fetchUrl);
+    //       setTimeout(() => {
+    //         // console.log(this.productCount);
+    //         if (this.offSet > this.productCount) {
+    //           console.log("no more products");
+    //           this.allFetched = true;
+    //         } else {
+    //           this.waitWithFetch = false;
+    //         }
+    //       }, 2000);
+    //       // console.log("Fetched!");
+    //     }
+    //   }
+    // },
   },
   created() {},
   async mounted() {

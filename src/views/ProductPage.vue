@@ -66,7 +66,7 @@
               :key="item"
               :to="{
                 name: 'Results',
-                params: { id: item.toLowerCase(), type: `keyword` },
+                params: { id: item.toLowerCase(), kind: 'keyword' },
               }"
             >
               <button
@@ -87,7 +87,7 @@
                 name: 'Results',
                 params: {
                   id: products[getIndex()].author.toLowerCase(),
-                  type: `author`,
+                  kind: `author`,
                 },
               }"
             >
@@ -103,7 +103,7 @@
                 name: 'Results',
                 params: {
                   id: products[getIndex()].author2.toLowerCase(),
-                  type: `author`,
+                  kind: `author`,
                 },
               }"
             >
@@ -119,7 +119,7 @@
                 name: 'Results',
                 params: {
                   id: products[getIndex()].author3.toLowerCase(),
-                  type: `author`,
+                  kind: `author`,
                 },
               }"
             >
