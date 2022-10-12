@@ -14,9 +14,17 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-danger" id="exampleModalLabel">
+            <div class="navbar-brand p-0 pb-2 d-flex align-items-center">
+              <img
+                src="https://bibliotek.kea.dk/images/KEAprodukter/KEA_logo_EN_Web_red.png"
+                class="logo d-inline"
+                alt=""
+              />
+              <p class="navbar-title d-inline ps-2 m-0 text-dark">Produkter</p>
+            </div>
+            <!-- <h5 class="modal-title text-info" id="exampleModalLabel">
               Om KEA Produkter
-            </h5>
+            </h5> -->
             <button
               type="button"
               class="btn-close"
@@ -28,15 +36,15 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
             <div class="p-3 text-start">
               <!-- <p pb-5>Del produktet via...</p> -->
               <p>
-                Platformen KEA Produkter er henvendt til både interne og
-                eksterne. Her findes alle de produkter der er udviklet af
-                ansatte på KEA over de seneste år. Afhængigt af produkttype er
-                der små beskrivelser, videoer og mulighed for at hente eller se
-                selve produktet. Det er altid muligt at komme med input, ønsker
-                og spørgsmål til platformen. For yderligere information kontakt:
-                Biblioteksleder Helle Guldberg Copyright: Alt materialet på KEA
-                Produkter er offentligt tilgængeligt og kan, med henvisning,
-                anvendes til undervisningsformål. God fornøjelse!
+                På KEA Produkter kan du finde alle de produkter, der er udviklet
+                af ansatte på KEA over de seneste år. Afhængigt af produkttype
+                er der små beskrivelser, videoer og mulighed for at hente eller
+                se selve produktet. Det er altid muligt at komme med input,
+                ønsker og spørgsmål til platformen. For yderligere information
+                kontakt: Biblioteksleder Helle Guldberg Copyright: Alt
+                materialet på KEA Produkter er offentligt tilgængeligt og kan,
+                med henvisning, anvendes til undervisningsformål. God
+                fornøjelse!
               </p>
             </div>
           </div>

@@ -30,7 +30,7 @@
         <div class="col-lg-7 producttext rounded-custom">
           <h1>{{ products[getIndex()].title }}</h1>
           <p>{{ products[getIndex()].text }}</p>
-          <router-link
+          <!-- <router-link
             :to="{ name: 'ProductVideo', params: { id: $route.params.id } }"
           >
             <button
@@ -44,7 +44,7 @@
               <i class="bi bi-play-circle"></i>&nbsp;
               {{ products[getIndex()].video[1] }}
             </button>
-          </router-link>
+          </router-link> -->
           <template
             v-for="(item, index) in Object.keys(products[getIndex()].article)"
             :key="item"
@@ -59,7 +59,16 @@
               {{ products[getIndex()].article[index + 1] }}</a
             >
           </template>
-          <accordion-menu :products="products" :getIndex="getIndex" />
+          <accordion-menu
+            v-if="
+              !(
+                products[getIndex()].video[0] == 'none' &&
+                products[getIndex()].video2[0] == 'none'
+              )
+            "
+            :products="products"
+            :getIndex="getIndex"
+          />
           <div class="mt-5">
             <span class="me-3">Keywords</span>
             <router-link
@@ -143,6 +152,7 @@
 import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
+import { getIndex } from "../assets/common.js";
 
 export default {
   components: { AccordionMenu },
@@ -162,7 +172,7 @@ export default {
           "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
           this.products[this.getIndex()].img1 +
           "), no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "150%", //før sat til "cover", men det gav problemer når man åbnede accordion
         fontSize: "16px",
         minHeight: "35rem",
       };
@@ -178,11 +188,13 @@ export default {
     log(item) {
       console.log(item);
     },
-    getIndex() {
-      return this.products
-        .map((object) => object.id)
-        .indexOf(this.$route.params.id);
-    },
+    getIndex: getIndex,
+
+    // getIndex() {
+    //   return this.products
+    //     .map((object) => object.id)
+    //     .indexOf(this.$route.params.id);
+    // },
     like(event, product) {
       product.liked = !product.liked;
       if (product.liked == true) {

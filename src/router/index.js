@@ -4,7 +4,7 @@ import ResultsPage from "../views/ResultsPage.vue";
 import LikesPage from "../views/LikesPage.vue";
 import ArchivePage from "../views/ArchivePage.vue";
 import ProductPage from "../views/ProductPage.vue";
-import ProductVideoPage from "../views/ProductVideoPage.vue";
+// import ProductVideoPage from "../views/ProductVideoPage.vue";
 
 // import { store } from "../assets/store.js";
 
@@ -21,11 +21,11 @@ const router = createRouter({
       component: HomePage,
     },
     { name: "Product", path: "/:id", component: ProductPage },
-    {
-      name: "ProductVideo",
-      path: "/:id/video",
-      component: ProductVideoPage,
-    },
+    // {
+    //   name: "ProductVideo",
+    //   path: "/:id/video",
+    //   component: ProductVideoPage,
+    // },
     {
       name: "Likes",
       path: "/liked",

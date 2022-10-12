@@ -1,3 +1,9 @@
+export const getIndex = function getIndex() {
+  return this.products
+    .map((object) => object.id)
+    .indexOf(this.$route.params.id);
+};
+
 //henter antallet af produkter (bruges til at sørge for, at fetchData ikke kører hvis alle produkter er hentet)
 export const fetchProductCount = async function fetchProductCount() {
   try {

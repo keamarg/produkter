@@ -9,6 +9,7 @@
           data-bs-target="#collapseOne"
           aria-expanded="false"
           aria-controls="collapseOne"
+          @click="playVideo()"
         >
           <!-- Se video {{ products[getIndex()].title }} -->
           <i class="bi bi-play-circle"></i>&nbsp;
@@ -25,14 +26,16 @@
           <div class="iframediv ratio ratio-16x9 rounded-custom mt-3">
             <!-- {{ log(products[getIndex()].video) }} -->
             <iframe
+              id="ytvideo"
               v-if="products[getIndex()].video[0] != 'none'"
               :src="videosrc"
               frameborder="0"
-              allow="accelerometer; encrypted-media; gyroscope;"
+              allow="accelerometer; autoplay;encrypted-media; gyroscope;"
               allowfullscreen
             >
             </iframe>
             <video
+              id="video"
               v-else-if="products[getIndex()].video2[0]"
               width="320"
               height="240"
@@ -49,11 +52,15 @@
 </template>
 
 <script>
+import { getIndex } from "../assets/common.js";
+
 export default {
   name: "AccordionMenu",
-  props: ["products", "getIndex"],
+  props: ["products"],
   data() {
-    return {};
+    return {
+      paused: true,
+    };
   },
   computed: {
     videosrc() {
@@ -70,6 +77,32 @@ export default {
   methods: {
     log(item) {
       console.log(item);
+    },
+    getIndex: getIndex,
+    playVideo() {
+      //   console.log(!!this.$el.querySelector("#video"));
+      if (this.$el.querySelector("#video")) {
+        let video = this.$el.querySelector("#video");
+        if (this.paused) {
+          video.play();
+          //   console.log("playing");
+        } else {
+          video.pause();
+          video.currentTime = 0;
+          //   console.log("stopping");
+        }
+      } else {
+        let ytvideo = this.$el.querySelector("#ytvideo");
+
+        if (this.paused) {
+          ytvideo.src += "&autoplay=1&mute=1";
+          //   console.log("playing yt");
+        } else {
+          ytvideo.src += "&autoplay=0";
+          //   console.log("stopping yt");
+        }
+      }
+      this.paused = !this.paused;
     },
   },
 };
