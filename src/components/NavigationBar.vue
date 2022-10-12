@@ -74,20 +74,6 @@ export default {
     };
   },
   computed: {
-    // filteredList() {
-    //   if (this.searchQuery)
-    //     return this.products.filter((product) =>
-    //       product.keywords.some(
-    //         (keyword) =>
-    //           keyword.slice(0, this.searchQuery.length).toLowerCase() ==
-    //           this.searchQuery.toLowerCase()
-    //       )
-    //     );
-    //   else {
-    //     return null;
-    //   }
-    // },
-
     //liste over produkter filtreret på author og keyword
     filteredList() {
       if (this.searchQuery) {
@@ -145,7 +131,7 @@ export default {
       let keywords = this.keywordList.filter((keyword) =>
         // keyword.slice(0, this.searchQuery.length) ==
         // this.searchQuery.slice(0, this.searchQuery.length)
-        keyword.includes(this.searchQuery)
+        keyword.includes(this.searchQuery.toLowerCase())
       );
       return keywords.sort().slice(0, 10);
     },

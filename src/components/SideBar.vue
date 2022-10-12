@@ -1,39 +1,50 @@
 //Sidebar ikoner
 <template>
-  <div class="col-md-1 pt-3 text-center mt-2 mt-md-5">
-    <router-link :to="{ name: 'Likes' }">
+  <div class="col-md-1 pt-3 text-center mt-1 mt-md-5">
+    <router-link :to="{ name: 'Likes' }" class="d-md-block sidebar-icons">
       <i
-        class="bi bi-heart d-md-block m-5 m-md-0 sidebar-icons sidebar-icon-like"
+        class="bi bi-heart-fill"
         data-bs-toggle="tooltip"
         data-bs-placement="auto"
         title="Likes"
       ></i>
+      <div class="sidebar-icons-text">Gemte</div>
     </router-link>
-    <router-link :to="{ name: 'Archive' }">
+    <router-link
+      :to="{ name: 'Archive' }"
+      class="d-md-block mt-md-2 mb-md-2 sidebar-icons"
+    >
       <i
-        class="bi bi bi-archive d-md-block mt-md-5 mb-md-5 mt-0 mtb-0 sidebar-icons sidebar-icon-archive"
+        class="bi bi-collection-fill"
         data-bs-toggle="tooltip"
         data-bs-placement="auto"
         title="Arkiv"
       ></i>
+      <div class="sidebar-icons-text">Alle</div>
     </router-link>
-    <i
-      class="bi bi-share d-md-block m-5 m-md-0 sidebar-icons sidebar-icon-share"
-      data-bs-toggle="modal"
-      data-bs-target="#shareModal"
-      title="Del"
-    ></i>
+    <div class="d-md-block sidebar-icons">
+      <i
+        class="bi bi-info-circle-fill"
+        data-bs-toggle="modal"
+        data-bs-target="#aboutModal"
+        title="Del"
+      ></i>
+      <div class="sidebar-icons-text">Om</div>
+    </div>
     <ShareModal />
+    <AboutModal />
   </div>
 </template>
 
 <script>
 import ShareModal from "@/components/ShareModal.vue";
+import AboutModal from "@/components/AboutModal.vue";
 
 export default {
   name: "SideBar",
   components: {
     ShareModal,
+    AboutModal,
   },
   props: {},
   data() {
@@ -52,6 +63,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sidebar-icons {
+  color: #ced4da;
+  font-size: 2.5rem; //4
+  line-height: 2rem; //5
+  opacity: 0.5;
+  transition: all 0.6s ease-in-out;
+}
+
+.sidebar-icons:hover {
+  color: white;
+  opacity: 1;
+}
+
+.sidebar-icons-text {
+  font-size: 1rem;
+}
+// .sidebar-icon-archive {
+//   color: white;
+//   opacity: 0.5;
+//   transition: all 0.6s ease-in-out;
+// }
+
+// .sidebar-icon-archive:hover {
+//   opacity: 1;
+// }
 /* @import "../styles/style.css"; */
 
 // .sidebar-icons {

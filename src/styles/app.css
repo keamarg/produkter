@@ -11349,23 +11349,6 @@ a {
 }
 
 /* Icons sidebar */
-.sidebar-icons {
-  color: #ced4da;
-  font-size: 2.5rem;
-  line-height: 2rem;
-}
-
-.sidebar-icons:hover {
-  color: white;
-}
-
-.tooltip-inner {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 2rem;
-  opacity: 0.6;
-}
-
 /* 
   .tooltip.top .tooltip-arrow {
     background-color: rgba(0, 0, 0, 0.2) !important;
@@ -11391,52 +11374,6 @@ a {
     font-size: 2rem;
     line-height: 5rem;
   } */
-.sidebar-icon-like:before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f417";
-  color: white;
-  opacity: 0.5;
-  transition: all 0.6s ease-in-out;
-}
-
-.sidebar-icon-like:hover:before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f415";
-  color: white;
-  opacity: 1;
-}
-
-.sidebar-icon-archive:before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f10d";
-  color: white;
-  opacity: 0.5;
-  transition: all 0.6s ease-in-out;
-}
-
-.sidebar-icon-archive:hover:before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f10c";
-  color: white;
-  opacity: 1;
-}
-
-.sidebar-icon-share:before {
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f52e";
-  color: white;
-  opacity: 0.5;
-  transition: all 0.6s ease-in-out;
-}
-
-.sidebar-icon-share:hover:before {
-  cursor: pointer;
-  font-family: Arial, Helvetica, sans-serif;
-  content: "\f52d";
-  color: white;
-  opacity: 1;
-}
-
 /* .sidebar-icon-like:hover:before {
     font-family: Arial, Helvetica, sans-serif;
     content: "Likes";

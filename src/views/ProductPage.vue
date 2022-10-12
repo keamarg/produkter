@@ -59,6 +59,7 @@
               {{ products[getIndex()].article[index + 1] }}</a
             >
           </template>
+          <accordion-menu :products="products" :getIndex="getIndex" />
           <div class="mt-5">
             <span class="me-3">Keywords</span>
             <router-link
@@ -139,10 +140,12 @@
 </template>
 
 <script>
+import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
 
 export default {
+  components: { AccordionMenu },
   name: "ProductPage",
   // components: { ShareThis },
   // components: ShareModal,

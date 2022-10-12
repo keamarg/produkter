@@ -52,7 +52,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] Den, der hedder artikel .pt, f.eks. til dilemmaspil som har 2 .pdf’er
 - [x] Sørg for, at navnet på knappen er dynamisk, da det også kan være andet end en artikel.
-- [ ] **BRUGES IKKE PT-** Dynamisk loading til mobil (virker ikke med onscroll)
+- [ ] **DYNAMISK LOADING BRUGES IKKE PT-** Dynamisk loading til mobil (virker ikke med onscroll)
 - [x] Ændre "like hjerte" til at ligge inde på selve produktet, i stedet for på thumbnail, det samme med "share"
 - [ ] Gentænk menuen til venstre (hjerte, arkiv, del), fjern den evt. helt, og læg funktionalitetet ud andre steder. "Arkiv" ligner en indkøbskurv, og navnet "arkiv" får folk til at tænke på, at man vil arkivere noget. Kald den evt. "alle produkter" eller lignende i stedet.
 - [ ] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
@@ -64,13 +64,13 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [x] bug1a Localstorage "likes" forsvinder pludseligt på refresh
 - [x] bug1b Alle relevante produkter skal loade under likes og søgninger
-- [ ] hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
-- [ ] henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
-- [ ] søgefelt på mobil giver ikke forslag
-- [x] tilbagepil farver hele linjen under produkt i safari
-- [ ] Bug eller ej? Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
-- [ ] Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald) UPDATE: Vi kan muligvis klare det via et "description" field, som holder en kopi af keywords i portfolio listen. I første omgang deaktiverer vi funktionaliteten med at hente ind løbende, og ser på hvor meget det rent faktisk betyder.
-- [ ] Hvis man refresher "results" siden efter et klik på en "author", så får man en tom liste. Jeg har undersøgt det, men kan ikke helt trænge til bunds i det (this.$route.params.kind virker, men kun indtil refresh. Har været nede af en vej med at bruge props, men det lykkedes ikke helt... tænker måske det har noget at gøre med "searchquery" i "navigation" komponenten, som emitter noget, der måske gemmer params ved refresh, men kan simpelthen ikke huske hvordan jeg har bygget det op i sin tid)
+- [ ] bug1c hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
+- [ ] bug1d **DYNAMISK LOADING BRUGES IKKE PT-** henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
+- [ ] bug1e søgefelt på mobil giver ikke forslag
+- [x] bug1f tilbagepil farver hele linjen under produkt i safari
+- [ ] bug1g Bug eller ej? Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
+- [ ] bug1h **DYNAMISK LOADING BRUGES IKKE PT-** Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald) UPDATE: Vi kan muligvis klare det via et "description" field, som holder en kopi af keywords i portfolio listen. I første omgang deaktiverer vi funktionaliteten med at hente ind løbende, og ser på hvor meget det rent faktisk betyder.
+- [x] bug1i Hvis man refresher "results" siden efter et klik på en "author", så får man en tom liste. Jeg har undersøgt det, men kan ikke helt trænge til bunds i det (this.$route.params.kind virker, men kun indtil refresh. Har været nede af en vej med at bruge props, men det lykkedes ikke helt... tænker måske det har noget at gøre med "searchquery" i "navigation" komponenten, som emitter noget, der måske gemmer params ved refresh, men kan simpelthen ikke huske hvordan jeg har bygget det op i sin tid)
 
 **Nice to have:**
 
