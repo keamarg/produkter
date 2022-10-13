@@ -4,25 +4,6 @@ export const getIndex = function getIndex() {
     .indexOf(this.$route.params.id);
 };
 
-//henter antallet af produkter (bruges til at sørge for, at fetchData ikke kører hvis alle produkter er hentet)
-export const fetchProductCount = async function fetchProductCount() {
-  try {
-    const response = await fetch(
-      `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387`,
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    let result = data.portfolios.value;
-    return result;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 //henter productLinks ind fra den aktuelle portfolioliste, så de kan bruges til at hente products
 export const fetchData = async function fetchData(url) {
   try {

@@ -172,7 +172,7 @@ export default {
           "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
           this.products[this.getIndex()].img1 +
           "), no-repeat",
-        backgroundSize: "150%", //før sat til "cover", men det gav problemer når man åbnede accordion
+        backgroundSize: "cover",
         fontSize: "16px",
         minHeight: "35rem",
       };

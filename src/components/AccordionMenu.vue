@@ -30,13 +30,13 @@
               v-if="products[getIndex()].video[0] != 'none'"
               :src="videosrc"
               frameborder="0"
-              allow="accelerometer; autoplay;encrypted-media; gyroscope;"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope;"
               allowfullscreen
             >
             </iframe>
             <video
               id="video"
-              v-else-if="products[getIndex()].video2[0]"
+              v-else-if="products[getIndex()].video2[0] != 'none'"
               width="320"
               height="240"
               controls
@@ -64,13 +64,11 @@ export default {
   },
   computed: {
     videosrc() {
-      // console.log(this.$route.params);
       return `https://www.youtube.com/embed/${
         this.products[this.getIndex()].video[0]
-      }?autoplay=1`;
+      }${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=0"}`;
     },
     videosrc2() {
-      // console.log(this.$route.params);
       return this.products[this.getIndex()].video2[0];
     },
   },
@@ -91,16 +89,16 @@ export default {
           video.currentTime = 0;
           //   console.log("stopping");
         }
-      } else {
-        let ytvideo = this.$el.querySelector("#ytvideo");
+        // } else {
+        //   let ytvideo = this.$el.querySelector("#ytvideo");
 
-        if (this.paused) {
-          ytvideo.src += "&autoplay=1&mute=1";
-          //   console.log("playing yt");
-        } else {
-          ytvideo.src += "&autoplay=0";
-          //   console.log("stopping yt");
-        }
+        //   if (this.paused) {
+        //     ytvideo.src += "&autoplay=1";
+        //     //   console.log("playing yt");
+        //   } else {
+        //     ytvideo.src += "&autoplay=0";
+        //     //   console.log("stopping yt");
+        //   }
       }
       this.paused = !this.paused;
     },
