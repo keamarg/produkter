@@ -66,7 +66,7 @@ export default {
     videosrc() {
       return `https://www.youtube.com/embed/${
         this.products[this.getIndex()].video[0]
-      }${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=0"}`;
+      }${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
     },
     videosrc2() {
       return this.products[this.getIndex()].video2[0];
