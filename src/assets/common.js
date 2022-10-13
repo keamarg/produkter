@@ -7,9 +7,7 @@ export const getIndex = function getIndex() {
 //henter antallet af produkter (bruges til at sørge for, at fetchData ikke kører hvis alle produkter er hentet)
 export const fetchProductCount = async function fetchProductCount() {
   try {
-    // console.log("fetching length of list");
     const response = await fetch(
-      // "https://projekter.kea.dk/almaproxy/almaws/v1/electronic/e-collections/618551140007387",
       `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387`,
       {
         headers: {
@@ -28,7 +26,6 @@ export const fetchProductCount = async function fetchProductCount() {
 //henter productLinks ind fra den aktuelle portfolioliste, så de kan bruges til at hente products
 export const fetchData = async function fetchData(url) {
   try {
-    // console.log("fetching products");
     const response = await fetch(url, {
       headers: {
         Accept: "application/json",
@@ -51,29 +48,23 @@ export const fetchData = async function fetchData(url) {
     );
 
     //bruger filteredProductList til at hente products ind
-
-    // filteredProductList.map(async (product) => {
-    //   const response = await fetch("https://projekter.kea.dk/almaproxy", {
-    //     headers: {
-    //       Accept: "application/json",
-    //       "X-almaEndpoint": `/almaws/v1/bibs/${product.value}`,
-    //     },
-    //   });
-    filteredProductList.map(async (product) => {
-      const response = await fetch(
-        // "https://projekter.kea.dk/almaproxy/almaws/v1/bibs/" + product.value,
-        `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/bibs/${product.value}`,
-        {
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-      const data = await response.json();
-      // console.log(data);
-      this.parseProducts(data);
-    });
+    const res = await fetch(
+      `${
+        process.env.VUE_APP_ALMA_PROXY_PATH
+      }/almaws/v1/bibs?mms_id=${filteredProductList.map(
+        (product) => product.value
+      )}`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    const d = await res.json();
+    this.parseProducts(d);
     this.loading = false;
+    let totalProducts = d.total_record_count;
+    return totalProducts;
   } catch (error) {
     console.error(error);
   }
@@ -81,39 +72,41 @@ export const fetchData = async function fetchData(url) {
 
 // parse xml inspireret af https://www.c-sharpcorner.com/blogs/get-data-from-xml-content-using-javascript burde nok udskiftes med en Vue version, som bruger virtual DOM
 export const parseProducts = function parseProducts(data) {
-  let parser = new DOMParser();
-  let xmlDoc = parser.parseFromString(data.anies, "text/xml");
+  data.bib.map((product) => {
+    let parser = new DOMParser();
+    let xmlDoc = parser.parseFromString(product.anies, "text/xml");
 
-  var x = xmlDoc.getElementsByTagName("datafield");
-  const parsedData = [];
-  for (let i = 0; i < x.length; i++) {
-    const subfieldData = Object.values(
-      x[i].getElementsByTagName("subfield")
-    ).map(function (value) {
-      return value.innerHTML;
+    var x = xmlDoc.getElementsByTagName("datafield");
+    const parsedData = [];
+    for (let i = 0; i < x.length; i++) {
+      const subfieldData = Object.values(
+        x[i].getElementsByTagName("subfield")
+      ).map(function (value) {
+        return value.innerHTML;
+      });
+      parsedData[i] = subfieldData;
+    }
+    // Object.assign for at beholde reactivity
+    const parsedProduct = [];
+
+    this.products[this.products.length] = Object.assign({}, parsedProduct, {
+      author: parsedData[1][0],
+      title: parsedData[2][0],
+      subtitle: parsedData[3][0],
+      text: parsedData[4][0],
+      keywords: parsedData[5],
+      author2: parsedData[6][0],
+      author3: parsedData[7][0],
+      links: parsedData[8][0],
+      video: parsedData[9],
+      video2: parsedData[10],
+      img1: parsedData[11][0],
+      img2: parsedData[12][0],
+      img3: parsedData[13][0],
+      article: parsedData[14],
+
+      id: product.mms_id,
+      liked: localStorage.getItem(parsedData[2][0]),
     });
-    parsedData[i] = subfieldData;
-  }
-  // Object.assign for at beholde reactivity
-  const parsedProduct = [];
-
-  this.products[this.products.length] = Object.assign({}, parsedProduct, {
-    author: parsedData[1][0],
-    title: parsedData[2][0],
-    subtitle: parsedData[3][0],
-    text: parsedData[4][0],
-    keywords: parsedData[5],
-    author2: parsedData[6][0],
-    author3: parsedData[7][0],
-    links: parsedData[8][0],
-    video: parsedData[9],
-    video2: parsedData[10],
-    img1: parsedData[11][0],
-    img2: parsedData[12][0],
-    img3: parsedData[13][0],
-    article: parsedData[14],
-
-    id: data.mms_id,
-    liked: localStorage.getItem(parsedData[2][0]),
   });
 };

@@ -38,7 +38,7 @@
 <script>
 import { store } from "./assets/store.js";
 import {
-  fetchProductCount,
+  // fetchProductCount,
   fetchData,
   parseProducts,
 } from "./assets/common.js";
@@ -56,9 +56,10 @@ export default {
   data() {
     return {
       store,
-      fetchProductCount: fetchProductCount,
+      // fetchProductCount: fetchProductCount,
       fetchData: fetchData,
       parseProducts: parseProducts,
+      productCount: "",
       filteredList: [],
       title: process.env.VUE_APP_TITLE,
       loading: true,
@@ -137,8 +138,8 @@ export default {
   },
   created() {},
   async mounted() {
-    this.fetchData(this.fetchUrl);
-    this.productCount = await this.fetchProductCount();
+    this.productCount = await this.fetchData(this.fetchUrl);
+    // this.productCount = await this.fetchProductCount();
   },
 };
 </script>
