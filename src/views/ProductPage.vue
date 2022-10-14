@@ -1,36 +1,86 @@
 <template>
   <div :products="products" :loading="loading" class="p-3 mb-3">
-    <div v-if="products[getIndex()]" class="row align-items-center">
+    <div
+      v-if="products[getIndex()]"
+      class="row align-items-center"
+      style="position: relative"
+    >
+      <span class="d-flex justify-content-end">
+        <i class="bi bi-arrow-left arrow-left" @click="$router.go(-1)"></i>
+      </span>
       <div class="col pt-3 product p-5 rounded-custom" :style="css">
         <div class="row">
-          <span class="col">
-            <i
-              @click="like($event, products[getIndex()])"
-              class="product-icon"
-              :class="
-                products[getIndex()].liked
-                  ? 'bi bi-heart-fill likeheart'
-                  : 'bi bi-heart unlikeheart'
-              "
-            ></i>
-            <i
-              class="bi bi-share m-3 product-icon"
-              data-bs-toggle="modal"
-              data-bs-target="#shareModal"
-              title="Del"
-            ></i>
-          </span>
-          <span class="col d-flex justify-content-end">
-            <i
-              class="bi bi-arrow-left product-icon"
-              @click="$router.go(-1)"
-            ></i>
-          </span>
-        </div>
-        <div class="col-lg-7 producttext rounded-custom">
-          <h1>{{ products[getIndex()].title }}</h1>
-          <p>{{ products[getIndex()].text }}</p>
-          <!-- <router-link
+          <div class="col-lg-10 producttext rounded-custom">
+            <span>
+              <i
+                @click="like($event, products[getIndex()])"
+                class="product-icon"
+                :class="
+                  products[getIndex()].liked
+                    ? 'bi bi-heart-fill likeheart'
+                    : 'bi bi-heart unlikeheart'
+                "
+              ></i>
+              <i
+                class="bi bi-share m-3 product-icon"
+                data-bs-toggle="modal"
+                data-bs-target="#shareModal"
+                title="Del"
+              ></i>
+            </span>
+
+            <h1>{{ products[getIndex()].title }}</h1>
+            <div class="mt-0">
+              <span class="me-3">Ophav</span>
+              <router-link
+                :to="{
+                  name: 'Results',
+                  params: {
+                    id: products[getIndex()].author.toLowerCase(),
+                    kind: `author`,
+                  },
+                }"
+              >
+                <span
+                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+                >
+                  {{ products[getIndex()].author }}
+                </span>
+              </router-link>
+              <router-link
+                :to="{
+                  name: 'Results',
+                  params: {
+                    id: products[getIndex()].author2.toLowerCase(),
+                    kind: `author`,
+                  },
+                }"
+              >
+                <span
+                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+                >
+                  {{ products[getIndex()].author2 }}
+                </span>
+              </router-link>
+              <router-link
+                :to="{
+                  name: 'Results',
+                  params: {
+                    id: products[getIndex()].author3.toLowerCase(),
+                    kind: `author`,
+                  },
+                }"
+              >
+                <span
+                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+                >
+                  {{ products[getIndex()].author3 }}
+                </span>
+              </router-link>
+            </div>
+            <p class="mt-5">{{ products[getIndex()].text }}</p>
+
+            <!-- <router-link
             :to="{ name: 'ProductVideo', params: { id: $route.params.id } }"
           >
             <button
@@ -45,21 +95,21 @@
               {{ products[getIndex()].video[1] }}
             </button>
           </router-link> -->
-          <template
-            v-for="(item, index) in Object.keys(products[getIndex()].article)"
-            :key="item"
-          >
-            <a
-              v-if="index % 2 == 0"
-              :href="products[getIndex()].article[item]"
-              target="_blank"
-              class="btn btn-custom-product rounded-custom me-4 mt-5"
-              download
-              ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
-              {{ products[getIndex()].article[index + 1] }}</a
+            <template
+              v-for="(item, index) in Object.keys(products[getIndex()].article)"
+              :key="item"
             >
-          </template>
-          <accordion-menu
+              <a
+                v-if="index % 2 == 0"
+                :href="products[getIndex()].article[item]"
+                target="_blank"
+                class="btn btn-custom-product rounded-custom me-4 mt-2"
+                download
+                ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
+                {{ products[getIndex()].article[index + 1] }}</a
+              >
+            </template>
+            <!-- <accordion-menu
             v-if="
               !(
                 products[getIndex()].video[0] == 'none' &&
@@ -68,94 +118,75 @@
             "
             :products="products"
             :getIndex="getIndex"
-          />
-          <div class="mt-5">
-            <span class="me-3">Keywords</span>
-            <router-link
-              v-for="item in products[getIndex()].keywords"
-              :key="item"
-              :to="{
-                name: 'Results',
-                params: { id: item.toLowerCase(), kind: 'keyword' },
-              }"
+          /> -->
+            <div
+              v-if="
+                !(
+                  products[getIndex()].video[0] == 'none' &&
+                  products[getIndex()].video2[0] == 'none'
+                )
+              "
+              class="iframediv ratio ratio-16x9 rounded-custom mt-5"
             >
-              <button
-                type="button"
-                class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
+              <!-- {{ log(products[getIndex()].video) }} -->
+              <iframe
+                id="ytvideo"
+                v-if="products[getIndex()].video[0] != 'none'"
+                :src="videosrc"
+                frameborder="0"
+                allow="accelerometer; encrypted-media; gyroscope;"
+                allowfullscreen
               >
-                {{ item }}
-              </button>
-              <!-- <p v-for="item in products[getIndex()].keywords" :key="item">
+              </iframe>
+              <video
+                id="video"
+                v-else-if="products[getIndex()].video2[0] != 'none'"
+                width="320"
+                height="240"
+                preload="metadata"
+                controls
+              >
+                <source :src="videosrc2" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="mt-5">
+              <span class="me-3">Keywords</span>
+              <router-link
+                v-for="item in products[getIndex()].keywords"
+                :key="item"
+                :to="{
+                  name: 'Results',
+                  params: { id: item.toLowerCase(), kind: 'keyword' },
+                }"
+              >
+                <button
+                  type="button"
+                  class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
+                >
+                  {{ item }}
+                </button>
+                <!-- <p v-for="item in products[getIndex()].keywords" :key="item">
               {{ item }}
             </p> -->
-            </router-link>
+              </router-link>
+            </div>
           </div>
-          <div class="mt-5">
-            <span class="me-3">Ophav</span>
-            <router-link
-              :to="{
-                name: 'Results',
-                params: {
-                  id: products[getIndex()].author.toLowerCase(),
-                  kind: `author`,
-                },
-              }"
-            >
-              <button
-                type="button"
-                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-              >
-                {{ products[getIndex()].author }}
-              </button>
-            </router-link>
-            <router-link
-              :to="{
-                name: 'Results',
-                params: {
-                  id: products[getIndex()].author2.toLowerCase(),
-                  kind: `author`,
-                },
-              }"
-            >
-              <button
-                type="button"
-                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-              >
-                {{ products[getIndex()].author2 }}
-              </button>
-            </router-link>
-            <router-link
-              :to="{
-                name: 'Results',
-                params: {
-                  id: products[getIndex()].author3.toLowerCase(),
-                  kind: `author`,
-                },
-              }"
-            >
-              <button
-                type="button"
-                class="btn btn-primary btn-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-              >
-                {{ products[getIndex()].author3 }}
-              </button>
-            </router-link>
-          </div>
+          <div class="col-lg-2"></div>
         </div>
-        <div class="col-lg-5"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AccordionMenu from "@/components/AccordionMenu.vue";
+// import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
 import { getIndex } from "../assets/common.js";
 
 export default {
-  components: { AccordionMenu },
+  // components: { AccordionMenu },
   name: "ProductPage",
   // components: { ShareThis },
   // components: ShareModal,
@@ -163,6 +194,14 @@ export default {
   computed: {
     articlesrc() {
       return `${this.products[this.getIndex()].article}`;
+    },
+    videosrc() {
+      return `https://www.youtube.com/embed/${
+        this.products[this.getIndex()].video[0]
+      }`; //(${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
+    },
+    videosrc2() {
+      return `${this.products[this.getIndex()].video2[0]}#t=0.5`;
     },
     css() {
       return {
@@ -222,4 +261,49 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.link-custom-author {
+  border-bottom: 2px solid darkgray;
+  transition: all 0.25s linear;
+  position: relative;
+  color: darkgray;
+  font-style: italic;
+}
+
+.link-custom-author:hover {
+  color: white;
+}
+
+.link-custom-author:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: $keared;
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* this is to match where the border is */
+  transform-origin: left;
+  transform: scale(0);
+  transition: 0.25s linear;
+  /*   will-change: transform; */
+}
+
+.link-custom-author:hover:before {
+  transform: scale(1);
+}
+.arrow-left {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 3;
+  opacity: 0.5;
+  font-size: 1.6rem;
+  color: white;
+  cursor: pointer;
+}
+
+.arrow-left:hover {
+  opacity: 1;
+}
+</style>

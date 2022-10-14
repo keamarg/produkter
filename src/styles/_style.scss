@@ -129,34 +129,6 @@ a {
   outline: none;
 }
 
-.btn-custom-author {
-  color: #343a40;
-  background-color: white;
-  border-color: white;
-  font-weight: bold;
-  border: 0px;
-  font-size: 0.7rem;
-
-  /* text-transform: uppercase !important; */
-}
-
-.btn-custom-author:hover {
-  background-color: #343a40;
-  color: white;
-}
-
-.btn-custom-author:active,
-.btn-custom-author:focus {
-  background-color: #343a40;
-  color: white;
-  border: 0px;
-  box-shadow: none;
-}
-
-.btn-custom-author:focus {
-  outline: none;
-}
-
 .carousel-indicators {
   z-index: 1;
   // position: relative;
