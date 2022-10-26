@@ -8,11 +8,11 @@
         data-bs-placement="auto"
         title="Likes"
       ></i>
-      <div class="sidebar-icons-text">Gemte</div>
+      <div class="d-none d-md-block sidebar-icons-text">Gemte</div>
     </router-link>
     <router-link
       :to="{ name: 'Archive' }"
-      class="d-md-block mt-md-2 mb-md-2 sidebar-icons"
+      class="d-md-block mx-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
     >
       <i
         class="bi bi-collection-fill"
@@ -20,17 +20,17 @@
         data-bs-placement="auto"
         title="Arkiv"
       ></i>
-      <div class="sidebar-icons-text">Alle</div>
+      <div class="d-none d-md-block sidebar-icons-text">Alle</div>
     </router-link>
-    <div class="d-md-block sidebar-icons">
+    <span class="d-md-block sidebar-icons">
       <i
         class="bi bi-info-circle-fill"
         data-bs-toggle="modal"
         data-bs-target="#aboutModal"
         title="Del"
       ></i>
-      <div class="sidebar-icons-text">Om</div>
-    </div>
+      <div class="d-none d-md-block sidebar-icons-text">Om</div>
+    </span>
     <ShareModal />
     <AboutModal />
   </div>

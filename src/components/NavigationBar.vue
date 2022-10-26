@@ -29,7 +29,7 @@
         />
         <div v-if="searchQuery" class="dropdown w-100">
           <div id="dropdown" ref="dropdown" class="dropdown-content w-100">
-            <p
+            <div
               tabindex="0"
               v-for="(keyword, index) in keywordSearchFilter"
               :key="index"
@@ -37,10 +37,10 @@
               @keydown.prevent.up="pick('up')"
               @keydown.prevent.down="pick('down')"
               @keydown.enter="search(this.picked.innerText.slice(2))"
-              class="w-100"
+              class="w-100 ps-1"
             >
               <i class="bi bi-search"></i> &nbsp;{{ keyword }}
-            </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,10 @@
 //app.vue
 <template>
-  <div id="app" class="px-3 py-2 px-sm-5" @mousewheel="handleWheel">
+  <div
+    id="app"
+    class="px-3 py-2 px-sm-5 pt-5 pt-sm-0"
+    @mousewheel="handleWheel"
+  >
     <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />

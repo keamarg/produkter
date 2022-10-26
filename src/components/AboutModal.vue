@@ -5,7 +5,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
   <div class="container">
     <!-- Modal -->
     <div
-      class="modal fade"
+      class="modal fade pt-5 pt-sm-0"
       id="aboutModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"

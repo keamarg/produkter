@@ -5,7 +5,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
   <div class="container">
     <!-- Modal -->
     <div
-      class="modal fade"
+      class="modal fade pt-5 pt-sm-0"
       id="shareModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
@@ -105,7 +105,7 @@ export default {
       if (this.$route.path == "/") {
         return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
       } else {
-        return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+        return `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid%3D${this.$route.path.slice(
           1,
           this.$route.path.length
         )}&quote=Check out this cool product from KEA!`;
@@ -115,7 +115,7 @@ export default {
       if (this.$route.path == "/") {
         return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
       } else {
-        return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+        return `https://twitter.com/intent/tweet?text=Check out this cool product from KEA!&url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid%3D${this.$route.path.slice(
           1,
           this.$route.path.length
         )}`;
@@ -125,7 +125,7 @@ export default {
       if (this.$route.path == "/") {
         return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter`;
       } else {
-        return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid=${this.$route.path.slice(
+        return `https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fbibliotek.kea.dk%2Fprodukter?productid%3D${this.$route.path.slice(
           1,
           this.$route.path.length
         )}`;
@@ -138,9 +138,10 @@ export default {
     },
     openSocial(media) {
       let width = 600;
-      let height = 400;
+      let height = 600;
       let url = "";
       // console.log(media);
+
       if (media == "fb") {
         url = this.getFBUrl;
       } else if (media == "tw") {
