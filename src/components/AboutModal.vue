@@ -35,6 +35,9 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           <div class="modal-body">
             <div class="p-3 text-start">
               <!-- <p pb-5>Del produktet via...</p> -->
+              <p class="obs">
+                OBS: Siden er under opbygning, og indeholder ufærdige artikler
+              </p>
               <p>
                 På KEA Produkter kan du finde alle de produkter, der er udviklet
                 af ansatte på KEA over de seneste år. Afhængigt af produkttype
@@ -163,5 +166,8 @@ textarea {
   resize: none;
   border: none;
   font-size: 0.8rem;
+}
+.obs {
+  color: red;
 }
 </style>

@@ -30,8 +30,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## To do:
 
-- [ ] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
 - [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
+- [x] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
 - [x] iframe fylder alt indhold i højde
 - [x] transitions
 - [x] Fjern active fra kategori knapper
@@ -55,8 +55,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] bug1c hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
 - [ ] bug1g Bug eller ej? Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
 - [ ] bug1e søgefelt på mobil giver ikke forslag
-- [ ] bug1j fejl i gradient på toppen af accordion til video på "product" siden (sker ikke i development mode)
-- [ ] bug1k baggrundsbillede forstørres på "product" siden når man åbner accordion
+- [ ] bug1j **NOFIX-** ACCORDION FJERNET. fejl i gradient på toppen af accordion til video på "product" siden (sker ikke i development mode)
+- [ ] bug1k **NOFIX-** ACCORDION FJERNET. baggrundsbillede forstørres på "product" siden når man åbner accordion
 - [ ] bug1d **NOFIX-** DYNAMISK LOADING BRUGES IKKE PT. Henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
 - [ ] bug1h **NOFIX-** DYNAMISK LOADING BRUGES IKKE PT. Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald) UPDATE: Vi kan muligvis klare det via et "description" field, som holder en kopi af keywords i portfolio listen. I første omgang deaktiverer vi funktionaliteten med at hente ind løbende, og ser på hvor meget det rent faktisk betyder.
 - [x] bug1l youtube afspilning virker ikke når man åbner accordion på "product" siden

@@ -13,8 +13,11 @@
     <div class="d-flex w-50">
       <div class="w-100">
         <input
+          id="inputfield"
           @input="updateSearchQuery"
-          @keyup.enter="search(searchQuery)"
+          @keydown.enter="search(searchQuery)"
+          @keydown.prevent.down="pick()"
+          ref="inputfield"
           v-model="searchQuery"
           name="name"
           class="searchFld form-control me-2"
@@ -25,11 +28,15 @@
           aria-label="Søg"
         />
         <div v-if="searchQuery" class="dropdown w-100">
-          <div class="dropdown-content w-100">
+          <div id="dropdown" ref="dropdown" class="dropdown-content w-100">
             <p
+              tabindex="0"
               v-for="(keyword, index) in keywordSearchFilter"
-              v-bind:key="index"
+              :key="index"
               @click="search(keyword)"
+              @keydown.prevent.up="pick('up')"
+              @keydown.prevent.down="pick('down')"
+              @keydown.enter="search(this.picked.innerText.slice(2))"
               class="w-100"
             >
               <i class="bi bi-search"></i> &nbsp;{{ keyword }}
@@ -71,6 +78,7 @@ export default {
       searchQuery: null,
       // keywords: [],
       filteredKeywords: [],
+      picked: null,
     };
   },
   computed: {
@@ -103,8 +111,11 @@ export default {
         return null;
       }
     },
-
-    //lav liste af unikke keywords til brug under dynamisk søgning
+    // dropdown() {
+    //   if (this.$refs.inputfield.value != "") {
+    //     return this.$refs.dropdown.firstElementChild;
+    //   } else return null;
+    // },
     keywordList() {
       let keywordList = [];
       this.products.map((product) => {
@@ -138,6 +149,7 @@ export default {
   },
   methods: {
     updateSearchQuery() {
+      this.picked = null;
       this.$emit("updateSearchQuery", this.searchQuery, this.filteredList);
     },
     search(searchQuery) {
@@ -149,9 +161,37 @@ export default {
         this.searchQuery = null;
       }
     },
+
+    // styrer resultat/dropdown menu under søgefelt
+    pick(key) {
+      if (
+        this.picked == null &&
+        this.$refs.inputfield.value != "" &&
+        this.$refs.dropdown.firstElementChild
+      ) {
+        this.picked = this.$refs.dropdown.firstElementChild;
+        this.picked.focus();
+      } else if (key == "down" && this.picked.nextElementSibling) {
+        this.picked = this.picked.nextElementSibling;
+        this.picked.focus();
+      } else if (key == "up" && this.picked.previousElementSibling) {
+        this.picked = this.picked.previousElementSibling;
+        this.picked.focus();
+      } else if (key == "up" && !this.picked.previousElementSibling) {
+        this.picked = null;
+        this.$refs.inputfield.focus();
+      }
+    },
+  },
+  mounted() {
+    // console.log(this.$refs);
+    // this.picked = this.$refs.dropdown;
   },
 };
 </script>
-<style>
+<style lang="scss" scoped>
 /* @import "../styles/style.css"; */
+.highlight {
+  background-color: white;
+}
 </style>
