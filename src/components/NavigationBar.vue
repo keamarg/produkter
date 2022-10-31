@@ -62,21 +62,7 @@ export default {
   },
   data() {
     return {
-      // imgcss: {
-      //   width: "8rem", // 12
-      //   "text-align": "left",
-      //   // "padding-bottom": "1rem",
-      // },
-      // titlecss: {
-      //   color: "white",
-      //   "text-transform": "none",
-      //   // "margin-bottom": "0.7rem",
-      //   "font-size": "1.2rem", //2
-      //   // "padding-bottom": "0rem",
-      //   // "margin-bottom": "0rem",
-      // },
       searchQuery: null,
-      // keywords: [],
       filteredKeywords: [],
       picked: null,
     };
@@ -111,11 +97,6 @@ export default {
         return null;
       }
     },
-    // dropdown() {
-    //   if (this.$refs.inputfield.value != "") {
-    //     return this.$refs.dropdown.firstElementChild;
-    //   } else return null;
-    // },
     keywordList() {
       let keywordList = [];
       this.products.map((product) => {
@@ -169,15 +150,30 @@ export default {
         this.$refs.inputfield.value != "" &&
         this.$refs.dropdown.firstElementChild
       ) {
+        // console.log("picked");
         this.picked = this.$refs.dropdown.firstElementChild;
+        this.picked.style.backgroundColor = "grey";
+        this.picked.style.color = "white";
         this.picked.focus();
       } else if (key == "down" && this.picked.nextElementSibling) {
         this.picked = this.picked.nextElementSibling;
+        this.picked.previousElementSibling.style.backgroundColor = "";
+        this.picked.previousElementSibling.style.color = "";
+        this.picked.style.backgroundColor = "grey";
+        this.picked.style.color = "white";
         this.picked.focus();
+        // console.log("down");
       } else if (key == "up" && this.picked.previousElementSibling) {
+        this.picked.style.backgroundColor = "";
+        this.picked.style.color = "";
         this.picked = this.picked.previousElementSibling;
+        this.picked.style.backgroundColor = "grey";
+        this.picked.style.color = "white";
         this.picked.focus();
+        // console.log("up");
       } else if (key == "up" && !this.picked.previousElementSibling) {
+        this.picked.style.backgroundColor = "";
+        this.picked.style.color = "";
         this.picked = null;
         this.$refs.inputfield.focus();
       }
