@@ -3,13 +3,26 @@
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div class="row align-items-center">
       <p>Søgning på {{ $route.params.id }}...</p>
-      <div class="filterbar d-flex w-75 ms-2 mb-3">Årstal</div>
+      <div class="filterbar d-flex w-50 ms-2 mb-3 bg-dark">
+        <!-- Filtrer efter...&nbsp; -->
+        <DropDown
+          @filterupdate="this.year = $event.target.innerText"
+          :products="filteredProducts"
+          title="Udgivelsesår"
+          filterCategory="year"
+        />
+      </div>
 
       <CardGroup
-        v-if="filteredProducts.length > 0"
-        :products="filteredProducts"
+        v-if="extraFilters.length > 0"
+        :products="extraFilters"
         :displayAll="displayAll"
       />
+      <!-- <CardGroup
+        v-else-if="filteredProducts.length > 0"
+        :products="filteredProducts"
+        :displayAll="displayAll"
+      /> -->
       <h5 v-else>ingen resultater</h5>
     </div>
   </div>
@@ -17,15 +30,19 @@
 
 <script>
 import CardGroup from "@/components/CardGroup.vue";
+import DropDown from "@/components/DropDown.vue";
+
 export default {
   name: "ResultsPage",
   components: {
     CardGroup,
+    DropDown,
   },
   props: ["products", "loading", "productcount"],
   data() {
     return {
       displayAll: true,
+      year: "Alle",
     };
   },
   computed: {
@@ -50,6 +67,7 @@ export default {
               this.$route.params.id.toLowerCase()
           )
         );
+
         // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
         const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
         return collectedAndFiltered;
@@ -57,14 +75,24 @@ export default {
         return null;
       }
     },
+    extraFilters() {
+      return this.filteredProducts.filter(
+        (product) => product.year == this.year || this.year == "Alle"
+      );
+    },
   },
-  methods: {},
+  methods: {
+    log(item) {
+      console.log(item);
+    },
+  },
   created() {},
 };
 </script>
 <style lang="scss" scoped>
 .filterbar {
-  background-color: white;
+  // background-color: $textcolor;
+  color: white;
   border-radius: 5px;
 }
 </style>

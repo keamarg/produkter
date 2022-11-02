@@ -132,16 +132,7 @@ export default {
     log(item) {
       console.log(item);
     },
-    handleFocusOut(e) {
-      if (e.relatedTarget == null) {
-        this.searchQuery = "";
-      } else if (
-        !e.relatedTarget.classList.contains("dropdownItem") &&
-        !e.relatedTarget.classList.contains("btn-search")
-      ) {
-        this.searchQuery = "";
-      }
-    },
+
     updateSearchQuery() {
       this.picked = null;
       this.$emit("updateSearchQuery", this.searchQuery, this.filteredList);
@@ -189,6 +180,18 @@ export default {
         this.picked.style.color = "";
         this.picked = null;
         this.$refs.inputfield.focus();
+      }
+    },
+
+    //håndterer, at søgeresultat "dropdown" forsvinder, når man klikker et andet sted på siden.
+    handleFocusOut(e) {
+      if (e.relatedTarget == null) {
+        this.searchQuery = "";
+      } else if (
+        !e.relatedTarget.classList.contains("dropdownItem") &&
+        !e.relatedTarget.classList.contains("btn-search")
+      ) {
+        this.searchQuery = "";
       }
     },
   },

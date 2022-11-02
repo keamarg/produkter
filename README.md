@@ -31,6 +31,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## To do:
 
 - [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
+- [x] Implementering af bar til filtrering (i første omgang årstal). Skal komme efter den første søgning.
 - [x] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
 - [x] iframe fylder alt indhold i højde
 - [x] transitions
@@ -50,11 +51,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1n):
+## Bugs (next: bug1o):
 
+- [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.
 - [x] bug1m uresponsiv søgefelt samt top af modal på mobil (iphone 11).
 - [ ] bug1c hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
-- [ ] bug1g Bug eller ej? Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
+- [x] bug1g Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
 - [x] bug1e søgefelt på mobil giver ikke forslag
 - [ ] bug1j **NOFIX-** ACCORDION FJERNET. fejl i gradient på toppen af accordion til video på "product" siden (sker ikke i development mode)
 - [ ] bug1k **NOFIX-** ACCORDION FJERNET. baggrundsbillede forstørres på "product" siden når man åbner accordion
