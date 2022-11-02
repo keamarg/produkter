@@ -11,7 +11,7 @@
       </div>
     </router-link>
     <div class="d-flex w-50">
-      <div class="w-100">
+      <div class="w-100" @focusout="handleFocusOut">
         <input
           id="inputfield"
           @input="updateSearchQuery"
@@ -37,7 +37,7 @@
               @keydown.prevent.up="pick('up')"
               @keydown.prevent.down="pick('down')"
               @keydown.enter="search(this.picked.innerText.slice(2))"
-              class="w-100 ps-1"
+              class="w-100 ps-1 dropdownItem"
             >
               <i class="bi bi-search"></i> &nbsp;{{ keyword }}
             </div>
@@ -129,6 +129,19 @@ export default {
     },
   },
   methods: {
+    log(item) {
+      console.log(item);
+    },
+    handleFocusOut(e) {
+      if (e.relatedTarget == null) {
+        this.searchQuery = "";
+      } else if (
+        !e.relatedTarget.classList.contains("dropdownItem") &&
+        !e.relatedTarget.classList.contains("btn-search")
+      ) {
+        this.searchQuery = "";
+      }
+    },
     updateSearchQuery() {
       this.picked = null;
       this.$emit("updateSearchQuery", this.searchQuery, this.filteredList);

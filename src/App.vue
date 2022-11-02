@@ -2,6 +2,7 @@
 <template>
   <div
     id="app"
+    ref="app"
     class="px-3 py-2 px-sm-5 pt-5 pt-sm-0"
     @mousewheel="handleWheel"
   >

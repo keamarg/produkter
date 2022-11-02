@@ -69,7 +69,6 @@ export const parseProducts = function parseProducts(data) {
     }
     // Object.assign for at beholde reactivity
     const parsedProduct = [];
-
     this.products[this.products.length] = Object.assign({}, parsedProduct, {
       author: parsedData[1][0],
       title: parsedData[2][0],
@@ -86,6 +85,7 @@ export const parseProducts = function parseProducts(data) {
       img3: parsedData[13][0],
       article: parsedData[14],
 
+      year: product.date_of_publication,
       id: product.mms_id,
       liked: localStorage.getItem(parsedData[2][0]),
     });

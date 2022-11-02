@@ -3,6 +3,8 @@
   <div :products="products" :loading="loading" class="p-3 mb-3">
     <div class="row align-items-center">
       <p>Søgning på {{ $route.params.id }}...</p>
+      <div class="filterbar d-flex w-75 ms-2 mb-3">Årstal</div>
+
       <CardGroup
         v-if="filteredProducts.length > 0"
         :products="filteredProducts"
@@ -60,3 +62,9 @@ export default {
   created() {},
 };
 </script>
+<style lang="scss" scoped>
+.filterbar {
+  background-color: white;
+  border-radius: 5px;
+}
+</style>
