@@ -31,7 +31,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## To do:
 
 - [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
-- [x] Implementering af bar til filtrering (i første omgang årstal). Skal komme efter den første søgning.
+- [x] Implementering af bar til filtrering (i førstescp omgang årstal). Skal komme efter den første søgning.
 - [x] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
 - [x] iframe fylder alt indhold i højde
 - [x] transitions

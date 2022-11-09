@@ -10,14 +10,16 @@
     </p>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li>
-        <span class="dropdown-item" v-on:click="$emit('filterupdate', $event)"
+        <span
+          class="dropdown-item"
+          v-on:click="$emit('filterupdate', $event, this.filterCategory)"
           >Alle</span
         >
       </li>
-      <li v-for="item in filteredProducts" :key="item.id">
+      <li v-for="item in itemCategories" :key="item.id">
         <span
           class="dropdown-item"
-          v-on:click="$emit('filterupdate', $event)"
+          v-on:click="$emit('filterupdate', $event, this.filterCategory)"
           >{{ item }}</span
         >
       </li>
@@ -29,7 +31,8 @@ export default {
   name: "DropDown",
   props: {
     title: String,
-    products: Array,
+    filteredProducts: Array,
+    extraFilters: Array,
     filterCategory: String,
   },
   emits: ["filterupdate"],
@@ -38,9 +41,14 @@ export default {
   },
   computed: {
     //filtrer de fremsøgte produkter yderligere efter kategori
-    filteredProducts() {
-      const data = this.products.map((product) => {
-        return product[this.filterCategory];
+    itemCategories() {
+      let data = [];
+      this.filteredProducts.map((product) => {
+        if (this.filterCategory == "author") {
+          data.push(product[this.filterCategory]);
+          data.push(product.author2);
+          data.push(product.author3);
+        } else data.push(product[this.filterCategory]);
       });
       return [...new Set(data)];
     },
