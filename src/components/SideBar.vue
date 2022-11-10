@@ -11,7 +11,7 @@
       <div class="d-none d-md-block sidebar-icons-text">Gemte</div>
     </router-link>
     <router-link
-      :to="{ name: 'Archive' }"
+      :to="{ name: 'Results', params: { id: 'alle' } }"
       class="d-md-block mx-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
     >
       <i

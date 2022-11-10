@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import ResultsPage from "../views/ResultsPage.vue";
 import LikesPage from "../views/LikesPage.vue";
-import ArchivePage from "../views/ArchivePage.vue";
+// import ArchivePage from "../views/ArchivePage_NOTUSED.vue";
 import ProductPage from "../views/ProductPage.vue";
 // import ProductVideoPage from "../views/ProductVideoPage.vue";
 
@@ -42,11 +42,11 @@ const router = createRouter({
       },
     },
 
-    {
-      name: "Archive",
-      path: "/archive",
-      component: ArchivePage,
-    },
+    // {
+    //   name: "Archive",
+    //   path: "/archive",
+    //   component: ArchivePage,
+    // },
     // {
     //   name: "Home",
     //   path: process.env.VUE_APP_PATH,

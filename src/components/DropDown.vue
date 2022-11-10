@@ -32,7 +32,7 @@ export default {
   props: {
     title: String,
     filteredProducts: Array,
-    extraFilters: Array,
+    // extraFilters: Array,
     filterCategory: String,
   },
   emits: ["filterupdate"],
@@ -64,5 +64,9 @@ export default {
 <style lang="scss" scoped>
 .dropdown-item {
   cursor: pointer;
+}
+.dropdown-menu {
+  overflow-y: scroll;
+  max-height: 20rem;
 }
 </style>
