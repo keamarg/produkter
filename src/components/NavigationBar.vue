@@ -206,4 +206,7 @@ export default {
 .highlight {
   background-color: white;
 }
+.dropdownItem:hover {
+  background-color: white;
+}
 </style>

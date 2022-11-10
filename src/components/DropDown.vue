@@ -62,6 +62,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//fjern safari button styling
+p[type="button"] {
+  -webkit-appearance: none;
+  //   -webkit-border-radius: 0;
+}
 .dropdown-item {
   cursor: pointer;
 }
