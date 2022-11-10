@@ -267,7 +267,6 @@ export default {
   background-color: #343a40;
   border: none;
   color: #f8f9fa;
-  /* padding: 0.5rem !important; */
   font-size: 0.7rem; //1
   cursor: default;
   border-radius: 0.7rem; //1

@@ -162,7 +162,7 @@
               >
                 <button
                   type="button"
-                  class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
+                  class="btn btn-primary btn-custom-keyword me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
                 >
                   {{ item }}
                 </button>
@@ -305,5 +305,18 @@ export default {
 
 .arrow-left:hover {
   opacity: 1;
+}
+
+.btn-custom-keyword {
+  background-color: #343a40;
+  border: none;
+  color: #f8f9fa;
+  font-size: 0.7rem; //1
+  cursor: default;
+  border-radius: 0.7rem; //1
+}
+.btn-custom-keyword:hover {
+  color: #343a40;
+  background-color: #f8f9fa;
 }
 </style>

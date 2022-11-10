@@ -98,6 +98,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Ikke teknisk:
 
+- [ ] Find ud af hvilke keywords der skal ligge på knapperne i navigationsmenuen (og ensret dem med keywords på produkterne!)
 - [ ] Beskrivelse af sitet
 - [ ] Beskrivelse til FB/LI/TW inkl. godt "card image"
 - [ ] Alma template - endelig form
