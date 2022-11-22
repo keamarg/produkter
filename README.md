@@ -53,7 +53,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Bugs (next: bug1p):
 
-- [ ] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
+- [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
 - [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.
 - [x] bug1m uresponsiv søgefelt samt top af modal på mobil (iphone 11).
 - [ ] bug1c hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
