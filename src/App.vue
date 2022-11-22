@@ -76,7 +76,11 @@ export default {
   },
   computed: {
     fetchUrl() {
-      return `${process.env.VUE_APP_ALMA_PROXY_PATH}/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=30&offset=${this.offSet}`;
+      return `${
+        process.env.VUE_APP_ALMA_PROXY_PATH
+      }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=30&offset=${
+        this.offSet
+      }&timestamp=${this.timeStamp()}`;
       // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
@@ -98,6 +102,10 @@ export default {
   methods: {
     log(item) {
       console.log(item);
+    },
+    //sendes med for at cachen cleares ved refresh
+    timeStamp() {
+      return new Date().getTime();
     },
     homePage() {
       // console.log(this.$route.path);
