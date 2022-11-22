@@ -34,7 +34,7 @@ export const fetchData = async function fetchData(url) {
         process.env.VUE_APP_ALMA_PROXY_PATH
       }/almaws/v1/bibs?mms_id=${filteredProductList.map(
         (product) => product.value
-      )}`,
+      )}&timestamp=${this.timeStamp()}`,
       {
         headers: {
           Accept: "application/json",
