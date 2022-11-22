@@ -44,7 +44,7 @@ export default {
         "Design",
         "Teknik",
         "Business",
-        "Teknologi",
+        "Produkter",
         // "newCat1",
         // "newCat2",
       ],

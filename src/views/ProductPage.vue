@@ -48,6 +48,7 @@
                 </span>
               </router-link>
               <router-link
+                v-if="this.products[getIndex()].author2 != 'none'"
                 :to="{
                   name: 'Results',
                   params: {
@@ -63,6 +64,7 @@
                 </span>
               </router-link>
               <router-link
+                v-if="this.products[getIndex()].author3 != 'none'"
                 :to="{
                   name: 'Results',
                   params: {
