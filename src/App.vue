@@ -78,7 +78,7 @@ export default {
     fetchUrl() {
       return `${
         process.env.VUE_APP_ALMA_PROXY_PATH
-      }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=30&offset=${
+      }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?offset=${
         this.offSet
       }&timestamp=${this.timeStamp()}`;
       // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
