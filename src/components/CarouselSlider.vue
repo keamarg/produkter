@@ -43,7 +43,14 @@
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <div class="carousel-caption d-block border-0 rounded-custom">
             <h5>{{ product.title }}</h5>
-            <p>{{ product.author }}</p>
+            <p>
+              {{ product.author
+              }}<span v-if="product.author2 != 'none'"
+                >, {{ product.author2 }}</span
+              ><span v-if="product.author3 != 'none'"
+                >, {{ product.author3 }}</span
+              >
+            </p>
           </div>
         </router-link>
       </div>

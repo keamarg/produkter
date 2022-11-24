@@ -111,6 +111,7 @@
                 {{ products[getIndex()].article[index + 1] }}</a
               >
             </template>
+
             <!-- <accordion-menu
             v-if="
               !(
