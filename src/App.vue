@@ -13,7 +13,7 @@
         v-if="loading"
         class="loading col d-flex align-items-center justify-content-center"
       >
-        <h5>Loading please wait...</h5>
+        <h5>Henter produkter, vent venligst...</h5>
       </div>
       <router-view
         v-else
@@ -78,7 +78,7 @@ export default {
     fetchUrl() {
       return `${
         process.env.VUE_APP_ALMA_PROXY_PATH
-      }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?offset=${
+      }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=1000&offset=${
         this.offSet
       }&timestamp=${this.timeStamp()}`;
       // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;

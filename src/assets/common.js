@@ -1,3 +1,24 @@
+// placeret i main i stedet
+// import { Tooltip } from "bootstrap";
+
+// export const tooltip = {
+//   mounted(el) {
+//     new Tooltip(el);
+//     /* Overvej i stedet Popover, med et link til "send mail" og et til "alle <<indsæt navns>> produkter"
+//     new Popover(el);
+//     */
+//   },
+// };
+
+//fælles funktion til shuffle
+export const shuffle = function shuffle(arr, arrLength) {
+  let shuffled = arr
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+  return shuffled.slice(0, arrLength);
+};
+
 export const getIndex = function getIndex() {
   return this.products
     .map((object) => object.id)
@@ -77,7 +98,7 @@ export const parseProducts = function parseProducts(data) {
       keywords: parsedData[5],
       author2: parsedData[6][0],
       author3: parsedData[7][0],
-      links: parsedData[8][0],
+      contact: parsedData[8][0],
       video: parsedData[9],
       video2: parsedData[10],
       img1: parsedData[11][0],

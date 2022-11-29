@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { shuffle } from "../assets/common.js";
 export default {
   name: "CardGroup",
   props: {
@@ -41,14 +42,13 @@ export default {
     return {};
   },
   computed: {
+    //returnerer 3 tilfældige produkter til slideren
     productsList: function () {
-      let productsList;
       if (this.displayAll) {
-        productsList = this.products;
+        return this.products;
       } else {
-        productsList = this.products.slice(0, 6);
+        return shuffle(this.products, 6);
       }
-      return productsList;
     },
   },
   methods: {

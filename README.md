@@ -51,8 +51,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1p):
+## Bugs (next: bug1q):
 
+- [ ] bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
 - [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
 - [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.
 - [x] bug1m uresponsiv søgefelt samt top af modal på mobil (iphone 11).

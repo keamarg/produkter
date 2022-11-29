@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import { shuffle } from "../assets/common.js";
 export default {
   name: "CarouselSlider",
   props: {
@@ -92,8 +93,9 @@ export default {
     };
   },
   computed: {
+    //returnerer 3 tilfældige produkter til slideren
     filteredProducts: function () {
-      return this.products.slice(0, 3);
+      return shuffle(this.products, 3);
     },
   },
   methods: {

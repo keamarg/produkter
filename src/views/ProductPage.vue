@@ -28,7 +28,7 @@
                 title="Del"
               ></i>
             </span>
-
+            <!-- https://vuejsexamples.com/a-custom-directive-tooltips-for-vue-3/-->
             <h1>{{ products[getIndex()].title }}</h1>
             <div class="mt-0">
               <span class="me-3">Ophav</span>
@@ -42,11 +42,19 @@
                 }"
               >
                 <span
+                  ref="tooltipmail"
+                  id="tooltipmail"
+                  v-tooltip
+                  :title="products[getIndex()].contact"
+                  data-bs-placement="bottom"
+                  data-bs-toggle="tooltip"
+                  data-bs-trigger="hover"
                   class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
                 >
                   {{ products[getIndex()].author }}
                 </span>
               </router-link>
+
               <router-link
                 v-if="this.products[getIndex()].author2 != 'none'"
                 :to="{
@@ -249,6 +257,7 @@ export default {
       // console.log(event.target, card.id);
     },
   },
+  mounted() {},
   created() {
     // this.$watch(
     //   () => this.$route.params,
@@ -261,6 +270,14 @@ export default {
     //     }
     //   }
     // );
+  },
+  beforeUnmount() {
+    // document.querySelector("#tooltip").tooltip("hide");
+    // this.$refs.tooltip.hide();
+    // console.log(document.querySelector("#tooltip"));
+    // document.querySelector('[data-bs-toggle="tooltip"]').tooltip("hide");
+    // console.log(document.querySelector('[data-bs-toggle="tooltip"]').tooltip());
+    // document.querySelector('#tooltip[data-bs-toggle="tooltip"]');
   },
 };
 </script>
