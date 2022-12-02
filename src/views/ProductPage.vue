@@ -1,5 +1,10 @@
 <template>
-  <div :products="products" :loading="loading" class="p-3 mb-3">
+  <div
+    :products="products"
+    :loading="loading"
+    class="p-3 mb-3"
+    @click="removeTip"
+  >
     <div
       v-if="products[getIndex()]"
       class="row align-items-center"
@@ -41,20 +46,17 @@
                   },
                 }"
               >
+                <!-- v-tooltip:bottom="products[getIndex()].contact" -->
                 <span
-                  ref="tooltipmail"
-                  id="tooltipmail"
-                  v-tooltip
-                  :title="products[getIndex()].contact"
-                  data-bs-placement="bottom"
+                  ref="tooltip"
+                  @mouseover="hoverTip"
                   data-bs-toggle="tooltip"
-                  data-bs-trigger="hover"
+                  data-bs-html="true"
                   class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
                 >
                   {{ products[getIndex()].author }}
                 </span>
               </router-link>
-
               <router-link
                 v-if="this.products[getIndex()].author2 != 'none'"
                 :to="{
@@ -195,6 +197,7 @@
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
 import { getIndex } from "../assets/common.js";
+import { Tooltip } from "bootstrap";
 
 export default {
   // components: { AccordionMenu },
@@ -238,6 +241,12 @@ export default {
     log(item) {
       console.log(item);
     },
+    hoverTip() {
+      this.tooltip.show();
+    },
+    removeTip() {
+      this.tooltip.hide();
+    },
     getIndex: getIndex,
 
     // getIndex() {
@@ -257,7 +266,13 @@ export default {
       // console.log(event.target, card.id);
     },
   },
-  mounted() {},
+  mounted() {
+    this.tooltip = new Tooltip(this.$refs.tooltip, {
+      title: `<ul><li><em>Tooltip</em> <u>with</u> <b>HTML</b></li><li><a href='https://www.dr.dk'>Danmarks Radio</a></li><li class="test" onclick="testPush()">Test</li></ul>`,
+      placement: "bottom",
+      trigger: "manual",
+    });
+  },
   created() {
     // this.$watch(
     //   () => this.$route.params,
@@ -273,7 +288,7 @@ export default {
   },
   beforeUnmount() {
     // document.querySelector("#tooltip").tooltip("hide");
-    // this.$refs.tooltip.hide();
+    // this.$refs.tooltip.tooltip.show();
     // console.log(document.querySelector("#tooltip"));
     // document.querySelector('[data-bs-toggle="tooltip"]').tooltip("hide");
     // console.log(document.querySelector('[data-bs-toggle="tooltip"]').tooltip());
