@@ -51,7 +51,7 @@ jobs:
           name: id_rsa # optional
           known hosts: ${{ secrets.SSH_HOST }}
           config: ${{ secrets.CONFIG }} # ssh config; optional
-          if key exists: fail # replace / ignore / fail; optional (defaults to fail)
+          if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
       - name: Pull
         run: ssh git-user@1.1.1.1 "cd /var/www/html/&& /usr/bin/git pull origin staging'
