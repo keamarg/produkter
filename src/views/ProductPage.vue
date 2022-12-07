@@ -1,10 +1,5 @@
 <template>
-  <div
-    :products="products"
-    :loading="loading"
-    class="p-3 mb-3"
-    @click="removeTip"
-  >
+  <div :products="products" :loading="loading" class="p-3 mb-3">
     <div
       v-if="products[getIndex()]"
       class="row align-items-center"
@@ -37,7 +32,7 @@
             <h1>{{ products[getIndex()].title }}</h1>
             <div class="mt-0">
               <span class="me-3">Ophav</span>
-              <router-link
+              <!-- <router-link
                 :to="{
                   name: 'Results',
                   params: {
@@ -45,18 +40,20 @@
                     kind: `author`,
                   },
                 }"
+              > -->
+              <!-- v-tooltip:bottom="products[getIndex()].contact" -->
+              <span
+                class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+                ref="tooltip"
+                @mouseover="hoverTip"
+                @mouseout="removeTip"
+                data-bs-html="true"
+                data-bs-toggle="modal"
+                data-bs-target="#profileModal"
               >
-                <!-- v-tooltip:bottom="products[getIndex()].contact" -->
-                <span
-                  ref="tooltip"
-                  @mouseover="hoverTip"
-                  data-bs-toggle="tooltip"
-                  data-bs-html="true"
-                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-                >
-                  {{ products[getIndex()].author }}
-                </span>
-              </router-link>
+                {{ products[getIndex()].author }}
+              </span>
+              <!-- </router-link> -->
               <router-link
                 v-if="this.products[getIndex()].author2 != 'none'"
                 :to="{
@@ -183,6 +180,7 @@
               {{ item }}
             </p> -->
               </router-link>
+              <ProfileModal :products="products" />
             </div>
           </div>
           <div class="col-lg-2"></div>
@@ -198,12 +196,13 @@
 // import ShareModal from "@/components/ShareModal.vue";
 import { getIndex } from "../assets/common.js";
 import { Tooltip } from "bootstrap";
+import ProfileModal from "@/components/ProfileModal.vue";
 
 export default {
   // components: { AccordionMenu },
   name: "ProductPage",
   // components: { ShareThis },
-  // components: ShareModal,
+  components: { ProfileModal },
   props: ["products", "loading"],
   computed: {
     articlesrc() {
@@ -268,7 +267,7 @@ export default {
   },
   mounted() {
     this.tooltip = new Tooltip(this.$refs.tooltip, {
-      title: `<ul><li><em>Tooltip</em> <u>with</u> <b>HTML</b></li><li><a href='https://www.dr.dk'>Danmarks Radio</a></li><li class="test" onclick="testPush()">Test</li></ul>`,
+      title: `Om ${this.products[this.getIndex()].author}`,
       placement: "bottom",
       trigger: "manual",
     });
@@ -307,6 +306,7 @@ export default {
 
 .link-custom-author:hover {
   color: white;
+  cursor: pointer;
 }
 
 .link-custom-author:before {
