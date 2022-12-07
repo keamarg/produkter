@@ -48,11 +48,8 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.MARGPROJEKTERKEA }}
-          name: id_rsa # optional
           known_hosts: ${{secrets.MARGPROJEKTERKEA_HOST}}
-          config: ${{ secrets.CONFIG }} # ssh config; optional
-          if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
       - name: Deploy with rsync
-        run: rsync -avz -e /dist/ ${{secrets.MARGPROJEKTERKEA}}@secrets.MARGPROJEKTERKEA_HOST:home/projekterkea/www/keaprodukter
+        run: rsync -avz -e /dist/ margprojekterkea@:home/projekterkea/www/keaprodukter
         
