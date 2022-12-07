@@ -51,5 +51,5 @@ jobs:
           known_hosts: ${{secrets.MARGPROJEKTERKEA_HOST}}
           
       - name: Deploy with rsync
-        run: rsync -avz -e /dist/ margprojekterkea@:home/projekterkea/www/keaprodukter
+        run: rsync -avz -e ./dist/ margprojekterkea@:home/projekterkea/www/keaprodukter
         
