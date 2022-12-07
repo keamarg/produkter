@@ -49,7 +49,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 with new technologies. I see innovation in multidisciplinary
                 collaborations and am very keen to make these happen.
               </p>
-              Ifram test
+              Iframe test
               <iframe
                 src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
               />
