@@ -49,7 +49,7 @@ jobs:
         with:
           key: ${{ secrets.MARGPROJEKTERKEA }}
           name: id_rsa # optional
-          known hosts: ${{ secrets.SSH_HOST }}
+          known hosts: ~/.ssh/known_hosts
           config: ${{ secrets.CONFIG }} # ssh config; optional
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
