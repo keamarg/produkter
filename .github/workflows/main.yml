@@ -44,14 +44,14 @@ jobs:
     if: github.ref == 'refs/heads/master'
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          name: production-files
-          path: ./dist
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          key: ${{ secrets.SSH PRIVATE KEY }]
+          name: id rsa # optional
+          known hosts: Sf secrets. SSH HOST 2}
+          config: ${{ secrets.CONFIG ]] # ssh config; optional
+          if key exists: fail # replace / ignore / fail; optional (defaults to fail)
+          
+      - name: Pull
+        run: ssh git-user@1.1.1.1 "cd /var/www/html/&& /usr/bin/git pull origin staging'
