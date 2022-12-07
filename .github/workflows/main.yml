@@ -34,6 +34,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+      - run: |
+          ls
 #
 #      - name: Run tests
 #        run: npm run test
@@ -51,7 +53,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-#    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: rsync deployments
       uses: burnett01/rsync-deployments@5.2.1
       with:
