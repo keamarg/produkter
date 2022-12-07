@@ -49,17 +49,10 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 with new technologies. I see innovation in multidisciplinary
                 collaborations and am very keen to make these happen.
               </p>
-              <div
-                class="rg-plugin"
-                data-stats="true"
-                data-faces="true"
-                data-publications="true"
-                data-height="600"
-                data-width="300"
-                data-theme="light"
-                data-type="institution"
-                data-installationId="638f00afc09dc31f410017c3"
+              <iframe
+                src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
               />
+
               <span data-bs-dismiss="modal" aria-label="Close">
                 <router-link
                   :to="{
@@ -95,18 +88,6 @@ export default {
       console.log(item);
     },
     getIndex: getIndex,
-  },
-  async mounted() {
-    console.log("ping");
-    (function () {
-      var st = document.createElement("script");
-      st.type = "text/javascript";
-      st.async = true;
-      st.src =
-        "https://www.researchgate.net/javascript/plugin/plugin-api-min.js";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(st, s);
-    })();
   },
 };
 </script>
