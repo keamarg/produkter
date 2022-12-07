@@ -53,7 +53,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - run: |
+          ls
     - uses: actions/checkout@v2
+    - run: |
+          ls
     - name: rsync deployments
       uses: burnett01/rsync-deployments@5.2.1
       with:
