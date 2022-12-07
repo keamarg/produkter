@@ -36,6 +36,17 @@ jobs:
         run: npm run build
       - run: |
           ls
+      - name: Deploy
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@5.2.1
+        with:
+          switches: -avzr
+          path: dist/
+          remote_path: /home/projekterkea/www/keaprodukter
+          remote_host: kea.dk
+          remote_user: projekterkea
+          remote_key: "${{ secrets.MARGPROJEKTERKEA }}"
+      
 #
 #      - name: Run tests
 #        run: npm run test
@@ -48,25 +59,25 @@ jobs:
 
 
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - run: |
-          ls
-    - uses: actions/checkout@v2
-    - run: |
-          ls
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
-      with:
-        switches: -avzr
-        path: dist/
-        remote_path: /home/projekterkea/www/keaprodukter
-        remote_host: kea.dk
-        remote_user: projekterkea
-        remote_key: "${{ secrets.MARGPROJEKTERKEA }}"
+#  deploy:
+#    name: Deploy
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#    - run: |
+#          ls
+#    - uses: actions/checkout@v2
+#    - run: |
+#          ls
+#    - name: rsync deployments
+#      uses: burnett01/rsync-deployments@5.2.1
+#      with:
+#        switches: -avzr
+#        path: dist/
+#        remote_path: /home/projekterkea/www/keaprodukter
+#        remote_host: kea.dk
+#        remote_user: projekterkea
+#        remote_key: "${{ secrets.MARGPROJEKTERKEA }}"
 
 #  deploy:
 #    name: Deploy
