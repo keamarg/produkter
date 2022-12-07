@@ -54,5 +54,5 @@ jobs:
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
       - name: Deploy with rsync
-        run: rsync -avz -e "ssh -p ${{secrets.MARGPROJEKTERKEA}}" ./dist/* projekter@kea.dk:home/projekterkea/www/keaprodukter
+        run: rsync -avz -e "ssh -i margprojekterkea projekterkea@kea.dk" ./dist/* projekter@kea.dk:home/projekterkea/www/keaprodukter
 
