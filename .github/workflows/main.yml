@@ -58,6 +58,6 @@ jobs:
           known_hosts: ${{secrets.MARGPROJEKTERKEA_HOST}}
           
       - name: Deploy with rsync
-        run: rsync -avz -e "ssh" ./dist/* projekterkea@kea.dk:/home/projekterkea/www/keaprodukter
+        run: rsync -avz -e "ssh  ${{ secrets.MARGPROJEKTERKEA }}" ./dist/* projekterkea@kea.dk:/home/projekterkea/www/keaprodukter
 
         
