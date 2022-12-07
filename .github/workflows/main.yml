@@ -55,7 +55,7 @@ jobs:
     - name: rsync deployments
       uses: burnett01/rsync-deployments@5.2.1
       with:
-        switches: -avzr --delete
+        switches: -avzr
         path: /
         remote_path: /home/projekterkea/www/keaprodukter
         remote_host: kea.dk
