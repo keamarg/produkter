@@ -46,34 +46,34 @@ jobs:
 
 
 
+#  deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#    - uses: actions/checkout@v2
+#    - name: rsync deployments
+#      uses: burnett01/rsync-deployments@5.2.1
+#      with:
+#        switches: -avzr --delete
+#        path: dist/
+#        remote_path: /home/projekterkea/www/keaprodukter
+#        remote_host: projekterkea@kea.dk
+#        remote_user: projekterkea
+#        remote_key: ${{ secrets.MARGPROJEKTERKEA }}
+
   deploy:
+    name: Deploy
+    needs: build
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
     steps:
-    - uses: actions/checkout@v2
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@5.2.1
-      with:
-        switches: -avzr --delete
-        path: dist/
-        remote_path: /home/projekterkea/www/keaprodukter
-        remote_host: projekterkea@kea.dk
-        remote_user: projekterkea
-        remote_key: ${{ secrets.MARGPROJEKTERKEA }}
-
-##  deploy:
-##    name: Deploy
-##    needs: build
-##    runs-on: ubuntu-latest
-##    if: github.ref == 'refs/heads/master'
-
-##    steps:
-##      - name: Install SSH Key
-##        uses: shimataro/ssh-key-action@v2
-##        with:
-##          key: ${{secrets.MARGPROJEKTERKEA}}
-##          known_hosts: ${{secrets.MARGPROJEKTERKEA_HOST}}
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{secrets.MARGPROJEKTERKEA}}
+          known_hosts: ${{secrets.MARGPROJEKTERKEA_HOST}}
           
-##      - name: Deploy with rsync
-##        run: rsync -avz -e "ssh -i ${{secrets.MARGPROJEKTERKEA}}" ./dist/* projekterkea@kea.dk:/home/projekterkea/www/keaprodukter
+      - name: Deploy with rsync
+        run: rsync -avz ./dist/* projekterkea@projekterkea@kea.dk:/home/projekterkea/www/keaprodukter
 
         
