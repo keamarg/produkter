@@ -58,7 +58,7 @@ jobs:
         remote_path: /home/projekterkea/www/keaprodukter
         remote_host: kea.dk
         remote_user: projekterkea
-        remote_key: "${{ secrets.margprojekt }}"
+        remote_key: "${{ secrets.MARGPROJEKTERKEA }}"
 
 #  deploy:
 #    name: Deploy
