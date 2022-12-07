@@ -53,5 +53,6 @@ jobs:
           config: ${{ secrets.CONFIG }} # ssh config; optional
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
-      - name: Pull
-        run: ssh git-user@1.1.1.1 "cd /var/www/html/&& /usr/bin/git pull origin staging'
+      - name: Deploy with rsync
+        run: rsync -avz -e "ssh -p 22" ./dist/* projekter@kea.dk:home/projekterkea/www/keaprodukter
+
