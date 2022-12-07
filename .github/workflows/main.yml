@@ -54,5 +54,5 @@ jobs:
           if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
           
       - name: Deploy with rsync
-        run: rsync -avz -e ./dist/ ${{secrets.MARGPROJEKTERKEA_HOST}}@secrets.MARGPROJEKTERKEA_HOST:home/projekterkea/www/keaprodukter
+        run: rsync -avz -e /dist/ ${{secrets.MARGPROJEKTERKEA_HOST}}@secrets.MARGPROJEKTERKEA_HOST:home/projekterkea/www/keaprodukter
         
