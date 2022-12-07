@@ -56,7 +56,7 @@ jobs:
         switches: -avzr --delete
         path: dist/
         remote_path: /home/projekterkea/www/keaprodukter
-        remote_host: kea.dk
+        remote_host: projekterkea@kea.dk
         remote_user: projekterkea
         remote_key: ${{ secrets.MARGPROJEKTERKEA }}
 
