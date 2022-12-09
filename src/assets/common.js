@@ -102,3 +102,66 @@ export const parseProducts = async (data) => {
 
   return products;
 };
+
+//Ny parser
+// export const parseProducts = async (data) => {
+//   const parsedData = [];
+//   const products = [];
+
+//   const parseProduct = (product) => {
+//     const parser = new DOMParser();
+//     const xmlDoc = parser.parseFromString(product.anies, "text/xml");
+
+//     const datafield = xmlDoc.getElementsByTagName("datafield");
+//     parsedData.splice(0);
+//     for (let i = 0; i < datafield.length; i++) {
+//       const subfieldData = Object.values(
+//         datafield[i].getElementsByTagName("subfield")
+//       ).map(function (value) {
+//         // const codeattribute = value.getAttribute("code");
+//         // console.log(value.nextSibling);
+//         // let prev = value.prevSibling;
+//         // console.log(prev.innerText);
+
+//         if (value.getAttribute("code") == "u") {
+//           return { [value.nextSibling.innerHTML]: value.innerHTML };
+//         } else if (value.getAttribute("code") != "z") return value.innerHTML;
+//       });
+//       parsedData.push(subfieldData);
+//     }
+
+//     // Create a new object for the product
+//     const productObj = {
+//       year: product.date_of_publication,
+//       id: product.mms_id,
+//       liked: localStorage.getItem(parsedData[2][0]),
+//     };
+
+//     // Loop over the parsed XML data and add each field to the product object
+//     // const subfield = xmlDoc.getElementsByTagName("subfield");
+
+//     parsedData.forEach((field, index) => {
+//       // Get the tag name from the XML data
+//       const tagName = datafield[index].getAttribute("tag");
+//       // const keyName = x[index].getAttribute("tag");
+//       // const valueName = x[index].getAttribute("tag");
+
+//       // Check if the property already exists in the object
+//       if (Object.prototype.hasOwnProperty.call(productObj, tagName)) {
+//         // If it does, push the new value to the existing array
+//         productObj[tagName].push(field.toString());
+//       } else {
+//         // If it doesn't, add the field to the object
+//         productObj[tagName] = field;
+//       }
+//     });
+
+//     // Push the product object to the products array
+//     products.push(productObj);
+//   };
+
+//   data.bib.map(parseProduct);
+//   console.log(products);
+
+//   return products;
+// };
