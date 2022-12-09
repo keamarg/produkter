@@ -1,11 +1,6 @@
 //app.vue
 <template>
-  <div
-    id="app"
-    ref="app"
-    class="px-3 py-2 px-sm-5 pt-5 pt-sm-0"
-    @mousewheel="handleWheel"
-  >
+  <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5 pt-sm-0">
     <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />
@@ -42,11 +37,7 @@
 
 <script>
 import { store } from "./assets/store.js";
-import {
-  // fetchProductCount,
-  fetchData,
-  parseProducts,
-} from "./assets/common.js";
+import { fetchData, parseProducts } from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
 import CardGroup from "@/components/CardGroup.vue";
 import SideBar from "@/components/SideBar.vue";
@@ -61,27 +52,25 @@ export default {
   data() {
     return {
       store,
-      // fetchProductCount: fetchProductCount,
-      fetchData: fetchData,
-      parseProducts: parseProducts,
       productCount: "",
       filteredList: [],
       title: process.env.VUE_APP_TITLE,
-      loading: true,
       products: [],
       offSet: 0,
-      waitWithFetch: false,
-      allFetched: false,
     };
   },
   computed: {
+    loading() {
+      if (this.products == []) {
+        return true;
+      } else return false;
+    },
     fetchUrl() {
       return `${
         process.env.VUE_APP_ALMA_PROXY_PATH
       }/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=1000&offset=${
         this.offSet
       }&timestamp=${this.timeStamp()}`;
-      // return `http://localhost:8081/almaws/v1/electronic/e-collections/618551140007387/e-services/628551130007387/portfolios?limit=12&offset=${this.offSet}`;
     },
     currentPath() {
       store.path = this.$route.path;
@@ -90,12 +79,8 @@ export default {
     iniFrame() {
       if (window.self !== window.top) {
         return (store.iframe = true);
-        // console.log(store.iframe);
-        // console.log("The page is in an iFrame");
       } else {
         return (store.iframe = false);
-        // console.log(store.iframe);
-        // console.log("The page is not in an iFrame");
       }
     },
   },
@@ -108,7 +93,6 @@ export default {
       return new Date().getTime();
     },
     homePage() {
-      // console.log(this.$route.path);
       if (
         this.$route.path == "/" ||
         this.$route.path == "/home" ||
@@ -120,45 +104,19 @@ export default {
       }
     },
     updateSearchQuery(searchQuery, filteredList) {
-      // console.log(filteredList);
       this.filteredList = filteredList;
-      // this.kind = searchQuery.kind;
     },
-
-    //håndterer løbende indhentning af produkter - deaktiveret, da alle produkter foreløbigt hentes ind
-    // handleWheel() {
-    //   if (
-    //     window.innerHeight + window.scrollY + 10 >=
-    //     document.body.offsetHeight
-    //   ) {
-    //     if (!this.waitWithFetch && !this.allFetched) {
-    //       this.waitWithFetch = true;
-    //       this.offSet = this.offSet + 12;
-    //       this.fetchData(this.fetchUrl);
-    //       setTimeout(() => {
-    //         // console.log(this.productCount);
-    //         if (this.offSet > this.productCount) {
-    //           console.log("no more products");
-    //           this.allFetched = true;
-    //         } else {
-    //           this.waitWithFetch = false;
-    //         }
-    //       }, 2000);
-    //       // console.log("Fetched!");
-    //     }
-    //   }
-    // },
   },
   created() {},
   async mounted() {
-    this.productCount = await this.fetchData(this.fetchUrl);
-    // this.productCount = await this.fetchProductCount();
+    let fd = await fetchData(this.fetchUrl);
+    this.productCount = fd.total_record_count;
+    this.products = await parseProducts(await fd);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// @import "./styles/style.css";
 #app {
   background-color: $body-bg;
 }

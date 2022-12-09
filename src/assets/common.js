@@ -1,15 +1,3 @@
-// placeret i main i stedet
-// import { Tooltip } from "bootstrap";
-
-// export const tooltip = {
-//   mounted(el) {
-//     new Tooltip(el);
-//     /* Overvej i stedet Popover, med et link til "send mail" og et til "alle <<indsæt navns>> produkter"
-//     new Popover(el);
-//     */
-//   },
-// };
-
 //fælles funktion til shuffle
 export const shuffle = function shuffle(arr, arrLength) {
   let shuffled = arr
@@ -55,7 +43,7 @@ export const fetchData = async function fetchData(url) {
         process.env.VUE_APP_ALMA_PROXY_PATH
       }/almaws/v1/bibs?mms_id=${filteredProductList.map(
         (product) => product.value
-      )}&timestamp=${this.timeStamp()}`,
+      )}&timestamp=${new Date().getTime()}`,
       {
         headers: {
           Accept: "application/json",
@@ -63,34 +51,32 @@ export const fetchData = async function fetchData(url) {
       }
     );
     const d = await res.json();
-    this.parseProducts(d);
-    this.loading = false;
-    let totalProducts = d.total_record_count;
-    return totalProducts;
+    return d;
   } catch (error) {
     console.error(error);
   }
 };
 
-// parse xml inspireret af https://www.c-sharpcorner.com/blogs/get-data-from-xml-content-using-javascript burde nok udskiftes med en Vue version, som bruger virtual DOM
-export const parseProducts = function parseProducts(data) {
-  data.bib.map((product) => {
-    let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString(product.anies, "text/xml");
+export const parseProducts = async (data) => {
+  const parsedData = [];
+  const products = [];
 
-    var x = xmlDoc.getElementsByTagName("datafield");
-    const parsedData = [];
+  const parseProduct = (product) => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(product.anies, "text/xml");
+
+    const x = xmlDoc.getElementsByTagName("datafield");
+    parsedData.splice(0);
     for (let i = 0; i < x.length; i++) {
       const subfieldData = Object.values(
         x[i].getElementsByTagName("subfield")
       ).map(function (value) {
         return value.innerHTML;
       });
-      parsedData[i] = subfieldData;
+      parsedData.push(subfieldData);
     }
-    // Object.assign for at beholde reactivity
-    const parsedProduct = [];
-    this.products[this.products.length] = Object.assign({}, parsedProduct, {
+
+    products.push({
       author: parsedData[1][0],
       title: parsedData[2][0],
       subtitle: parsedData[3][0],
@@ -110,5 +96,9 @@ export const parseProducts = function parseProducts(data) {
       id: product.mms_id,
       liked: localStorage.getItem(parsedData[2][0]),
     });
-  });
+  };
+
+  data.bib.map(parseProduct);
+
+  return products;
 };
