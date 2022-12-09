@@ -57,14 +57,10 @@ export default {
       title: process.env.VUE_APP_TITLE,
       products: [],
       offSet: 0,
+      loading: true,
     };
   },
   computed: {
-    loading() {
-      if (this.products == []) {
-        return true;
-      } else return false;
-    },
     fetchUrl() {
       return `${
         process.env.VUE_APP_ALMA_PROXY_PATH
@@ -111,7 +107,8 @@ export default {
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
     this.productCount = fd.total_record_count;
-    this.products = await parseProducts(await fd);
+    this.products = await parseProducts(fd);
+    this.loading = !fd;
   },
 };
 </script>
