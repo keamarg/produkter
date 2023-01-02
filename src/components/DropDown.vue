@@ -54,9 +54,12 @@ export default {
 
         if (this.filterCategory == "author") {
           // console.log(product);
-          data.push(product["100"][0]);
-          product[700].map((item) => data.push(item));
-          // data.push(product.author2);
+          if (typeof product["100"][0] != "undefined") {
+            data.push(product["100"][0]);
+          }
+          if (typeof product["700"] != "undefined") {
+            product[700].map((item) => data.push(item));
+          } // data.push(product.author2);
           // data.push(product.author3);
         } else data.push(product[this.filterCategory]);
         // console.log(product[this.filterCategory]);

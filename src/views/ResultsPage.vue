@@ -120,16 +120,18 @@ export default {
             (product) =>
               product[100][0].toLowerCase() ==
                 this.$route.params.id.toLowerCase() ||
-              product[700].some(
-                (author) =>
-                  // console.log(
-                  author.slice(0, this.$route.params.id.length).toLowerCase() ==
-                  this.$route.params.id.toLowerCase()
-                // )
-                // keyword
-                //   .slice(0, this.$route.params.id.length)
-                //   .toLowerCase() == this.$route.params.id.toLowerCase()
-              )
+              (typeof product[700] != "undefined" &&
+                product[700].some(
+                  (author) =>
+                    // console.log(
+                    author
+                      .slice(0, this.$route.params.id.length)
+                      .toLowerCase() == this.$route.params.id.toLowerCase()
+                  // )
+                  // keyword
+                  //   .slice(0, this.$route.params.id.length)
+                  //   .toLowerCase() == this.$route.params.id.toLowerCase()
+                ))
             // product[700].map((item) => item.toLowerCase()) ==
             //   this.$route.params.id.toLowerCase() //||
             // product.author3.toLowerCase() ==
@@ -147,6 +149,7 @@ export default {
           );
 
           // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
+
           const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
           // console.log(collectedAndFiltered);
           return collectedAndFiltered;

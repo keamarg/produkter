@@ -192,7 +192,10 @@
                 ).toString()
               )
             }} -->
-            <div class="iframediv ratio ratio-16x9 rounded-custom mt-5">
+            <div
+              v-if="getProperty('youtube') || getProperty('keavideo')"
+              class="iframediv ratio ratio-16x9 rounded-custom mt-5"
+            >
               <iframe
                 v-if="getProperty('youtube')"
                 id="ytvideo"

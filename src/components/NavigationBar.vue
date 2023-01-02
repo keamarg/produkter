@@ -122,11 +122,13 @@ export default {
             keywordList.push(keyword.toLowerCase());
           }
         });
-        product[700].map((keyword) => {
-          if (!keywordList.includes(keyword)) {
-            keywordList.push(keyword.toLowerCase());
-          }
-        });
+        if (typeof product[700] != "undefined") {
+          product[700].map((keyword) => {
+            if (!keywordList.includes(keyword.toLowerCase())) {
+              keywordList.push(keyword.toLowerCase());
+            }
+          });
+        }
         if (!keywordList.includes(product[100][0].toLowerCase())) {
           keywordList.push(product[100][0].toLowerCase());
         }
