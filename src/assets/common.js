@@ -1,3 +1,37 @@
+//fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
+export const getImage = function getImage(product) {
+  if (typeof product[997] == "undefined") {
+    return "https://projekter.kea.dk/assets/SoMeCard.png";
+  } else {
+    return Object.values(
+      product["997"].find((item) => item.Billedmateriale)
+    )[0];
+  }
+};
+//fælles function til andre properties
+export const getProperty = function getProperty(property) {
+  if (property == "100" || property == "author") {
+    return this.products[this.getIndex()][100][0];
+  } else if (property == "245" || property == "title") {
+    return this.products[this.getIndex()][245][0];
+  } else if (property == "subtext") {
+    return this.products[this.getIndex()]["520"][0].toLowerCase();
+  } else if (property == "text") {
+    return this.products[this.getIndex()]["520"][1].toLowerCase();
+  }
+  // hvis property ikke findes i ovenstående tjekkes i resten af 997 feltet, returner værdien (dvs. alle urls, contact, billedmateriale, videolinks osv.)
+  else if (
+    typeof this.products[this.getIndex()][997].find((item) => item[property]) !=
+    "undefined"
+  ) {
+    return Object.values(
+      this.products[this.getIndex()][997].find((item) => item[property])
+    ).toString();
+  } else {
+    return false;
+  }
+};
+
 //fælles funktion til shuffle
 export const shuffle = function shuffle(arr, arrLength) {
   let shuffled = arr
@@ -57,53 +91,6 @@ export const fetchData = async function fetchData(url) {
   }
 };
 
-export const parseProducts = async (data) => {
-  const parsedData = [];
-  const products = [];
-
-  const parseProduct = (product) => {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(product.anies, "text/xml");
-
-    const x = xmlDoc.getElementsByTagName("datafield");
-    parsedData.splice(0);
-    for (let i = 0; i < x.length; i++) {
-      const subfieldData = Object.values(
-        x[i].getElementsByTagName("subfield")
-      ).map(function (value) {
-        return value.innerHTML;
-      });
-      parsedData.push(subfieldData);
-    }
-
-    products.push({
-      author: parsedData[1][0],
-      title: parsedData[2][0],
-      subtitle: parsedData[3][0],
-      text: parsedData[4][0],
-      keywords: parsedData[5],
-      author2: parsedData[6][0],
-      author3: parsedData[7][0],
-      contact: parsedData[8][0],
-      video: parsedData[9],
-      video2: parsedData[10],
-      img1: parsedData[11][0],
-      img2: parsedData[12][0],
-      img3: parsedData[13][0],
-      article: parsedData[14],
-
-      year: product.date_of_publication,
-      id: product.mms_id,
-      liked: localStorage.getItem(parsedData[2][0]),
-    });
-  };
-
-  data.bib.map(parseProduct);
-
-  return products;
-};
-
-//Ny parser
 // export const parseProducts = async (data) => {
 //   const parsedData = [];
 //   const products = [];
@@ -112,56 +99,125 @@ export const parseProducts = async (data) => {
 //     const parser = new DOMParser();
 //     const xmlDoc = parser.parseFromString(product.anies, "text/xml");
 
-//     const datafield = xmlDoc.getElementsByTagName("datafield");
+//     const x = xmlDoc.getElementsByTagName("datafield");
 //     parsedData.splice(0);
-//     for (let i = 0; i < datafield.length; i++) {
+//     for (let i = 0; i < x.length; i++) {
 //       const subfieldData = Object.values(
-//         datafield[i].getElementsByTagName("subfield")
+//         x[i].getElementsByTagName("subfield")
 //       ).map(function (value) {
-//         // const codeattribute = value.getAttribute("code");
-//         // console.log(value.nextSibling);
-//         // let prev = value.prevSibling;
-//         // console.log(prev.innerText);
-
-//         if (value.getAttribute("code") == "u") {
-//           return { [value.nextSibling.innerHTML]: value.innerHTML };
-//         } else if (value.getAttribute("code") != "z") return value.innerHTML;
+//         return value.innerHTML;
 //       });
 //       parsedData.push(subfieldData);
 //     }
 
-//     // Create a new object for the product
-//     const productObj = {
+//     products.push({
+//       author: parsedData[1][0],
+//       title: parsedData[2][0],
+//       subtitle: parsedData[3][0],
+//       text: parsedData[4][0],
+//       keywords: parsedData[5],
+//       author2: parsedData[6][0],
+//       author3: parsedData[7][0],
+//       contact: parsedData[8][0],
+//       video: parsedData[9],
+//       video2: parsedData[10],
+//       img1: parsedData[11][0],
+//       img2: parsedData[12][0],
+//       img3: parsedData[13][0],
+//       article: parsedData[14],
+
 //       year: product.date_of_publication,
 //       id: product.mms_id,
 //       liked: localStorage.getItem(parsedData[2][0]),
-//     };
-
-//     // Loop over the parsed XML data and add each field to the product object
-//     // const subfield = xmlDoc.getElementsByTagName("subfield");
-
-//     parsedData.forEach((field, index) => {
-//       // Get the tag name from the XML data
-//       const tagName = datafield[index].getAttribute("tag");
-//       // const keyName = x[index].getAttribute("tag");
-//       // const valueName = x[index].getAttribute("tag");
-
-//       // Check if the property already exists in the object
-//       if (Object.prototype.hasOwnProperty.call(productObj, tagName)) {
-//         // If it does, push the new value to the existing array
-//         productObj[tagName].push(field.toString());
-//       } else {
-//         // If it doesn't, add the field to the object
-//         productObj[tagName] = field;
-//       }
 //     });
-
-//     // Push the product object to the products array
-//     products.push(productObj);
 //   };
 
 //   data.bib.map(parseProduct);
-//   console.log(products);
 
 //   return products;
 // };
+
+// Ny parsergit
+export const parseProducts = async (data) => {
+  const parsedData = [];
+  const products = [];
+
+  const parseProduct = (product) => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(product.anies, "text/xml");
+
+    const datafield = xmlDoc.getElementsByTagName("datafield");
+    parsedData.splice(0);
+    for (let i = 0; i < datafield.length; i++) {
+      const subfieldData = Object.values(
+        datafield[i].getElementsByTagName("subfield")
+      ).map(function (value) {
+        // const codeattribute = value.getAttribute("code");
+        // console.log(value.nextSibling);
+        // let prev = value.prevSibling;
+        // console.log(prev.innerText);
+
+        if (value.getAttribute("code") == "u") {
+          // console.log(value);
+          return { [value.nextSibling.innerHTML]: value.innerHTML };
+        } else if (value.getAttribute("code") != "z") return value.innerHTML;
+      });
+      // console.log(subfieldData);
+
+      //fjerner undefined værdier fra array'et
+      const filteredSubfieldData = subfieldData.filter(function (x) {
+        return x !== undefined;
+      });
+      // if (!Array.prototype.includes.call(subfieldData, undefined)) {
+      //   // console.log("ping");
+      // console.log(filteredSubfieldData);
+      parsedData.push(filteredSubfieldData);
+      // }
+      // if (!subfieldData.includes(undefined)) {
+      //   console.log("ping");
+      // }
+    }
+
+    const productObj = {
+      year: product.date_of_publication,
+      id: product.mms_id,
+      liked: !!localStorage.getItem(parsedData[3][0]),
+    };
+
+    // Loop over the parsed XML data and add each field to the product object
+    // const subfield = xmlDoc.getElementsByTagName("subfield");
+    // console.log(parsedData);
+
+    parsedData.forEach((field, index) => {
+      // Get the tag name from the XML data
+      const tagName = datafield[index].getAttribute("tag");
+      // const keyName = x[index].getAttribute("tag");
+      // const valueName = x[index].getAttribute("tag");
+
+      // Check if the property already exists in the object
+      if (Object.prototype.hasOwnProperty.call(productObj, tagName)) {
+        // If it does, push the new value to the existing array
+        productObj[tagName].push(field.toString());
+      } else {
+        // If it doesn't, add the field to the object
+        productObj[tagName] = field;
+      }
+    });
+
+    // if (productObj["997"]) {
+    //   const obj = productObj["997"].find((x) => x.Billedmateriale);
+    //   console.log(obj);
+    //   productObj["Billedmateriale"] = obj["Billedmateriale"];
+    // }
+    // Push the product object to the products array
+    products.push(productObj);
+  };
+
+  data.bib.map(parseProduct);
+  // console.log(products);
+  // let pro = [products[0]];
+
+  const filteredProducts = products.filter((product) => product[998]); //only products with the 998 "kea field"
+  return filteredProducts;
+  // return products;
+};

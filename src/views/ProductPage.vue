@@ -29,14 +29,14 @@
               ></i>
             </span>
             <!-- https://vuejsexamples.com/a-custom-directive-tooltips-for-vue-3/-->
-            <h1>{{ products[getIndex()].title }}</h1>
+            <h1>{{ getProperty("title") }}</h1>
             <div class="mt-0">
               <span class="me-3">Ophav</span>
               <!-- <router-link
                 :to="{
                   name: 'Results',
                   params: {
-                    id: products[getIndex()].author.toLowerCase(),
+                    id: products[getIndex()]['100'][0].toLowerCase(),
                     kind: `author`,
                   },
                 }"
@@ -51,15 +51,26 @@
                 data-bs-toggle="modal"
                 data-bs-target="#profileModal"
               >
-                {{ products[getIndex()].author }}
+                {{ getProperty("author") }}
               </span>
+              <span
+                v-for="item in products[getIndex()][700]"
+                :key="item"
+                class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+                data-bs-html="true"
+                data-bs-toggle="modal"
+                data-bs-target="#profileModal"
+              >
+                {{ item }}
+              </span>
+
               <!-- </router-link> -->
-              <router-link
-                v-if="this.products[getIndex()].author2 != 'none'"
+              <!-- <router-link
+                v-if="products[getIndex()]['100'] != 'none'"
                 :to="{
                   name: 'Results',
                   params: {
-                    id: products[getIndex()].author2.toLowerCase(),
+                    id: products[getIndex()]['100'][0].toLowerCase(),
                     kind: `author`,
                   },
                 }"
@@ -69,13 +80,13 @@
                 >
                   {{ products[getIndex()].author2 }}
                 </span>
-              </router-link>
-              <router-link
+              </router-link> -->
+              <!-- <router-link
                 v-if="this.products[getIndex()].author3 != 'none'"
                 :to="{
                   name: 'Results',
                   params: {
-                    id: products[getIndex()].author3.toLowerCase(),
+                    id: products[getIndex()]['100'][0].toLowerCase(),
                     kind: `author`,
                   },
                 }"
@@ -85,10 +96,11 @@
                 >
                   {{ products[getIndex()].author3 }}
                 </span>
-              </router-link>
+              </router-link> -->
             </div>
-            <p class="mt-5">{{ products[getIndex()].text }}</p>
-
+            <p class="mt-5">
+              {{ getProperty("text") }}
+            </p>
             <!-- <router-link
             :to="{ name: 'ProductVideo', params: { id: $route.params.id } }"
           >
@@ -104,7 +116,51 @@
               {{ products[getIndex()].video[1] }}
             </button>
           </router-link> -->
+            <!-- <template
+              v-for="(item, index) in products[getIndex()][997]"
+              :key="index"
+            >
+              <p
+                v-if="
+                  Object.keys(item).toString() != 'Billedmateriale' &&
+                  Object.keys(item).toString() != 'youtube' &&
+                  Object.keys(item).toString() != 'keavideo'
+                "
+              >
+                {{ log(Object.keys(item).toString() != "keavideo") }}
+                {{ Object.keys(item).toString() }}
+                {{ Object.values(item).toString() }}
+           
+              </p>
+              <a
+                v-if="
+                  Object.keys(item).toString() != 'Billedmateriale' &&
+                  Object.keys(item).toString() != 'contact' &&
+                  Object.keys(item).toString() != 'youtube' &&
+                  Object.keys(item).toString() != 'keavideo'
+                "
+                :href="Object.values(item).toString()"
+                target="_blank"
+                class="btn btn-custom-product rounded-custom me-4 mt-2"
+                download
+                ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
+                {{ Object.keys(item).toString() }}</a
+              >
+            </template> -->
             <template
+              v-for="(item, index) in products[getIndex()][856]"
+              :key="index"
+            >
+              <a
+                :href="Object.values(item).toString()"
+                target="_blank"
+                class="btn btn-custom-product rounded-custom me-4 mt-2"
+                download
+                ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
+                {{ Object.keys(item).toString() }}</a
+              >
+            </template>
+            <!-- <template
               v-for="(item, index) in Object.keys(products[getIndex()].article)"
               :key="item"
             >
@@ -117,7 +173,7 @@
                 ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
                 {{ products[getIndex()].article[index + 1] }}</a
               >
-            </template>
+            </template> -->
 
             <!-- <accordion-menu
             v-if="
@@ -129,20 +185,18 @@
             :products="products"
             :getIndex="getIndex"
           /> -->
-            <div
-              v-if="
-                !(
-                  products[getIndex()].video[0] == 'none' &&
-                  products[getIndex()].video2[0] == 'none'
-                )
-              "
-              class="iframediv ratio ratio-16x9 rounded-custom mt-5"
-            >
-              <!-- {{ log(products[getIndex()].video) }} -->
+            <!-- {{
+              log(
+                Object.keys(
+                  products[getIndex()][997].find((item) => item.youtube)
+                ).toString()
+              )
+            }} -->
+            <div class="iframediv ratio ratio-16x9 rounded-custom mt-5">
               <iframe
+                v-if="getProperty('youtube')"
                 id="ytvideo"
-                v-if="products[getIndex()].video[0] != 'none'"
-                :src="videosrc"
+                :src="videosrcYt"
                 frameborder="0"
                 allow="accelerometer; encrypted-media; gyroscope;"
                 allowfullscreen
@@ -150,20 +204,20 @@
               </iframe>
               <video
                 id="video"
-                v-else-if="products[getIndex()].video2[0] != 'none'"
+                v-else-if="getProperty('keavideo')"
                 width="320"
                 height="240"
                 preload="metadata"
                 controls
               >
-                <source :src="videosrc2" type="video/mp4" />
+                <source :src="videosrcKea" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
             <div class="mt-5">
               <span class="me-3">Keywords</span>
               <router-link
-                v-for="item in products[getIndex()].keywords"
+                v-for="item in products[getIndex()][653]"
                 :key="item"
                 :to="{
                   name: 'Results',
@@ -194,7 +248,7 @@
 // import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
-import { getIndex } from "../assets/common.js";
+import { getIndex, getProperty } from "../assets/common.js";
 import { Tooltip } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 
@@ -203,18 +257,23 @@ export default {
   name: "ProductPage",
   // components: { ShareThis },
   components: { ProfileModal },
-  props: ["products", "loading"],
+  props: {
+    products: { type: Array },
+    loading: { type: Boolean },
+    productcount: { type: Number },
+  },
   computed: {
-    articlesrc() {
-      return `${this.products[this.getIndex()].article}`;
+    // filteredMaterials(){
+
+    // },
+    // articlesrc() {
+    //   return `${this.products[this.getIndex()].article}`;
+    // },
+    videosrcYt() {
+      return `https://www.youtube.com/embed/${this.getProperty("youtube")}`; //(${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
     },
-    videosrc() {
-      return `https://www.youtube.com/embed/${
-        this.products[this.getIndex()].video[0]
-      }`; //(${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
-    },
-    videosrc2() {
-      return `${this.products[this.getIndex()].video2[0]}#t=0.5`;
+    videosrcKea() {
+      return `${this.getProperty("keavideo")}#t=0.5`;
     },
     css() {
       return {
@@ -222,7 +281,7 @@ export default {
         color: "white",
         background:
           "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
-          this.products[this.getIndex()].img1 +
+          this.getProperty("Billedmateriale") + //          this.products[this.getIndex()].img1 +
           "), no-repeat",
         backgroundSize: "cover",
         fontSize: "16px",
@@ -247,6 +306,7 @@ export default {
       this.tooltip.hide();
     },
     getIndex: getIndex,
+    getProperty: getProperty,
 
     // getIndex() {
     //   return this.products
@@ -255,10 +315,11 @@ export default {
     // },
     like(event, product) {
       product.liked = !product.liked;
+      console.log(product[245][0]);
       if (product.liked == true) {
-        localStorage.setItem(product.title, product.liked);
+        localStorage.setItem(product[245][0], product.liked);
       } else {
-        localStorage.removeItem(product.title);
+        localStorage.removeItem(product[245][0]);
       }
       // console.log(card.liked);
       // console.log(card);
@@ -267,12 +328,13 @@ export default {
   },
   mounted() {
     this.tooltip = new Tooltip(this.$refs.tooltip, {
-      title: `Om ${this.products[this.getIndex()].author}`,
+      title: `Om ${this.getProperty("author")}`,
       placement: "bottom",
       trigger: "manual",
     });
   },
   created() {
+    // this.products[getIndex()]["700"].forEach((product) => console.log(product));
     // this.$watch(
     //   () => this.$route.params,
     //   (toParams, previousParams) => {

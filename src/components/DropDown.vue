@@ -16,6 +16,12 @@
           >Alle</span
         >
       </li>
+      <!-- {{
+        log(itemCategories)
+      }} -->
+      <!-- {{
+        log(filterCategory)
+      }} -->
       <li v-for="item in itemCategories" :key="item.id">
         <span
           class="dropdown-item"
@@ -44,11 +50,16 @@ export default {
     itemCategories() {
       let data = [];
       this.filteredProducts.map((product) => {
+        // console.log(product["year"]);
+
         if (this.filterCategory == "author") {
-          data.push(product[this.filterCategory]);
-          data.push(product.author2);
-          data.push(product.author3);
+          // console.log(product);
+          data.push(product["100"][0]);
+          product[700].map((item) => data.push(item));
+          // data.push(product.author2);
+          // data.push(product.author3);
         } else data.push(product[this.filterCategory]);
+        // console.log(product[this.filterCategory]);
       });
       return [...new Set(data)];
     },

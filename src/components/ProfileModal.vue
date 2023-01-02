@@ -34,8 +34,10 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           </div>
           <div class="modal-body">
             <div class="p-3 text-start">
-              <h2>{{ this.products[this.getIndex()].author }}</h2>
-              <p>{{ this.products[this.getIndex()].contact }}</p>
+              <h2>{{ getProperty("author") }}</h2>
+              <p>
+                {{ getProperty("contact") }}
+              </p>
               <h3 class="obs">
                 API info fra Research gate, LinkedIn el. lign.
               </h3>
@@ -52,18 +54,17 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <iframe
                 src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
               />
-
               <span data-bs-dismiss="modal" aria-label="Close">
                 <router-link
                   :to="{
                     name: 'Results',
                     params: {
-                      id: products[getIndex()].author.toLowerCase(),
+                      id: getProperty('author').toLowerCase(),
                       kind: `author`,
                     },
                   }"
                   >Alle KEA produkter af Iframe test
-                  {{ this.products[this.getIndex()].author }}
+                  {{ getProperty("author") }}
                 </router-link>
               </span>
             </div>
@@ -75,7 +76,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
 </template>
 
 <script>
-import { getIndex } from "../assets/common.js";
+import { getIndex, getProperty } from "../assets/common.js";
 
 export default {
   props: { products: Array },
@@ -88,6 +89,7 @@ export default {
       console.log(item);
     },
     getIndex: getIndex,
+    getProperty: getProperty,
   },
 };
 </script>

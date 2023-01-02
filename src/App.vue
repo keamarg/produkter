@@ -12,7 +12,6 @@
       </div>
       <router-view
         v-else
-        class="col"
         :products="products"
         :loading="loading"
         :productcount="productCount"
@@ -99,9 +98,9 @@ export default {
         return false;
       }
     },
-    updateSearchQuery(searchQuery, filteredList) {
-      this.filteredList = filteredList;
-    },
+    // updateSearchQuery(searchQuery, filteredList) {
+    //   this.filteredList = filteredList;
+    // },
   },
   created() {},
   async mounted() {

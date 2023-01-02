@@ -35,21 +35,22 @@
         :class="{ active: index == 0 }"
       >
         <img
-          :src="product.img1"
+          v-if="product[997]"
+          :src="getImage(product)"
           class="d-block w-100 border-0 rounded-custom"
           alt="..."
           @load="onImgLoad"
         />
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <div class="carousel-caption d-block border-0 rounded-custom">
-            <h5>{{ product.title }}</h5>
+            <h5>{{ product[245][0] }}</h5>
             <p>
-              {{ product.author
-              }}<span v-if="product.author2 != 'none'"
-                >, {{ product.author2 }}</span
-              ><span v-if="product.author3 != 'none'"
-                >, {{ product.author3 }}</span
-              >
+              {{ product[100][0] }}
+              <span v-if="product[700]">
+                <span v-for="(product, index) in product[700]" :key="index">
+                  <span>, {{ product }}</span>
+                </span>
+              </span>
             </p>
           </div>
         </router-link>
@@ -79,7 +80,7 @@
 </template>
 
 <script>
-import { shuffle } from "../assets/common.js";
+import { shuffle, getImage } from "../assets/common.js";
 export default {
   name: "CarouselSlider",
   props: {
@@ -89,16 +90,21 @@ export default {
   data() {
     return {
       // tempImg: "https://kea.dk/slir/w2200-c100x72/images/news/2021/12/Byg.jpeg",
-      isLoaded: false,
+      isLoaded: true,
     };
   },
   computed: {
     //returnerer 3 tilfældige produkter til slideren
     filteredProducts: function () {
+      // console.log(shuffle(this.products, 3));
+      // console.log(this.products.filter((product) => product[997]));
+
+      // return this.products.filter((product) => product[997]);
       return shuffle(this.products, 3);
     },
   },
   methods: {
+    getImage: getImage,
     log(item) {
       console.log(item);
     },

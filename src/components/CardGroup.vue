@@ -18,10 +18,10 @@
           "
         ></i>
         <router-link :to="{ name: 'Product', params: { id: card.id } }">
-          <img :src="card.img1" class="card-img-top" alt="..." />
+          <img :src="getImage(card)" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">{{ card.title }}</h5>
-            <p class="card-text">{{ card.subtitle }}</p>
+            <h5 class="card-title">{{ card[245][0] }}</h5>
+            <p class="card-text">{{ card[520][0] }}</p>
           </div>
         </router-link>
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { shuffle } from "../assets/common.js";
+import { shuffle, getImage } from "../assets/common.js";
 export default {
   name: "CardGroup",
   props: {
@@ -52,15 +52,17 @@ export default {
     },
   },
   methods: {
+    getImage: getImage,
     log(item) {
       console.log(item);
     },
     like(event, card) {
       card.liked = !card.liked;
+      console.log(card[245][0]);
       if (card.liked == true) {
-        localStorage.setItem(card.title, card.liked);
+        localStorage.setItem(card[245][0], card.liked);
       } else {
-        localStorage.removeItem(card.title);
+        localStorage.removeItem(card[245][0]);
       }
       // console.log(card.liked);
       // console.log(card);

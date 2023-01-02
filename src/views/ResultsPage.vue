@@ -8,7 +8,7 @@
   >
     <div class="row align-items-center">
       <p v-if="$route.params.id == 'alle'">
-        Alle {{ productcount }} KEA produkter...
+        Alle {{ products.length }} KEA produkter...
       </p>
       <p v-else>Søgning på {{ $route.params.id }}...</p>
       <div class="filterbar d-flex ms-2 mb-3 bg-dark">
@@ -118,16 +118,28 @@ export default {
         } else {
           let authors = this.products.filter(
             (product) =>
-              product.author.toLowerCase() ==
+              product[100][0].toLowerCase() ==
                 this.$route.params.id.toLowerCase() ||
-              product.author2.toLowerCase() ==
-                this.$route.params.id.toLowerCase() ||
-              product.author3.toLowerCase() ==
-                this.$route.params.id.toLowerCase()
+              product[700].some(
+                (author) =>
+                  // console.log(
+                  author.slice(0, this.$route.params.id.length).toLowerCase() ==
+                  this.$route.params.id.toLowerCase()
+                // )
+                // keyword
+                //   .slice(0, this.$route.params.id.length)
+                //   .toLowerCase() == this.$route.params.id.toLowerCase()
+              )
+            // product[700].map((item) => item.toLowerCase()) ==
+            //   this.$route.params.id.toLowerCase() //||
+            // product.author3.toLowerCase() ==
+            //   this.$route.params.id.toLowerCase()
           );
+
           //filtrer efter keyword
+          // console.log(this.products);
           let keywords = this.products.filter((product) =>
-            product.keywords.some(
+            product[653].some(
               (keyword) =>
                 keyword.slice(0, this.$route.params.id.length).toLowerCase() ==
                 this.$route.params.id.toLowerCase()
@@ -136,7 +148,7 @@ export default {
 
           // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
           const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
-
+          // console.log(collectedAndFiltered);
           return collectedAndFiltered;
         }
       } else {
@@ -159,23 +171,56 @@ export default {
         this.filterListAuthor.length > 0
       ) {
         console.log("only Authors");
+        // console.log(this.filteredProducts);
+        // console.log(this.filterListAuthor.includes("Martin Gundtoft"));
+        // console.log(this.filterListAuthor);
         return this.filteredProducts.filter(
           (product) =>
-            this.filterListAuthor.includes(product.author) ||
-            this.filterListAuthor.includes(product.author2) ||
-            this.filterListAuthor.includes(product.author3)
+            // console.log(this.filterListAuthor.includes(product["100"]))
+            // console.log(product["100"][0])
+
+            // this.filterListAuthor.includes(product["100"][0]) ||
+            // this.filterListAuthor.includes(product["700"][0]) ||
+            // this.filterListAuthor.includes(product["700"][1]) ||
+            // this.filterListAuthor.includes(product["700"][2]) ||
+            // this.filterListAuthor.includes(product["700"][3])
+            this.filterListAuthor.includes(product["100"][0]) ||
+            product["700"].some((item) => this.filterListAuthor.includes(item))
         );
       } else if (
         this.filterListYear.length > 0 &&
         this.filterListAuthor.length > 0
       ) {
         console.log("both years and authors");
+        // console.log(this.filterListYear);
+        // console.log(this.filterListAuthor);
+
         return this.filteredProducts.filter(
           (product) =>
-            this.filterListYear.includes(product.year) &&
-            (this.filterListAuthor.includes(product.author) ||
-              this.filterListAuthor.includes(product.author2) ||
-              this.filterListAuthor.includes(product.author3))
+            // console.log(
+            //   product.year,
+            //   this.filterListAuthor,
+            //   this.filterListYear,
+            //   this.filterListYear.includes(product.year),
+            //   this.filterListAuthor.includes(product["100"][0])
+            // )
+            // (this.filterListYear.includes(product.year) &&
+            //   this.filterListAuthor.includes(product["100"][0])) ||
+            // // || product["700"].map((item) => item)
+            // (this.filterListYear.includes(product.year) &&
+            //   this.filterListAuthor.includes(product["700"][0])) ||
+            // (this.filterListYear.includes(product.year) &&
+            //   this.filterListAuthor.includes(product["700"][1])) ||
+            // (this.filterListYear.includes(product.year) &&
+            //   this.filterListAuthor.includes(product["700"][2])) ||
+            // (this.filterListYear.includes(product.year) &&
+            //   this.filterListAuthor.includes(product["700"][3]))
+            (this.filterListYear.includes(product.year) &&
+              this.filterListAuthor.includes(product["100"][0])) ||
+            (this.filterListYear.includes(product.year) &&
+              product["700"].some((item) =>
+                this.filterListAuthor.includes(item)
+              ))
         );
       } else {
         return [];
@@ -187,6 +232,7 @@ export default {
       console.log(item);
     },
     addFilter(event, filterCategory) {
+      // console.log(event.target);
       this.filterType = filterCategory;
       if (
         this.filterType == "year" &&
