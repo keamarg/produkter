@@ -59,6 +59,39 @@ export const fetchZotero = async function fetchZotero() {
       }
     );
     const data = await response.json();
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//Mendeley test
+export const fetchMendeley = async function fetchMendeley() {
+  //fetch oauth token
+  try {
+    const response = await fetch("https://api.mendeley.com/oauth/token", {
+      body: "grant_type=client_credentials&scope=all",
+      headers: {
+        Authorization: "Basic MTQyOTI6aVRSWjVyRnRxelcybjdkbA==",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      method: "POST",
+    });
+    const token = await response.json();
+    // console.log(token.access_token);
+
+    //fetch profil med oauth token
+    const res = await fetch(
+      "https://api.mendeley.com/profiles?email=marg@kea.dk",
+      {
+        headers: {
+          Accept: "application/vnd.mendeley-profiles.1+json",
+          Authorization: `Bearer ${token.access_token} `,
+        },
+      }
+    );
+    const data = await res.json();
     console.log(data);
     return data;
   } catch (error) {

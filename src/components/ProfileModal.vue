@@ -50,10 +50,23 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 collaborations and am very keen to make these happen.
               </p> -->
               <img
+                v-if="store.zoteroData != null"
                 :src="`${store.zoteroData[0].data.tags[0].tag}`"
                 width="100"
               />
-              <p>{{ store.zoteroData[0].data.tags[1].tag }}</p>
+              <p v-if="store.zoteroData != null">
+                {{ store.zoteroData[0].data.tags[1].tag }}
+              </p>
+
+              <h3 class="obs">API info fra Mendeley.</h3>
+              <img
+                v-if="store.mendeleyData != null"
+                :src="`${store.mendeleyData[0].photos[0].url}`"
+                width="100"
+              />
+              <p v-if="store.mendeleyData != null">
+                {{ store.mendeleyData }}
+              </p>
 
               <!-- <iframe
                 src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"

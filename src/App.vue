@@ -36,7 +36,12 @@
 
 <script>
 import { store } from "./assets/store.js";
-import { fetchData, parseProducts, fetchZotero } from "./assets/common.js";
+import {
+  fetchData,
+  parseProducts,
+  // fetchZotero,
+  // fetchMendeley,
+} from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
 import CardGroup from "@/components/CardGroup.vue";
 import SideBar from "@/components/SideBar.vue";
@@ -106,11 +111,13 @@ export default {
   created() {},
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
-    let zd = await fetchZotero();
+    // let zd = await fetchZotero();
+    // let md = await fetchMendeley();
     this.productCount = fd.total_record_count;
     this.products = await parseProducts(fd);
     this.loading = !fd;
-    this.store.zoteroData = zd;
+    // this.store.zoteroData = zd;
+    // this.store.mendeleyData = md;
   },
 };
 </script>

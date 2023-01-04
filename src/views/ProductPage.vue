@@ -251,9 +251,15 @@
 // import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
-import { getIndex, getProperty } from "../assets/common.js";
+import {
+  getIndex,
+  getProperty,
+  fetchZotero,
+  fetchMendeley,
+} from "../assets/common.js";
 import { Tooltip } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
+import { store } from "../assets/store.js";
 
 export default {
   // components: { AccordionMenu },
@@ -295,7 +301,7 @@ export default {
 
   data() {
     return {
-      //   store,
+      store,
     };
   },
   methods: {
@@ -329,12 +335,16 @@ export default {
       // console.log(event.target, card.id);
     },
   },
-  mounted() {
+  async mounted() {
     this.tooltip = new Tooltip(this.$refs.tooltip, {
       title: `Om ${this.getProperty("author")}`,
       placement: "bottom",
       trigger: "manual",
     });
+    let zd = await fetchZotero();
+    let md = await fetchMendeley();
+    this.store.zoteroData = zd;
+    this.store.mendeleyData = md;
   },
   created() {
     // this.products[getIndex()]["700"].forEach((product) => console.log(product));

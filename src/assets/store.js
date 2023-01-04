@@ -7,5 +7,6 @@ export const store = reactive({
   //   this.index = productIndex;
   // },
   products: null,
-  zoteroData: "null",
+  zoteroData: null,
+  mendeleyData: null,
 });

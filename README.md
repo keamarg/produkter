@@ -73,6 +73,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 **Nice to have:**
 
+- [ ] Omstrukturering fra brug af props (emit/listen) til brug af store
 - [ ] "Featured" liste til forsiden (markeret via felt i Alma?)
 - [ ] vue tooltips til sidebar ikoner
 - [ ] vue tooltips til sekundære forfatter (virker til primær)
