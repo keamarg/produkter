@@ -47,6 +47,25 @@ export const getIndex = function getIndex() {
     .indexOf(this.$route.params.id);
 };
 
+//zotero test
+export const fetchZotero = async function fetchZotero() {
+  try {
+    const response = await fetch(
+      "https://api.zotero.org/users/10858779/items?v=3",
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 //henter productLinks ind fra den aktuelle portfolioliste, så de kan bruges til at hente products
 export const fetchData = async function fetchData(url) {
   try {

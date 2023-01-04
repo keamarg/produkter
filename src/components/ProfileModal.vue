@@ -38,10 +38,8 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <p>
                 {{ getProperty("contact") }}
               </p>
-              <h3 class="obs">
-                API info fra Research gate, LinkedIn el. lign.
-              </h3>
-              <img
+              <h3 class="obs">API info fra Zotero.</h3>
+              <!-- <img
                 width="100"
                 src="https://media-exp1.licdn.com/dms/image/C4D03AQFfWAkUeLtcUA/profile-displayphoto-shrink_200_200/0/1636453477288?e=1675296000&v=beta&t=_Ma1fOO3RI92KH6ZkpitCHHIZcaQiDMDSfUt4xkZdMw"
               />
@@ -50,10 +48,16 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 with traditional craft methods as well as with combining them
                 with new technologies. I see innovation in multidisciplinary
                 collaborations and am very keen to make these happen.
-              </p>
-              <iframe
-                src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
+              </p> -->
+              <img
+                :src="`${store.zoteroData[0].data.tags[0].tag}`"
+                width="100"
               />
+              <p>{{ store.zoteroData[0].data.tags[1].tag }}</p>
+
+              <!-- <iframe
+                src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
+              /> -->
               <span data-bs-dismiss="modal" aria-label="Close">
                 <router-link
                   :to="{
@@ -77,13 +81,20 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
 
 <script>
 import { getIndex, getProperty } from "../assets/common.js";
+import { store } from "../assets/store.js";
 
 export default {
   props: { products: Array },
   data() {
-    return {};
+    return {
+      store,
+    };
   },
-  computed: {},
+  computed: {
+    zoteroImg() {
+      return this.store.zoteroData[0].data.tags[0];
+    },
+  },
   methods: {
     log(item) {
       console.log(item);
