@@ -49,15 +49,25 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 with new technologies. I see innovation in multidisciplinary
                 collaborations and am very keen to make these happen.
               </p> -->
-              <img
-                v-if="store.zoteroData != null"
-                :src="`${store.zoteroData[0].data.tags[0].tag}`"
-                width="100"
-              />
-              <p v-if="store.zoteroData != null">
-                {{ store.zoteroData[0].data.tags[1].tag }}
-              </p>
+              <span v-if="store.zoteroData != null">
+                <img
+                  :src="`${store.zoteroData[0].data.tags[0].tag}`"
+                  width="100"
+                />
+                <h4>Om forfatteren</h4>
+                <span v-for="item in this.store.zoteroData" :key="item.key">
+                  <p v-if="item.data.itemType == 'note'">
+                    {{ item.data.tags[1].tag }}
+                  </p>
+                </span>
+                <h4>Referencer</h4>
+                <span v-for="item in zoteroDataNoNotes" :key="item.key">
+                  <p v-html="item.bib"></p>
+                </span>
 
+                <!-- {{ store.zoteroData }} -->
+                <!-- {{ log(store.zoteroData) }} -->
+              </span>
               <h3 class="obs">API info fra Mendeley.</h3>
               <img
                 v-if="store.mendeleyData != null"
@@ -107,6 +117,12 @@ export default {
     zoteroImg() {
       return this.store.zoteroData[0].data.tags[0];
     },
+    zoteroDataNoNotes() {
+      return this.store.zoteroData.filter(function (item) {
+        console.log(item.data.itemType);
+        return item.data.itemType != "note";
+      });
+    },
   },
   methods: {
     log(item) {
@@ -132,7 +148,8 @@ textarea {
   color: red;
   font-size: 1rem;
 }
-h2 {
+h2,
+h4 {
   color: black;
 }
 </style>

@@ -51,7 +51,7 @@ export const getIndex = function getIndex() {
 export const fetchZotero = async function fetchZotero() {
   try {
     const response = await fetch(
-      "https://api.zotero.org/users/10858779/items?v=3",
+      "https://api.zotero.org/users/10858779/items?v=3&format=json&include=data,bib,citation",
       {
         headers: {
           Accept: "application/json",
@@ -61,6 +61,7 @@ export const fetchZotero = async function fetchZotero() {
     const data = await response.json();
     // console.log(data);
     return data;
+    // return response;
   } catch (error) {
     console.error(error);
   }
@@ -92,7 +93,7 @@ export const fetchMendeley = async function fetchMendeley() {
       }
     );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     return data;
   } catch (error) {
     console.error(error);
