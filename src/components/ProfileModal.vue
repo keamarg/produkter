@@ -68,7 +68,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 <!-- {{ store.zoteroData }} -->
                 <!-- {{ log(store.zoteroData) }} -->
               </span>
-              <h3 class="obs">API info fra Mendeley.</h3>
+              <!-- <h3 class="obs">API info fra Mendeley.</h3>
               <img
                 v-if="store.mendeleyData != null"
                 :src="`${store.mendeleyData[0].photos[0].url}`"
@@ -76,7 +76,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               />
               <p v-if="store.mendeleyData != null">
                 {{ store.mendeleyData }}
-              </p>
+              </p> -->
 
               <!-- <iframe
                 src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
@@ -119,7 +119,7 @@ export default {
     },
     zoteroDataNoNotes() {
       return this.store.zoteroData.filter(function (item) {
-        console.log(item.data.itemType);
+        // console.log(item.data.itemType);
         return item.data.itemType != "note";
       });
     },

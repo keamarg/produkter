@@ -255,7 +255,7 @@ import {
   getIndex,
   getProperty,
   fetchZotero,
-  fetchMendeley,
+  // fetchMendeley,
 } from "../assets/common.js";
 import { Tooltip } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
@@ -342,9 +342,9 @@ export default {
       trigger: "manual",
     });
     let zd = await fetchZotero();
-    let md = await fetchMendeley();
+    // let md = await fetchMendeley();
     this.store.zoteroData = zd;
-    this.store.mendeleyData = md;
+    // this.store.mendeleyData = md;
   },
   created() {
     // this.products[getIndex()]["700"].forEach((product) => console.log(product));

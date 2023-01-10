@@ -8,5 +8,5 @@ export const store = reactive({
   // },
   products: null,
   zoteroData: null,
-  mendeleyData: null,
+  // mendeleyData: null,
 });

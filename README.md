@@ -30,6 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## To do:
 
+- [ ] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
 - [ ] Author side, evt. med datatræk fra f.eks. ResearchGate, LinkedIn etc. (Microsoft Graph er checket, men vi kan ikke få adgang jf. servicedesk: https://kea.topdesk.net/tas/public/ssp/content/detail/incident?unid=bca6cba01598406a953c89c9dd15ec84)
 - [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
 - [x] Implementering af bar til filtrering (i førstescp omgang årstal). Skal komme efter den første søgning.
