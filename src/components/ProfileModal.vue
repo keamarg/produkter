@@ -34,11 +34,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           </div>
           <div class="modal-body">
             <div class="p-3 text-start">
-              <h2>{{ getProperty("author") }}</h2>
-              <p>
-                {{ getProperty("contact") }}
-              </p>
-              <h3 class="obs">API info fra Zotero.</h3>
+              <!-- <h3 class="obs">API info fra Zotero.</h3> -->
               <!-- <img
                 width="100"
                 src="https://media-exp1.licdn.com/dms/image/C4D03AQFfWAkUeLtcUA/profile-displayphoto-shrink_200_200/0/1636453477288?e=1675296000&v=beta&t=_Ma1fOO3RI92KH6ZkpitCHHIZcaQiDMDSfUt4xkZdMw"
@@ -50,24 +46,92 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 collaborations and am very keen to make these happen.
               </p> -->
               <span v-if="store.zoteroData != null">
-                <img
-                  :src="`${store.zoteroData[0].data.tags[0].tag}`"
-                  width="100"
-                />
-                <h4>Om forfatteren</h4>
-                <span v-for="item in this.store.zoteroData" :key="item.key">
+                <!-- {{ log(store.zoteroData) }} -->
+                <span
+                  v-for="collection in this.store.zoteroData"
+                  :key="collection.keaId"
+                >
+                  <!-- {{ log(collection) }} -->
+                  <span v-for="entry in collection" :key="entry">
+                    <div
+                      v-if="
+                        collection.keaId == store.currentProfile &&
+                        entry.data.itemType == 'note'
+                      "
+                    >
+                      <h2 v-if="store.currentProfileNumber == 1">
+                        {{ getProperty("author") }}
+                      </h2>
+                      <h2 v-else>
+                        {{ getProperty("author") }}
+
+                        <!-- Skriv kode her og i common.js, der sørger for at der hentes ind fra 700 feltet og bruger currentProfileNumber ELLER brug evt. noget getagtigt til at tage id'et fra html elementet-->
+                      </h2>
+                      <a
+                        :href="`mailto:${
+                          store.currentProfile +
+                          '@kea.dk' +
+                          '?subject=Angående produktet ' +
+                          getProperty('title')
+                        }`"
+                      >
+                        <img
+                          class="profileimg"
+                          :src="`${entry.data.tags[0].tag}`"
+                          width="100"
+                        /><br />
+                        Kontakt</a
+                      >
+                    </div>
+
+                    <div
+                      v-if="
+                        collection.keaId == store.currentProfile &&
+                        entry.data.itemType == 'note'
+                      "
+                    >
+                      <h4>Om forfatteren</h4>
+                      <p>
+                        {{ entry.data.tags[0].tag }}
+                      </p>
+                    </div>
+                    <div
+                      v-if="
+                        collection.keaId == store.currentProfile &&
+                        entry.data.itemType != 'note'
+                      "
+                    >
+                      <h4>Referencer</h4>
+                      <span v-for="item in collection" :key="item.key">
+                        {{ log(item) }}
+
+                        <p
+                          v-if="item.data.itemType != 'note'"
+                          v-html="item.bib"
+                        ></p>
+                      </span>
+                    </div>
+                  </span>
+
+                  <!-- {{ log(item[0].data.tags) }} -->
+                  <!-- {{ log(item.keaId) }}
+                  {{ log(getProperty("contact")) }}
+                  {{ log(item) }} -->
+
+                  <!-- <h4>Om forfatteren</h4>
                   <p v-if="item.data.itemType == 'note'">
-                    {{ item.data.tags[1].tag }}
+                    {{ item.data.tags[0].tag }}
                   </p>
                 </span>
                 <h4>Referencer</h4>
                 <span v-for="item in zoteroDataNoNotes" :key="item.key">
-                  <p v-html="item.bib"></p>
+                  <p v-html="item.bib"></p> -->
                 </span>
 
                 <!-- {{ store.zoteroData }} -->
                 <!-- {{ log(store.zoteroData) }} -->
               </span>
+
               <!-- <h3 class="obs">API info fra Mendeley.</h3>
               <img
                 v-if="store.mendeleyData != null"
@@ -81,7 +145,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <!-- <iframe
                 src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
               /> -->
-              <span data-bs-dismiss="modal" aria-label="Close">
+              <div data-bs-dismiss="modal" aria-label="Close">
                 <router-link
                   :to="{
                     name: 'Results',
@@ -90,10 +154,10 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       kind: `author`,
                     },
                   }"
-                  >Alle KEA produkter af Iframe test
+                  >Alle KEA produkter af
                   {{ getProperty("author") }}
                 </router-link>
-              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -114,15 +178,15 @@ export default {
     };
   },
   computed: {
-    zoteroImg() {
-      return this.store.zoteroData[0].data.tags[0];
-    },
-    zoteroDataNoNotes() {
-      return this.store.zoteroData.filter(function (item) {
-        // console.log(item.data.itemType);
-        return item.data.itemType != "note";
-      });
-    },
+    // zoteroImg() {
+    //   return this.store.zoteroData[0].data.tags[0];
+    // },
+    // zoteroDataNoNotes() {
+    //   return this.store.zoteroData.filter(function (item) {
+    //     // console.log(item.data.itemType);
+    //     return item.data.itemType != "note";
+    //   });
+    // },
   },
   methods: {
     log(item) {
@@ -135,6 +199,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profileimg {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
 p {
   color: black;
 }

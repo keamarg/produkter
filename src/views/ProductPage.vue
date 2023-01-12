@@ -50,103 +50,39 @@
                 data-bs-html="true"
                 data-bs-toggle="modal"
                 data-bs-target="#profileModal"
+                @click="
+                  store.currentProfile = getProperty('contact');
+                  store.currentProfileNumber = 1;
+                "
               >
                 {{ getProperty("author") }}
               </span>
               <span
-                v-for="item in products[getIndex()][700]"
-                :key="item"
+                v-for="(item, index) in products[getIndex()][700]"
+                :key="index"
+                :id="'contact' + (index + 2)"
+                @click="
+                  store.currentProfile = getProperty('contact' + (index + 2));
+                  store.currentProfileNumber = index + 2;
+                "
                 class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
                 data-bs-html="true"
                 data-bs-toggle="modal"
                 data-bs-target="#profileModal"
               >
+                <!-- log(products[getIndex()][700].length);
+                  log('contact' + (index + 2));
+                  log(
+                    Object.values(products[getIndex()][997]).filter((item) =>
+                      item.hasOwnProperty('contact' + (index + 2))
+                    )
+                  ); -->
                 {{ item }}
               </span>
-
-              <!-- </router-link> -->
-              <!-- <router-link
-                v-if="products[getIndex()]['100'] != 'none'"
-                :to="{
-                  name: 'Results',
-                  params: {
-                    id: products[getIndex()]['100'][0].toLowerCase(),
-                    kind: `author`,
-                  },
-                }"
-              >
-                <span
-                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-                >
-                  {{ products[getIndex()].author2 }}
-                </span>
-              </router-link> -->
-              <!-- <router-link
-                v-if="this.products[getIndex()].author3 != 'none'"
-                :to="{
-                  name: 'Results',
-                  params: {
-                    id: products[getIndex()]['100'][0].toLowerCase(),
-                    kind: `author`,
-                  },
-                }"
-              >
-                <span
-                  class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-                >
-                  {{ products[getIndex()].author3 }}
-                </span>
-              </router-link> -->
             </div>
             <p class="mt-5">
               {{ getProperty("text") }}
             </p>
-            <!-- <router-link
-            :to="{ name: 'ProductVideo', params: { id: $route.params.id } }"
-          >
-            <button
-              v-if="
-                products[getIndex()].video[0] != 'none' ||
-                products[getIndex()].video2[0] != 'none'
-              "
-              type="button"
-              class="btn btn-custom-product rounded-custom me-4 mt-5"
-            >
-              <i class="bi bi-play-circle"></i>&nbsp;
-              {{ products[getIndex()].video[1] }}
-            </button>
-          </router-link> -->
-            <!-- <template
-              v-for="(item, index) in products[getIndex()][997]"
-              :key="index"
-            >
-              <p
-                v-if="
-                  Object.keys(item).toString() != 'Billedmateriale' &&
-                  Object.keys(item).toString() != 'youtube' &&
-                  Object.keys(item).toString() != 'keavideo'
-                "
-              >
-                {{ log(Object.keys(item).toString() != "keavideo") }}
-                {{ Object.keys(item).toString() }}
-                {{ Object.values(item).toString() }}
-           
-              </p>
-              <a
-                v-if="
-                  Object.keys(item).toString() != 'Billedmateriale' &&
-                  Object.keys(item).toString() != 'contact' &&
-                  Object.keys(item).toString() != 'youtube' &&
-                  Object.keys(item).toString() != 'keavideo'
-                "
-                :href="Object.values(item).toString()"
-                target="_blank"
-                class="btn btn-custom-product rounded-custom me-4 mt-2"
-                download
-                ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
-                {{ Object.keys(item).toString() }}</a
-              >
-            </template> -->
             <template
               v-for="(item, index) in products[getIndex()][856]"
               :key="index"
@@ -160,38 +96,6 @@
                 {{ Object.keys(item).toString() }}</a
               >
             </template>
-            <!-- <template
-              v-for="(item, index) in Object.keys(products[getIndex()].article)"
-              :key="item"
-            >
-              <a
-                v-if="index % 2 == 0"
-                :href="products[getIndex()].article[item]"
-                target="_blank"
-                class="btn btn-custom-product rounded-custom me-4 mt-2"
-                download
-                ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
-                {{ products[getIndex()].article[index + 1] }}</a
-              >
-            </template> -->
-
-            <!-- <accordion-menu
-            v-if="
-              !(
-                products[getIndex()].video[0] == 'none' &&
-                products[getIndex()].video2[0] == 'none'
-              )
-            "
-            :products="products"
-            :getIndex="getIndex"
-          /> -->
-            <!-- {{
-              log(
-                Object.keys(
-                  products[getIndex()][997].find((item) => item.youtube)
-                ).toString()
-              )
-            }} -->
             <div
               v-if="getProperty('youtube') || getProperty('keavideo')"
               class="iframediv ratio ratio-16x9 rounded-custom mt-5"
@@ -233,9 +137,6 @@
                 >
                   {{ item }}
                 </button>
-                <!-- <p v-for="item in products[getIndex()].keywords" :key="item">
-              {{ item }}
-            </p> -->
               </router-link>
               <ProfileModal :products="products" />
             </div>
@@ -251,12 +152,7 @@
 // import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
-import {
-  getIndex,
-  getProperty,
-  fetchZotero,
-  // fetchMendeley,
-} from "../assets/common.js";
+import { getIndex, getProperty, fetchZotero } from "../assets/common.js";
 import { Tooltip } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { store } from "../assets/store.js";
@@ -272,12 +168,6 @@ export default {
     productcount: { type: Number },
   },
   computed: {
-    // filteredMaterials(){
-
-    // },
-    // articlesrc() {
-    //   return `${this.products[this.getIndex()].article}`;
-    // },
     videosrcYt() {
       return `https://www.youtube.com/embed/${this.getProperty("youtube")}`; //(${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
     },
@@ -317,11 +207,6 @@ export default {
     getIndex: getIndex,
     getProperty: getProperty,
 
-    // getIndex() {
-    //   return this.products
-    //     .map((object) => object.id)
-    //     .indexOf(this.$route.params.id);
-    // },
     like(event, product) {
       product.liked = !product.liked;
       console.log(product[245][0]);
@@ -330,9 +215,6 @@ export default {
       } else {
         localStorage.removeItem(product[245][0]);
       }
-      // console.log(card.liked);
-      // console.log(card);
-      // console.log(event.target, card.id);
     },
   },
   async mounted() {
@@ -341,33 +223,11 @@ export default {
       placement: "bottom",
       trigger: "manual",
     });
-    let zd = await fetchZotero();
-    // let md = await fetchMendeley();
+    let zd = await fetchZotero(this.products[this.getIndex()]);
     this.store.zoteroData = zd;
-    // this.store.mendeleyData = md;
   },
-  created() {
-    // this.products[getIndex()]["700"].forEach((product) => console.log(product));
-    // this.$watch(
-    //   () => this.$route.params,
-    //   (toParams, previousParams) => {
-    //     if (this.products[toParams.id]) {
-    //       this.css.backgroundImage =
-    //         "linear-gradient(0.25turn, rgba(0,0,0,0.8), rgba(0,0,0,0.6),rgba(0,0,0,0.3), rgba(0,0,0,0.0)),url(" +
-    //         this.products[toParams.id].img1 +
-    //         ")";
-    //     }
-    //   }
-    // );
-  },
-  beforeUnmount() {
-    // document.querySelector("#tooltip").tooltip("hide");
-    // this.$refs.tooltip.tooltip.show();
-    // console.log(document.querySelector("#tooltip"));
-    // document.querySelector('[data-bs-toggle="tooltip"]').tooltip("hide");
-    // console.log(document.querySelector('[data-bs-toggle="tooltip"]').tooltip());
-    // document.querySelector('#tooltip[data-bs-toggle="tooltip"]');
-  },
+  created() {},
+  beforeUnmount() {},
 };
 </script>
 <style lang="scss" scoped>
