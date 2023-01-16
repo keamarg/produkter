@@ -1,23 +1,25 @@
 //fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
 export const getImage = function getImage(product) {
-  if (typeof product[997] == "undefined") {
+  if (typeof product[997].find((item) => item.billedmateriale) == "undefined") {
     return "https://projekter.kea.dk/assets/SoMeCard.png";
   } else {
     return Object.values(
-      product["997"].find((item) => item.Billedmateriale)
+      product["997"].find((item) => item.billedmateriale)
     )[0];
   }
 };
 //fælles function til andre properties
-export const getProperty = function getProperty(property) {
+export const getProperty = function getProperty(property, authorNumber) {
   if (property == "100" || property == "author") {
     return this.products[this.getIndex()][100][0];
   } else if (property == "245" || property == "title") {
     return this.products[this.getIndex()][245][0];
+  } else if (property == "700" || property == "secAuthor") {
+    return this.products[this.getIndex()][700][authorNumber - 2];
   } else if (property == "subtext") {
-    return this.products[this.getIndex()]["520"][0].toLowerCase();
+    return this.products[this.getIndex()]["520"][0];
   } else if (property == "text") {
-    return this.products[this.getIndex()]["520"][1].toLowerCase();
+    return this.products[this.getIndex()]["520"][1];
   }
   // hvis property ikke findes i ovenstående tjekkes i resten af 997 feltet, returner værdien (dvs. alle urls, contact, billedmateriale, videolinks osv.)
   else if (
@@ -59,7 +61,7 @@ export const getIndex = function getIndex() {
 export const fetchZotero = async (product) => {
   try {
     const response = await fetch(
-      "https://api.zotero.org/users/10858779/collections/top?v=3",
+      "https://api.zotero.org/users/10924352/collections/top?v=3",
       {
         headers: {
           Accept: "application/json",
@@ -133,7 +135,7 @@ export const fetchZotero = async (product) => {
 export const fetchZoteroCollection = async (collectionKeyValue) => {
   try {
     const response = await fetch(
-      `https://api.zotero.org/users/10858779/collections/${Object.values(
+      `https://api.zotero.org/users/10924352/collections/${Object.values(
         collectionKeyValue
       )}/items?v=3&format=json&include=data,bib,citation`,
       {
@@ -250,11 +252,11 @@ export const parseProducts = async (data) => {
 
   const filteredProducts = products.filter((product) => product[998]); //only products with the 998 "kea field"
 
-  // const extraFiltered = filteredProducts.filter(
-  //   (product) => Object.values(product["998"][0])[0] == "keatest"
-  // );
+  const extraFiltered = filteredProducts.filter(
+    (product) => Object.values(product["998"][0])[0] == "kea"
+  );
 
-  // return extraFiltered;
+  return extraFiltered;
   // return products;
-  return filteredProducts;
+  // return filteredProducts;
 };

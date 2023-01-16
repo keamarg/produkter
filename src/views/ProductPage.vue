@@ -32,16 +32,6 @@
             <h1>{{ getProperty("title") }}</h1>
             <div class="mt-0">
               <span class="me-3">Ophav</span>
-              <!-- <router-link
-                :to="{
-                  name: 'Results',
-                  params: {
-                    id: products[getIndex()]['100'][0].toLowerCase(),
-                    kind: `author`,
-                  },
-                }"
-              > -->
-              <!-- v-tooltip:bottom="products[getIndex()].contact" -->
               <span
                 class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
                 ref="tooltip"
@@ -70,13 +60,6 @@
                 data-bs-toggle="modal"
                 data-bs-target="#profileModal"
               >
-                <!-- log(products[getIndex()][700].length);
-                  log('contact' + (index + 2));
-                  log(
-                    Object.values(products[getIndex()][997]).filter((item) =>
-                      item.hasOwnProperty('contact' + (index + 2))
-                    )
-                  ); -->
                 {{ item }}
               </span>
             </div>
@@ -180,7 +163,7 @@ export default {
         color: "white",
         background:
           "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
-          this.getProperty("Billedmateriale") + //          this.products[this.getIndex()].img1 +
+          this.getProperty("billedmateriale") + //          this.products[this.getIndex()].img1 +
           "), no-repeat",
         backgroundSize: "cover",
         fontSize: "16px",

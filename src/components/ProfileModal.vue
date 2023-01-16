@@ -20,133 +20,86 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 class="logo d-inline"
                 alt=""
               />
-              <p class="navbar-title d-inline ps-2 m-0 text-dark">Produkter</p>
+              <p class="navbar-title d-inline ps-2 m-0 text-white">Produkter</p>
             </div>
-            <!-- <h5 class="modal-title text-info" id="exampleModalLabel">
-              Om KEA Produkter
-            </h5> -->
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
           <div class="modal-body">
             <div class="p-3 text-start">
-              <!-- <h3 class="obs">API info fra Zotero.</h3> -->
-              <!-- <img
-                width="100"
-                src="https://media-exp1.licdn.com/dms/image/C4D03AQFfWAkUeLtcUA/profile-displayphoto-shrink_200_200/0/1636453477288?e=1675296000&v=beta&t=_Ma1fOO3RI92KH6ZkpitCHHIZcaQiDMDSfUt4xkZdMw"
-              />
-              <p>
-                The new and undiscovered excites me. I am experienced in working
-                with traditional craft methods as well as with combining them
-                with new technologies. I see innovation in multidisciplinary
-                collaborations and am very keen to make these happen.
-              </p> -->
               <span v-if="store.zoteroData != null">
-                <!-- {{ log(store.zoteroData) }} -->
                 <span
                   v-for="collection in this.store.zoteroData"
                   :key="collection.keaId"
                 >
-                  <!-- {{ log(collection) }} -->
-                  <span v-for="entry in collection" :key="entry">
+                  <div v-for="entry in collection" :key="entry">
                     <div
                       v-if="
                         collection.keaId == store.currentProfile &&
                         entry.data.itemType == 'note'
                       "
                     >
-                      <h2 v-if="store.currentProfileNumber == 1">
-                        {{ getProperty("author") }}
-                      </h2>
-                      <h2 v-else>
-                        {{ getProperty("author") }}
+                      <div id="imageDiv">
+                        <a
+                          :href="`mailto:${
+                            store.currentProfile +
+                            '@kea.dk' +
+                            '?subject=Angående produktet ' +
+                            getProperty('title')
+                          }`"
+                        >
+                          <!-- <figure> -->
+                          <img
+                            class="profileimg"
+                            :src="`${entry.data.tags[0].tag}`"
+                          />
+                          <div class="bottom-right">
+                            <i class="bi bi-envelope-plus-fill"></i>
+                          </div>
+                          <!-- <figcaption class="btn rounded-custom">
+                            Kontakt
+                          </figcaption>
+                        </figure> -->
+                        </a>
+                      </div>
 
-                        <!-- Skriv kode her og i common.js, der sørger for at der hentes ind fra 700 feltet og bruger currentProfileNumber ELLER brug evt. noget getagtigt til at tage id'et fra html elementet-->
-                      </h2>
-                      <a
-                        :href="`mailto:${
-                          store.currentProfile +
-                          '@kea.dk' +
-                          '?subject=Angående produktet ' +
-                          getProperty('title')
-                        }`"
-                      >
-                        <img
-                          class="profileimg"
-                          :src="`${entry.data.tags[0].tag}`"
-                          width="100"
-                        /><br />
-                        Kontakt</a
-                      >
+                      <div>
+                        <!-- <h4>Om forfatteren</h4> -->
+                        <br />
+                        <!-- add DOMPURIFY or similar-->
+                        <div
+                          class="zoteroProfile"
+                          v-html="entry.data.note"
+                        ></div>
+                      </div>
                     </div>
+                  </div>
+                  <div v-if="collection.keaId == store.currentProfile">
+                    <span v-for="(item, index) in collection" :key="item.key">
+                      <h4 v-if="collection.length > 1 && index == 0">
+                        Referencer
+                      </h4>
 
-                    <div
-                      v-if="
-                        collection.keaId == store.currentProfile &&
-                        entry.data.itemType == 'note'
-                      "
-                    >
-                      <h4>Om forfatteren</h4>
-                      <p>
-                        {{ entry.data.tags[0].tag }}
-                      </p>
-                    </div>
-                    <div
-                      v-if="
-                        collection.keaId == store.currentProfile &&
-                        entry.data.itemType != 'note'
-                      "
-                    >
-                      <h4>Referencer</h4>
-                      <span v-for="item in collection" :key="item.key">
-                        {{ log(item) }}
-
-                        <p
-                          v-if="item.data.itemType != 'note'"
-                          v-html="item.bib"
-                        ></p>
-                      </span>
-                    </div>
-                  </span>
-
-                  <!-- {{ log(item[0].data.tags) }} -->
-                  <!-- {{ log(item.keaId) }}
-                  {{ log(getProperty("contact")) }}
-                  {{ log(item) }} -->
-
-                  <!-- <h4>Om forfatteren</h4>
-                  <p v-if="item.data.itemType == 'note'">
-                    {{ item.data.tags[0].tag }}
-                  </p>
+                      <div
+                        class="zoteroReference"
+                        v-if="
+                          item.data.itemType != 'note' &&
+                          item.data.itemType != 'attachment'
+                        "
+                        v-html="item.bib"
+                      ></div>
+                    </span>
+                  </div>
                 </span>
-                <h4>Referencer</h4>
-                <span v-for="item in zoteroDataNoNotes" :key="item.key">
-                  <p v-html="item.bib"></p> -->
-                </span>
-
-                <!-- {{ store.zoteroData }} -->
-                <!-- {{ log(store.zoteroData) }} -->
               </span>
-
-              <!-- <h3 class="obs">API info fra Mendeley.</h3>
-              <img
-                v-if="store.mendeleyData != null"
-                :src="`${store.mendeleyData[0].photos[0].url}`"
-                width="100"
-              />
-              <p v-if="store.mendeleyData != null">
-                {{ store.mendeleyData }}
-              </p> -->
-
-              <!-- <iframe
-                src="https://www.researchgate.net/plugins/institution?stats=true&faces=true&publications=true&height=600&width=300&theme=light&type=institution&installationId=63909fc1a3ef1ef77a001a73"
-              /> -->
               <div data-bs-dismiss="modal" aria-label="Close">
                 <router-link
+                  class="btn btn-custom-product rounded-custom me-4 mt-4 mb-2"
+                  v-if="store.currentProfileNumber == 1"
                   :to="{
                     name: 'Results',
                     params: {
@@ -154,8 +107,24 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       kind: `author`,
                     },
                   }"
-                  >Alle KEA produkter af
+                  >Se alle KEA produkter af
                   {{ getProperty("author") }}
+                </router-link>
+                <router-link
+                  class="btn btn-custom-product rounded-custom me-4 mt-4 mb-2"
+                  v-else-if="store.currentProfileNumber != null"
+                  :to="{
+                    name: 'Results',
+                    params: {
+                      id: getProperty(
+                        'secAuthor',
+                        store.currentProfileNumber
+                      ).toLowerCase(),
+                      kind: `author`,
+                    },
+                  }"
+                  >Se alle KEA produkter af
+                  {{ getProperty("secAuthor", store.currentProfileNumber) }}
                 </router-link>
               </div>
             </div>
@@ -199,27 +168,88 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profileimg {
-  vertical-align: middle;
+.modal-content {
+  background-color: $body-bg;
+}
+
+#imageDiv {
   width: 100px;
   height: 100px;
+}
+.profileimg {
+  vertical-align: middle;
   border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
-p {
-  color: black;
+// figcaption {
+//   text-align: center;
+// }
+#imageDiv {
+  position: relative;
+  text-align: center;
 }
+
+.bottom-right {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+}
+i {
+  font-size: 1.5rem;
+  color: $lighttextcolor;
+}
+
 textarea {
   width: 100%;
   resize: none;
   border: none;
   font-size: 0.8rem;
 }
+.zoteroProfile {
+  :deep {
+    p,
+    h1,
+    h2,
+    h4,
+    h5 {
+      color: $lighttextcolor;
+    }
+    h3 {
+      color: $keared;
+    }
+  }
+}
+
+.zoteroReference {
+  :deep {
+    div,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-size: 12px;
+      color: $lighttextcolor;
+    }
+  }
+}
+
 .obs {
   color: red;
   font-size: 1rem;
 }
+p,
+h1,
 h2,
+h3,
+h4,
+h5 {
+  color: $lighttextcolor;
+}
+
 h4 {
-  color: black;
+  color: $keared;
 }
 </style>
