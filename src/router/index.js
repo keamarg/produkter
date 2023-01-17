@@ -12,7 +12,11 @@ import ProductPage from "../views/ProductPage.vue";
 // console.log("path from env " + process.env.VUE_APP_PATH);
 
 const routerHistory = createWebHashHistory();
+
 const router = createRouter({
+  scrollBehavior() {
+    return { top: 0 };
+  },
   history: routerHistory,
   routes: [
     {
