@@ -81,7 +81,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                   <div v-if="collection.keaId == store.currentProfile">
                     <span v-for="(item, index) in collection" :key="item.key">
                       <h4 v-if="collection.length > 1 && index == 0">
-                        Referencer
+                        Udvalgte referencer
                       </h4>
 
                       <div
