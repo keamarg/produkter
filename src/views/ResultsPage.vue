@@ -4,7 +4,7 @@
     :products="products"
     :loading="loading"
     class="p-3 mb-3"
-    @mousewheel="handleWheel"
+    @mousewheel.passive="handleWheel"
   >
     <div class="row align-items-center">
       <p v-if="$route.params.id == 'alle'">
@@ -173,7 +173,7 @@ export default {
         !this.filterListYear.length > 0 &&
         this.filterListAuthor.length > 0
       ) {
-        console.log("only Authors");
+        // console.log("only Authors");
         // console.log(this.filteredProducts);
         // console.log(this.filterListAuthor.includes("Martin Gundtoft"));
         // console.log(this.filterListAuthor);
@@ -188,13 +188,16 @@ export default {
             // this.filterListAuthor.includes(product["700"][2]) ||
             // this.filterListAuthor.includes(product["700"][3])
             this.filterListAuthor.includes(product["100"][0]) ||
-            product["700"].some((item) => this.filterListAuthor.includes(item))
+            ("700" in product &&
+              product["700"].some((item) =>
+                this.filterListAuthor.includes(item)
+              ))
         );
       } else if (
         this.filterListYear.length > 0 &&
         this.filterListAuthor.length > 0
       ) {
-        console.log("both years and authors");
+        // console.log("both years and authors");
         // console.log(this.filterListYear);
         // console.log(this.filterListAuthor);
 
@@ -221,6 +224,7 @@ export default {
             (this.filterListYear.includes(product.year) &&
               this.filterListAuthor.includes(product["100"][0])) ||
             (this.filterListYear.includes(product.year) &&
+              "700" in product &&
               product["700"].some((item) =>
                 this.filterListAuthor.includes(item)
               ))

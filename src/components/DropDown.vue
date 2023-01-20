@@ -64,7 +64,7 @@ export default {
         } else data.push(product[this.filterCategory]);
         // console.log(product[this.filterCategory]);
       });
-      return [...new Set(data)];
+      return [...new Set(data)].sort();
     },
   },
   methods: {
