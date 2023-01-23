@@ -53,8 +53,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1q):
+## Bugs (next: bug1r):
 
+- [ ] bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
 - [ ] bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
 - [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
 - [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.

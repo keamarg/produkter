@@ -17,6 +17,7 @@ const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+
   history: routerHistory,
   routes: [
     {
@@ -24,7 +25,14 @@ const router = createRouter({
       path: "/",
       component: HomePage,
     },
-    { name: "Product", path: "/:id", component: ProductPage },
+    {
+      name: "Product",
+      path: "/:id",
+      component: ProductPage,
+      // beforeEnter() {
+      //   console.log("ping");
+      // },
+    },
     // {
     //   name: "ProductVideo",
     //   path: "/:id/video",

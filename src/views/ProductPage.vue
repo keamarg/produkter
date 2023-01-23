@@ -136,7 +136,7 @@
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
 import { getIndex, getProperty, fetchZotero } from "../assets/common.js";
-import { Tooltip } from "bootstrap";
+import { Tooltip, Modal } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { store } from "../assets/store.js";
 
@@ -150,6 +150,7 @@ export default {
     loading: { type: Boolean },
     productcount: { type: Number },
   },
+
   computed: {
     videosrcYt() {
       return `https://www.youtube.com/embed/${this.getProperty("youtube")}`; //(${this.paused ? "?autoplay=0&mute=1" : "?autoplay=1&mute=1"}`;
@@ -200,6 +201,7 @@ export default {
       }
     },
   },
+
   async mounted() {
     this.tooltip = new Tooltip(this.$refs.tooltip, {
       title: `Om ${this.getProperty("author")}`,
@@ -211,6 +213,39 @@ export default {
   },
   created() {},
   beforeUnmount() {},
+  beforeRouteLeave(to, from, next) {
+    // const backdrop = document.querySelector(".modal-backdrop");
+    // const modal = document.querySelector(".modal");
+    // document.getElementById("profileModal").modal("hide");
+    let modal = Modal.getOrCreateInstance(
+      document.getElementById("profileModal")
+    ); // Returns a Bootstrap modal instance
+    // Show or hide:
+    // modal.show();
+    // modal.hide();
+    if (modal._isShown) {
+      modal.toggle();
+    } // let modal = document.getElementById("profileModal");
+
+    // modal.classList.remove("show");
+    // console.log(modal._isShown);
+
+    // if (modal != null) {
+    //   modal("toggle");
+    // }
+    // const modal = document.querySelector(".modal");
+    // modal.classList.remove("show");
+    // modal.setAttribute("aria-hidden", "true");
+    // modal.remove();
+    // const backdrop = document.querySelector(".modal-backdrop");
+    // backdrop.remove();
+
+    // document.body.classList.remove("modal-open");
+    // let modal = document.getElementById("profileModal");
+    // modal.classList.remove("show");
+    // console.log(modal.classList);
+    next();
+  },
 };
 </script>
 <style lang="scss" scoped>
