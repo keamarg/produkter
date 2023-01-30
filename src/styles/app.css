@@ -11433,6 +11433,7 @@ div.modal-body {
 /*search bar options*/
 .dropdown {
   position: relative;
+  z-index: 2;
   /* display: inline-block !important; */
 }
 
@@ -11467,7 +11468,7 @@ div.modal-body {
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  z-index: 3;
+  z-index: 1;
   color: #eb5045;
 }
 
@@ -11479,7 +11480,7 @@ div.modal-body {
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  z-index: 3;
+  z-index: 1;
 }
 
 .unlikeheart:hover:before {

@@ -31,11 +31,10 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           </div>
           <div class="modal-body">
             <div class="p-3 text-start">
-              <span v-if="store.zoteroData != null">
-                <span
-                  v-for="collection in this.store.zoteroData"
-                  :key="collection.keaId"
-                >
+              <!-- <span v-if="store.zoteroData != null"> -->
+              <span v-for="collection in store.zoteroData" :key="collection">
+                <span v-if="collection.keaId == store.currentProfile">
+                  <!-- <span v-for="collection in user" :key="collection.keaId"> -->
                   <div v-for="entry in collection" :key="entry">
                     <div
                       v-if="
@@ -76,11 +75,45 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           v-html="entry.data.note"
                         ></div>
                       </div>
+                      <router-link
+                        class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
+                        v-if="
+                          store.currentProfileNumber != null &&
+                          store.currentProfileNumber == '1'
+                        "
+                        :to="{
+                          name: 'Results',
+                          params: {
+                            id: getProperty('author').toLowerCase(),
+                            kind: `author`,
+                          },
+                        }"
+                        >Se alle KEA produkter af
+                        {{ getProperty("author") }}
+                      </router-link>
+                      <router-link
+                        class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
+                        v-else-if="store.currentProfileNumber != null"
+                        :to="{
+                          name: 'Results',
+                          params: {
+                            id: getProperty(
+                              'secAuthor'.toLowerCase(),
+                              store.currentProfileNumber
+                            ),
+                            kind: `author`,
+                          },
+                        }"
+                        >Se alle KEA produkter af
+                        {{
+                          getProperty("secAuthor", store.currentProfileNumber)
+                        }}
+                      </router-link>
                     </div>
                   </div>
                   <div v-if="collection.keaId == store.currentProfile">
                     <span v-for="(item, index) in collection" :key="item.key">
-                      <h4 v-if="collection.length > 1 && index == 0">
+                      <h4 v-if="collection.length > '1' && index == 0">
                         Udvalgte referencer
                       </h4>
 
@@ -96,37 +129,62 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                   </div>
                 </span>
               </span>
-              <div data-bs-dismiss="modal" aria-label="Close">
-                <router-link
-                  class="btn btn-custom-product rounded-custom me-4 mt-4 mb-2"
-                  v-if="store.currentProfileNumber == 1"
-                  :to="{
-                    name: 'Results',
-                    params: {
-                      id: getProperty('author').toLowerCase(),
-                      kind: `author`,
-                    },
-                  }"
-                  >Se alle KEA produkter af
-                  {{ getProperty("author") }}
-                </router-link>
-                <router-link
-                  class="btn btn-custom-product rounded-custom me-4 mt-4 mb-2"
-                  v-else-if="store.currentProfileNumber != null"
-                  :to="{
-                    name: 'Results',
-                    params: {
-                      id: getProperty(
-                        'secAuthor',
-                        store.currentProfileNumber
-                      ).toLowerCase(),
-                      kind: `author`,
-                    },
-                  }"
-                  >Se alle KEA produkter af
-                  {{ getProperty("secAuthor", store.currentProfileNumber) }}
-                </router-link>
-              </div>
+              <!-- </span> -->
+              <!-- <span v-if="authorlinks != null"> -->
+              <span v-if="store.currentProfile == false">
+                <span
+                  v-if="
+                    store.currentProfileNumber != null &&
+                    store.currentProfileNumber == '1'
+                  "
+                >
+                  {{ getProperty("author") }} har ikke en kea profil
+                  <router-link
+                    class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
+                    :to="{
+                      name: 'Results',
+                      params: {
+                        id: getProperty('author').toLowerCase(),
+                        kind: `author`,
+                      },
+                    }"
+                    >Se alle KEA produkter af
+                    {{ getProperty("author") }}
+                  </router-link>
+                </span>
+                <span v-else-if="store.currentProfileNumber != null">
+                  {{ getProperty("secAuthor", store.currentProfileNumber) }} har
+                  ikke en kea profil
+                  <router-link
+                    class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
+                    :to="{
+                      name: 'Results',
+                      params: {
+                        id: getProperty(
+                          'secAuthor'.toLowerCase(),
+                          store.currentProfileNumber
+                        ),
+                        kind: `author`,
+                      },
+                    }"
+                    >Se alle KEA produkter af
+                    {{ getProperty("secAuthor", store.currentProfileNumber) }}
+                  </router-link>
+                </span>
+                <!-- {{ log(authorlinks) }}
+                  {{ log(this.$el.querySelector("#authorlinks")) }} -->
+              </span>
+              <!-- </span> -->
+              <!-- {{ log(store.zoteroData[0].find((profile) => profile)) }} -->
+              <!-- <span v-if="store.zoterodata == null">
+                Bæv
+                {{ log(store.currentProfile) }}
+                {{ log(store.currentProfile) }}
+              </span> -->
+
+              <!-- {{ log(store.zoteroData) }} -->
+
+              <div data-bs-dismiss="modal" aria-label="Close"></div>
             </div>
           </div>
         </div>
@@ -144,6 +202,7 @@ export default {
   data() {
     return {
       store,
+      authorlinks: null,
     };
   },
   computed: {
@@ -163,6 +222,9 @@ export default {
     },
     getIndex: getIndex,
     getProperty: getProperty,
+  },
+  mounted() {
+    // this.authorlinks = document.querySelector("#authorlinks").childElementCount;
   },
 };
 </script>

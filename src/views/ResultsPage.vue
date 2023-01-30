@@ -165,7 +165,7 @@ export default {
       // console.log("filtering: " + this.filterType);
 
       if (this.filterListYear.length > 0 && !this.filterListAuthor.length > 0) {
-        console.log("only years");
+        // console.log("only years");
         return this.filteredProducts.filter((product) =>
           this.filterListYear.includes(product.year)
         );

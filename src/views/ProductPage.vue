@@ -30,8 +30,8 @@
             </span>
             <!-- https://vuejsexamples.com/a-custom-directive-tooltips-for-vue-3/-->
             <h1>{{ getProperty("title") }}</h1>
-            <div class="mt-0">
-              <span class="me-3">Ophav</span>
+            <span class="me-3">Ophav</span>
+            <span id="authorlinks" class="mt-0">
               <span
                 class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
                 ref="tooltip"
@@ -62,7 +62,7 @@
               >
                 {{ item }}
               </span>
-            </div>
+            </span>
             <p class="mt-5">
               {{ getProperty("text") }}
             </p>
@@ -111,14 +111,17 @@
                 :key="item"
                 :to="{
                   name: 'Results',
-                  params: { id: item.toLowerCase(), kind: 'keyword' },
+                  params: {
+                    id: item.replace('.', '').toLowerCase(),
+                    kind: 'keyword',
+                  },
                 }"
               >
                 <button
                   type="button"
                   class="btn btn-primary btn-custom-keyword me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
                 >
-                  {{ item }}
+                  {{ item.replace(".", "") }}
                 </button>
               </router-link>
               <ProfileModal :products="products" />
@@ -188,12 +191,13 @@ export default {
     removeTip() {
       this.tooltip.hide();
     },
+
     getIndex: getIndex,
     getProperty: getProperty,
 
     like(event, product) {
       product.liked = !product.liked;
-      console.log(product[245][0]);
+      // console.log(product[245][0]);
       if (product.liked == true) {
         localStorage.setItem(product[245][0], product.liked);
       } else {
@@ -210,40 +214,25 @@ export default {
     });
     let zd = await fetchZotero(this.products[this.getIndex()]);
     this.store.zoteroData = zd;
+    Modal.getOrCreateInstance(
+      document.getElementById("profileModal")
+    )._element.addEventListener("hide.bs.modal", function (e) {
+      resetProfile(e);
+    });
+    const resetProfile = () => {
+      this.store.currentProfileNumber = null;
+    };
   },
   created() {},
   beforeUnmount() {},
   beforeRouteLeave(to, from, next) {
-    // const backdrop = document.querySelector(".modal-backdrop");
-    // const modal = document.querySelector(".modal");
-    // document.getElementById("profileModal").modal("hide");
     let modal = Modal.getOrCreateInstance(
       document.getElementById("profileModal")
     ); // Returns a Bootstrap modal instance
     // Show or hide:
-    // modal.show();
-    // modal.hide();
     if (modal._isShown) {
       modal.toggle();
-    } // let modal = document.getElementById("profileModal");
-
-    // modal.classList.remove("show");
-    // console.log(modal._isShown);
-
-    // if (modal != null) {
-    //   modal("toggle");
-    // }
-    // const modal = document.querySelector(".modal");
-    // modal.classList.remove("show");
-    // modal.setAttribute("aria-hidden", "true");
-    // modal.remove();
-    // const backdrop = document.querySelector(".modal-backdrop");
-    // backdrop.remove();
-
-    // document.body.classList.remove("modal-open");
-    // let modal = document.getElementById("profileModal");
-    // modal.classList.remove("show");
-    // console.log(modal.classList);
+    }
     next();
   },
 };

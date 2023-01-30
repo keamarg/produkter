@@ -118,8 +118,8 @@ export default {
       let keywordList = [];
       this.products.map((product) => {
         product[653].map((keyword) => {
-          if (!keywordList.includes(keyword)) {
-            keywordList.push(keyword.toLowerCase());
+          if (!keywordList.includes(keyword.replace(".", ""))) {
+            keywordList.push(keyword.replace(".", "").toLowerCase());
           }
         });
         if (typeof product[700] != "undefined") {
