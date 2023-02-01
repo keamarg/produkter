@@ -1,38 +1,51 @@
 //fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
 export const getImage = function getImage(product) {
-  if (typeof product[997].find((item) => item.billedmateriale) == "undefined") {
+  // if (typeof product[997] != "undefined") {
+  try {
+    // if (
+    //   typeof product[997].find((item) => item.billedmateriale) == "undefined"
+    // ) {
+    //   return "https://projekter.kea.dk/assets/SoMeCard.png";
+    // } else {
+    return Object.values(product["997"].find((item) => item.billedmateriale));
+    // }
+  } catch {
+    console.log("no image");
     return "https://projekter.kea.dk/assets/SoMeCard.png";
-  } else {
-    return Object.values(
-      product["997"].find((item) => item.billedmateriale)
-    )[0];
   }
+  // }
 };
 //fælles function til andre properties
 export const getProperty = function getProperty(property, authorNumber) {
-  if (property == "100" || property == "author") {
-    return this.products[this.getIndex()][100][0];
-  } else if (property == "245" || property == "title") {
-    return this.products[this.getIndex()][245][0];
-  } else if (property == "700" || property == "secAuthor") {
-    return this.products[this.getIndex()][700][authorNumber - 2];
-  } else if (property == "subtext") {
-    return this.products[this.getIndex()]["520"][0];
-  } else if (property == "text") {
-    return this.products[this.getIndex()]["520"][1];
-  }
-  // hvis property ikke findes i ovenstående tjekkes i resten af 997 feltet, returner værdien (dvs. alle urls, contact, billedmateriale, videolinks osv.)
-  else if (
-    typeof this.products[this.getIndex()][997].find((item) => item[property]) !=
-    "undefined"
-  ) {
-    return Object.values(
-      this.products[this.getIndex()][997].find((item) => item[property])
-    ).toString();
-  } else {
-    // console.log("pong");
+  try {
+    if (property == "100" || property == "author") {
+      return this.products[this.getIndex()][100][0];
+    } else if (property == "245" || property == "title") {
+      return this.products[this.getIndex()][245][0];
+    } else if (property == "700" || property == "secAuthor") {
+      return this.products[this.getIndex()][700][authorNumber - 2];
+    } else if (property == "subtext") {
+      return this.products[this.getIndex()]["520"][0];
+    } else if (property == "text") {
+      return this.products[this.getIndex()]["520"][1];
+    }
+    // hvis property ikke findes i ovenstående tjekkes i resten af 997 feltet, returner værdien (dvs. alle urls, contact, billedmateriale, videolinks osv.)
+    else if (
+      typeof this.products[this.getIndex()][997].find(
+        (item) => item[property]
+      ) != "undefined"
+    ) {
+      return Object.values(
+        this.products[this.getIndex()][997].find((item) => item[property])
+      ).toString();
+    } else {
+      // console.log("pong");
 
-    return false;
+      return false;
+    }
+  } catch {
+    console.log("no data");
+    return "no data";
   }
 };
 
@@ -92,12 +105,14 @@ export const fetchZotero = async (product) => {
     // console.log(product[997]);
 
     const contacts = product[997]
-      .filter((item) => {
-        let keys = Object.keys(item);
-        return keys.some((key) => key.startsWith("contact"));
-      })
-      .map((item) => Object.values(item))
-      .flat();
+      ? product[997]
+          .filter((item) => {
+            let keys = Object.keys(item);
+            return keys.some((key) => key.startsWith("contact"));
+          })
+          .map((item) => Object.values(item))
+          .flat()
+      : "";
     // console.log(contacts);
     // log(
     //   Object.values(products[getIndex()][997]).filter((item) =>
@@ -190,6 +205,7 @@ export const fetchData = async function fetchData(url) {
       }
     );
     const d = await res.json();
+
     return d;
   } catch (error) {
     console.error(error);
@@ -239,6 +255,32 @@ export const parseProducts = async (data) => {
       // Check if the property already exists in the object
       if (Object.prototype.hasOwnProperty.call(productObj, tagName)) {
         // If it does, push the new value to the existing array
+
+        //Tjek om der er komma i "author", hvis der er, byt rundt så fornavnet kommer først
+        if (productObj[100][0].includes(",")) {
+          let author = productObj[100][0];
+          let commaIndex = productObj[100][0].indexOf(",");
+          let lastName = author.substr(0, commaIndex);
+          let firstName = author.substr(commaIndex + 2);
+          let fullName = firstName + " " + lastName;
+          productObj[100][0] = fullName;
+        }
+        //Tjek om der er komma i "secAuthor", hvis der er, byt rundt så fornavnet kommer først
+        if (
+          typeof productObj[700] != "undefined" &&
+          productObj[700].map((product) => product.includes(","))
+        ) {
+          productObj[700].map((product, index) => {
+            if (product.includes(",")) {
+              let author = productObj[700][index];
+              let commaIndex = productObj[700][index].indexOf(",");
+              let lastName = author.substr(0, commaIndex);
+              let firstName = author.substr(commaIndex + 2);
+              let fullName = firstName + " " + lastName;
+              productObj[700][index] = fullName;
+            }
+          });
+        }
         productObj[tagName].push(...field);
       } else {
         // If it doesn't, add the field to the object

@@ -30,8 +30,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## To do:
 
-- [ ] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
-- [ ] Author side, evt. med datatræk fra f.eks. ResearchGate, LinkedIn etc. (Microsoft Graph er checket, men vi kan ikke få adgang jf. servicedesk: https://kea.topdesk.net/tas/public/ssp/content/detail/incident?unid=bca6cba01598406a953c89c9dd15ec84)
+- [x] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
+- [x] Author side, evt. med datatræk fra f.eks. ResearchGate, LinkedIn etc. (Microsoft Graph er checket, men vi kan ikke få adgang jf. servicedesk: https://kea.topdesk.net/tas/public/ssp/content/detail/incident?unid=bca6cba01598406a953c89c9dd15ec84)
 - [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
 - [x] Implementering af bar til filtrering (i førstescp omgang årstal). Skal komme efter den første søgning.
 - [x] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
@@ -53,8 +53,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1r):
+## Bugs (next: bug1s):
 
+- [x] bug1r Dropdown i søgefelt virker ikke med tastatur 2. gang man besøger feltet. Tænker det har noget at gøre med fokus eller passive/active buttons
 - [ ] bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
 - [ ] bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
 - [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
@@ -105,10 +106,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Ikke teknisk:
 
+- [ ] Find et godt navn til platformen
 - [ ] Find ud af hvilke keywords der skal ligge på knapperne i navigationsmenuen (og ensret dem med keywords på produkterne!)
 - [ ] Beskrivelse af sitet
 - [ ] Beskrivelse til FB/LI/TW inkl. godt "card image"
-- [ ] Alma template - endelig form
+- [x] Alma template - endelig form
 
 ## Ændre midlertidige addresser mm.:
 

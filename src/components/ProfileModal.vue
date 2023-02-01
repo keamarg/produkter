@@ -154,7 +154,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                 </span>
                 <span v-else-if="store.currentProfileNumber != null">
                   {{ getProperty("secAuthor", store.currentProfileNumber) }} har
-                  ikke en kea profil
+                  ikke en kea profil<br />
                   <router-link
                     class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
                     :to="{

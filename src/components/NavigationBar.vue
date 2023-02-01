@@ -13,6 +13,7 @@
     <div class="d-flex w-50">
       <div class="w-100" @focusout="handleFocusOut">
         <input
+          @focusin="this.picked = null"
           id="inputfield"
           @keydown.enter="search(searchQuery)"
           @keydown.prevent.down="pick()"

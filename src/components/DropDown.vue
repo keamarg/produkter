@@ -54,7 +54,7 @@ export default {
 
         if (this.filterCategory == "author") {
           // console.log(product);
-          if (typeof product["100"][0] != "undefined") {
+          if (typeof product["100"] != "undefined") {
             data.push(product["100"][0]);
           }
           if (typeof product["700"] != "undefined") {
