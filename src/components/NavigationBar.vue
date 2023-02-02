@@ -234,4 +234,32 @@ export default {
 .dropdownItem:hover {
   background-color: white;
 }
+/*search bar options*/
+.dropdown {
+  position: relative;
+  z-index: 2;
+
+  /* display: inline-block !important; */
+}
+.dropdown-content {
+  /* display: none; */
+  position: absolute;
+  background-color: rgba(256, 256, 256, 0.8);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+.dropdown-content p {
+  color: #343a40;
+  padding: 0.2rem;
+  text-decoration: none;
+  display: block;
+  z-index: 2;
+}
+
+.dropdown-content p:hover {
+  background-color: #ddd;
+}
 </style>

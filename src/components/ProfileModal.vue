@@ -117,14 +117,31 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                         Udvalgte referencer
                       </h4>
 
-                      <div
+                      <!-- <div
                         class="zoteroReference"
                         v-if="
                           item.data.itemType != 'note' &&
                           item.data.itemType != 'attachment'
                         "
                         v-html="item.bib"
-                      ></div>
+                      ></div> -->
+                      <div
+                        class="zoteroReference"
+                        v-if="
+                          item.data.itemType != 'note' &&
+                          item.data.itemType != 'attachment'
+                        "
+                      >
+                        <i>{{ item.data.title }}</i
+                        >.
+                        <p>
+                          {{ item.data.edition ? item.data.edition + "," : "" }}
+                          {{
+                            item.data.publisher ? item.data.publisher + "," : ""
+                          }}
+                          {{ item.data.date ? item.data.date : "" }}
+                        </p>
+                      </div>
                     </span>
                   </div>
                 </span>
@@ -268,6 +285,7 @@ textarea {
   border: none;
   font-size: 0.8rem;
 }
+
 .zoteroProfile {
   :deep {
     p,
@@ -283,20 +301,26 @@ textarea {
   }
 }
 
-.zoteroReference {
-  :deep {
-    div,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-      font-size: 12px;
-      color: $lighttextcolor;
-    }
-  }
+.zoteroReference i,
+p {
+  font-size: 12px;
+  //       color: $lighttextcolor;
 }
+//Brugt til v-html versionen
+// .zoteroReference {
+//   :deep {
+//     div,
+//     p,
+//     h1,
+//     h2,
+//     h3,
+//     h4,
+//     h5 {
+//       font-size: 12px;
+//       color: $lighttextcolor;
+//     }
+//   }
+// }
 
 .obs {
   color: red;

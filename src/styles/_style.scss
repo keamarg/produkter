@@ -129,11 +129,6 @@ a {
   outline: none;
 }
 
-.carousel-indicators {
-  z-index: 1;
-  // position: relative;
-}
-
 /* rykker navbar helt til venstre */
 /* .row {
     --bs-gutter-x: 0rem !important;
@@ -143,22 +138,6 @@ a {
   border-radius: 10px;
 }
 
-.carousel img {
-  object-fit: cover; /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
-  height: 20rem; //30
-  width: 100%;
-}
-.carousel-caption {
-  transition: all 0.2s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.carousel-caption:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
-}
-
 /* .carousel-caption p {
     transition: all 0.2s ease-in-out;
   } */
@@ -166,35 +145,6 @@ a {
 /* .carousel-caption:hover p {
     color: #ea4e44 !important;
   } */
-
-/* Cards */
-.card-text {
-  font-size: 0.7rem; //1
-}
-/* .embed-responsive .card-img-top {
-    object-fit: cover;
-    object-position: center; 
-  } */
-
-.card-img-top {
-  height: 12rem; //20
-  object-fit: cover;
-  object-position: center;
-}
-.card {
-  transition: all 0.2s ease-in-out;
-}
-.card:hover {
-  transform: scale(1.03); //1.05
-  /* color: #ea4e44 !important; */
-}
-
-.card-title {
-  font-size: 1rem;
-}
-.card:hover .card-title {
-  color: #eb5045;
-}
 
 /* Multi carousel */
 /* Tried this, did not work: https://www.codeply.com/p/0CWffz76Q9 */
@@ -424,61 +374,4 @@ div.modal-body {
   // width: 50rem;
   max-height: 27rem;
   max-width: 48rem;
-}
-
-/*search bar options*/
-.dropdown {
-  position: relative;
-  z-index: 2;
-
-  /* display: inline-block !important; */
-}
-.dropdown-content {
-  /* display: none; */
-  position: absolute;
-  background-color: rgba(256, 256, 256, 0.8);
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-}
-.dropdown-content p {
-  color: #343a40;
-  padding: 0.2rem;
-  text-decoration: none;
-  display: block;
-  z-index: 2;
-}
-
-.dropdown-content p:hover {
-  background-color: #ddd;
-}
-
-.likeheart {
-  color: #eb5045;
-}
-
-.likeheart-card {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  z-index: 1;
-  color: #eb5045;
-}
-
-.likeheart:hover:before {
-  content: "\F770";
-}
-
-.unlikeheart-card {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  z-index: 1;
-}
-
-.unlikeheart:hover:before {
-  /* content: "\F415"; */
-  color: #eb5045;
 }

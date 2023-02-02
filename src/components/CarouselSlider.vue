@@ -132,6 +132,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.carousel-indicators {
+  z-index: 1;
+  // position: relative;
+}
+.carousel img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 20rem; //30
+  width: 100%;
+}
+.carousel-caption {
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.carousel-caption:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+}
 // .carousel img {
 //   object-fit: cover; /* Do not scale the image */
 //   object-position: center; /* Center the image within the element */

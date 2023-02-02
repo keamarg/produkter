@@ -66,6 +66,12 @@
             <p class="mt-5">
               {{ getProperty("text") }}
             </p>
+            <div v-if="products[getIndex()][505]" class="mt-4 mb-0">
+              <h2>Indhold</h2>
+              <p>
+                {{ getProperty("antologi") }}
+              </p>
+            </div>
             <template
               v-for="(item, index) in products[getIndex()][856]"
               :key="index"
@@ -238,6 +244,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h2 {
+  font-size: 1.2rem;
+}
 .link-custom-author {
   border-bottom: 2px solid darkgray;
   transition: all 0.25s linear;
@@ -295,5 +304,17 @@ export default {
 .btn-custom-keyword:hover {
   color: #343a40;
   background-color: #f8f9fa;
+}
+.likeheart {
+  color: #eb5045;
+}
+
+.likeheart:hover:before {
+  content: "\F770";
+}
+
+.unlikeheart:hover:before {
+  /* content: "\F415"; */
+  color: $keared;
 }
 </style>

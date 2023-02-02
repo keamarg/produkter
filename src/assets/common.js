@@ -24,6 +24,8 @@ export const getProperty = function getProperty(property, authorNumber) {
       return this.products[this.getIndex()][245][0];
     } else if (property == "700" || property == "secAuthor") {
       return this.products[this.getIndex()][700][authorNumber - 2];
+    } else if (property == "antologi") {
+      return this.products[this.getIndex()]["505"][0];
     } else if (property == "subtext") {
       return this.products[this.getIndex()]["520"][0];
     } else if (property == "text") {
@@ -161,7 +163,7 @@ export const fetchZoteroCollection = async (collectionKeyValue) => {
     );
     const data = await response.json();
     [data.keaId] = Object.keys(collectionKeyValue);
-    // console.log(data);
+    console.log(data);
     return data;
     // return response;
   } catch (error) {

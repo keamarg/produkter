@@ -58,7 +58,7 @@ export default {
     },
     like(event, card) {
       card.liked = !card.liked;
-      console.log(card[245][0]);
+      // console.log(card[245][0]);
       if (card.liked == true) {
         localStorage.setItem(card[245][0], card.liked);
       } else {
@@ -78,6 +78,63 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* Cards */
+.card-text {
+  font-size: 0.7rem; //1
+}
+/* .embed-responsive .card-img-top {
+    object-fit: cover;
+    object-position: center; 
+  } */
+
+.card-img-top {
+  // height: 20rem; //20
+  height: 12rem;
+  object-fit: cover;
+  object-position: center;
+}
+.card {
+  transition: all 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.03); //1.05
+  /* color: #ea4e44 !important; */
+}
+
+.card-title {
+  font-size: 1rem;
+}
+.card:hover .card-title {
+  color: $keared;
+}
+
+.likeheart {
+  color: #eb5045;
+}
+
+.likeheart-card {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 1;
+  color: #eb5045;
+}
+
+.likeheart:hover:before {
+  content: "\F770";
+}
+
+.unlikeheart-card {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.unlikeheart:hover:before {
+  /* content: "\F415"; */
+  color: $keared;
+}
 // .card-text {
 //   font-size: 1rem;
 // }
