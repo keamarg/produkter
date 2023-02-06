@@ -8,7 +8,8 @@
         v-if="loading"
         class="loading col d-flex align-items-center justify-content-center"
       >
-        <h5>Henter produkter, vent venligst...</h5>
+        <!-- <h5>Henter produkter, vent venligst...</h5> -->
+        <div class="pulseLoader"></div>
       </div>
       <router-view
         v-else
@@ -128,6 +129,29 @@ export default {
 }
 .loading {
   min-height: "22rem";
+}
+
+$pulseSize: 4em;
+$pulseTiming: 1.2s;
+
+.pulseLoader {
+  width: $pulseSize;
+  height: $pulseSize;
+  border-radius: $pulseSize;
+  background-color: white;
+  outline: 1px solid transparent;
+  animation: pulseanim $pulseTiming ease-in-out infinite;
+}
+
+@keyframes pulseanim {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
 @import "./styles/app.css";

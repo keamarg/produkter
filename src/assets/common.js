@@ -163,7 +163,7 @@ export const fetchZoteroCollection = async (collectionKeyValue) => {
     );
     const data = await response.json();
     [data.keaId] = Object.keys(collectionKeyValue);
-    console.log(data);
+    // console.log(data);
     return data;
     // return response;
   } catch (error) {
