@@ -32,10 +32,13 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
           <div class="modal-body">
             <div class="p-3 text-start">
               <!-- <span v-if="store.zoteroData != null"> -->
+              <!-- {{ log(store.zoteroData) }} -->
               <span v-for="collection in store.zoteroData" :key="collection">
+                <!-- {{ log(collection) }} -->
                 <span v-if="collection.keaId == store.currentProfile">
                   <!-- <span v-for="collection in user" :key="collection.keaId"> -->
                   <div v-for="entry in collection" :key="entry">
+                    <!-- {{ log(entry) }} -->
                     <div
                       v-if="
                         collection.keaId == store.currentProfile &&
@@ -112,7 +115,16 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                     </div>
                   </div>
                   <div v-if="collection.keaId == store.currentProfile">
-                    <span v-for="(item, index) in collection" :key="item.key">
+                    <!-- {{ this.sortedCollection(collection) }} -->
+                    <!-- {{ log(collection) }} -->
+                    <!-- {{ log(this.sortedCollection(collection)) }} -->
+                    <!-- {{ (this.sortedCollection = collection) }} -->
+                    <!-- {{ sortedCollection(collection) }} -->
+                    <span
+                      :id="item.data.date"
+                      v-for="(item, index) in sortedCollection(collection)"
+                      :key="item.key"
+                    >
                       <h4 v-if="collection.length > '1' && index == 0">
                         Udvalgte referencer
                       </h4>
@@ -132,15 +144,54 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           item.data.itemType != 'attachment'
                         "
                       >
-                        <i>{{ item.data.title }}</i
-                        >.
-                        <p>
-                          {{ item.data.edition ? item.data.edition + "," : "" }}
-                          {{
-                            item.data.publisher ? item.data.publisher + "," : ""
-                          }}
-                          {{ item.data.date ? item.data.date : "" }}
-                        </p>
+                        <span v-if="item.data.itemType == 'book'">
+                          <a
+                            :href="`${item.data.url}`"
+                            target="_blank"
+                            :class="
+                              `${item.data.url}` == ''
+                                ? 'inactiveLink'
+                                : 'activeLink'
+                            "
+                          >
+                            <p>
+                              <span
+                                v-for="author in getAuthors(item)"
+                                :key="author"
+                                >{{ author + ", " }}</span
+                              >
+                              <span
+                                v-for="property in getReferenceProperties(
+                                  item,
+                                  this.itemTypes[item.data.itemType]
+                                )"
+                                :key="property"
+                              >
+                                {{ Object.values(property).toString() }}</span
+                              >
+
+                              <!-- {{
+                                getReferenceProperties(item, [
+                                  "date",
+                                  "title",
+                                  "series",
+                                  "seriesNumber",
+                                  "edition",
+                                  "place",
+                                  "publisher",
+                                ])
+                              }} -->
+
+                              <!-- {{ getReferenceProperty(item, "date") }}
+                              <i> {{ getReferenceProperty(item, "title") }} </i>
+                              {{ getReferenceProperty(item, "series") }}
+                              {{ getReferenceProperty(item, "seriesNumber") }}
+                              {{ getReferenceProperty(item, "edition") }}
+                              {{ getReferenceProperty(item, "place") }}
+                              {{ getReferenceProperty(item, "publisher") }} -->
+                            </p>
+                          </a>
+                        </span>
                       </div>
                     </span>
                   </div>
@@ -220,6 +271,18 @@ export default {
     return {
       store,
       authorlinks: null,
+      itemTypes: {
+        book: [
+          "date",
+          "title",
+          "series",
+          "seriesNumber",
+          "edition",
+          "place",
+          "publisher",
+          "doi",
+        ],
+      },
     };
   },
   computed: {
@@ -237,6 +300,53 @@ export default {
     log(item) {
       console.log(item);
     },
+    sortedCollection(collection) {
+      const sortedCollection = [...collection]
+        .sort((a, b) =>
+          a.data.date > b.data.date ? 1 : b.data.date > a.data.date ? -1 : 0
+        )
+        .reverse();
+      return sortedCollection;
+    },
+    getReferenceProperties(item, properties) {
+      let propertyArray = [];
+      properties.map((property) => {
+        // console.log(item.data[property]);
+        propertyArray.push({
+          [property]: item.data[property]
+            ? item.data[property].slice(-1) == "."
+              ? item.data[property]
+              : item.data[property] + ". "
+            : " ",
+        });
+      });
+      // console.log(propertyArray[0].date);
+      // propertyArray.sort(function (a, b) {
+      //   return b - a;
+      // });
+      // console.log(propertyArray.sort());
+      // Object.entries(propertyArray[0].date.sort((a, b) => a[1] - b[1]));
+      // console.log(propertyArray);
+      // console.log(this.references);
+      return propertyArray;
+    },
+
+    getAuthors(item) {
+      // console.log("creators");
+      // console.log(item.data.creators);
+      const authors = [];
+      item.data.creators.map((author) => {
+        let fullName = author.name
+          ? author.name
+          : author.firstName
+          ? author.lastName + ", " + author.firstName
+          : "";
+        // console.log(fullName);
+        authors.push(fullName);
+        // console.log(authors);
+      });
+      return authors;
+    },
     getIndex: getIndex,
     getProperty: getProperty,
   },
@@ -247,6 +357,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.inactiveLink {
+  pointer-events: none;
+  cursor: default;
+}
+
+.activeLink:hover * {
+  color: $keared;
+  transition: color 0.5s ease;
+}
+
 .modal-content {
   background-color: $body-bg;
 }
