@@ -115,11 +115,6 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                     </div>
                   </div>
                   <div v-if="collection.keaId == store.currentProfile">
-                    <!-- {{ this.sortedCollection(collection) }} -->
-                    <!-- {{ log(collection) }} -->
-                    <!-- {{ log(this.sortedCollection(collection)) }} -->
-                    <!-- {{ (this.sortedCollection = collection) }} -->
-                    <!-- {{ sortedCollection(collection) }} -->
                     <span
                       :id="item.data.date"
                       v-for="(item, index) in sortedCollection(collection)"
@@ -144,33 +139,70 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           item.data.itemType != 'attachment'
                         "
                       >
-                        <span v-if="item.data.itemType == 'book'">
-                          <a
-                            :href="`${item.data.url}`"
-                            target="_blank"
-                            :class="
-                              `${item.data.url}` == ''
-                                ? 'inactiveLink'
-                                : 'activeLink'
+                        <!-- <span v-if="item.data.itemType == 'book'"> -->
+                        <a
+                          :href="`${item.data.url}`"
+                          target="_blank"
+                          :class="
+                            `${item.data.url}` == ''
+                              ? 'inactiveLink'
+                              : 'activeLink'
+                          "
+                        >
+                          <p
+                            v-if="
+                              this.itemTypes[item.data.itemType] != undefined
                             "
                           >
-                            <p>
-                              <span
-                                v-for="author in getAuthors(item)"
-                                :key="author"
-                                >{{ author + ", " }}</span
+                            <span
+                              v-for="author in getAuthors(item)"
+                              :key="author"
+                              >{{ author + ", " }}</span
+                            >
+                            <span
+                              v-for="property in getReferenceProperties(
+                                item,
+                                this.itemTypes[item.data.itemType]
+                              )"
+                              :key="property"
+                              ><span
+                                v-if="
+                                  item.data.itemType === 'journalArticle' ||
+                                  item.data.itemType === 'magazineArticle'
+                                "
                               >
-                              <span
-                                v-for="property in getReferenceProperties(
-                                  item,
-                                  this.itemTypes[item.data.itemType]
-                                )"
-                                :key="property"
-                              >
-                                {{ Object.values(property).toString() }}</span
-                              >
-
-                              <!-- {{
+                                {{ log(Object.keys(property).toString()) }}
+                                <span
+                                  v-if="
+                                    Object.keys(property).toString() ==
+                                    'publicationTitle'
+                                  "
+                                >
+                                  <i>{{
+                                    Object.values(property).toString()
+                                  }}</i>
+                                </span>
+                                <span v-else>
+                                  {{ Object.values(property).toString() }}
+                                </span>
+                              </span>
+                              <span v-else>
+                                <span
+                                  v-if="
+                                    Object.keys(property).toString() == 'title'
+                                  "
+                                >
+                                  <i>{{
+                                    Object.values(property).toString()
+                                  }}</i>
+                                </span>
+                                <span v-else>
+                                  {{ Object.values(property).toString() }}
+                                </span>
+                              </span>
+                            </span>
+                            <!-- {{ `(${item.data.itemType})` }} -->
+                            <!-- {{
                                 getReferenceProperties(item, [
                                   "date",
                                   "title",
@@ -182,16 +214,16 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                                 ])
                               }} -->
 
-                              <!-- {{ getReferenceProperty(item, "date") }}
+                            <!-- {{ getReferenceProperty(item, "date") }}
                               <i> {{ getReferenceProperty(item, "title") }} </i>
                               {{ getReferenceProperty(item, "series") }}
                               {{ getReferenceProperty(item, "seriesNumber") }}
                               {{ getReferenceProperty(item, "edition") }}
                               {{ getReferenceProperty(item, "place") }}
                               {{ getReferenceProperty(item, "publisher") }} -->
-                            </p>
-                          </a>
-                        </span>
+                          </p>
+                        </a>
+                        <!-- </span> -->
                       </div>
                     </span>
                   </div>
@@ -280,8 +312,12 @@ export default {
           "edition",
           "place",
           "publisher",
-          "doi",
+          "DOI",
         ],
+        magazineArticle: ["date", "title", "publicationTitle", "pages", "DOI"],
+        journalArticle: ["date", "title", "publicationTitle", "pages", "DOI"],
+
+        conferencePaper: ["date", "title", "conferenceName", "pages", "DOI"],
       },
     };
   },
@@ -309,6 +345,7 @@ export default {
       return sortedCollection;
     },
     getReferenceProperties(item, properties) {
+      console.log(item.data.itemType, properties);
       let propertyArray = [];
       properties.map((property) => {
         // console.log(item.data[property]);
@@ -320,14 +357,10 @@ export default {
             : " ",
         });
       });
-      // console.log(propertyArray[0].date);
-      // propertyArray.sort(function (a, b) {
-      //   return b - a;
-      // });
-      // console.log(propertyArray.sort());
-      // Object.entries(propertyArray[0].date.sort((a, b) => a[1] - b[1]));
-      // console.log(propertyArray);
-      // console.log(this.references);
+      // if (item.data.itemType == "book") {
+      //   console.log(Object.values(propertyArray.find((obj) => obj.title)));
+      //   console.log(item.data.title);
+      // }
       return propertyArray;
     },
 
