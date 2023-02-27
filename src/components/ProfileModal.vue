@@ -33,6 +33,9 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
             <div class="p-3 text-start">
               <!-- <span v-if="store.zoteroData != null"> -->
               <!-- {{ log(store.zoteroData) }} -->
+              <span v-if="store.zoteroData == null">
+                <div class="pulseLoader"></div>
+              </span>
               <span v-for="collection in store.zoteroData" :key="collection">
                 <!-- {{ log(collection) }} -->
                 <span v-if="collection.keaId == store.currentProfile">
@@ -154,11 +157,11 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                               this.itemTypes[item.data.itemType] != undefined
                             "
                           >
-                            <span
+                            <!-- <span
                               v-for="author in getAuthors(item)"
                               :key="author"
                               >{{ author + ", " }}</span
-                            >
+                            > -->
                             <span
                               v-for="property in getReferenceProperties(
                                 item,
@@ -171,7 +174,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                                   item.data.itemType === 'magazineArticle'
                                 "
                               >
-                                {{ log(Object.keys(property).toString()) }}
+                                <!-- {{ log(Object.keys(property).toString()) }} -->
                                 <span
                                   v-if="
                                     Object.keys(property).toString() ==
@@ -305,6 +308,8 @@ export default {
       authorlinks: null,
       itemTypes: {
         book: [
+          "author",
+          "editor",
           "date",
           "title",
           "series",
@@ -314,10 +319,54 @@ export default {
           "publisher",
           "DOI",
         ],
-        magazineArticle: ["date", "title", "publicationTitle", "pages", "DOI"],
-        journalArticle: ["date", "title", "publicationTitle", "pages", "DOI"],
+        bookSection: [
+          "contributor",
+          "editor",
+          "date",
+          "title",
+          "series",
+          "seriesNumber",
+          "edition",
+          "place",
+          "publisher",
+          "DOI",
+        ],
+        magazineArticle: [
+          "author",
+          "date",
+          "title",
+          "publicationTitle",
+          "pages",
+          "DOI",
+        ],
+        journalArticle: [
+          "author",
+          "date",
+          "title",
+          "publicationTitle",
+          "volume",
+          "issue",
+          "pages",
+          "DOI",
+        ],
 
-        conferencePaper: ["date", "title", "conferenceName", "pages", "DOI"],
+        conferencePaper: [
+          "author",
+          "date",
+          "title",
+          "conferenceName",
+          "pages",
+          "DOI",
+        ],
+        presentation: [
+          "presenter",
+          "date",
+          "title",
+          "meetingName",
+          "place",
+          "DOI",
+        ],
+        thesis: ["author", "date", "title", "university", "place", "DOI"],
       },
     };
   },
@@ -345,17 +394,70 @@ export default {
       return sortedCollection;
     },
     getReferenceProperties(item, properties) {
-      console.log(item.data.itemType, properties);
+      // console.log(item.data.itemType, properties);
       let propertyArray = [];
       properties.map((property) => {
         // console.log(item.data[property]);
-        propertyArray.push({
-          [property]: item.data[property]
-            ? item.data[property].slice(-1) == "."
-              ? item.data[property]
-              : item.data[property] + ". "
-            : " ",
-        });
+        // console.log(property);
+        if (
+          property == "author" ||
+          property == "presenter" ||
+          property == "editor" ||
+          property == "contributor"
+        ) {
+          // console.log(item.data.creators[0].creatorType);
+          item.data.creators.map((author) => {
+            let fullName = author.name
+              ? author.name
+              : author.firstName
+              ? author.lastName + ", " + author.firstName
+              : "";
+            // console.log(fullName);
+            // console.log(author.creatorType);
+            if (property != "editor" && author.creatorType != "editor") {
+              propertyArray.push({
+                [author.creatorType]: [fullName] + ", ",
+              });
+            } else if (property == "editor" && author.creatorType == "editor") {
+              propertyArray.push({
+                [author.creatorType]: [fullName] + " (Red.), ",
+              });
+            }
+
+            // console.log(authors);
+            // console.log(propertyArray);
+          });
+        } else {
+          if (
+            property == "volume" ||
+            property == "issue" ||
+            property == "pages"
+          ) {
+            let propertyType =
+              property == "volume"
+                ? "Årg. "
+                : property == "issue"
+                ? "Nr. "
+                : property == "pages"
+                ? "S. "
+                : "";
+            propertyArray.push({
+              [property]: item.data[property]
+                ? item.data[property].slice(-1) == "."
+                  ? item.data[property]
+                  : propertyType + item.data[property] + ". "
+                : " ",
+            });
+          } else {
+            propertyArray.push({
+              [property]: item.data[property]
+                ? item.data[property].slice(-1) == "."
+                  ? item.data[property]
+                  : item.data[property] + ". "
+                : " ",
+            });
+          }
+        }
       });
       // if (item.data.itemType == "book") {
       //   console.log(Object.values(propertyArray.find((obj) => obj.title)));
@@ -364,22 +466,22 @@ export default {
       return propertyArray;
     },
 
-    getAuthors(item) {
-      // console.log("creators");
-      // console.log(item.data.creators);
-      const authors = [];
-      item.data.creators.map((author) => {
-        let fullName = author.name
-          ? author.name
-          : author.firstName
-          ? author.lastName + ", " + author.firstName
-          : "";
-        // console.log(fullName);
-        authors.push(fullName);
-        // console.log(authors);
-      });
-      return authors;
-    },
+    // getAuthors(item) {
+    //   // console.log("creators");
+    //   // console.log(item.data.creators);
+    //   const authors = [];
+    //   item.data.creators.map((author) => {
+    //     let fullName = author.name
+    //       ? author.name
+    //       : author.firstName
+    //       ? author.lastName + ", " + author.firstName
+    //       : "";
+    //     // console.log(fullName);
+    //     authors.push(fullName);
+    //     // console.log(authors);
+    //   });
+    //   return authors;
+    // },
     getIndex: getIndex,
     getProperty: getProperty,
   },
@@ -390,6 +492,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$pulseSize: 2em;
+$pulseTiming: 1.2s;
+
+.pulseLoader {
+  width: $pulseSize;
+  height: $pulseSize;
+  border-radius: $pulseSize;
+  background-color: white;
+  outline: 1px solid transparent;
+  animation: pulseanim $pulseTiming ease-in-out infinite;
+}
+
+@keyframes pulseanim {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
 .inactiveLink {
   pointer-events: none;
   cursor: default;
