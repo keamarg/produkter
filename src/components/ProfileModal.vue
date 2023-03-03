@@ -321,17 +321,28 @@ export default {
         ],
         bookSection: [
           "contributor",
-          "editor",
           "date",
           "title",
           "series",
           "seriesNumber",
           "edition",
+          "bookTitle",
+          "editor",
+          "pages",
           "place",
           "publisher",
           "DOI",
         ],
         magazineArticle: [
+          "author",
+          "date",
+          "title",
+          "publicationTitle",
+          "pages",
+          "DOI",
+        ],
+        newspaperArticle: [
+          //tjek referencetype
           "author",
           "date",
           "title",
@@ -356,6 +367,7 @@ export default {
           "title",
           "conferenceName",
           "pages",
+          "place",
           "DOI",
         ],
         presentation: [
@@ -366,7 +378,31 @@ export default {
           "place",
           "DOI",
         ],
-        thesis: ["author", "date", "title", "university", "place", "DOI"],
+        thesis: [
+          "author",
+          "date",
+          "title",
+          "thesisType",
+          "university",
+          "place",
+          "DOI",
+        ],
+        report: [
+          //tjek referencetype
+          "author",
+          "date",
+          "title",
+          "institution",
+          "place",
+          "DOI",
+        ],
+        document: [
+          //tjek referencetype
+          "author",
+          "date",
+          "title",
+          "DOI",
+        ],
       },
     };
   },
@@ -406,7 +442,8 @@ export default {
           property == "contributor"
         ) {
           // console.log(item.data.creators[0].creatorType);
-          item.data.creators.map((author) => {
+          // console.log(item.data.creators);
+          item.data.creators.map((author, index) => {
             let fullName = author.name
               ? author.name
               : author.firstName
@@ -415,12 +452,22 @@ export default {
             // console.log(fullName);
             // console.log(author.creatorType);
             if (property != "editor" && author.creatorType != "editor") {
-              propertyArray.push({
-                [author.creatorType]: [fullName] + ", ",
-              });
+              let actualAuthors = item.data.creators.filter(
+                (author) => author.creatorType == "author"
+              );
+              // console.log(actualAuthors);
+              if (actualAuthors.length < 3) {
+                propertyArray.push({
+                  [author.creatorType]: [fullName] + "; ",
+                });
+              } else if (actualAuthors.length >= 3 && index == 0) {
+                propertyArray.push({
+                  [author.creatorType]: [fullName] + " et al.; ",
+                });
+              }
             } else if (property == "editor" && author.creatorType == "editor") {
               propertyArray.push({
-                [author.creatorType]: [fullName] + " (Red.), ",
+                [author.creatorType]: [fullName] + " (red.); ",
               });
             }
 
@@ -431,16 +478,22 @@ export default {
           if (
             property == "volume" ||
             property == "issue" ||
-            property == "pages"
+            property == "pages" ||
+            property == "bookTitle" ||
+            property == "DOI"
           ) {
             let propertyType =
               property == "volume"
                 ? "Årg. "
                 : property == "issue"
-                ? "Nr. "
+                ? "nr. "
                 : property == "pages"
-                ? "S. "
-                : "";
+                ? "s. "
+                : property == "bookTitle"
+                ? "i "
+                : property == "DOI"
+                ? "DOI: "
+                : " ";
             propertyArray.push({
               [property]: item.data[property]
                 ? item.data[property].slice(-1) == "."
