@@ -104,7 +104,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           name: 'Results',
                           params: {
                             id: getProperty(
-                              'secAuthor'.toLowerCase(),
+                              'secAuthor',
                               store.currentProfileNumber
                             ),
                             kind: `author`,
@@ -264,7 +264,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       name: 'Results',
                       params: {
                         id: getProperty(
-                          'secAuthor'.toLowerCase(),
+                          'secAuthor',
                           store.currentProfileNumber
                         ),
                         kind: `author`,
@@ -591,6 +591,7 @@ $pulseTiming: 1.2s;
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 // figcaption {
 //   text-align: center;
