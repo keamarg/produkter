@@ -144,8 +144,9 @@
 // import AccordionMenu from "@/components/AccordionMenu.vue";
 // import ShareThis from "@/components/ShareThis";
 // import ShareModal from "@/components/ShareModal.vue";
-import { getIndex, getProperty, fetchZotero } from "../assets/common.js";
-import { Tooltip, Modal } from "bootstrap";
+import { getIndex, getProperty } from "../assets/common.js";
+// import { Tooltip } from "bootstrap";
+import { Modal } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { store } from "../assets/store.js";
 
@@ -191,12 +192,12 @@ export default {
     log(item) {
       console.log(item);
     },
-    hoverTip() {
-      this.tooltip.show();
-    },
-    removeTip() {
-      this.tooltip.hide();
-    },
+    // hoverTip() {
+    //   this.tooltip.show();
+    // },
+    // removeTip() {
+    //   this.tooltip.hide();
+    // },
 
     getIndex: getIndex,
     getProperty: getProperty,
@@ -213,13 +214,13 @@ export default {
   },
 
   async mounted() {
-    this.tooltip = new Tooltip(this.$refs.tooltip, {
-      title: `Om ${this.getProperty("author")}`,
-      placement: "bottom",
-      trigger: "manual",
-    });
-    let zd = await fetchZotero(this.products[this.getIndex()]);
-    this.store.zoteroData = zd;
+    // this.tooltip = new Tooltip(this.$refs.tooltip, {
+    //   title: `Om ${this.getProperty("author")}`,
+    //   placement: "bottom",
+    //   trigger: "manual",
+    // });
+    // let zd = await fetchZotero(this.products[this.getIndex()]);
+    // this.store.zoteroData = zd;
     Modal.getOrCreateInstance(
       document.getElementById("profileModal")
     )._element.addEventListener("hide.bs.modal", function (e) {

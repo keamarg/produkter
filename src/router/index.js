@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import ResultsPage from "../views/ResultsPage.vue";
 import LikesPage from "../views/LikesPage.vue";
-// import ArchivePage from "../views/ArchivePage_NOTUSED.vue";
+import ProfilePage from "../views/ProfilePage.vue";
 import ProductPage from "../views/ProductPage.vue";
 // import ProductVideoPage from "../views/ProductVideoPage.vue";
 
@@ -48,6 +48,15 @@ const router = createRouter({
       name: "Results",
       path: "/results/:id",
       component: ResultsPage,
+      props: {
+        // kind: "author",
+        default: true,
+      },
+    },
+    {
+      name: "Profiles",
+      path: "/profiles",
+      component: ProfilePage,
       props: {
         // kind: "author",
         default: true,

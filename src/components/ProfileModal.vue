@@ -38,6 +38,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               </span>
               <span v-for="collection in store.zoteroData" :key="collection">
                 <!-- {{ log(collection) }} -->
+
                 <span v-if="collection.keaId == store.currentProfile">
                   <!-- <span v-for="collection in user" :key="collection.keaId"> -->
                   <div v-for="entry in collection" :key="entry">
@@ -51,10 +52,14 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       <div id="imageDiv">
                         <a
                           :href="`mailto:${
-                            store.currentProfile +
-                            '@kea.dk' +
-                            '?subject=Angående produktet ' +
-                            getProperty('title')
+                            store.currentProfileNumber != 'profilePage'
+                              ? store.currentProfile +
+                                '@kea.dk' +
+                                '?subject=Angående produktet ' +
+                                getProperty('title')
+                              : store.currentProfile +
+                                '@kea.dk' +
+                                '?subject=Angående KEA Produkter'
                           }`"
                         >
                           <!-- <figure> -->
@@ -84,6 +89,21 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       <router-link
                         class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
                         v-if="
+                          store.currentProfileNumber != null &&
+                          store.currentProfileNumber == 'profilePage'
+                        "
+                        :to="{
+                          name: 'Results',
+                          params: {
+                            id: store.currentProfileName,
+                            kind: `author`,
+                          },
+                        }"
+                        >Se alle KEA produkter af {{ store.currentProfileName }}
+                      </router-link>
+                      <router-link
+                        class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
+                        v-else-if="
                           store.currentProfileNumber != null &&
                           store.currentProfileNumber == '1'
                         "

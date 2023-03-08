@@ -41,11 +41,10 @@ export const getProperty = function getProperty(property, authorNumber) {
         this.products[this.getIndex()][997].find((item) => item[property])
       ).toString();
     } else {
-      // console.log("pong");
-
       return false;
     }
   } catch {
+    console.log(property);
     console.log("no data");
     return "no data";
   }
@@ -66,13 +65,41 @@ export const getIndex = function getIndex() {
     .indexOf(this.$route.params.id);
 };
 
-// https://api.zotero.org/users/10858779/collections?v=3&format=json&include=data,bib,citation
-// "collections": [
-//   Marg: "5MKDPWQR",
-//   Dapr: "EQJNXPB2",
-//   Per: "95ZXMMWM"
-//   ],
-//zotero test
+export const fetchZoteroProfiles = async () => {
+  try {
+    const response = await fetch(
+      "https://api.zotero.org/users/10924352/collections/top?v=3",
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    // console.log(data);
+    // const contacts = product[997]
+    //   ? product[997]
+    //       .filter((item) => {
+    //         let keys = Object.keys(item);
+    //         return keys.some((key) => key.startsWith("contact"));
+    //       })
+    //       .map((item) => Object.values(item))
+    //       .flat()
+    //   : "";
+    const collectionKeyValue = data
+      // .filter((item) => contacts.includes(item.data.name))
+      .map((item) => ({ [item.data.name]: item.key }));
+    const collections = await Promise.all(
+      collectionKeyValue.map(
+        async (keyValue) => await fetchZoteroCollection(keyValue)
+      )
+    );
+    return collections;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const fetchZotero = async (product) => {
   try {
     const response = await fetch(
@@ -84,28 +111,7 @@ export const fetchZotero = async (product) => {
       }
     );
     const data = await response.json();
-    // const [contact] = Object.values(
-    //   product[997].filter((item) => item.contact)[0]
-    // );
-    // console.log(contact);
-
-    // const [contacts] = Object.values(
-    //   product[997].filter((item, index) =>
-    //     // console.log(index, item[`contact${index - 1}`].startsWith("contact"))
-    //     console.log(item)
-    //   )
-    // );
-
-    // let filteredEntries = Object.entries(product[997])
-    //   .filter(([key]) => key.startsWith("contact"))
-    //   .map(([, value]) => value);
-    // console.log(filteredEntries); // ["value1", "value2", "value4"]
-
-    // console.log(
-    //   Object.keys(product[997]).filter((key) => key.startsWith("contact"))
-    // );
-    // console.log(product[997]);
-
+    // console.log(data);
     const contacts = product[997]
       ? product[997]
           .filter((item) => {
@@ -115,34 +121,14 @@ export const fetchZotero = async (product) => {
           .map((item) => Object.values(item))
           .flat()
       : "";
-    // console.log(contacts);
-    // log(
-    //   Object.values(products[getIndex()][997]).filter((item) =>
-    //     item.hasOwnProperty("contact" + (index + 2))
-    //   )
-    // );
-    // console.log(contacts);
-
-    // const [{ key: collectionKey }] = data.filter(
-    //   (item) => item.data.name == contact
-    // );
-    // const [{ key: collectionKeys }] = data.filter(
-    //   (item, index) => item.data.name == contacts[index]
-    // );
     const collectionKeyValue = data
       .filter((item) => contacts.includes(item.data.name))
       .map((item) => ({ [item.data.name]: item.key }));
-    // console.log(collectionKeyValue);
-    // console.log(collectionKey);
-
     const collections = await Promise.all(
       collectionKeyValue.map(
         async (keyValue) => await fetchZoteroCollection(keyValue)
       )
     );
-    // console.log(collections);
-    // const collection = fetchZoteroCollection(collectionKey);
-    // console.log(collection);
     return collections;
   } catch (error) {
     console.error(error);
@@ -150,6 +136,8 @@ export const fetchZotero = async (product) => {
 };
 
 export const fetchZoteroCollection = async (collectionKeyValue) => {
+  // console.log(collectionKeyValue);
+
   try {
     const response = await fetch(
       `https://api.zotero.org/users/10924352/collections/${Object.values(

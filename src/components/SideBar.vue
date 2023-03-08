@@ -20,7 +20,19 @@
         data-bs-placement="auto"
         title="Arkiv"
       ></i>
-      <div class="d-none d-md-block sidebar-icons-text">Alle</div>
+      <div class="d-none d-md-block sidebar-icons-text">Produkter</div>
+    </router-link>
+    <router-link
+      :to="{ name: 'Profiles', params: { id: 'profiler' } }"
+      class="d-md-block mx-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
+    >
+      <i
+        class="bi bi-person-fill"
+        data-bs-toggle="tooltip"
+        data-bs-placement="auto"
+        title="Profiler"
+      ></i>
+      <div class="d-none d-md-block sidebar-icons-text">Profiler</div>
     </router-link>
     <span class="d-md-block sidebar-icons">
       <i
@@ -31,6 +43,7 @@
       ></i>
       <div class="d-none d-md-block sidebar-icons-text">Om</div>
     </span>
+
     <ShareModal />
     <AboutModal />
   </div>

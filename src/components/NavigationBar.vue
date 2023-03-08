@@ -69,52 +69,6 @@ export default {
   },
   computed: {
     //liste over produkter filtreret på author og keyword
-    // filteredList() {
-    //   if (this.searchQuery) {
-    //     //filtrer efter author
-    //     let authors = this.products.filter(
-    //       (product) =>
-    //         product[100][0].toLowerCase() ==
-    //           this.$route.params.id.toLowerCase() ||
-    //         product[700].some(
-    //           (author) =>
-    //             // console.log(
-    //             author.slice(0, this.$route.params.id.length).toLowerCase() ==
-    //             this.$route.params.id.toLowerCase()
-    //           // )
-    //           // keyword
-    //           //   .slice(0, this.$route.params.id.length)
-    //           //   .toLowerCase() == this.$route.params.id.toLowerCase()
-    //         )
-    //       // product[700].map((item) => item.toLowerCase()) ==
-    //       //   this.$route.params.id.toLowerCase() //||
-    //       // product.author3.toLowerCase() ==
-    //       //   this.$route.params.id.toLowerCase()
-    //     );
-
-    //     //filtrer efter keyword
-    //     // let keywords = this.products.filter((product) =>
-    //     //   product.keywords.some(
-    //     //     (keyword) =>
-    //     //       keyword.slice(0, this.searchQuery.length).toLowerCase() ==
-    //     //       this.searchQuery.toLowerCase()
-    //     //   )
-    //     // );
-    //     let keywords = this.products.filter((product) =>
-    //       product[653].some(
-    //         (keyword) =>
-    //           keyword.slice(0, this.searchQuery.length).toLowerCase() ==
-    //           this.searchQuery.toLowerCase()
-    //       )
-    //     );
-
-    //     // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
-    //     const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
-    //     return collectedAndFiltered;
-    //   } else {
-    //     return null;
-    //   }
-    // },
     keywordList() {
       let keywordList = [];
       this.products.map((product) => {
@@ -133,12 +87,6 @@ export default {
         if (!keywordList.includes(product[100][0].toLowerCase())) {
           keywordList.push(product[100][0].toLowerCase());
         }
-        // if (!keywordList.includes(product[700][0].toLowerCase())) {
-        //   keywordList.push(product[700][0].toLowerCase());
-        // }
-        // if (!keywordList.includes(product[700][1].toLowerCase())) {
-        //   keywordList.push(product[700][1].toLowerCase());
-        // }
       });
       return keywordList;
     },
@@ -157,11 +105,6 @@ export default {
     log(item) {
       console.log(item);
     },
-
-    // updateSearchQuery() {
-    //   this.picked = null;
-    //   this.$emit("updateSearchQuery", this.searchQuery);
-    // },
     search(searchQuery) {
       if (searchQuery) {
         this.$router.push({

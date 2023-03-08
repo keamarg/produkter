@@ -1,5 +1,76 @@
 <template>
   <div
+    v-if="profiles"
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6"
+  >
+    <!-- <p>{{ profiles.length }}</p> -->
+    <div
+      class="col mb-4"
+      v-for="profileCard in store.zoteroData"
+      :id="profileCard.keaId"
+      :key="profileCard.keaId"
+    >
+      <!-- {{ setZoteroProfile(profileCard.keaId) }} -->
+
+      <!-- <p>{{ profileCard }}</p> -->
+      <!-- {{ log(profileCard.keaId) }} -->
+      <div class="card text-white bg-dark border-2 h-100">
+        <!-- <i
+            @click="like($event, card)"
+            :class="
+              card.liked
+                ? 'bi bi-heart-fill likeheart likeheart-card'
+                : 'bi bi-heart unlikeheart unlikeheart-card'
+            "
+          ></i> -->
+        <!-- <span
+          class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
+          ref="tooltip"
+          @mouseover="hoverTip"
+          @mouseout="removeTip"
+          data-bs-html="true"
+          data-bs-toggle="modal"
+          data-bs-target="#profileModal"
+          @click="
+            store.currentProfile = getProperty('contact');
+            store.currentProfileNumber = 1;
+          "
+        >
+          {{ getProperty("author") }}
+        </span> -->
+        <span
+          data-bs-html="true"
+          data-bs-toggle="modal"
+          data-bs-target="#profileModal"
+          @click="
+            (store.currentProfile = profileCard.keaId),
+              (store.currentProfileNumber = 'profilePage'),
+              (store.currentProfileName = getZoteroProfile(
+                profileCard.keaId,
+                'name'
+              ))
+          "
+        >
+          <img
+            :src="getZoteroProfile(profileCard.keaId, 'image')"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              {{ getZoteroProfile(profileCard.keaId, "name") }}
+            </h5>
+            <p class="card-text">
+              {{ getZoteroProfile(profileCard.keaId, "title") }}
+              <!-- {{ getZoteroProfile(profileCard.keaId, "bio") }} -->
+            </p>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    v-else
     class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6"
   >
     <div
@@ -30,16 +101,19 @@
 </template>
 
 <script>
-import { shuffle, getImage } from "../assets/common.js";
+import { shuffle, getImage, getProperty } from "../assets/common.js";
+import { store } from "../assets/store.js";
+
 export default {
   name: "CardGroup",
   props: {
     products: { type: Array },
+    profiles: { type: Boolean },
     loading: { type: Boolean },
     displayAll: { type: Boolean },
   },
   data() {
-    return {};
+    return { getProperty, store };
   },
   computed: {
     //returnerer 3 tilfældige produkter til slideren
@@ -56,6 +130,57 @@ export default {
     log(item) {
       console.log(item);
     },
+    getZoteroProfile(keaId, property) {
+      // console.log(keaId);
+
+      //return profile image
+      if (property == "image") {
+        let [zoteroData] = this.store.zoteroData
+          .find((collection) => collection.keaId == keaId)
+          .filter((item) => item.data.itemType == "note");
+        if (typeof zoteroData.data.tags[0] !== "undefined") {
+          // console.log(zoteroData.data.tags[0].tag);
+          return zoteroData.data.tags[0].tag;
+        }
+      }
+
+      //return profile name/bio
+      const parser = new DOMParser();
+      if (property == "name" || property == "bio" || property == "title") {
+        let [zoteroData] = this.store.zoteroData
+          .find((collection) => collection.keaId == keaId)
+          .filter((item) => item.data.itemType == "note");
+        const htmlDoc = parser.parseFromString(
+          zoteroData.data.note,
+          "text/html"
+        );
+        // console.log(htmlDoc);
+        //bare for forsøgets skyld, checker navn med typeof, og checker bio med try/catch baseret på https://www.meticulous.ai/blog/how-to-prevent-the-error-cannot-read-property-0-of-undefined
+        if (property == "name") {
+          if (typeof htmlDoc.getElementsByTagName("h3")[0] !== "undefined") {
+            // console.log(htmlDoc.getElementsByTagName("h3")[0].innerText);
+            return htmlDoc.getElementsByTagName("h3")[0].innerText;
+          } else {
+            return "no name";
+          }
+        }
+        if (property == "title") {
+          if (typeof htmlDoc.getElementsByTagName("em")[0] !== "undefined") {
+            // console.log(htmlDoc.getElementsByTagName("h3")[0].innerText);
+            return htmlDoc.getElementsByTagName("em")[0].innerText;
+          } else {
+            return "titel mangler";
+          }
+        }
+        if (property == "bio") {
+          try {
+            return htmlDoc.getElementsByTagName("p")[0].innerText;
+          } catch {
+            return "no bio";
+          }
+        }
+      }
+    },
     like(event, card) {
       card.liked = !card.liked;
       // console.log(card[245][0]);
@@ -64,15 +189,7 @@ export default {
       } else {
         localStorage.removeItem(card[245][0]);
       }
-      // console.log(card.liked);
-      // console.log(card);
-      // console.log(event.target, card.id);
     },
-    // setIndex(index) {
-    //   this.index = index;
-    //   console.log(this.index);
-    //   store.index = index;
-    // },
   },
 };
 </script>
@@ -135,46 +252,4 @@ export default {
   /* content: "\F415"; */
   color: $keared;
 }
-// .card-text {
-//   font-size: 1rem;
-// }
-// .card-img-top {
-//   height: 20rem;
-//   object-fit: cover;
-//   object-position: center;
-// }
-// .card {
-//   transition: all 0.2s ease-in-out;
-// }
-// .card:hover {
-//   transform: scale(1.05);
-//   /* color: #ea4e44 !important; */
-// }
-
-// .card:hover .card-title {
-//   color: $keared;
-// }
-// .likeheart {
-//   position: absolute;
-//   top: 0.5rem;
-//   right: 1rem;
-//   z-index: 3;
-//   color: $keared;
-// }
-
-// .likeheart:hover:before {
-//   content: "\F770";
-// }
-
-// .unlikeheart {
-//   position: absolute;
-//   top: 0.5rem;
-//   right: 1rem;
-//   z-index: 3;
-// }
-
-// .unlikeheart:hover:before {
-//   /* content: "\F415"; */
-//   color: $keared;
-// }
 </style>

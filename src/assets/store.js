@@ -10,5 +10,7 @@ export const store = reactive({
   zoteroData: null,
   currentProfile: null,
   currentProfileNumber: null,
+  currentProfileName: null,
+
   // mendeleyData: null,
 });
