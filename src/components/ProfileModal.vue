@@ -52,14 +52,15 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       <div id="imageDiv">
                         <a
                           :href="`mailto:${
-                            store.currentProfileNumber != 'profilePage'
+                            store.currentProfileNumber == 'profilePage' ||
+                            store.currentProfileNumber == null
                               ? store.currentProfile +
+                                '@kea.dk' +
+                                '?subject=Angående KEA Produkter'
+                              : store.currentProfile +
                                 '@kea.dk' +
                                 '?subject=Angående produktet ' +
                                 getProperty('title')
-                              : store.currentProfile +
-                                '@kea.dk' +
-                                '?subject=Angående KEA Produkter'
                           }`"
                         >
                           <!-- <figure> -->

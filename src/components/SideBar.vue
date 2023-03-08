@@ -24,7 +24,7 @@
     </router-link>
     <router-link
       :to="{ name: 'Profiles', params: { id: 'profiler' } }"
-      class="d-md-block mx-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
+      class="d-md-block me-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
     >
       <i
         class="bi bi-person-fill"

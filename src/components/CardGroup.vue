@@ -6,7 +6,7 @@
     <!-- <p>{{ profiles.length }}</p> -->
     <div
       class="col mb-4"
-      v-for="profileCard in store.zoteroData"
+      v-for="profileCard in sortedCollection()"
       :id="profileCard.keaId"
       :key="profileCard.keaId"
     >
@@ -129,6 +129,13 @@ export default {
     getImage: getImage,
     log(item) {
       console.log(item);
+    },
+    sortedCollection() {
+      const sortedCollection = [...store.zoteroData].sort((a, b) =>
+        a.keaId > b.keaId ? 1 : b.keaId > a.keaId ? -1 : 0
+      );
+      // .reverse();
+      return sortedCollection;
     },
     getZoteroProfile(keaId, property) {
       // console.log(keaId);
