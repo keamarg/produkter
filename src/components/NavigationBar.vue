@@ -87,6 +87,9 @@ export default {
         if (!keywordList.includes(product[100][0].toLowerCase())) {
           keywordList.push(product[100][0].toLowerCase());
         }
+        if (!keywordList.includes(product[245][0].toLowerCase())) {
+          keywordList.push(product[245][0].toLowerCase());
+        }
       });
       return keywordList;
     },

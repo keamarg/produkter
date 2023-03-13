@@ -4,10 +4,17 @@
       <!-- <p v-if="filteredProducts.length < 1">
         Du har ikke "liket" nogen produkter...
       </p> -->
-      <span>
+      <span v-if="store.zoteroData != null">
         <p>KEA Profiler...</p>
         <CardGroup :profiles="true" :displayAll="displayAll" />
       </span>
+      <div
+        v-else
+        class="loading col d-flex align-items-center justify-content-center"
+      >
+        <!-- <h5>Henter produkter, vent venligst...</h5> -->
+        <div class="pulseLoader"></div>
+      </div>
     </div>
   </div>
   <ProfileModal />
@@ -15,7 +22,7 @@
 
 <script>
 import CardGroup from "@/components/CardGroup.vue";
-// import { fetchZoteroProfiles } from "../assets/common.js";
+import { fetchZoteroProfiles } from "../assets/common.js";
 import { store } from "../assets/store.js";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { Modal } from "bootstrap";
@@ -41,6 +48,10 @@ export default {
     // // console.log(zd);
     // store.zoteroData = zd;
     // this.profiles = zd;
+    if (store.zoteroData == null) {
+      let zd = await fetchZoteroProfiles();
+      store.zoteroData = zd;
+    }
 
     // this.store.zoteroData.map((item) => console.log(item.keaId));
     Modal.getOrCreateInstance(
@@ -64,3 +75,31 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.loading {
+  min-height: "22rem";
+}
+
+$pulseSize: 4em;
+$pulseTiming: 1.2s;
+
+.pulseLoader {
+  width: $pulseSize;
+  height: $pulseSize;
+  border-radius: $pulseSize;
+  background-color: white;
+  outline: 1px solid transparent;
+  animation: pulseanim $pulseTiming ease-in-out infinite;
+}
+
+@keyframes pulseanim {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+</style>

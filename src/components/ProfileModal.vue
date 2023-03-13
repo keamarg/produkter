@@ -262,7 +262,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                     store.currentProfileNumber == '1'
                   "
                 >
-                  {{ getProperty("author") }} har ikke en kea profil
+                  {{ getProperty("author") }} har ikke en kea profil<br />
                   <router-link
                     class="btn btn-custom-product rounded-custom me-4 mt-2 mb-4"
                     :to="{

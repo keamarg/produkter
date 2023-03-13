@@ -120,6 +120,8 @@ export default {
             (product) =>
               product[100][0].toLowerCase() ==
                 this.$route.params.id.toLowerCase() ||
+              product[245][0].toLowerCase() ==
+                this.$route.params.id.toLowerCase() ||
               (typeof product[700] != "undefined" &&
                 product[700].some(
                   (author) =>

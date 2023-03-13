@@ -85,9 +85,14 @@
                 {{ Object.keys(item).toString() }}</a
               >
             </template>
+            <p v-if="getProperty('videotekst')" class="mb-1 mt-5 videotekst">
+              {{ getProperty("videotekst") }}
+            </p>
+            <div v-else class="mb-1 mt-5"></div>
+
             <div
               v-if="getProperty('youtube') || getProperty('keavideo')"
-              class="iframediv ratio ratio-16x9 rounded-custom mt-5"
+              class="iframediv ratio ratio-16x9 rounded-custom mt-0"
             >
               <iframe
                 v-if="getProperty('youtube')"
@@ -149,6 +154,7 @@ import { getIndex, getProperty } from "../assets/common.js";
 import { Modal } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { store } from "../assets/store.js";
+import { fetchZoteroProfiles } from "../assets/common.js";
 
 export default {
   // components: { AccordionMenu },
@@ -221,6 +227,10 @@ export default {
     // });
     // let zd = await fetchZotero(this.products[this.getIndex()]);
     // this.store.zoteroData = zd;
+    if (store.zoteroData == null) {
+      let zd = await fetchZoteroProfiles();
+      store.zoteroData = zd;
+    }
     Modal.getOrCreateInstance(
       document.getElementById("profileModal")
     )._element.addEventListener("hide.bs.modal", function (e) {
@@ -248,6 +258,11 @@ export default {
 h2 {
   font-size: 1.2rem;
 }
+
+.videotekst {
+  color: darkgray;
+}
+
 .link-custom-author {
   border-bottom: 2px solid darkgray;
   transition: all 0.25s linear;

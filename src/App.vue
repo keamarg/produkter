@@ -40,7 +40,7 @@ import { store } from "./assets/store.js";
 import {
   fetchData,
   parseProducts,
-  fetchZoteroProfiles,
+  // fetchZoteroProfiles,
   // fetchMendeley,
 } from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
@@ -112,14 +112,14 @@ export default {
   created() {},
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
-    let zd = await fetchZoteroProfiles();
-    // console.log(zd);
-    store.zoteroData = zd;
-    // let zd = await fetchZotero();
-    // let md = await fetchMendeley();
     this.productCount = fd.total_record_count;
     this.products = await parseProducts(fd);
     this.loading = !fd;
+    // let zd = await fetchZoteroProfiles();
+    // store.zoteroData = zd;
+
+    // let zd = await fetchZotero();
+    // let md = await fetchMendeley();
     // this.store.zoteroData = zd;
     // this.store.mendeleyData = md;
   },
