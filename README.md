@@ -56,8 +56,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1t):
+## Bugs (next: bug1u):
 
+- [ ] bug1t Klik på profilbilleder fjerne nederste card rækkke (KUN Safari) OBS: Sker KUN i Iframe (cutter den bunden af?)
 - [ ] bug1s Nederste række af buttonGroup menu virker ikke i Safari (løser sig måske nå vi lave den om til områder)
 - [x] bug1r Dropdown i søgefelt virker ikke med tastatur 2. gang man besøger feltet. Tænker det har noget at gøre med fokus eller passive/active buttons
 - [ ] bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking

@@ -11,7 +11,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <div class="navbar-brand p-0 pb-2 d-flex align-items-center">
