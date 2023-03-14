@@ -4,6 +4,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
 <template>
   <div class="container">
     <!-- Modal -->
+    <!-- {{ setModalPos() }} -->
     <div
       class="modal fade pt-5 pt-sm-0"
       id="profileModal"
@@ -450,6 +451,10 @@ export default {
         .reverse();
       return sortedCollection;
     },
+    // setModalPos() {
+    //   document.getElementsByClassName("modal-dialog").top = window.innerHeight;
+    //   console.log(document.getElementsByClassName("modal-dialog").top);
+    // },
     getReferenceProperties(item, properties) {
       // console.log(item.data.itemType, properties);
       let propertyArray = [];
@@ -533,35 +538,12 @@ export default {
           }
         }
       });
-      // if (item.data.itemType == "book") {
-      //   console.log(Object.values(propertyArray.find((obj) => obj.title)));
-      //   console.log(item.data.title);
-      // }
       return propertyArray;
     },
-
-    // getAuthors(item) {
-    //   // console.log("creators");
-    //   // console.log(item.data.creators);
-    //   const authors = [];
-    //   item.data.creators.map((author) => {
-    //     let fullName = author.name
-    //       ? author.name
-    //       : author.firstName
-    //       ? author.lastName + ", " + author.firstName
-    //       : "";
-    //     // console.log(fullName);
-    //     authors.push(fullName);
-    //     // console.log(authors);
-    //   });
-    //   return authors;
-    // },
     getIndex: getIndex,
     getProperty: getProperty,
   },
-  mounted() {
-    // this.authorlinks = document.querySelector("#authorlinks").childElementCount;
-  },
+  mounted() {},
 };
 </script>
 
@@ -602,12 +584,12 @@ $pulseTiming: 1.2s;
 .modal-content {
   background-color: $body-bg;
 }
-.modal-dialog {
-  // position: fixed;
-  top: calc(0vh);
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-}
+// .modal-dialog {
+//   // position: fixed;
+//   // left: 50%;
+//   // top: 100%;
+//   // transform: translate(-50%, -50%);
+// }
 
 #imageDiv {
   width: 100px;

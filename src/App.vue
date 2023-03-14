@@ -8,7 +8,6 @@
         v-if="loading"
         class="loading col d-flex align-items-center justify-content-center"
       >
-        <!-- <h5>Henter produkter, vent venligst...</h5> -->
         <div class="pulseLoader"></div>
       </div>
       <router-view
@@ -37,15 +36,11 @@
 
 <script>
 import { store } from "./assets/store.js";
-import {
-  fetchData,
-  parseProducts,
-  // fetchZoteroProfiles,
-  // fetchMendeley,
-} from "./assets/common.js";
+import { fetchData, parseProducts } from "./assets/common.js";
 import TopBar from "@/components/TopBar.vue";
 import CardGroup from "@/components/CardGroup.vue";
 import SideBar from "@/components/SideBar.vue";
+import { fetchZoteroProfiles } from "@/assets/common.js";
 
 export default {
   components: {
@@ -63,7 +58,6 @@ export default {
       products: [],
       offSet: 0,
       loading: true,
-      // zoteroData: "",
     };
   },
   computed: {
@@ -105,9 +99,6 @@ export default {
         return false;
       }
     },
-    // updateSearchQuery(searchQuery, filteredList) {
-    //   this.filteredList = filteredList;
-    // },
   },
   created() {},
   async mounted() {
@@ -115,13 +106,7 @@ export default {
     this.productCount = fd.total_record_count;
     this.products = await parseProducts(fd);
     this.loading = !fd;
-    // let zd = await fetchZoteroProfiles();
-    // store.zoteroData = zd;
-
-    // let zd = await fetchZotero();
-    // let md = await fetchMendeley();
-    // this.store.zoteroData = zd;
-    // this.store.mendeleyData = md;
+    this.store.zoteroData = await fetchZoteroProfiles();
   },
 };
 </script>

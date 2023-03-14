@@ -146,20 +146,13 @@
 </template>
 
 <script>
-// import AccordionMenu from "@/components/AccordionMenu.vue";
-// import ShareThis from "@/components/ShareThis";
-// import ShareModal from "@/components/ShareModal.vue";
 import { getIndex, getProperty } from "../assets/common.js";
-// import { Tooltip } from "bootstrap";
 import { Modal } from "bootstrap";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { store } from "../assets/store.js";
-import { fetchZoteroProfiles } from "../assets/common.js";
 
 export default {
-  // components: { AccordionMenu },
   name: "ProductPage",
-  // components: { ShareThis },
   components: { ProfileModal },
   props: {
     products: { type: Array },
@@ -180,7 +173,7 @@ export default {
         color: "white",
         background:
           "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
-          this.getProperty("billedmateriale") + //          this.products[this.getIndex()].img1 +
+          this.getProperty("billedmateriale") + //this.products[this.getIndex()].img1 +
           "), no-repeat",
         backgroundSize: "cover",
         fontSize: "16px",
@@ -198,19 +191,12 @@ export default {
     log(item) {
       console.log(item);
     },
-    // hoverTip() {
-    //   this.tooltip.show();
-    // },
-    // removeTip() {
-    //   this.tooltip.hide();
-    // },
 
     getIndex: getIndex,
     getProperty: getProperty,
 
     like(event, product) {
       product.liked = !product.liked;
-      // console.log(product[245][0]);
       if (product.liked == true) {
         localStorage.setItem(product[245][0], product.liked);
       } else {
@@ -220,17 +206,6 @@ export default {
   },
 
   async mounted() {
-    // this.tooltip = new Tooltip(this.$refs.tooltip, {
-    //   title: `Om ${this.getProperty("author")}`,
-    //   placement: "bottom",
-    //   trigger: "manual",
-    // });
-    // let zd = await fetchZotero(this.products[this.getIndex()]);
-    // this.store.zoteroData = zd;
-    if (store.zoteroData == null) {
-      let zd = await fetchZoteroProfiles();
-      store.zoteroData = zd;
-    }
     Modal.getOrCreateInstance(
       document.getElementById("profileModal")
     )._element.addEventListener("hide.bs.modal", function (e) {

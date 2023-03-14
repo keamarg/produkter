@@ -1,9 +1,6 @@
 <template>
   <div class="p-3 mb-3">
     <div class="row align-items-center">
-      <!-- <p v-if="filteredProducts.length < 1">
-        Du har ikke "liket" nogen produkter...
-      </p> -->
       <span v-if="store.zoteroData != null">
         <p>KEA Profiler...</p>
         <CardGroup :profiles="true" :displayAll="displayAll" />
@@ -12,7 +9,6 @@
         v-else
         class="loading col d-flex align-items-center justify-content-center"
       >
-        <!-- <h5>Henter produkter, vent venligst...</h5> -->
         <div class="pulseLoader"></div>
       </div>
     </div>
@@ -22,7 +18,6 @@
 
 <script>
 import CardGroup from "@/components/CardGroup.vue";
-import { fetchZoteroProfiles } from "../assets/common.js";
 import { store } from "../assets/store.js";
 import ProfileModal from "@/components/ProfileModal.vue";
 import { Modal } from "bootstrap";
@@ -44,16 +39,6 @@ export default {
   computed: {},
   methods: {},
   async mounted() {
-    // let zd = await fetchZoteroProfiles();
-    // // console.log(zd);
-    // store.zoteroData = zd;
-    // this.profiles = zd;
-    if (store.zoteroData == null) {
-      let zd = await fetchZoteroProfiles();
-      store.zoteroData = zd;
-    }
-
-    // this.store.zoteroData.map((item) => console.log(item.keaId));
     Modal.getOrCreateInstance(
       document.getElementById("profileModal")
     )._element.addEventListener("hide.bs.modal", function (e) {

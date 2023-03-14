@@ -1,3 +1,5 @@
+// import { store } from "./store";
+
 //fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
 export const getImage = function getImage(product) {
   // if (typeof product[997] != "undefined") {
@@ -94,46 +96,47 @@ export const fetchZoteroProfiles = async () => {
         async (keyValue) => await fetchZoteroCollection(keyValue)
       )
     );
+    // store.zoteroData = collections;
     return collections;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const fetchZotero = async (product) => {
-  try {
-    const response = await fetch(
-      "https://api.zotero.org/users/10924352/collections/top?v=3",
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    // console.log(data);
-    const contacts = product[997]
-      ? product[997]
-          .filter((item) => {
-            let keys = Object.keys(item);
-            return keys.some((key) => key.startsWith("contact"));
-          })
-          .map((item) => Object.values(item))
-          .flat()
-      : "";
-    const collectionKeyValue = data
-      .filter((item) => contacts.includes(item.data.name))
-      .map((item) => ({ [item.data.name]: item.key }));
-    const collections = await Promise.all(
-      collectionKeyValue.map(
-        async (keyValue) => await fetchZoteroCollection(keyValue)
-      )
-    );
-    return collections;
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const fetchZotero = async (product) => {
+//   try {
+//     const response = await fetch(
+//       "https://api.zotero.org/users/10924352/collections/top?v=3",
+//       {
+//         headers: {
+//           Accept: "application/json",
+//         },
+//       }
+//     );
+//     const data = await response.json();
+//     // console.log(data);
+//     const contacts = product[997]
+//       ? product[997]
+//           .filter((item) => {
+//             let keys = Object.keys(item);
+//             return keys.some((key) => key.startsWith("contact"));
+//           })
+//           .map((item) => Object.values(item))
+//           .flat()
+//       : "";
+//     const collectionKeyValue = data
+//       .filter((item) => contacts.includes(item.data.name))
+//       .map((item) => ({ [item.data.name]: item.key }));
+//     const collections = await Promise.all(
+//       collectionKeyValue.map(
+//         async (keyValue) => await fetchZoteroCollection(keyValue)
+//       )
+//     );
+//     return collections;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
 
 export const fetchZoteroCollection = async (collectionKeyValue) => {
   // console.log(collectionKeyValue);

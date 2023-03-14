@@ -125,23 +125,13 @@ export default {
               (typeof product[700] != "undefined" &&
                 product[700].some(
                   (author) =>
-                    // console.log(
                     author
                       .slice(0, this.$route.params.id.length)
                       .toLowerCase() == this.$route.params.id.toLowerCase()
-                  // )
-                  // keyword
-                  //   .slice(0, this.$route.params.id.length)
-                  //   .toLowerCase() == this.$route.params.id.toLowerCase()
                 ))
-            // product[700].map((item) => item.toLowerCase()) ==
-            //   this.$route.params.id.toLowerCase() //||
-            // product.author3.toLowerCase() ==
-            //   this.$route.params.id.toLowerCase()
           );
 
           //filtrer efter keyword
-          // console.log(this.products);
           let keywords = this.products.filter((product) =>
             product[653].some(
               (keyword) =>
@@ -205,24 +195,6 @@ export default {
 
         return this.filteredProducts.filter(
           (product) =>
-            // console.log(
-            //   product.year,
-            //   this.filterListAuthor,
-            //   this.filterListYear,
-            //   this.filterListYear.includes(product.year),
-            //   this.filterListAuthor.includes(product["100"][0])
-            // )
-            // (this.filterListYear.includes(product.year) &&
-            //   this.filterListAuthor.includes(product["100"][0])) ||
-            // // || product["700"].map((item) => item)
-            // (this.filterListYear.includes(product.year) &&
-            //   this.filterListAuthor.includes(product["700"][0])) ||
-            // (this.filterListYear.includes(product.year) &&
-            //   this.filterListAuthor.includes(product["700"][1])) ||
-            // (this.filterListYear.includes(product.year) &&
-            //   this.filterListAuthor.includes(product["700"][2])) ||
-            // (this.filterListYear.includes(product.year) &&
-            //   this.filterListAuthor.includes(product["700"][3]))
             (this.filterListYear.includes(product.year) &&
               this.filterListAuthor.includes(product["100"][0])) ||
             (this.filterListYear.includes(product.year) &&
@@ -275,9 +247,6 @@ export default {
       this.filterListAuthor = this.filterListAuthor.filter(
         (item) => item != event.currentTarget.innerText.slice(1)
       );
-      // console.log("removed " + event.currentTarget.innerText.slice(1));
-      // console.log("current year filters: " + this.filterListYear);
-      // console.log("current author filters: " + this.filterListAuthor);
     },
     handleWheel() {
       // console.log(this.divHeight);
@@ -285,6 +254,7 @@ export default {
         window.innerHeight + window.scrollY + 10 <= document.body.offsetHeight;
     },
   },
+
   created() {},
 };
 </script>
