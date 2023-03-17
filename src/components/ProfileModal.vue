@@ -34,7 +34,10 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
             <div class="p-3 text-start">
               <!-- <span v-if="store.zoteroData != null"> -->
               <!-- {{ log(store.zoteroData) }} -->
-              <span v-if="store.zoteroData == null">
+              <span v-if="store.fetchErrorZotero">
+                <p>Ingen forbindelse til profildata (Zotero)...</p>
+              </span>
+              <span v-else-if="store.zoteroData == null">
                 <div class="pulseLoader"></div>
               </span>
               <span v-for="collection in store.zoteroData" :key="collection">

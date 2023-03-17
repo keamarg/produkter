@@ -1,7 +1,19 @@
 <template>
   <div class="p-3 mb-3">
     <div class="row align-items-center">
-      <span v-if="store.zoteroData != null">
+      <div
+        v-if="store.fetchErrorZotero"
+        class="col d-flex align-items-center justify-content-center"
+      >
+        <div class="connecterror">
+          <p>Ingen forbindelse til profildata (Zotero)...</p>
+          <i
+            class="bi bi-arrow-clockwise d-flex justify-content-center"
+            @click="this.$router.go()"
+          ></i>
+        </div>
+      </div>
+      <span v-else-if="store.zoteroData != null">
         <p>KEA Profiler...</p>
         <CardGroup :profiles="true" :displayAll="displayAll" />
       </span>
@@ -63,6 +75,22 @@ export default {
 <style lang="scss" scoped>
 .loading {
   min-height: "22rem";
+}
+
+.connecterror {
+  color: white;
+  cursor: pointer;
+}
+
+.bi-arrow-clockwise {
+  font-size: 2rem;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+
+.bi-arrow-clockwise:hover {
+  font-size: 2rem;
+  opacity: 1;
 }
 
 $pulseSize: 4em;

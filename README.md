@@ -30,8 +30,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## To do:
 
-- [ ] Ændre buttonGroup menu i top-right til kun områder (byg, digital, teknik, design).
+- [ ] Opdatere url i iframe så den afspejler hovedsiden (bare så man kan kopiere adressen direkte fra browseren osv.) - history.pushState ser lovende ud, har lavet lidt tests med det i <app> componenten (addHashToLocation funktionen)
+- [x] Ændre buttonGroup menu i top-right til kun områder (byg, digital, teknik, design).
 - [ ] Tilføj flere facetter - type?
+- [x] Tilføj fejlhåndtering hvis API'erne er nede eller mangler data
 - [x] Tilføj søgning på titel (hele titlen som string i emneord/author arrayet?)
 - [x] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
 - [x] Author side, evt. med datatræk fra f.eks. ResearchGate, LinkedIn etc. (Microsoft Graph er checket, men vi kan ikke få adgang jf. servicedesk: https://kea.topdesk.net/tas/public/ssp/content/detail/incident?unid=bca6cba01598406a953c89c9dd15ec84)
@@ -56,13 +58,14 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Lav forfatternavne osv. under selve produktet som knapper, så man med et tryk f.eks. kan søge på alt af "Jesper Balslev"
 - [x] Fjern "video" som en selvstændig side, lav det til en "drop down" på produktsiden.
 
-## Bugs (next: bug1u):
+## Bugs (next: bug1v):
 
+- [ ] bug1u søgninger i søgefeltet fanger ikke alle hvis det er halve søgninger (des - design)
 - [ ] bug1t Klik på profilbilleder fjerne nederste card rækkke (KUN Safari) OBS: Sker KUN i Iframe (cutter den bunden af?)
 - [ ] bug1s Nederste række af buttonGroup menu virker ikke i Safari (løser sig måske nå vi lave den om til områder)
 - [x] bug1r Dropdown i søgefelt virker ikke med tastatur 2. gang man besøger feltet. Tænker det har noget at gøre med fokus eller passive/active buttons
-- [ ] bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
-- [ ] bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
+- [ ] **NOFIX-** bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
+- [x] **NOFIX-** TOOLTIP FJERNET. bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
 - [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
 - [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.
 - [x] bug1m uresponsiv søgefelt samt top af modal på mobil (iphone 11).

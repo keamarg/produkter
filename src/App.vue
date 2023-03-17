@@ -1,11 +1,24 @@
 //app.vue
 <template>
+  <!-- <button @click="addHashToLocation('profiles')">test replace</button> -->
   <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5 pt-sm-0">
     <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />
       <div
-        v-if="loading"
+        v-if="store.fetchErrorAlma"
+        class="col d-flex align-items-center justify-content-center"
+      >
+        <div class="connecterror">
+          <p>Ingen forbindelse til produktdata (Alma)...</p>
+          <i
+            class="bi bi-arrow-clockwise d-flex justify-content-center"
+            @click="this.$router.go()"
+          ></i>
+        </div>
+      </div>
+      <div
+        v-else-if="loading"
         class="loading col d-flex align-items-center justify-content-center"
       >
         <div class="pulseLoader"></div>
@@ -99,13 +112,22 @@ export default {
         return false;
       }
     },
+    addHashToLocation(params) {
+      history.pushState(
+        {},
+        null,
+        this.$route.path + "#" + encodeURIComponent(params)
+      );
+    },
   },
   created() {},
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
-    this.productCount = fd.total_record_count;
-    this.products = await parseProducts(fd);
-    this.loading = !fd;
+    if (fd) {
+      this.productCount = fd.total_record_count;
+      this.products = await parseProducts(fd);
+      this.loading = !fd;
+    }
     this.store.zoteroData = await fetchZoteroProfiles();
   },
 };
@@ -117,6 +139,21 @@ export default {
 }
 .loading {
   min-height: "22rem";
+}
+.connecterror {
+  color: white;
+  cursor: pointer;
+}
+
+.bi-arrow-clockwise {
+  font-size: 2rem;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+
+.bi-arrow-clockwise:hover {
+  font-size: 2rem;
+  opacity: 1;
 }
 
 $pulseSize: 4em;

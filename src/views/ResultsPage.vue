@@ -25,6 +25,14 @@
           filterCategory="author"
           class="ms-3"
         />
+        <!-- test -->
+        <DropDown
+          @filterupdate="addFilter"
+          :filteredProducts="filteredProducts"
+          title="Materialetype"
+          filterCategory="material"
+          class="ms-3"
+        />
       </div>
       <span class="w-100 d-block">
         <span v-for="(item, index) in filterListYear" :key="index">
@@ -50,6 +58,22 @@
           and
         </span>
         <span v-for="(item, index) in filterListAuthor" :key="index">
+          <span
+            v-if="index > 0"
+            class="btn btn-custom-and rounded-pill mb-3 me-2"
+            >or</span
+          >
+          <button
+            @click="removeFilter"
+            type="button"
+            class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
+          >
+            <i class="bi bi-x-lg"></i>
+            {{ item }}
+          </button>
+        </span>
+        <!-- test -->
+        <span v-for="(item, index) in filterListMaterial" :key="index">
           <span
             v-if="index > 0"
             class="btn btn-custom-and rounded-pill mb-3 me-2"
@@ -104,6 +128,7 @@ export default {
       filterType: "",
       filterListYear: [],
       filterListAuthor: [],
+      filterListMaterial: [],
       displayChevron: true,
     };
   },
@@ -140,6 +165,8 @@ export default {
             )
           );
 
+          //filtrer efter materialetype ikke nødvendig, da materialetype også indgår som keywords
+
           // saml de to arrays (authors og keywords) og filtrer for dubletter (i fald author også er kommet på som keyword)
 
           const collectedAndFiltered = [...new Set([...authors, ...keywords])]; // Kun concatenation, ES6 version: const collectedArrays = [...authors, ...keywords]; ES5 version: let collectedArrays = authors.concat(keywords);
@@ -151,8 +178,9 @@ export default {
       }
     },
 
-    //tilføj ekstra filtre (filterList blev delt op i i authorFilterList og yearFilterList, for at undgå at de bliver sidestillet i filtrering)
+    //tilføj ekstra filtre "facetter" (filterList blev delt op i i authorFilterList og yearFilterList, for at undgå at de bliver sidestillet i filtrering)
 
+    //facetter
     extraFilters() {
       // console.log("filtering: " + this.filterType);
 
@@ -161,6 +189,41 @@ export default {
         return this.filteredProducts.filter((product) =>
           this.filterListYear.includes(product.year)
         );
+
+        //test start
+      } else if (
+        !this.filterListYear.length > 0 &&
+        !this.filterListAuthor.length > 0 &&
+        this.filterListMaterial.length > 0
+      ) {
+        console.log("only materials");
+        // console.log(this.filterListMaterial);
+        // console.log(
+        //   this.filteredProducts.filter(
+        //     (product) => console.log("product: " + product["653"]) //[0].replace(".", "")
+        //     // product["653"].some((item) => this.filterListAuthor.includes(item))
+        //   )
+        // );
+        // console.log(this.filteredProducts.filter((product) => product[653][0]));
+
+        console.log(this.filterListMaterial);
+        return this.filteredProducts.filter((product) =>
+          product[653].some(
+            (
+              item //console.log(item.replace(".", ""))
+            ) => this.filterListMaterial.includes(item.replace(".", ""))
+          )
+        );
+        // return this.filteredProducts.filter((product) =>
+        //   product["653"].some((item) =>
+        //     this.filterListAuthor.includes(item.replace(".", ""))
+        //   )
+        // );
+
+        // this.filteredProducts.filter((product) =>
+        //   this.filterListMaterial.includes(product[653][0])
+
+        //test end
       } else if (
         !this.filterListYear.length > 0 &&
         this.filterListAuthor.length > 0
@@ -227,6 +290,14 @@ export default {
         event.target.innerText != "Alle"
       ) {
         this.filterListAuthor.push(event.target.innerText);
+      }
+      //test
+      else if (
+        this.filterType == "material" &&
+        !this.filterListMaterial.includes(event.target.innerText) &&
+        event.target.innerText != "Alle"
+      ) {
+        this.filterListMaterial.push(event.target.innerText);
       } else if (
         event.target.innerText == "Alle" &&
         this.filterType == "year"
@@ -237,6 +308,11 @@ export default {
         this.filterType == "author"
       ) {
         this.filterListAuthor = [];
+      } else if (
+        event.target.innerText == "Alle" &&
+        this.filterType == "material"
+      ) {
+        this.filterListMaterial = [];
       }
     },
 
@@ -245,6 +321,9 @@ export default {
         (item) => item != event.currentTarget.innerText.slice(1)
       );
       this.filterListAuthor = this.filterListAuthor.filter(
+        (item) => item != event.currentTarget.innerText.slice(1)
+      );
+      this.filterListMaterial = this.filterListMaterial.filter(
         (item) => item != event.currentTarget.innerText.slice(1)
       );
     },

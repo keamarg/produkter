@@ -1,4 +1,4 @@
-// import { store } from "./store";
+import { store } from "./store";
 
 //fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
 export const getImage = function getImage(product) {
@@ -67,6 +67,7 @@ export const getIndex = function getIndex() {
     .indexOf(this.$route.params.id);
 };
 
+// hent zoterodata
 export const fetchZoteroProfiles = async () => {
   try {
     const response = await fetch(
@@ -78,19 +79,9 @@ export const fetchZoteroProfiles = async () => {
       }
     );
     const data = await response.json();
-    // console.log(data);
-    // const contacts = product[997]
-    //   ? product[997]
-    //       .filter((item) => {
-    //         let keys = Object.keys(item);
-    //         return keys.some((key) => key.startsWith("contact"));
-    //       })
-    //       .map((item) => Object.values(item))
-    //       .flat()
-    //   : "";
-    const collectionKeyValue = data
-      // .filter((item) => contacts.includes(item.data.name))
-      .map((item) => ({ [item.data.name]: item.key }));
+    const collectionKeyValue = data.map((item) => ({
+      [item.data.name]: item.key,
+    }));
     const collections = await Promise.all(
       collectionKeyValue.map(
         async (keyValue) => await fetchZoteroCollection(keyValue)
@@ -100,47 +91,12 @@ export const fetchZoteroProfiles = async () => {
     return collections;
   } catch (error) {
     console.error(error);
+    console.log("Ingen forbindese til Zotero...");
+    store.fetchErrorZotero = true;
   }
 };
 
-// export const fetchZotero = async (product) => {
-//   try {
-//     const response = await fetch(
-//       "https://api.zotero.org/users/10924352/collections/top?v=3",
-//       {
-//         headers: {
-//           Accept: "application/json",
-//         },
-//       }
-//     );
-//     const data = await response.json();
-//     // console.log(data);
-//     const contacts = product[997]
-//       ? product[997]
-//           .filter((item) => {
-//             let keys = Object.keys(item);
-//             return keys.some((key) => key.startsWith("contact"));
-//           })
-//           .map((item) => Object.values(item))
-//           .flat()
-//       : "";
-//     const collectionKeyValue = data
-//       .filter((item) => contacts.includes(item.data.name))
-//       .map((item) => ({ [item.data.name]: item.key }));
-//     const collections = await Promise.all(
-//       collectionKeyValue.map(
-//         async (keyValue) => await fetchZoteroCollection(keyValue)
-//       )
-//     );
-//     return collections;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
 export const fetchZoteroCollection = async (collectionKeyValue) => {
-  // console.log(collectionKeyValue);
-
   try {
     const response = await fetch(
       `https://api.zotero.org/users/10924352/collections/${Object.values(
@@ -202,6 +158,8 @@ export const fetchData = async function fetchData(url) {
     return d;
   } catch (error) {
     console.error(error);
+    console.log("Ingen forbindese til Alma...");
+    store.fetchErrorAlma = true;
   }
 };
 

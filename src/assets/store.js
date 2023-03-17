@@ -11,6 +11,9 @@ export const store = reactive({
   currentProfile: null,
   currentProfileNumber: null,
   currentProfileName: null,
+  fetchErrorZotero: false,
+  fetchErrorAlma: false,
+  // materialFilters: null,
 
   // mendeleyData: null,
 });

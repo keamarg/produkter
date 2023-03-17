@@ -86,75 +86,11 @@ export default {
 
 .sidebar-icons:hover {
   color: white;
+  cursor: pointer;
   opacity: 1;
 }
 
 .sidebar-icons-text {
   font-size: 1rem;
 }
-// .sidebar-icon-archive {
-//   color: white;
-//   opacity: 0.5;
-//   transition: all 0.6s ease-in-out;
-// }
-
-// .sidebar-icon-archive:hover {
-//   opacity: 1;
-// }
-/* @import "../styles/style.css"; */
-
-// .sidebar-icons {
-//   color: #ced4da;
-//   font-size: 4rem;
-//   line-height: 5rem;
-// }
-
-// .sidebar-icons:hover {
-//   color: white;
-// }
-
-// .sidebar-icon-like:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\F417";
-//   color: white;
-//   opacity: 0.5;
-//   transition: all 0.6s ease-in-out;
-// }
-
-// .sidebar-icon-like:hover:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\f415";
-//   color: white;
-//   opacity: 1;
-// }
-
-// .sidebar-icon-archive:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\F10D";
-//   color: white;
-//   opacity: 0.5;
-//   transition: all 0.6s ease-in-out;
-// }
-
-// .sidebar-icon-archive:hover:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\F10C";
-//   color: white;
-//   opacity: 1;
-// }
-
-// .sidebar-icon-share:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\F52E";
-//   color: white;
-//   opacity: 0.5;
-//   transition: all 0.6s ease-in-out;
-// }
-
-// .sidebar-icon-share:hover:before {
-//   font-family: Arial, Helvetica, sans-serif;
-//   content: "\F52D";
-//   color: white;
-//   opacity: 1;
-// }
 </style>

@@ -33,6 +33,8 @@
   </div>
 </template>
 <script>
+// import { store } from "../assets/store.js";
+
 export default {
   name: "DropDown",
   props: {
@@ -43,7 +45,9 @@ export default {
   },
   emits: ["filterupdate"],
   data() {
-    return {};
+    return {
+      // store,
+    };
   },
   computed: {
     //filtrer de fremsøgte produkter yderligere efter kategori
@@ -52,7 +56,34 @@ export default {
       this.filteredProducts.map((product) => {
         // console.log(product["year"]);
 
-        if (this.filterCategory == "author") {
+        //test
+        if (this.filterCategory == "material") {
+          let materialList = [
+            "artikler.",
+            "thesis.",
+            "rapporter.",
+            "podcasts.",
+            "præsentationer.",
+            "e-bøger.",
+            "bøger.",
+            "spil.",
+          ];
+          if (typeof product["653"] != "undefined") {
+            // product[653].map((item) => data.push(item));
+            product[653].reduce((filtered, option) => {
+              let optionStripped = option.replace(".", "");
+              if (
+                !data.includes(optionStripped) &&
+                materialList.includes(option)
+              ) {
+                // console.log(optionStripped);
+                data.push(optionStripped);
+              }
+              // return filtered;
+              // this.store.materialFilters = data;
+            }, []);
+          }
+        } else if (this.filterCategory == "author") {
           // console.log(product);
           if (typeof product["100"] != "undefined") {
             data.push(product["100"][0]);

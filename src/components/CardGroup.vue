@@ -222,6 +222,7 @@ export default {
 }
 .card:hover {
   transform: scale(1.03); //1.05
+  cursor: pointer;
   /* color: #ea4e44 !important; */
 }
 
