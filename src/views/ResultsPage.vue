@@ -105,7 +105,8 @@
               filterListMaterial.length > 0 &&
               (filterListYear.length > 0 ||
                 filterListAuthor.length > 0 ||
-                filterListSearchQuery.length > 0)
+                (filterListSearchQuery.length > 0 &&
+                  filterListAuthor.length > 0))
             "
             class="btn btn-custom-and rounded-pill mb-3 me-2"
           >
