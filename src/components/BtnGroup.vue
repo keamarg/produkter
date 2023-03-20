@@ -45,7 +45,7 @@
             </button> -->
             <button
               type="button"
-              class="btn-circle me-1 me-sm-3"
+              class="btn-circle me-1 px-3 py-2"
               :class="category"
             >
               {{ category }}
@@ -73,8 +73,8 @@ export default {
 
 <style lang="scss">
 .btn-circle {
-  width: 6rem;
-  height: 3rem;
+  // width: 6rem;
+  // height: 3rem;
   color: white;
   border: none;
   border-radius: 3rem;
@@ -109,26 +109,4 @@ export default {
 .TEKNIK:hover {
   background-color: #037dbb;
 }
-/* @import "../styles/style.css"; */
-// .btn-custom-nav {
-//   color: $keared;
-//   background-color: white;
-//   border-color: white;
-//   font-weight: bold;
-//   border: 0px;
-// }
-// .btn-custom-nav:hover {
-//   background-color: $keared;
-//   color: white;
-// }
-
-// .btn-custom-nav:active {
-//   background-color: $keared;
-//   color: white;
-//   border: 0px;
-// }
-
-// .btn-custom-nav:focus {
-//   outline: none;
-// }
 </style>

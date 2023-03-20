@@ -46,7 +46,7 @@
       </div>
       <button
         @click="search(searchQuery)"
-        class="btn-search btn btn-outline-light"
+        class="btn-search btn btn-outline-light ms-1"
         type="button"
       >
         &nbsp;Søg&nbsp;
