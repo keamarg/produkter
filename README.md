@@ -30,6 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## To do:
 
+- [ ] Implementér catchall til ikke eksisterende routes (f.eks. "results" uden /{searchQuery})
 - [ ] Opdatere url i iframe så den afspejler hovedsiden (bare så man kan kopiere adressen direkte fra browseren osv.) - history.pushState ser lovende ud, har lavet lidt tests med det i <app> componenten (addHashToLocation funktionen)
 - [x] Ændre buttonGroup menu i top-right til kun områder (byg, digital, teknik, design).
 - [ ] Tilføj flere facetter - type?

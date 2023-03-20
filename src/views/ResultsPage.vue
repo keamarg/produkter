@@ -34,7 +34,31 @@
           class="ms-3"
         />
       </div>
+
       <span class="w-100 d-block">
+        <router-link :to="{ name: 'Results', params: { id: 'alle' } }">
+          <button
+            v-if="this.filterListSearchQuery.length > 0"
+            @click="removeFilter"
+            type="button"
+            class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
+          >
+            <i class="bi bi-x-lg"></i>
+            {{ $route.params.id }}
+          </button>
+        </router-link>
+        <span
+          id="btn-custom-and"
+          v-if="
+            filterListSearchQuery.length > 0 &&
+            (filterListYear.length > 0 ||
+              filterListAuthor.length > 0 ||
+              filterListMaterial.length > 0)
+          "
+          class="btn btn-custom-and rounded-pill mb-3 me-2"
+        >
+          and
+        </span>
         <span v-for="(item, index) in filterListYear" :key="index">
           <span
             v-if="index > 0"
@@ -74,6 +98,19 @@
         </span>
         <!-- test -->
         <span v-for="(item, index) in filterListMaterial" :key="index">
+          <span
+            id="btn-custom-and"
+            v-if="
+              index < 1 &&
+              filterListMaterial.length > 0 &&
+              (filterListYear.length > 0 ||
+                filterListAuthor.length > 0 ||
+                filterListSearchQuery.length > 0)
+            "
+            class="btn btn-custom-and rounded-pill mb-3 me-2"
+          >
+            and
+          </span>
           <span
             v-if="index > 0"
             class="btn btn-custom-and rounded-pill mb-3 me-2"
@@ -129,6 +166,7 @@ export default {
       filterListYear: [],
       filterListAuthor: [],
       filterListMaterial: [],
+      filterListSearchQuery: [],
       displayChevron: true,
     };
   },
@@ -182,31 +220,21 @@ export default {
 
     //facetter
     extraFilters() {
-      // console.log("filtering: " + this.filterType);
-
-      if (this.filterListYear.length > 0 && !this.filterListAuthor.length > 0) {
-        // console.log("only years");
+      //only years
+      if (
+        this.filterListYear.length > 0 &&
+        !this.filterListAuthor.length > 0 &&
+        !this.filterListMaterial.length > 0
+      ) {
         return this.filteredProducts.filter((product) =>
           this.filterListYear.includes(product.year)
         );
-
-        //test start
+        //only materials
       } else if (
         !this.filterListYear.length > 0 &&
         !this.filterListAuthor.length > 0 &&
         this.filterListMaterial.length > 0
       ) {
-        console.log("only materials");
-        // console.log(this.filterListMaterial);
-        // console.log(
-        //   this.filteredProducts.filter(
-        //     (product) => console.log("product: " + product["653"]) //[0].replace(".", "")
-        //     // product["653"].some((item) => this.filterListAuthor.includes(item))
-        //   )
-        // );
-        // console.log(this.filteredProducts.filter((product) => product[653][0]));
-
-        console.log(this.filterListMaterial);
         return this.filteredProducts.filter((product) =>
           product[653].some(
             (
@@ -214,48 +242,27 @@ export default {
             ) => this.filterListMaterial.includes(item.replace(".", ""))
           )
         );
-        // return this.filteredProducts.filter((product) =>
-        //   product["653"].some((item) =>
-        //     this.filterListAuthor.includes(item.replace(".", ""))
-        //   )
-        // );
-
-        // this.filteredProducts.filter((product) =>
-        //   this.filterListMaterial.includes(product[653][0])
-
-        //test end
+        //Only authors
       } else if (
         !this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0
+        this.filterListAuthor.length > 0 &&
+        !this.filterListMaterial.length > 0
       ) {
-        // console.log("only Authors");
-        // console.log(this.filteredProducts);
-        // console.log(this.filterListAuthor.includes("Martin Gundtoft"));
-        // console.log(this.filterListAuthor);
         return this.filteredProducts.filter(
           (product) =>
-            // console.log(this.filterListAuthor.includes(product["100"]))
-            // console.log(product["100"][0])
-
-            // this.filterListAuthor.includes(product["100"][0]) ||
-            // this.filterListAuthor.includes(product["700"][0]) ||
-            // this.filterListAuthor.includes(product["700"][1]) ||
-            // this.filterListAuthor.includes(product["700"][2]) ||
-            // this.filterListAuthor.includes(product["700"][3])
             this.filterListAuthor.includes(product["100"][0]) ||
             ("700" in product &&
               product["700"].some((item) =>
                 this.filterListAuthor.includes(item)
               ))
         );
-      } else if (
+      }
+      //years and authors
+      else if (
         this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0
+        this.filterListAuthor.length > 0 &&
+        !this.filterListMaterial.length > 0
       ) {
-        // console.log("both years and authors");
-        // console.log(this.filterListYear);
-        // console.log(this.filterListAuthor);
-
         return this.filteredProducts.filter(
           (product) =>
             (this.filterListYear.includes(product.year) &&
@@ -264,6 +271,61 @@ export default {
               "700" in product &&
               product["700"].some((item) =>
                 this.filterListAuthor.includes(item)
+              ))
+        );
+      }
+      //years and materials
+      else if (
+        this.filterListYear.length > 0 &&
+        !this.filterListAuthor.length > 0 &&
+        this.filterListMaterial.length > 0
+      ) {
+        return this.filteredProducts.filter(
+          (product) =>
+            this.filterListYear.includes(product.year) &&
+            product[653].some((item) =>
+              this.filterListMaterial.includes(item.replace(".", ""))
+            )
+        );
+      }
+
+      //authors and materials
+      else if (
+        !this.filterListYear.length > 0 &&
+        this.filterListAuthor.length > 0 &&
+        this.filterListMaterial.length > 0
+      ) {
+        return this.filteredProducts.filter(
+          (product) =>
+            (product[653].some((item) =>
+              this.filterListMaterial.includes(item.replace(".", ""))
+            ) &&
+              this.filterListAuthor.includes(product["100"][0])) ||
+            (this.filterListYear.includes(product.year) &&
+              "700" in product &&
+              product["700"].some((item) =>
+                this.filterListAuthor.includes(item)
+              ))
+        );
+      }
+
+      //years and authors and materials
+      else if (
+        this.filterListYear.length > 0 &&
+        this.filterListAuthor.length > 0 &&
+        this.filterListMaterial.length > 0
+      ) {
+        return this.filteredProducts.filter(
+          (product) =>
+            (this.filterListYear.includes(product.year) &&
+              this.filterListAuthor.includes(product["100"][0])) ||
+            (this.filterListYear.includes(product.year) &&
+              "700" in product &&
+              product["700"].some((item) =>
+                this.filterListAuthor.includes(item)
+              ) &&
+              product[653].some((item) =>
+                this.filterListMaterial.includes(item.replace(".", ""))
               ))
         );
       } else {
@@ -326,6 +388,9 @@ export default {
       this.filterListMaterial = this.filterListMaterial.filter(
         (item) => item != event.currentTarget.innerText.slice(1)
       );
+      this.filterListSearchQuery = this.filterListSearchQuery.filter(
+        (item) => item != event.currentTarget.innerText.slice(1)
+      );
     },
     handleWheel() {
       // console.log(this.divHeight);
@@ -334,7 +399,12 @@ export default {
     },
   },
 
-  created() {},
+  mounted() {
+    // console.log(this.$route.params.id);
+    if (this.$route.params.id !== "alle") {
+      this.filterListSearchQuery.push(this.$route.params.id);
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
