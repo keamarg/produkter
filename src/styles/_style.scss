@@ -305,28 +305,27 @@ a {
     font-size: 16px;
     min-height: 60rem;
   } */
-
-/* custom media queries*/
-
-/* Extra small devices (phones, 576px and down) */
-@media only screen and (max-width: 576px) {
-  // .carousel-indicators button {
-  //   left: 3rem;
-  //   position: relative;
-  // }
-  .btn-custom-nav {
-    font-size: 0.5rem;
-  }
-  .navbar-brand {
-    font-size: 0.8rem;
-  }
-  .navbar-brand img {
-    width: 6rem; // 12
-  }
-}
 div.modal-body {
   padding: 0;
 }
+/* custom media queries*/
+
+// /* Extra small devices (phones, 576px and down) */
+// @media only screen and (max-width: 576px) {
+//   // .carousel-indicators button {
+//   //   left: 3rem;
+//   //   position: relative;
+//   // }
+//   .btn-custom-nav {
+//     font-size: 0.5rem;
+//   }
+//   .navbar-brand {
+//     font-size: 0.8rem;
+//   }
+//   .navbar-brand img {
+//     width: 6rem; // 12
+//   }
+// }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {

@@ -45,7 +45,7 @@
             </button> -->
             <button
               type="button"
-              class="btn-circle me-1 px-3 py-2"
+              class="btn-circle me-0 me-xs1 px-3 py-2"
               :class="category"
             >
               {{ category }}
@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .btn-circle {
   // width: 6rem;
   // height: 3rem;
@@ -108,5 +108,11 @@ export default {
 }
 .TEKNIK:hover {
   background-color: #037dbb;
+}
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 768px) {
+  .btn-circle {
+    font-size: 0.8rem;
+  }
 }
 </style>

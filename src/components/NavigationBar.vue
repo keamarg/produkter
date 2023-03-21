@@ -173,6 +173,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+/* Extra small devices (phones, 576px and down) */
+@media only screen and (max-width: 768px) {
+  .btn-custom-nav {
+    font-size: 0.5rem;
+  }
+  .navbar-brand {
+    font-size: 0.8rem;
+  }
+  .navbar-brand img {
+    width: 6rem; // 12
+  }
+}
 /* @import "../styles/style.css"; */
 .highlight {
   background-color: white;
