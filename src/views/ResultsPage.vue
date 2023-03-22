@@ -133,7 +133,13 @@
         :products="extraFilters"
         :displayAll="displayAll"
       />
-      <h5 v-else-if="filterListAuthor.length > 0 || filterListYear.length > 0">
+      <h5
+        v-else-if="
+          filterListAuthor.length > 0 ||
+          filterListYear.length > 0 ||
+          filterListMaterial.length > 0
+        "
+      >
         ingen resultater opfylder de valgte kriterier
       </h5>
       <CardGroup
@@ -172,7 +178,7 @@ export default {
     };
   },
   computed: {
-    // tjekker om produktet i søgningen findes i produktlisten (slice sørger for, at også søgninger på f.eks. "pod" stadig viser podcasts)
+    // tjekker om produktet i søgningen findes i produktlisten (slice sørger for, at også søgninger på f.eks. "pod" stadig viser podcasts) !!!ændret til includes
 
     filteredProducts() {
       //filtrer efter ophav
@@ -182,16 +188,23 @@ export default {
         } else {
           let authors = this.products.filter(
             (product) =>
-              product[100][0].toLowerCase() ==
-                this.$route.params.id.toLowerCase() ||
-              product[245][0].toLowerCase() ==
-                this.$route.params.id.toLowerCase() ||
+              product[100][0]
+                .toLowerCase()
+                // .slice(0, this.$route.params.id.length)
+                // .toLowerCase() == this.$route.params.id.toLowerCase()
+                .includes(this.$route.params.id.toLowerCase()) ||
+              product[245][0]
+                .toLowerCase()
+                // .slice(0, this.$route.params.id.length)
+                // .toLowerCase() == this.$route.params.id.toLowerCase() ||
+                .includes(this.$route.params.id.toLowerCase()) ||
               (typeof product[700] != "undefined" &&
-                product[700].some(
-                  (author) =>
-                    author
-                      .slice(0, this.$route.params.id.length)
-                      .toLowerCase() == this.$route.params.id.toLowerCase()
+                product[700].some((author) =>
+                  author
+                    // .slice(0, this.$route.params.id.length)
+                    // .toLowerCase() == this.$route.params.id.toLowerCase()
+                    .toLowerCase()
+                    .includes(this.$route.params.id.toLowerCase())
                 ))
           );
 
