@@ -7,10 +7,27 @@
     @mousewheel.passive="handleWheel"
   >
     <div class="row align-items-center">
-      <p v-if="$route.params.id == 'alle'">
+      <p
+        v-if="
+          $route.params.id == 'alle' &&
+          filterListMaterial.length < 1 &&
+          filterListAuthor.length < 1 &&
+          filterListYear.length < 1
+        "
+      >
         Alle {{ products.length }} KEA produkter...
       </p>
-      <p v-else>Søgning på {{ $route.params.id }}...</p>
+      <p v-else>
+        {{
+          filterListMaterial.length > 0 ||
+          filterListAuthor.length > 0 ||
+          filterListYear.length > 0
+            ? extraFilters.length
+            : filteredProducts.length
+        }}
+        filtrerede produkter...
+      </p>
+      <!-- <p v-else>Søgning på {{ $route.params.id }}...</p> -->
       <div class="filterbar d-flex ms-2 mb-3 bg-dark">
         <DropDown
           @filterupdate="addFilter"
