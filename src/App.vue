@@ -1,7 +1,7 @@
 //app.vue
 <template>
   <!-- <button @click="addHashToLocation('profiles')">test replace</button> -->
-  <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5 pt-sm-0">
+  <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5">
     <TopBar :products="products" />
     <div class="row mb-5">
       <SideBar />
