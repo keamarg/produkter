@@ -33,7 +33,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] Implementér catchall til ikke eksisterende routes (f.eks. "results" uden /{searchQuery}).
 - [ ] Opdatere url i iframe så den afspejler hovedsiden (bare så man kan kopiere adressen direkte fra browseren osv.) - history.pushState ser lovende ud, har lavet lidt tests med det i <app> componenten (addHashToLocation funktionen)
 - [x] Ændre buttonGroup menu i top-right til kun områder (byg, digital, teknik, design).
-- [ ] Tilføj flere facetter - type?
+- [x] Tilføj flere facetter - type?
 - [x] Tilføj fejlhåndtering hvis API'erne er nede eller mangler data
 - [x] Tilføj søgning på titel (hele titlen som string i emneord/author arrayet?)
 - [x] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
@@ -61,9 +61,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## Bugs (next: bug1v):
 
-- [ ] bug1u søgninger i søgefeltet fanger ikke alle hvis det er halve søgninger (des - design)
+- [x] bug1u søgninger i søgefeltet fanger ikke alle hvis det er halve søgninger (des - design)
 - [ ] bug1t Klik på profilbilleder fjerne nederste card rækkke (KUN Safari) OBS: Sker KUN i Iframe (cutter den bunden af?)
-- [ ] bug1s Nederste række af buttonGroup menu virker ikke i Safari (løser sig måske nå vi lave den om til områder)
+- [x] bug1s Nederste række af buttonGroup menu virker ikke i Safari (løser sig måske når vi lave den om til områder)
 - [x] bug1r Dropdown i søgefelt virker ikke med tastatur 2. gang man besøger feltet. Tænker det har noget at gøre med fokus eller passive/active buttons
 - [ ] **NOFIX-** bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
 - [x] **NOFIX-** TOOLTIP FJERNET. bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
@@ -90,8 +90,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] vue tooltips til sidebar ikoner
 - [ ] vue tooltips til sekundære forfatter (virker til primær)
 - [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
-- [ ] Krydsning af knapper (f.eks. e-bøger OG Teknik)
-- [ ] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
+- [x] Krydsning af knapper (f.eks. e-bøger OG Teknik)
+- [x] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
 - [x] ved sharing, link direkte til hovedsiden i stedet for iframe siden (kan måske løses a la det her https://stackoverflow.com/questions/41946851/directly-link-to-page-with-specific-content-loaded-in-iframe eller det her: https://stackoverflow.com/questions/32790086/using-a-javascript-function-to-load-a-page-in-an-iframe)
 - [x] Dynamisk loading af produkter m. infinite scroll (https://cs50.harvard.edu/web/2020/weeks/6/) ca. 19 minutter inde /31 er snapsen
 - [x] "Down arrow" til at indikere, at der kan loades mere

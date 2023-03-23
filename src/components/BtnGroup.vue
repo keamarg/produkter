@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { store } from "../assets/store.js";
 export default {
   name: "BtnGroup",
   props: {
@@ -65,7 +66,7 @@ export default {
     categories: Array,
   },
   data() {
-    return {};
+    return { store };
   },
   methods: {},
 };
@@ -82,32 +83,35 @@ export default {
   text-align: center;
 }
 .BYG {
-  background-color: #01774075;
+  background-color: $bygdark;
   transition: 0.3s ease-in-out;
 }
 .BYG:hover {
-  background-color: #017740;
+  background-color: $byg;
+}
+.BYG:active {
+  background-color: $byg;
 }
 .DESIGN {
-  background-color: #ea436075;
+  background-color: $designdark;
   transition: 0.3s ease-in-out;
 }
 .DESIGN:hover {
-  background-color: #ea4360;
+  background-color: $design;
 }
 .DIGITAL {
-  background-color: #e8833475;
+  background-color: $digitaldark;
   transition: 0.3s ease-in-out;
 }
 .DIGITAL:hover {
-  background-color: #e88334;
+  background-color: $digital;
 }
 .TEKNIK {
-  background-color: #037dbb75;
+  background-color: $teknikdark;
   transition: 0.3s ease-in-out;
 }
 .TEKNIK:hover {
-  background-color: #037dbb;
+  background-color: $teknik;
 }
 /* Extra small devices (phones, 576px and down) */
 @media only screen and (max-width: 768px) {

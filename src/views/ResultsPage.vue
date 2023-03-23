@@ -7,27 +7,48 @@
     @mousewheel.passive="handleWheel"
   >
     <div class="row align-items-center">
-      <p
-        v-if="
-          $route.params.id == 'alle' &&
-          filterListMaterial.length < 1 &&
-          filterListAuthor.length < 1 &&
-          filterListYear.length < 1
-        "
-      >
+      <p v-if="$route.params.id == 'alle'">
         Alle {{ products.length }} KEA produkter...
       </p>
-      <p v-else>
-        {{
-          filterListMaterial.length > 0 ||
-          filterListAuthor.length > 0 ||
-          filterListYear.length > 0
-            ? extraFilters.length
-            : filteredProducts.length
-        }}
-        filtrerede produkter...
-      </p>
-      <!-- <p v-else>Søgning på {{ $route.params.id }}...</p> -->
+      <span v-else class="d-flex">
+        <p class="d-inline">
+          {{
+            filterListMaterial.length > 0 ||
+            filterListAuthor.length > 0 ||
+            filterListYear.length > 0
+              ? extraFilters.length
+              : filteredProducts.length
+          }}
+          resultater på søgningen&nbsp;
+        </p>
+        <router-link :to="{ name: 'Results', params: { id: 'alle' } }">
+          <button
+            v-if="this.filterListSearchQuery.length > 0"
+            @click="removeFilter"
+            type="button"
+            class="btn btn-primary btn-custom-filter btn-custom-keyword rounded-pill mb-3 me-2"
+          >
+            <i class="bi bi-x-lg"></i>
+            {{ $route.params.id }}
+          </button>
+        </router-link>
+
+        <!-- <p v-else>Søgning på {{ $route.params.id }}...</p> -->
+      </span>
+      <span class="d-flex">
+        <p
+          v-if="
+            filterListMaterial.length > 0 ||
+            filterListAuthor.length > 0 ||
+            filterListYear.length > 0
+          "
+        >
+          Filtreret på:
+          <!-- {{ filterListYear.length > 0 ? "udgivelsesår" : null }}
+          {{ filterListAuthor.length > 0 ? "forfatter" : null }}
+          {{ filterListMaterial.length > 0 ? "materialetype" : null }} -->
+        </p>
+      </span>
       <div class="filterbar d-flex ms-2 mb-3 bg-dark">
         <DropDown
           @filterupdate="addFilter"
@@ -53,12 +74,12 @@
       </div>
 
       <span class="w-100 d-block">
-        <router-link :to="{ name: 'Results', params: { id: 'alle' } }">
+        <!-- <router-link :to="{ name: 'Results', params: { id: 'alle' } }">
           <button
             v-if="this.filterListSearchQuery.length > 0"
             @click="removeFilter"
             type="button"
-            class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
+            class="btn btn-primary btn-custom-filter btn-custom-keyword rounded-pill mb-3 me-2"
           >
             <i class="bi bi-x-lg"></i>
             {{ $route.params.id }}
@@ -75,7 +96,7 @@
           class="btn btn-custom-and rounded-pill mb-3 me-2"
         >
           and
-        </span>
+        </span> -->
         <span v-for="(item, index) in filterListYear" :key="index">
           <span
             v-if="index > 0"
@@ -192,6 +213,19 @@ export default {
       filterListMaterial: [],
       filterListSearchQuery: [],
       displayChevron: true,
+      styleObject: {
+        backgroundColor: `${
+          this.$route.params.id.toLocaleLowerCase() == "design"
+            ? "#ea4360"
+            : this.$route.params.id.toLocaleLowerCase() == "byg"
+            ? "#017740"
+            : this.$route.params.id.toLocaleLowerCase() == "teknik"
+            ? "#037dbb"
+            : this.$route.params.id.toLocaleLowerCase() == "digital"
+            ? "#e88334"
+            : "#eb5045"
+        }`,
+      },
     };
   },
   computed: {
@@ -346,17 +380,30 @@ export default {
         this.filterListAuthor.length > 0 &&
         this.filterListMaterial.length > 0
       ) {
+        // return this.filteredProducts.filter(
+        //   (product) =>
+        //     (this.filterListYear.includes(product.year) &&
+        //       this.filterListAuthor.includes(product["100"][0])) ||
+        //     (this.filterListYear.includes(product.year) &&
+        //       "700" in product &&
+        //       product["700"].some((item) =>
+        //         this.filterListAuthor.includes(item)
+        //       ) &&
+        //       product[653].some((item) =>
+        //         this.filterListMaterial.includes(item.replace(".", ""))
+        //       ))
+        // );
         return this.filteredProducts.filter(
           (product) =>
-            (this.filterListYear.includes(product.year) &&
+            (product[653].some((item) =>
+              this.filterListMaterial.includes(item.replace(".", ""))
+            ) &&
+              this.filterListYear.includes(product.year) &&
               this.filterListAuthor.includes(product["100"][0])) ||
-            (this.filterListYear.includes(product.year) &&
-              "700" in product &&
+            // this.filterListYear.includes(product.year) &&
+            ("700" in product &&
               product["700"].some((item) =>
                 this.filterListAuthor.includes(item)
-              ) &&
-              product[653].some((item) =>
-                this.filterListMaterial.includes(item.replace(".", ""))
               ))
         );
       } else {
@@ -453,6 +500,10 @@ export default {
   cursor: pointer;
   border-radius: 0.7rem; //1
   // width: 20%;
+  // max-width: 8rem;
+  // max-height: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-custom-filter:hover {
@@ -484,9 +535,20 @@ export default {
   background-color: $keared;
 }
 
+.btn-custom-keyword {
+  color: white;
+  // background-color: $teknik;
+  background-color: v-bind("styleObject.backgroundColor");
+}
+
+.btn-custom-keyword i {
+  color: white;
+}
+
 .bi-chevron-down {
   font-size: 2rem;
 }
+
 .bounce {
   position: fixed;
   left: 50%;
