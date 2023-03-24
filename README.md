@@ -88,7 +88,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] Omstrukturering fra brug af props (emit/listen) til brug af store
 - [ ] "Featured" liste til forsiden (markeret via felt i Alma?)
 - [ ] vue tooltips til sidebar ikoner
-- [ ] vue tooltips til sekundære forfatter (virker til primær)
+- [ ] vue tooltips til sekundære forfatter (virker til primær) (fjernet fra primær)
 - [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
 - [x] Krydsning af knapper (f.eks. e-bøger OG Teknik)
 - [x] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
