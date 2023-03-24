@@ -139,7 +139,7 @@ export default {
 .carousel img {
   object-fit: cover; /* Do not scale the image */
   object-position: center; /* Center the image within the element */
-  height: 20rem; //30
+  height: 21rem; //30
   width: 100%;
 }
 .carousel-caption {

@@ -1,6 +1,6 @@
 //Sidebar ikoner
 <template>
-  <div class="col-md-1 pt-3 text-center mt-1 mt-md-5">
+  <div class="col-md-1 pt-3 text-center mt-1 mt-md-4">
     <router-link :to="{ name: 'Likes' }" class="d-md-block sidebar-icons">
       <i
         class="bi bi-heart-fill"
