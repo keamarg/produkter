@@ -53,6 +53,7 @@
         >
           <img
             :src="getZoteroProfile(profileCard.keaId, 'image')"
+            onerror="this.onerror=null;this.src='https://projekter.kea.dk/assets/noimage.jpg';"
             class="card-img-top"
             alt="..."
           />
@@ -89,7 +90,12 @@
           "
         ></i>
         <router-link :to="{ name: 'Product', params: { id: card.id } }">
-          <img :src="getImage(card)" class="card-img-top" alt="..." />
+          <img
+            :src="getImage(card)"
+            class="card-img-top"
+            alt="..."
+            onerror="this.onerror=null;this.src='https://projekter.kea.dk/assets/noimage.jpg';"
+          />
           <div class="card-body">
             <h5 class="card-title">{{ card[245][0] }}</h5>
             <p class="card-text">{{ card[520][0] }}</p>

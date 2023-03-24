@@ -43,10 +43,19 @@
             >
               {{ category }}
             </button> -->
+
+            <!-- { [category + 'ACTIVE']: category + 'isActive' }, -->
+            <!-- log(`${category + 'isActive'}`); -->
+
             <button
               type="button"
               class="btn-circle me-0 me-xs1 px-3 py-2"
-              :class="category"
+              :class="[
+                category.toLowerCase() == $route.params.id
+                  ? category + 'ACTIVE'
+                  : '',
+                category,
+              ]"
             >
               {{ category }}
             </button>
@@ -66,9 +75,13 @@ export default {
     categories: Array,
   },
   data() {
-    return { store };
+    return { store, isActive: null };
   },
-  methods: {},
+  methods: {
+    log(item) {
+      console.log(item);
+    },
+  },
 };
 </script>
 
@@ -82,19 +95,23 @@ export default {
   font-size: 1rem;
   text-align: center;
 }
+
 .BYG {
   background-color: $bygdark;
   transition: 0.3s ease-in-out;
 }
-.BYG:hover {
+.BYGACTIVE {
   background-color: $byg;
 }
-.BYG:active {
+.BYG:hover {
   background-color: $byg;
 }
 .DESIGN {
   background-color: $designdark;
   transition: 0.3s ease-in-out;
+}
+.DESIGNACTIVE {
+  background-color: $design;
 }
 .DESIGN:hover {
   background-color: $design;
@@ -103,12 +120,18 @@ export default {
   background-color: $digitaldark;
   transition: 0.3s ease-in-out;
 }
+.DIGITALACTIVE {
+  background-color: $digital;
+}
 .DIGITAL:hover {
   background-color: $digital;
 }
 .TEKNIK {
   background-color: $teknikdark;
   transition: 0.3s ease-in-out;
+}
+.TEKNIKACTIVE {
+  background-color: $teknik;
 }
 .TEKNIK:hover {
   background-color: $teknik;

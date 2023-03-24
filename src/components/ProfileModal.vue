@@ -71,6 +71,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           <img
                             class="profileimg"
                             :src="`${entry.data.tags[0].tag}`"
+                            onerror="this.onerror=null;this.src='https://projekter.kea.dk/assets/noimage.jpg';"
                           />
                           <div class="bottom-right">
                             <i class="bi bi-envelope-plus-fill"></i>

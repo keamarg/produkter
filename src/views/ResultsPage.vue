@@ -345,7 +345,6 @@ export default {
         !this.filterListAuthor.length > 0 &&
         this.filterListMaterial.length > 0
       ) {
-        console.log("ping");
         return this.filteredProducts.filter(
           (product) =>
             this.filterListYear.includes(product.year) &&
