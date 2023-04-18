@@ -43,6 +43,7 @@ export default {
         "DESIGN",
         "DIGITAL",
         "TEKNIK",
+        "OM",
         // "Business",
         // "Produkter",
         // "newCat1",

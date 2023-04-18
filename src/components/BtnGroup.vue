@@ -31,7 +31,41 @@
           v-bind:key="index"
           class="me-2 ms-2"
         >
+          <span v-if="category == 'OM'">
+            <!-- <span class="d-md-block sidebar-icons">
+              <i
+                class="bi bi-info-circle-fill"
+                data-bs-toggle="modal"
+                data-bs-target="#aboutModal"
+                title="Del"
+              ></i>
+              <div class="d-none d-md-block sidebar-icons-text">Om</div>
+            </span> -->
+            <!-- <button
+              type="button"
+              class="btn-circle me-0 me-xs1 px-3 py-2"
+              :class="[
+                category.toLowerCase() == $route.params.id
+                  ? category + 'ACTIVE'
+                  : '',
+                category,
+              ]"
+            > -->
+            <!-- <span class="btn-circle me-0 me-xs1 px-3 py-2"> -->
+            <!-- <i
+              class="bi bi-info-circle-fill btn-circle align-middle"
+              data-bs-toggle="modal"
+              data-bs-target="#aboutModal"
+              title="Om"
+              style="font-size: 2rem"
+            ></i> -->
+            <!-- </span> -->
+            <!-- {{ category }} -->
+            <!-- </button> -->
+          </span>
+
           <router-link
+            v-else
             :to="{
               name: 'Results',
               params: { id: category.toLowerCase(), list: 'productlist' },
@@ -94,6 +128,8 @@ export default {
   border-radius: 3rem;
   font-size: 1rem;
   text-align: center;
+  line-height: 2rem;
+  width: 6rem;
 }
 
 .BYG {
@@ -136,10 +172,20 @@ export default {
 .TEKNIK:hover {
   background-color: $teknik;
 }
-/* Extra small devices (phones, 576px and down) */
-@media only screen and (max-width: 768px) {
+
+/* Small devices (portrait tablets and large phones, 600px and down) */
+@media only screen and (max-width: 600px) {
   .btn-circle {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    width: 4rem;
+  }
+}
+
+/* Extra small devices (phones, 374px and down) */
+@media only screen and (max-width: 374px) {
+  .btn-circle {
+    font-size: 0.5rem;
+    width: 3.5rem;
   }
 }
 </style>

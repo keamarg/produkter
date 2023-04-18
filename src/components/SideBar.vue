@@ -1,6 +1,6 @@
 //Sidebar ikoner
 <template>
-  <div class="col-md-1 pt-3 text-center mt-1 mt-md-4">
+  <div class="col-md-1 pt-3 text-center mt-1 mt-md-5 ms-3">
     <router-link :to="{ name: 'Likes' }" class="d-md-block sidebar-icons">
       <i
         class="bi bi-heart-fill"
@@ -27,14 +27,14 @@
       class="d-md-block me-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
     >
       <i
-        class="bi bi-person-fill"
+        class="bi bi-people-fill"
         data-bs-toggle="tooltip"
         data-bs-placement="auto"
         title="Profiler"
       ></i>
-      <div class="d-none d-md-block sidebar-icons-text">Profiler</div>
+      <div class="d-none d-md-block sidebar-icons-text">Forfattere</div>
     </router-link>
-    <span class="d-md-block sidebar-icons">
+    <!-- <span class="d-md-block sidebar-icons">
       <i
         class="bi bi-info-circle-fill"
         data-bs-toggle="modal"
@@ -42,7 +42,7 @@
         title="Del"
       ></i>
       <div class="d-none d-md-block sidebar-icons-text">Om</div>
-    </span>
+    </span> -->
 
     <ShareModal />
     <AboutModal />
@@ -81,7 +81,7 @@ export default {
   font-size: 2.5rem; //4
   line-height: 2rem; //5
   opacity: 0.5;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .sidebar-icons:hover {
@@ -92,5 +92,7 @@ export default {
 
 .sidebar-icons-text {
   font-size: 1rem;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 </style>

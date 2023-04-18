@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar justify-content-start">
     <router-link :to="{ name: 'Home' }" @click="searchQuery = ''">
-      <div class="navbar-brand p-0 pb-2 d-flex align-items-center">
+      <div class="navbar-brand d-flex align-items-center">
         <img
           src="https://bibliotek.kea.dk/images/KEAprodukter/KEA_logo_EN_Web_red.png"
           class="logo d-inline"
@@ -10,7 +10,7 @@
         <p class="navbar-title d-inline ps-2 m-0">Produkter</p>
       </div>
     </router-link>
-    <div class="d-flex w-50">
+    <div class="d-flex w-50 align-items-center">
       <div class="w-100" @focusout="handleFocusOut">
         <input
           @focusin="this.picked = null"
@@ -51,6 +51,12 @@
       >
         &nbsp;Søg&nbsp;
       </button>
+      <i
+        class="bi bi-info-circle-fill ms-2 btn-om"
+        data-bs-toggle="modal"
+        data-bs-target="#aboutModal"
+        title="Om"
+      ></i>
     </div>
   </nav>
 </template>
@@ -173,8 +179,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-/* Extra small devices (phones, 576px and down) */
-@media only screen and (max-width: 768px) {
+.btn-om {
+  color: #ced4da;
+  font-size: 2rem;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.btn-om:hover {
+  color: white;
+  cursor: pointer;
+  opacity: 1;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
   .btn-custom-nav {
     font-size: 0.5rem;
   }
@@ -183,6 +201,13 @@ export default {
   }
   .navbar-brand img {
     width: 6rem; // 12
+  }
+}
+
+/* Extra small devices (phones, 375px and down) */
+@media only screen and (max-width: 375px) {
+  .navbar-brand img {
+    width: 3rem; // 12
   }
 }
 /* @import "../styles/style.css"; */
