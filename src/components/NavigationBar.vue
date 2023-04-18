@@ -200,7 +200,7 @@ export default {
     font-size: 0.8rem;
   }
   .navbar-brand img {
-    width: 6rem; // 12 /
+    width: 6rem; // 12
   }
 }
 
