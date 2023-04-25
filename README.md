@@ -154,3 +154,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 Kopier “dist” mappen til production serveren (fra projektfolderen):
 scp -r dist/\* projekterkea@kea.dk:/home/projekterkea/www/keaprodukter
+
+just a test
