@@ -548,6 +548,9 @@ export default {
 .bi-chevron-down {
   font-size: 2rem;
 }
+.rounded-pill {
+  border-radius: 2rem !important;
+}
 
 .bounce {
   position: fixed;
