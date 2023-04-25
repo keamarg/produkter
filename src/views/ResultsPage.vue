@@ -52,12 +52,14 @@
       <div class="filterbar d-flex ms-2 mb-3 bg-dark">
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Udgivelsesår"
           filterCategory="year"
         />
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Forfatter"
           filterCategory="author"
@@ -66,6 +68,7 @@
         <!-- test -->
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Materialetype"
           filterCategory="material"
@@ -108,8 +111,7 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
         <span
@@ -130,8 +132,7 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
         <!-- test -->
@@ -160,8 +161,7 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
       </span>
@@ -196,6 +196,7 @@
 <script>
 import CardGroup from "@/components/CardGroup.vue";
 import DropDown from "@/components/DropDown.vue";
+import { store } from "../assets/store.js";
 
 export default {
   name: "ResultsPage",
@@ -206,6 +207,7 @@ export default {
   props: ["products", "loading", "productcount"],
   data() {
     return {
+      store,
       displayAll: true,
       filterType: "",
       filterListYear: [],
@@ -291,6 +293,11 @@ export default {
         !this.filterListAuthor.length > 0 &&
         !this.filterListMaterial.length > 0
       ) {
+        // console.log("1_" + this.filteredProducts[0].year);
+        // console.log("2_" + this.filterListYear);
+        // console.log(
+        //   this.filterListYear[0].includes(this.filteredProducts[0].year)
+        // );
         return this.filteredProducts.filter((product) =>
           this.filterListYear.includes(product.year)
         );
@@ -416,7 +423,7 @@ export default {
       console.log(item);
     },
     addFilter(event, filterCategory) {
-      // console.log(event.target);
+      console.log(event.target.innerText);
       this.filterType = filterCategory;
       if (
         this.filterType == "year" &&
@@ -456,19 +463,43 @@ export default {
       }
     },
 
-    removeFilter(event) {
+    removeFilter(event, filter) {
+      // console.log(event.currentTarget.innerText.replace(/\s+/, ""));
+      // store.updateItemCategoriesSelected(
+      //   event.currentTarget.innerText.replace(/\s+/, "")
+      // );
+      // console.log(filter);
+      if (
+        filter == "Forfatter" ||
+        filter == "Udgivelsesår" ||
+        filter == "Materialetype"
+      ) {
+        this.filterListAuthor = [];
+        this.filterListYear = [];
+        this.filterListMaterial = [];
+
+        this.store.itemCategoriesSelected = [];
+      }
+      console.log(event.currentTarget.innerText);
+      store.updateItemCategoriesSelected(event.currentTarget.innerText);
+      // console.log(store.itemCategoriesSelected);
       this.filterListYear = this.filterListYear.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
-      );
-      this.filterListAuthor = this.filterListAuthor.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+        (item) => !item.includes(event.currentTarget.innerText.slice(1))
       );
       this.filterListMaterial = this.filterListMaterial.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+        (item) => !item.includes(event.currentTarget.innerText.slice(1))
+      );
+      this.filterListAuthor = this.filterListAuthor.filter(
+        (item) => !item.includes(event.currentTarget.innerText.slice(1))
       );
       this.filterListSearchQuery = this.filterListSearchQuery.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+        (item) => !item.includes(event.currentTarget.innerText.slice(1))
       );
+
+      //old format
+      // this.filterListSearchQuery = this.filterListSearchQuery.filter(
+      //   (item) => item != event.currentTarget.innerText.slice(1)
+      // );
     },
     handleWheel() {
       // console.log(this.divHeight);
@@ -479,6 +510,7 @@ export default {
 
   mounted() {
     // console.log(this.$route.params.id);
+    this.store.itemCategoriesSelected = [];
     if (this.$route.params.id !== "alle") {
       this.filterListSearchQuery.push(this.$route.params.id);
     }
@@ -486,6 +518,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+i {
+  padding-right: 0.2rem;
+}
 .filterbar {
   color: white;
   border-radius: 5px;

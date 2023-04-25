@@ -12,7 +12,9 @@
       <li>
         <span
           class="dropdown-item"
-          v-on:click="$emit('filterupdate', $event, this.filterCategory)"
+          v-on:click="
+            removeFilter($event, title) //$emit('filterupdate', $event, this.filterCategory), log('clicked')
+          "
           >Alle</span
         >
       </li>
@@ -25,15 +27,29 @@
       <li v-for="item in itemCategories" :key="item.id">
         <span
           class="dropdown-item"
-          v-on:click="$emit('filterupdate', $event, this.filterCategory)"
-          >{{ item }}</span
+          v-on:click="
+            store.itemCategoriesSelected.includes(item)
+              ? removeFilter($event, item)
+              : store.updateItemCategoriesSelected(item),
+              $emit('filterupdate', $event, this.filterCategory)
+          "
+          ><i
+            class="bi"
+            :class="
+              store.itemCategoriesSelected.includes(item)
+                ? 'bi-check2-square'
+                : 'bi-square'
+            "
+            style="font-style: normal; padding-right: 0.5rem"
+            >{{ item }}</i
+          ></span
         >
       </li>
     </ul>
   </div>
 </template>
 <script>
-// import { store } from "../assets/store.js";
+import { store } from "../assets/store.js";
 
 export default {
   name: "DropDown",
@@ -43,10 +59,12 @@ export default {
     // extraFilters: Array,
     filterCategory: String,
   },
-  emits: ["filterupdate"],
+  emits: ["filterupdate", "removeFilter"],
   data() {
     return {
-      // store,
+      // isActive: true,
+      // itemCategoriesSelected: [],
+      store,
     };
   },
   computed: {
@@ -101,6 +119,15 @@ export default {
   methods: {
     log(item) {
       console.log(item);
+    },
+    removeFilter(event, title) {
+      this.$emit("removeFilter", event, title);
+      // console.log("inside removeFilter " + item);
+      // console.log(this.store.itemCategoriesSelected.indexOf(item));
+      // console.log(this.store.itemCategoriesSelected);
+      // this.store.itemCategoriesSelected.splice(
+      //   this.store.itemCategoriesSelected.indexOf(item, 1)
+      // );
     },
   },
 };
