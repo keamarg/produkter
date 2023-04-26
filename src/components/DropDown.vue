@@ -28,20 +28,25 @@
         <span
           class="dropdown-item"
           v-on:click="
-            store.itemCategoriesSelected.includes(item)
+            store.getFilterList('year').includes(item) ||
+            store.getFilterList('author').includes(item) ||
+            store.getFilterList('material').includes(item)
               ? removeFilter($event, item)
-              : store.updateItemCategoriesSelected(item),
-              $emit('filterupdate', $event, this.filterCategory)
+              : //OBS! store.updateItemCategoriesSelected(item),
+                $emit('filterupdate', $event, this.filterCategory)
           "
           ><i
             class="bi"
             :class="
-              store.itemCategoriesSelected.includes(item)
+              store.getFilterList('year').includes(item) ||
+              store.getFilterList('author').includes(item) ||
+              store.getFilterList('material').includes(item) //store.itemCategoriesSelected.includes(item)
                 ? 'bi-check2-square'
                 : 'bi-square'
             "
-            style="font-style: normal; padding-right: 0.5rem"
-            >{{ item }}</i
+            ><span style="font-style: normal; padding-left: 0.5rem">{{
+              item
+            }}</span></i
           ></span
         >
       </li>

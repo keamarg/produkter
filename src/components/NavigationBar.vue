@@ -118,7 +118,7 @@ export default {
       if (searchQuery) {
         this.$router.push({
           name: "Results",
-          params: { id: searchQuery, list: "productlist" },
+          params: { id: searchQuery }, //list: "productlist"
         });
         this.searchQuery = null;
       }

@@ -102,7 +102,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           name: 'Results',
                           params: {
                             id: store.currentProfileName,
-                            kind: `author`,
+                            //kind: `author`,
                           },
                         }"
                         >Se alle KEA produkter af {{ store.currentProfileName }}
@@ -117,7 +117,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           name: 'Results',
                           params: {
                             id: getProperty('author').toLowerCase(),
-                            kind: `author`,
+                            //: `author`,
                           },
                         }"
                         >Se alle KEA produkter af
@@ -133,7 +133,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                               'secAuthor',
                               store.currentProfileNumber
                             ),
-                            kind: `author`,
+                            //kind: `author`,
                           },
                         }"
                         >Se alle KEA produkter af
@@ -274,7 +274,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       name: 'Results',
                       params: {
                         id: getProperty('author').toLowerCase(),
-                        kind: `author`,
+                        //kind: `author`,
                       },
                     }"
                     >Se alle KEA produkter af
@@ -293,7 +293,7 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                           'secAuthor',
                           store.currentProfileNumber
                         ),
-                        kind: `author`,
+                        // kind: `author`,
                       },
                     }"
                     >Se alle KEA produkter af

@@ -68,7 +68,7 @@
             v-else
             :to="{
               name: 'Results',
-              params: { id: category.toLowerCase(), list: 'productlist' },
+              params: { id: category.toLowerCase() }, //, list: 'productlist'
             }"
           >
             <!-- <button
