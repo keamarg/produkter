@@ -23,7 +23,7 @@
       <div class="d-none d-md-block sidebar-icons-text">Produkter</div>
     </router-link>
     <router-link
-      :to="{ name: 'Profiles', params: { id: 'profiler' } }"
+      :to="{ name: 'Profiles' }"
       class="d-md-block me-5 mx-md-0 mt-md-2 mb-md-2 sidebar-icons"
     >
       <i

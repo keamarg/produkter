@@ -13,9 +13,9 @@
       <span v-else class="d-flex">
         <p class="d-inline">
           {{
-            filterListMaterial.length > 0 ||
-            filterListAuthor.length > 0 ||
-            filterListYear.length > 0
+            store.getFilterList("material").length > 0 ||
+            store.getFilterList("author").length > 0 ||
+            store.getFilterList("year").length > 0
               ? extraFilters.length
               : filteredProducts.length
           }}
@@ -23,7 +23,6 @@
         </p>
         <router-link :to="{ name: 'Results', params: { id: 'alle' } }">
           <button
-            v-if="this.filterListSearchQuery.length > 0"
             @click="removeFilter"
             type="button"
             class="btn btn-primary btn-custom-filter btn-custom-keyword rounded-pill mb-3 me-2"
@@ -38,9 +37,9 @@
       <span class="d-flex">
         <p
           v-if="
-            filterListMaterial.length > 0 ||
-            filterListAuthor.length > 0 ||
-            filterListYear.length > 0
+            store.getFilterList('material').length > 0 ||
+            store.getFilterList('author').length > 0 ||
+            store.getFilterList('year').length > 0
           "
         >
           Filtreret på:
@@ -48,16 +47,19 @@
           {{ filterListAuthor.length > 0 ? "forfatter" : null }}
           {{ filterListMaterial.length > 0 ? "materialetype" : null }} -->
         </p>
+        <p v-else>Vælg filtre:</p>
       </span>
       <div class="filterbar d-flex ms-2 mb-3 bg-dark">
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Udgivelsesår"
           filterCategory="year"
         />
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Forfatter"
           filterCategory="author"
@@ -66,6 +68,7 @@
         <!-- test -->
         <DropDown
           @filterupdate="addFilter"
+          @removeFilter="removeFilter"
           :filteredProducts="filteredProducts"
           title="Materialetype"
           filterCategory="material"
@@ -97,7 +100,7 @@
         >
           and
         </span> -->
-        <span v-for="(item, index) in filterListYear" :key="index">
+        <span v-for="(item, index) in store.getFilterList('year')" :key="index">
           <span
             v-if="index > 0"
             class="btn btn-custom-and rounded-pill mb-3 me-2"
@@ -108,18 +111,23 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
         <span
           id="btn-custom-and"
-          v-if="filterListYear.length > 0 && filterListAuthor.length > 0"
+          v-if="
+            store.getFilterList('year').length > 0 &&
+            store.getFilterList('author').length > 0
+          "
           class="btn btn-custom-and rounded-pill mb-3 me-2"
         >
           and
         </span>
-        <span v-for="(item, index) in filterListAuthor" :key="index">
+        <span
+          v-for="(item, index) in store.getFilterList('author')"
+          :key="index"
+        >
           <span
             v-if="index > 0"
             class="btn btn-custom-and rounded-pill mb-3 me-2"
@@ -130,21 +138,23 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
         <!-- test -->
-        <span v-for="(item, index) in filterListMaterial" :key="index">
+        <span
+          v-for="(item, index) in store.getFilterList('material')"
+          :key="index"
+        >
           <span
             id="btn-custom-and"
             v-if="
               index < 1 &&
-              filterListMaterial.length > 0 &&
-              (filterListYear.length > 0 ||
-                filterListAuthor.length > 0 ||
-                (filterListSearchQuery.length > 0 &&
-                  filterListAuthor.length > 0))
+              store.getFilterList('material').length > 0 &&
+              (store.getFilterList('year').length > 0 ||
+                store.getFilterList('author').length > 0 ||
+                (store.getFilterList('searchQuery').length > 0 &&
+                  store.getFilterList('author').length > 0))
             "
             class="btn btn-custom-and rounded-pill mb-3 me-2"
           >
@@ -160,8 +170,7 @@
             type="button"
             class="btn btn-primary btn-custom-filter rounded-pill mb-3 me-2"
           >
-            <i class="bi bi-x-lg"></i>
-            {{ item }}
+            <i class="bi bi-x-lg"></i>{{ item }}
           </button>
         </span>
       </span>
@@ -173,9 +182,9 @@
       />
       <h5
         v-else-if="
-          filterListAuthor.length > 0 ||
-          filterListYear.length > 0 ||
-          filterListMaterial.length > 0
+          store.getFilterList('author').length > 0 ||
+          store.getFilterList('year').length > 0 ||
+          store.getFilterList('material').length > 0
         "
       >
         ingen resultater opfylder de valgte kriterier
@@ -196,6 +205,7 @@
 <script>
 import CardGroup from "@/components/CardGroup.vue";
 import DropDown from "@/components/DropDown.vue";
+import { store } from "../assets/store.js";
 
 export default {
   name: "ResultsPage",
@@ -206,12 +216,9 @@ export default {
   props: ["products", "loading", "productcount"],
   data() {
     return {
+      store,
       displayAll: true,
       filterType: "",
-      filterListYear: [],
-      filterListAuthor: [],
-      filterListMaterial: [],
-      filterListSearchQuery: [],
       displayChevron: true,
       styleObject: {
         backgroundColor: `${
@@ -287,98 +294,110 @@ export default {
     extraFilters() {
       //only years
       if (
-        this.filterListYear.length > 0 &&
-        !this.filterListAuthor.length > 0 &&
-        !this.filterListMaterial.length > 0
+        this.store.getFilterList("year").length > 0 &&
+        !this.store.getFilterList("author").length > 0 &&
+        !this.store.getFilterList("material").length > 0
       ) {
+        // console.log("1_" + this.filteredProducts[0].year);
+        // console.log("2_" + this.filterListYear);
+        // console.log(
+        //   this.filterListYear[0].includes(this.filteredProducts[0].year)
+        // );
         return this.filteredProducts.filter((product) =>
-          this.filterListYear.includes(product.year)
+          this.store.getFilterList("year").includes(product.year)
         );
         //only materials
       } else if (
-        !this.filterListYear.length > 0 &&
-        !this.filterListAuthor.length > 0 &&
-        this.filterListMaterial.length > 0
+        !this.store.getFilterList("year").length > 0 &&
+        !this.store.getFilterList("author").length > 0 &&
+        this.store.getFilterList("material").length > 0
       ) {
         return this.filteredProducts.filter((product) =>
           product[653].some(
             (
               item //console.log(item.replace(".", ""))
-            ) => this.filterListMaterial.includes(item.replace(".", ""))
+            ) =>
+              this.store
+                .getFilterList("material")
+                .includes(item.replace(".", ""))
           )
         );
         //Only authors
       } else if (
-        !this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0 &&
-        !this.filterListMaterial.length > 0
+        !this.store.getFilterList("year").length > 0 &&
+        this.store.getFilterList("author").length > 0 &&
+        !this.store.getFilterList("material").length > 0
       ) {
         return this.filteredProducts.filter(
           (product) =>
-            this.filterListAuthor.includes(product["100"][0]) ||
+            this.store.getFilterList("author").includes(product["100"][0]) ||
             ("700" in product &&
               product["700"].some((item) =>
-                this.filterListAuthor.includes(item)
+                this.store.getFilterList("author").includes(item)
               ))
         );
       }
       //years and authors
       else if (
-        this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0 &&
-        !this.filterListMaterial.length > 0
+        this.store.getFilterList("year").length > 0 &&
+        this.store.getFilterList("author").length > 0 &&
+        !this.store.getFilterList("material").length > 0
       ) {
         return this.filteredProducts.filter(
           (product) =>
-            (this.filterListYear.includes(product.year) &&
-              this.filterListAuthor.includes(product["100"][0])) ||
-            (this.filterListYear.includes(product.year) &&
+            (this.store.getFilterList("year").includes(product.year) &&
+              this.store.getFilterList("author").includes(product["100"][0])) ||
+            (this.store.getFilterList("year").includes(product.year) &&
               "700" in product &&
               product["700"].some((item) =>
-                this.filterListAuthor.includes(item)
+                this.store.getFilterList("author").includes(item)
               ))
         );
       }
       //years and materials
       else if (
-        this.filterListYear.length > 0 &&
-        !this.filterListAuthor.length > 0 &&
-        this.filterListMaterial.length > 0
+        this.store.getFilterList("year").length > 0 &&
+        !this.store.getFilterList("author").length > 0 &&
+        this.store.getFilterList("material").length > 0
       ) {
         return this.filteredProducts.filter(
           (product) =>
-            this.filterListYear.includes(product.year) &&
+            this.store.getFilterList("year").includes(product.year) &&
             product[653].some((item) =>
-              this.filterListMaterial.includes(item.replace(".", ""))
+              this.store
+                .getFilterList("material")
+                .includes(item.replace(".", ""))
             )
         );
       }
 
       //authors and materials
       else if (
-        !this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0 &&
-        this.filterListMaterial.length > 0
+        !this.store.getFilterList("year").length > 0 &&
+        this.store.getFilterList("author").length > 0 &&
+        this.store.getFilterList("material").length > 0
       ) {
         return this.filteredProducts.filter(
           (product) =>
             (product[653].some((item) =>
-              this.filterListMaterial.includes(item.replace(".", ""))
+              this.store
+                .getFilterList("material")
+                .includes(item.replace(".", ""))
             ) &&
-              this.filterListAuthor.includes(product["100"][0])) ||
-            (this.filterListYear.includes(product.year) &&
+              this.store.getFilterList("author").includes(product["100"][0])) ||
+            (this.store.getFilterList("year").includes(product.year) &&
               "700" in product &&
               product["700"].some((item) =>
-                this.filterListAuthor.includes(item)
+                this.store.getFilterList("author").includes(item)
               ))
         );
       }
 
       //years and authors and materials
       else if (
-        this.filterListYear.length > 0 &&
-        this.filterListAuthor.length > 0 &&
-        this.filterListMaterial.length > 0
+        this.store.getFilterList("year").length > 0 &&
+        this.store.getFilterList("author").length > 0 &&
+        this.store.getFilterList("material").length > 0
       ) {
         // return this.filteredProducts.filter(
         //   (product) =>
@@ -396,14 +415,16 @@ export default {
         return this.filteredProducts.filter(
           (product) =>
             (product[653].some((item) =>
-              this.filterListMaterial.includes(item.replace(".", ""))
+              this.store
+                .getFilterList("material")
+                .includes(item.replace(".", ""))
             ) &&
-              this.filterListYear.includes(product.year) &&
-              this.filterListAuthor.includes(product["100"][0])) ||
-            (this.filterListYear.includes(product.year) &&
+              this.store.getFilterList("year").includes(product.year) &&
+              this.store.getFilterList("author").includes(product["100"][0])) ||
+            (this.store.getFilterList("year").includes(product.year) &&
               "700" in product &&
               product["700"].some((item) =>
-                this.filterListAuthor.includes(item)
+                this.store.getFilterList("author").includes(item)
               ))
         );
       } else {
@@ -416,59 +437,147 @@ export default {
       console.log(item);
     },
     addFilter(event, filterCategory) {
-      // console.log(event.target);
+      // console.log(event.target.innerText);
       this.filterType = filterCategory;
       if (
         this.filterType == "year" &&
-        !this.filterListYear.includes(event.target.innerText) &&
+        !this.store.getFilterList("year").includes(event.target.innerText) &&
         event.target.innerText != "Alle"
       ) {
-        this.filterListYear.push(event.target.innerText);
+        this.store.setFilterList(
+          "year",
+          this.store.getFilterList("year").concat(event.target.innerText)
+        );
       } else if (
         this.filterType == "author" &&
-        !this.filterListAuthor.includes(event.target.innerText) &&
+        !this.store.getFilterList("author").includes(event.target.innerText) &&
         event.target.innerText != "Alle"
       ) {
-        this.filterListAuthor.push(event.target.innerText);
+        this.store.setFilterList(
+          "author",
+          this.store.getFilterList("author").concat(event.target.innerText)
+        );
       }
       //test
       else if (
         this.filterType == "material" &&
-        !this.filterListMaterial.includes(event.target.innerText) &&
+        !this.store
+          .getFilterList("material")
+          .includes(event.target.innerText) &&
         event.target.innerText != "Alle"
       ) {
-        this.filterListMaterial.push(event.target.innerText);
+        this.store.setFilterList(
+          "material",
+          this.store.getFilterList("material").concat(event.target.innerText)
+        );
       } else if (
         event.target.innerText == "Alle" &&
         this.filterType == "year"
       ) {
-        this.filterListYear = [];
+        this.store.setFilterList("year", []);
+        // this.store.filterListYear = [];
       } else if (
         event.target.innerText == "Alle" &&
         this.filterType == "author"
       ) {
-        this.filterListAuthor = [];
+        this.store.setFilterList("author", []);
+        // this.store.filterListAuthor = [];
       } else if (
         event.target.innerText == "Alle" &&
         this.filterType == "material"
       ) {
-        this.filterListMaterial = [];
+        this.store.setFilterList("material", []);
+        // this.store.filterListMaterial = [];
       }
     },
 
-    removeFilter(event) {
-      this.filterListYear = this.filterListYear.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+    removeFilter(event, filter) {
+      // console.log(event.currentTarget.innerText.replace(/\s+/, ""));
+      // store.updateItemCategoriesSelected(
+      //   event.currentTarget.innerText.replace(/\s+/, "")
+      // );
+      // console.log(filter);
+
+      // if (
+      //   filter == "Forfatter" ||
+      //   filter == "Udgivelsesår" ||
+      //   filter == "Materialetype"
+      // ) {
+      //   this.store.setFilterList("year", []);
+      //   this.store.setFilterList("author", []);
+      //   this.store.setFilterList("material", []);
+
+      //   // this.store.filterListAuthor = [];
+      //   // this.store.filterListYear = [];
+      //   // this.store.filterListMaterial = [];
+
+      //   //OBS! this.store.itemCategoriesSelected = [];
+      // }
+
+      //hvis trykket på "alle"
+      if (filter == "Udgivelsesår") {
+        this.store.setFilterList("year", []);
+      }
+      if (filter == "Materialetype") {
+        this.store.setFilterList("material", []);
+      }
+      if (filter == "Forfatter") {
+        this.store.setFilterList("author", []);
+      }
+      // console.log(event.currentTarget.innerText);
+      //OBS!store.updateItemCategoriesSelected(event.currentTarget.innerText);
+      // console.log(store.itemCategoriesSelected);
+      // console.log("ping");
+      this.store.setFilterList(
+        "year",
+        this.store
+          .getFilterList("year")
+          .filter(
+            (item) => !item.includes(event.currentTarget.innerText.slice(1))
+          )
       );
-      this.filterListAuthor = this.filterListAuthor.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+      // this.store.filterListYear = this.store.filterListYear.filter(
+      //   (item) => !item.includes(event.currentTarget.innerText.slice(1))
+      // );
+      this.store.setFilterList(
+        "material",
+        this.store
+          .getFilterList("material")
+          .filter(
+            (item) => !item.includes(event.currentTarget.innerText.slice(1))
+          )
       );
-      this.filterListMaterial = this.filterListMaterial.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+      // this.store.filterListMaterial = this.store.filterListMaterial.filter(
+      //   (item) => !item.includes(event.currentTarget.innerText.slice(1))
+      // );
+      this.store.setFilterList(
+        "author",
+        this.store
+          .getFilterList("author")
+          .filter(
+            (item) => !item.includes(event.currentTarget.innerText.slice(1))
+          )
       );
-      this.filterListSearchQuery = this.filterListSearchQuery.filter(
-        (item) => item != event.currentTarget.innerText.slice(1)
+      // this.store.filterListAuthor = this.store.filterListAuthor.filter(
+      //   (item) => !item.includes(event.currentTarget.innerText.slice(1))
+      // );
+      this.store.setFilterList(
+        "searchQuery",
+        this.store
+          .getFilterList("searchQuery")
+          .filter(
+            (item) => !item.includes(event.currentTarget.innerText.slice(1))
+          )
       );
+      // this.store.filterListSearchQuery =
+      //   this.store.filterListSearchQuery.filter(
+      //     (item) => !item.includes(event.currentTarget.innerText.slice(1))
+      //   );
+
+      //old format
+      // this.filterListSearchQuery = this.filterListSearchQuery.filter(
+      //   (item) => item != event.currentTarget.innerText.slice(1)
+      // );
     },
     handleWheel() {
       // console.log(this.divHeight);
@@ -479,13 +588,17 @@ export default {
 
   mounted() {
     // console.log(this.$route.params.id);
+    //OBS! this.store.itemCategoriesSelected = [];
     if (this.$route.params.id !== "alle") {
-      this.filterListSearchQuery.push(this.$route.params.id);
+      this.store.getFilterList("searchQuery").concat(this.$route.params.id);
     }
   },
 };
 </script>
 <style lang="scss" scoped>
+i {
+  padding-right: 0.2rem;
+}
 .filterbar {
   color: white;
   border-radius: 5px;

@@ -124,7 +124,6 @@
                   name: 'Results',
                   params: {
                     id: item.replace('.', '').toLowerCase(),
-                    kind: 'keyword',
                   },
                 }"
               >

@@ -118,7 +118,7 @@ export default {
       if (searchQuery) {
         this.$router.push({
           name: "Results",
-          params: { id: searchQuery, list: "productlist" },
+          params: { id: searchQuery }, //list: "productlist"
         });
         this.searchQuery = null;
       }
@@ -191,7 +191,7 @@ export default {
   opacity: 1;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
+/* Small devices (portrait tablets and large phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .btn-custom-nav {
     font-size: 0.5rem;
