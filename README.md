@@ -85,9 +85,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 **Nice to have:**
 
-- [ ] Flueben i dropdown menu til facetter, så man også der kan se, at man har valgt f.eks. artikler. Også en i "Alle".
+- [x] Flueben i dropdown menu til facetter, så man også der kan se, at man har valgt f.eks. artikler. Også en i "Alle".
 - [ ] Omstrukturering fra brug af props (emit/listen) til brug af store
-- [ ] "Featured" liste til forsiden (markeret via felt i Alma?)
+- [x] "Featured" liste til forsiden (markeret via felt i Alma?)
 - [ ] vue tooltips til sidebar ikoner
 - [ ] vue tooltips til sekundære forfatter (virker til primær) (fjernet fra primær)
 - [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)

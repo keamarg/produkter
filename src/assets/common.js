@@ -4,11 +4,6 @@ import { store } from "./store";
 export const getImage = function getImage(product) {
   // if (typeof product[997] != "undefined") {
   try {
-    // if (
-    //   typeof product[997].find((item) => item.billedmateriale) == "undefined"
-    // ) {
-    //   return "https://projekter.kea.dk/assets/SoMeCard.png";
-    // } else {
     return Object.values(product["997"].find((item) => item.billedmateriale));
     // }
   } catch {

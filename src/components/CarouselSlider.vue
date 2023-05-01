@@ -103,7 +103,14 @@ export default {
       // console.log(this.products.filter((product) => product[997]));
 
       // return this.products.filter((product) => product[997]);
-      return shuffle(this.products, 3);
+      // return shuffle(this.products, 3);
+
+      return shuffle(
+        this.products.filter((product) =>
+          product[997].find((item) => item.featured === "slider")
+        ),
+        3
+      );
     },
   },
   methods: {
