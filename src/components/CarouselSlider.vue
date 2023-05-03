@@ -34,7 +34,7 @@
         :key="index"
         :class="{ active: index == 0 }"
       >
-        <img
+        <!-- <img
           :src="
             product[997]
               ? getImage(product)
@@ -43,7 +43,59 @@
           class="d-block w-100 border-0 rounded-custom"
           alt="..."
           @load="onImgLoad"
-        />
+        /> -->
+        <picture>
+          <source
+            media="(min-width:576px) and (max-width:991px)"
+            :srcset="
+              product[997]
+                ? getImage(product, 'md') //sm
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+          />
+          <!-- <source
+            media="(min-width:768px) and (max-width:991px)"
+            :srcset="
+              product[997]
+                ? getImage(product, 'md')
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+          /> -->
+          <source
+            media="(min-width:992px) and (max-width:1199px)"
+            :srcset="
+              product[997]
+                ? getImage(product, 'lg')
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+          />
+          <source
+            media="(min-width:1200px) and (max-width:1399px)"
+            :srcset="
+              product[997]
+                ? getImage(product, 'xl')
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+          />
+          <source
+            media="(min-width:1400px)"
+            :srcset="
+              product[997]
+                ? getImage(product, 'xxl')
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+          />
+          <img
+            :src="
+              product[997]
+                ? getImage(product)
+                : 'https://projekter.kea.dk/assets/SoMeCard.png'
+            "
+            class="d-block w-100 border-0 rounded-custom"
+            alt="..."
+            @load="onImgLoad"
+          />
+        </picture>
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <div class="carousel-caption d-block border-0 rounded-custom">
             <h5>{{ getProductTitle(product) }}</h5>
