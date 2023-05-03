@@ -90,12 +90,30 @@
           "
         ></i>
         <router-link :to="{ name: 'Product', params: { id: card.id } }">
-          <img
-            :src="getImage(card)"
-            class="card-img-top"
-            alt="..."
-            onerror="this.onerror=null;this.src='https://projekter.kea.dk/assets/noimage.jpg';"
-          />
+          <picture>
+            <source
+              media="(max-width:576px)"
+              :srcset="
+                card[997]
+                  ? getImage(card, 'md')
+                  : 'https://projekter.kea.dk/assets/SoMeCard.png'
+              "
+            />
+            <source
+              media="(min-width:577px)"
+              :srcset="
+                card[997]
+                  ? getImage(card, 'card')
+                  : 'https://projekter.kea.dk/assets/SoMeCard.png'
+              "
+            />
+            <img
+              :src="getImage(card)"
+              class="card-img-top"
+              alt="..."
+              onerror="this.onerror=null;this.src='https://projekter.kea.dk/assets/noimage.jpg';"
+            />
+          </picture>
           <div class="card-body">
             <h5 class="card-title">{{ card[245][0] }}</h5>
             <p class="card-text">{{ card[520][0] }}</p>
