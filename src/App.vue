@@ -1,19 +1,6 @@
 //app.vue
 <template>
-  <!-- <button @click="addHashToLocation('profiles')">test replace</button> -->
-  <!-- <i
-    class="bi bi-info-circle-fill"
-    data-bs-toggle="modal"
-    data-bs-target="#aboutModal"
-    title="Om"
-    style="
-      font-size: 2rem;
-      color: white;
-      position: absolute;
-      top: 3rem;
-      right: 1rem;
-    "
-  ></i> -->
+  <button @click="addHashToLocation()">test replace</button>
   <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5">
     <TopBar :products="products" />
     <div class="row mb-5">
@@ -125,15 +112,21 @@ export default {
         return false;
       }
     },
-    addHashToLocation(params) {
+    addHashToLocation() {
+      console.log("#" + this.$route.path);
       history.pushState(
         {},
         null,
-        this.$route.path + "#" + encodeURIComponent(params)
+        "#" + this.$route.path //+ "#" + encodeURIComponent(params)
       );
     },
   },
-  created() {},
+  watch: {
+    $route() {
+      console.log("Hash changed to:", window.location.hash);
+      this.addHashToLocation();
+    },
+  },
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
     if (fd) {

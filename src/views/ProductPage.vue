@@ -8,7 +8,12 @@
       <span class="d-flex justify-content-end">
         <i class="bi bi-arrow-left arrow-left" @click="$router.go(-1)"></i>
       </span>
-      <div class="col pt-3 product p-5 rounded-custom" :style="css">
+      <div
+        class="col pt-3 product p-5 rounded-custom product-background"
+        :style="{
+          '--background-image': 'url(' + getProperty('billedmateriale') + ')',
+        }"
+      >
         <div class="row">
           <div class="col-lg-10 producttext rounded-custom">
             <span>
@@ -166,19 +171,6 @@ export default {
     videosrcKea() {
       return `${this.getProperty("keavideo")}#t=0.5`;
     },
-    css() {
-      return {
-        textAlign: "left",
-        color: "white",
-        background:
-          "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0.9),rgba(0,0,0,0.8),rgba(0,0,0,0.5),rgba(0,0,0,0.3)),url(" +
-          this.getProperty("billedmateriale") + //this.products[this.getIndex()].img1 +
-          "), no-repeat",
-        backgroundSize: "cover",
-        fontSize: "16px",
-        minHeight: "35rem",
-      };
-    },
   },
 
   data() {
@@ -232,7 +224,22 @@ export default {
 h2 {
   font-size: 1.2rem;
 }
-
+.product-background {
+  text-align: left;
+  color: white;
+  background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.3)
+    ),
+    var(--background-image) no-repeat;
+  background-size: cover;
+  font-size: 16px;
+  min-height: 35rem;
+}
 .videotekst {
   color: darkgray;
 }

@@ -38,7 +38,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [x] Tilføj søgning på titel (hele titlen som string i emneord/author arrayet?)
 - [x] Omstrukturering af parser, hvor 997 feltet har 1 entry per felt.
 - [x] Author side, evt. med datatræk fra f.eks. ResearchGate, LinkedIn etc. (Microsoft Graph er checket, men vi kan ikke få adgang jf. servicedesk: https://kea.topdesk.net/tas/public/ssp/content/detail/incident?unid=bca6cba01598406a953c89c9dd15ec84)
-- [ ] **NOFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
+- [ ] **WONTFIX** DYNAMISK LOADING BRUGES IKKE PT. Dynamisk loading til mobil (virker ikke med onscroll)
 - [x] Implementering af bar til filtrering (i første omgang årstal). Skal komme efter den første søgning.
 - [x] Mulighed for at trykke "pil ned" i søgefeltet, så man kan vælge mellem muligheder i stedet for at trykke med musen
 - [x] iframe fylder alt indhold i højde
@@ -65,18 +65,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - [ ] bug1t Klik på profilbilleder fjerne nederste card rækkke (KUN Safari) OBS: Sker KUN i Iframe (cutter den bunden af?)
 - [x] bug1s Nederste række af buttonGroup menu virker ikke i Safari (løser sig måske når vi lave den om til områder)
 - [x] bug1r Dropdown i søgefelt virker ikke med tastatur 2. gang man besøger feltet. Tænker det har noget at gøre med fokus eller passive/active buttons
-- [ ] **NOFIX-** bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
-- [x] **NOFIX-** TOOLTIP FJERNET. bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
+- [ ] **WONTFIX-** bug1q På product siden kommer der en fejl som beskrevet i linket (chrome violations er ikke deciderede fejl, men snarere opmærksomhedspunkter hvor man kan optimere sin kode). Tilsyneladende er det pga. youtubes volume slider. Har prøvet forskellige fixes, men uden held (betyder ikke noget i praksis)(man kan sætte youtubes "controls" property til 0, hvilket fjerner fejlen, men så har man ingen controls) https://stackoverflow.com/questions/56780548/youtube-iframe-embed-violation-non-passive-event-listener-to-a-scroll-blocking
+- [x] **WONTFIX-** TOOLTIP FJERNET. bug1p tooltip hænger ved hover over navn på produktside, og efterfølgende skift
 - [x] bug1o fetcher ikke ny data ved ændringer i alma, men bruger cache i stedet (den gør det i localhost). Forsøgt ændret med no-cache header (CORS fejl), og timeStamp query parameter
 - [x] bug1n "dropdown" menu med søgeresultater bliver hængende når man klikker andre steder på siden.
 - [x] bug1m uresponsiv søgefelt samt top af modal på mobil (iphone 11).
 - [ ] bug1c hjerte ved like fremstår som "knækket" når man klikker, skal først "knække" når man genbesøger (har bøvlet med det tidligere uden held, fjern evt. funktionaliteten)
 - [x] bug1g Tilbagepil sender én tilbage til foregående side "udenfor" kea produkter hvis man kommer fra et direkte link til et produkt
 - [x] bug1e søgefelt på mobil giver ikke forslag
-- [ ] bug1j **NOFIX-** ACCORDION FJERNET. fejl i gradient på toppen af accordion til video på "product" siden (sker ikke i development mode)
-- [ ] bug1k **NOFIX-** ACCORDION FJERNET. baggrundsbillede forstørres på "product" siden når man åbner accordion
-- [ ] bug1d **NOFIX-** DYNAMISK LOADING BRUGES IKKE PT. Henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
-- [ ] bug1h **NOFIX-** DYNAMISK LOADING BRUGES IKKE PT. Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald) UPDATE: Vi kan muligvis klare det via et "description" field, som holder en kopi af keywords i portfolio listen. I første omgang deaktiverer vi funktionaliteten med at hente ind løbende, og ser på hvor meget det rent faktisk betyder.
+- [ ] bug1j **WONTFIX-** ACCORDION FJERNET. fejl i gradient på toppen af accordion til video på "product" siden (sker ikke i development mode)
+- [ ] bug1k **WONTFIX-** ACCORDION FJERNET. baggrundsbillede forstørres på "product" siden når man åbner accordion
+- [ ] bug1d **WONTFIX-** DYNAMISK LOADING BRUGES IKKE PT. Henter produkter ind "onscroll", selvom man ikke er inde i arkivet, hvis der scrolles
+- [ ] bug1h **WONTFIX-** DYNAMISK LOADING BRUGES IKKE PT. Når man søger på et "keyword" er man nødt til at hente alle produkter ind for at få deres keywords. Er der nogen måde vi kan få keywords allerede i "listekaldet", uden at hente alle produkter ind. Alternativt skal man hive alle produkter ind hver gang siden loader, men det er måske ikke så hensigtsmæssigt, både ift. loadtid og antal api kald (det ville i så fald være et kald per produkt ud over det samlede kald) UPDATE: Vi kan muligvis klare det via et "description" field, som holder en kopi af keywords i portfolio listen. I første omgang deaktiverer vi funktionaliteten med at hente ind løbende, og ser på hvor meget det rent faktisk betyder.
 - [x] bug1l youtube afspilning virker ikke når man åbner accordion på "product" siden
 - [x] bug1a Localstorage "likes" forsvinder pludseligt på refresh
 - [x] bug1b Alle relevante produkter skal loade under likes og søgninger
@@ -86,11 +86,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 **Nice to have:**
 
 - [x] Flueben i dropdown menu til facetter, så man også der kan se, at man har valgt f.eks. artikler. Også en i "Alle".
-- [ ] Omstrukturering fra brug af props (emit/listen) til brug af store
+- [x] Omstrukturering fra brug af props (emit/listen) til brug af store
 - [x] "Featured" liste til forsiden (markeret via felt i Alma?)
 - [ ] vue tooltips til sidebar ikoner
 - [ ] vue tooltips til sekundære forfatter (virker til primær) (fjernet fra primær)
-- [ ] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
+- [x] håndtering af billedstørrelse (f.eks. implementering af alma felt, der definerer hvordan et givent billede skal vises eg. background-position)
 - [x] Krydsning af knapper (f.eks. e-bøger OG Teknik)
 - [x] Evt. læg den ned i “søgning på ….” og giv mulighed for at fravælge
 - [x] ved sharing, link direkte til hovedsiden i stedet for iframe siden (kan måske løses a la det her https://stackoverflow.com/questions/41946851/directly-link-to-page-with-specific-content-loaded-in-iframe eller det her: https://stackoverflow.com/questions/32790086/using-a-javascript-function-to-load-a-page-in-an-iframe)

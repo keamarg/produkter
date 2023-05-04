@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- CarouselSlider component displays a carousel of featured products -->
     <CarouselSlider :products="products" :loading="loading" />
   </div>
 </template>
