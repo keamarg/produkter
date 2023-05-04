@@ -22,7 +22,7 @@
             </template>
             <img
               :src="getImage(product)"
-              class="d-block w-100 border-0 rounded-custom"
+              class="d-block w-100 border-0 rounded-custom carousel-img"
               alt="..."
               @load="onImgLoad"
             />
@@ -32,9 +32,7 @@
             <p>
               {{ getProductAuthor(product) }}
               <span v-if="product[700]">
-                <span v-for="(product, index) in product[700]" :key="index">
-                  <span>, {{ product }}</span>
-                </span>
+                {{ joinAuthors(product[700]) }}
               </span>
             </p>
           </div>
@@ -74,7 +72,6 @@ export default {
   },
   data() {
     return {
-      // tempImg: "https://kea.dk/slir/w2200-c100x72/images/news/2021/12/Byg.jpeg",
       isLoaded: true,
       sizeDataArray: [
         { size: "md", media: "(min-width:0px) and (max-width:991px)" },
@@ -91,14 +88,7 @@ export default {
     };
   },
   computed: {
-    //returnerer 3 tilfældige produkter til slideren
     filteredProducts: function () {
-      // console.log(shuffle(this.products, 3));
-      // console.log(this.products.filter((product) => product[997]));
-
-      // return this.products.filter((product) => product[997]);
-      // return shuffle(this.products, 3);
-
       return shuffle(
         this.products.filter((product) =>
           product[997].find((item) => item.featured === "slider")
@@ -110,24 +100,21 @@ export default {
   methods: {
     getImage: getImage,
     getProperty: getProperty,
-
-    log(item) {
-      console.log(item);
-    },
     onImgLoad() {
       this.isLoaded = true;
     },
     getProductTitle(product) {
-      // console.log(product);
       if (typeof product[245] != "undefined") {
         return product[245][0];
       } else return "no title";
     },
     getProductAuthor(product) {
-      // console.log(product);
       if (typeof product[100] != "undefined") {
         return product[100][0];
       } else return "no author";
+    },
+    joinAuthors(authors) {
+      return authors.slice(1).join(", ");
     },
   },
 };
@@ -135,12 +122,11 @@ export default {
 <style lang="scss" scoped>
 .carousel-indicators {
   z-index: 1;
-  // position: relative;
 }
-.carousel img {
-  object-fit: cover; /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
-  height: 20rem; //30
+.carousel-img {
+  object-fit: cover;
+  object-position: center;
+  height: 20rem;
   width: 100%;
 }
 .carousel-caption {
