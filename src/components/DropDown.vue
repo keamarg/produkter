@@ -27,6 +27,7 @@
       <li v-for="item in itemCategories" :key="item.id">
         <span
           class="dropdown-item"
+          @click.stop
           v-on:click="
             store.getFilterList('year').includes(item) ||
             store.getFilterList('author').includes(item) ||

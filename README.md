@@ -117,7 +117,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Ikke teknisk:
 
 - [ ] Find et godt navn til platformen
-- [ ] Find ud af hvilke keywords der skal ligge på knapperne i navigationsmenuen (og ensret dem med keywords på produkterne!)
+- [x] Find ud af hvilke keywords der skal ligge på knapperne i navigationsmenuen (og ensret dem med keywords på produkterne!)
 - [ ] Beskrivelse af sitet
 - [ ] Beskrivelse til FB/LI/TW inkl. godt "card image"
 - [x] Alma template - endelig form
