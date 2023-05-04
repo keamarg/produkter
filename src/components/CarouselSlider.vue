@@ -5,70 +5,28 @@
     data-bs-ride="carousel"
     data-bs-interval="10000"
   >
-    <div v-if="isLoaded" class="carousel-indicators">
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
-        aria-label="Slide 1"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="1"
-        aria-label="Slide 2"
-      ></button>
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to="2"
-        aria-label="Slide 3"
-      ></button>
-    </div>
     <div class="carousel-inner border-0 rounded-custom">
       <div
         v-for="(product, index) in filteredProducts"
-        class="carousel-item"
         :key="index"
         :class="{ active: index == 0 }"
+        class="carousel-item"
       >
-        <picture>
-          <template
-            v-for="(sizeData, index) in [
-              { size: 'md', media: '(min-width:0px) and (max-width:991px)' },
-              { size: 'lg', media: '(min-width:992px) and (max-width:1199px)' },
-              {
-                size: 'xl',
-                media: '(min-width:1200px) and (max-width:1399px)',
-              },
-              { size: 'xxl', media: '(min-width:1400px)' },
-            ]"
-            :key="index"
-          >
-            <source
-              :media="sizeData.media"
-              :srcset="
-                product[997]
-                  ? getImage(product, sizeData.size)
-                  : 'https://projekter.kea.dk/assets/SoMeCard.png'
-              "
-            />
-          </template>
-          <img
-            :src="
-              product[997]
-                ? getImage(product)
-                : 'https://projekter.kea.dk/assets/SoMeCard.png'
-            "
-            class="d-block w-100 border-0 rounded-custom"
-            alt="..."
-            @load="onImgLoad"
-          />
-        </picture>
-
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
+          <picture>
+            <template v-for="(sizeData, index) in sizeDataArray" :key="index">
+              <source
+                :media="sizeData.media"
+                :srcset="getImage(product, sizeData.size)"
+              />
+            </template>
+            <img
+              :src="getImage(product)"
+              class="d-block w-100 border-0 rounded-custom"
+              alt="..."
+              @load="onImgLoad"
+            />
+          </picture>
           <div class="carousel-caption d-block border-0 rounded-custom">
             <h5>{{ getProductTitle(product) }}</h5>
             <p>
@@ -118,6 +76,18 @@ export default {
     return {
       // tempImg: "https://kea.dk/slir/w2200-c100x72/images/news/2021/12/Byg.jpeg",
       isLoaded: true,
+      sizeDataArray: [
+        { size: "md", media: "(min-width:0px) and (max-width:991px)" },
+        {
+          size: "lg",
+          media: "(min-width:992px) and (max-width:1199px)",
+        },
+        {
+          size: "xl",
+          media: "(min-width:1200px) and (max-width:1399px)",
+        },
+        { size: "xxl", media: "(min-width:1400px)" },
+      ],
     };
   },
   computed: {
@@ -175,11 +145,11 @@ export default {
 }
 .carousel-caption {
   transition: all 0.2s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .carousel-caption:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   transform: scale(1.05);
 }
 </style>
