@@ -1,6 +1,6 @@
 //app.vue
 <template>
-  <button @click="addHashToLocation()">test replace</button>
+  <!-- <button @click="addHashToLocation()">test replace</button> -->
   <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5">
     <TopBar :products="products" />
     <div class="row mb-5">
@@ -112,19 +112,21 @@ export default {
         return false;
       }
     },
-    addHashToLocation() {
-      console.log("#" + this.$route.path);
-      history.pushState(
-        {},
-        null,
-        "#" + this.$route.path //+ "#" + encodeURIComponent(params)
-      );
-    },
+    // addHashToLocation() {
+    //   // console.log("#" + this.$route.path);
+    //   history.pushState(
+    //     {},
+    //     null,
+    //     "#" + this.$route.path //+ "#" + encodeURIComponent(params)
+    //   );
+    // },
   },
   watch: {
     $route() {
       console.log("Hash changed to:", window.location.hash);
-      this.addHashToLocation();
+      const data = this.$route.path;
+      parent.postMessage({ type: "updateURL", data }, "*");
+      // this.addHashToLocation();
     },
   },
   async mounted() {
