@@ -136,6 +136,15 @@ export default {
     }
     this.store.zoteroData = await fetchZoteroProfiles();
   },
+  created() {
+    console.log("Hash changed to:", window.location.hash);
+    if (process.env.NODE_ENV != "development") {
+      top.location = "?=" + this.$route.path;
+    } else {
+      console.log(process.env.NODE_ENV);
+    }
+    this.addHashToLocation();
+  },
 };
 </script>
 
