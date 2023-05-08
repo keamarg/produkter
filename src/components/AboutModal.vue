@@ -59,7 +59,6 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
 
 <script>
 export default {
-  props: {},
   data() {
     return {};
   },
@@ -132,26 +131,6 @@ export default {
       );
       return false;
     },
-    //virker ikke i iframe
-    // copyToClipboard() {
-    //   /* Get the text field */
-    //   let copyText = document.getElementById("myInput");
-
-    //   /* Select the text field */
-    //   copyText.select();
-    //   copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-    //   /* Copy the text inside the text field */
-    //   navigator.clipboard.writeText(copyText.value);
-
-    //   /* Alert the copied text */
-    //   alert("Copied the text: " + copyText.value);
-    // },
-    //deprecated, men virker i iFrame
-    copyToClipboard() {
-      document.querySelector("#myInput").select();
-      document.execCommand("copy");
-    },
   },
 };
 </script>
@@ -160,12 +139,6 @@ export default {
 p {
   color: black;
   display: inline;
-}
-textarea {
-  width: 100%;
-  resize: none;
-  border: none;
-  font-size: 0.8rem;
 }
 .obs {
   color: red;

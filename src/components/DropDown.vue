@@ -10,20 +10,11 @@
     </p>
     <ul class="dropdown-menu dropdown-menu-dark">
       <li>
-        <span
-          class="dropdown-item"
-          v-on:click="
-            removeFilter($event, title) //$emit('filterupdate', $event, this.filterCategory), log('clicked')
-          "
+        <span class="dropdown-item" v-on:click="removeFilter($event, title)"
           >Alle</span
         >
       </li>
-      <!-- {{
-        log(itemCategories)
-      }} -->
-      <!-- {{
-        log(filterCategory)
-      }} -->
+
       <li v-for="item in itemCategories" :key="item.id">
         <span
           class="dropdown-item"
@@ -41,7 +32,7 @@
             :class="
               store.getFilterList('year').includes(item) ||
               store.getFilterList('author').includes(item) ||
-              store.getFilterList('material').includes(item) //store.itemCategoriesSelected.includes(item)
+              store.getFilterList('material').includes(item)
                 ? 'bi-check2-square'
                 : 'bi-square'
             "
@@ -62,14 +53,11 @@ export default {
   props: {
     title: String,
     filteredProducts: Array,
-    // extraFilters: Array,
     filterCategory: String,
   },
   emits: ["filterupdate", "removeFilter"],
   data() {
     return {
-      // isActive: true,
-      // itemCategoriesSelected: [],
       store,
     };
   },
@@ -78,8 +66,6 @@ export default {
     itemCategories() {
       let data = [];
       this.filteredProducts.map((product) => {
-        // console.log(product["year"]);
-
         //test
         if (this.filterCategory == "material") {
           let materialList = [
@@ -93,31 +79,24 @@ export default {
             "spil.",
           ];
           if (typeof product["653"] != "undefined") {
-            // product[653].map((item) => data.push(item));
             product[653].reduce((filtered, option) => {
               let optionStripped = option.replace(".", "");
               if (
                 !data.includes(optionStripped) &&
                 materialList.includes(option)
               ) {
-                // console.log(optionStripped);
                 data.push(optionStripped);
               }
-              // return filtered;
-              // this.store.materialFilters = data;
             }, []);
           }
         } else if (this.filterCategory == "author") {
-          // console.log(product);
           if (typeof product["100"] != "undefined") {
             data.push(product["100"][0]);
           }
           if (typeof product["700"] != "undefined") {
             product[700].map((item) => data.push(item));
-          } // data.push(product.author2);
-          // data.push(product.author3);
+          }
         } else data.push(product[this.filterCategory]);
-        // console.log(product[this.filterCategory]);
       });
       return [...new Set(data)].sort();
     },
@@ -128,22 +107,14 @@ export default {
     },
     removeFilter(event, title) {
       this.$emit("removeFilter", event, title);
-      // console.log("inside removeFilter " + item);
-      // console.log(this.store.itemCategoriesSelected.indexOf(item));
-      // console.log(this.store.itemCategoriesSelected);
-      // this.store.itemCategoriesSelected.splice(
-      //   this.store.itemCategoriesSelected.indexOf(item, 1)
-      // );
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-//fjern safari button styling
 p[type="button"] {
   -webkit-appearance: none;
-  //   -webkit-border-radius: 0;
 }
 .dropdown-item {
   cursor: pointer;

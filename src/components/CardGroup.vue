@@ -3,41 +3,13 @@
     v-if="profiles"
     class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6"
   >
-    <!-- <p>{{ profiles.length }}</p> -->
     <div
       class="col mb-4"
       v-for="profileCard in sortedCollection()"
       :id="profileCard.keaId"
       :key="profileCard.keaId"
     >
-      <!-- {{ setZoteroProfile(profileCard.keaId) }} -->
-
-      <!-- <p>{{ profileCard }}</p> -->
-      <!-- {{ log(profileCard.keaId) }} -->
       <div class="card text-white bg-dark border-2 h-100">
-        <!-- <i
-            @click="like($event, card)"
-            :class="
-              card.liked
-                ? 'bi bi-heart-fill likeheart likeheart-card'
-                : 'bi bi-heart unlikeheart unlikeheart-card'
-            "
-          ></i> -->
-        <!-- <span
-          class="link-custom-author me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2"
-          ref="tooltip"
-          @mouseover="hoverTip"
-          @mouseout="removeTip"
-          data-bs-html="true"
-          data-bs-toggle="modal"
-          data-bs-target="#profileModal"
-          @click="
-            store.currentProfile = getProperty('contact');
-            store.currentProfileNumber = 1;
-          "
-        >
-          {{ getProperty("author") }}
-        </span> -->
         <span
           data-bs-html="true"
           data-bs-toggle="modal"
@@ -63,7 +35,6 @@
             </h5>
             <p class="card-text">
               {{ getZoteroProfile(profileCard.keaId, "title") }}
-              <!-- {{ getZoteroProfile(profileCard.keaId, "bio") }} -->
             </p>
           </div>
         </span>
@@ -230,10 +201,6 @@ export default {
 .card-text {
   font-size: 0.7rem; //1
 }
-/* .embed-responsive .card-img-top {
-    object-fit: cover;
-    object-position: center; 
-  } */
 
 .card-img-top {
   // height: 20rem; //20
@@ -247,7 +214,6 @@ export default {
 .card:hover {
   transform: scale(1.03); //1.05
   cursor: pointer;
-  /* color: #ea4e44 !important; */
 }
 
 .card-title {
@@ -281,7 +247,6 @@ export default {
 }
 
 .unlikeheart:hover:before {
-  /* content: "\F415"; */
   color: $keared;
 }
 </style>

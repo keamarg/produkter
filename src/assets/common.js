@@ -1,10 +1,8 @@
 import { store } from "./store";
 
-//fælles function til image (har sin egen funktion fordi der ikke er nogen getindex mulighed)
-// export const getImage = function getImage(product, size = "") {
 export const getImage = function getImage(product, size = "") {
   try {
-    let imageArray = product[997].filter((item) =>
+    const imageArray = product[997].filter((item) =>
       Object.keys(item).some((key) => key.includes("billedmateriale"))
     );
 
@@ -18,146 +16,12 @@ export const getImage = function getImage(product, size = "") {
     if (image) {
       return image[imageSize];
     }
-    // else {
-    //   console.log(`No object with ${imageSize} property found`);
-    // }
   } catch {
     console.log("no image");
     return "https://projekter.kea.dk/assets/SoMeCard.png";
   }
 };
-//   // if (typeof product[997] != "undefined") {
-//   try {
-//     // if (array) {
-//     // console.log(Object.values(product[997].filter((item) => item)));
-//     // console.log(
-//     //   product[997].filter((item) =>
-//     //     Object.keys(item).some((key) => key.includes("billedmateriale"))
-//     //   )
-//     // );
 
-//     let imageArray = product[997].filter((item) =>
-//       Object.keys(item).some((key) => key.includes("billedmateriale"))
-//     );
-//     // console.log(imageArray);
-//     if (size == "") {
-//       console.log("card");
-//       const normalImage = imageArray.find((item) =>
-//         Object.keys(item).some((key) => key == "billedmateriale")
-//       );
-
-//       if (normalImage) {
-//         return normalImage.billedmateriale;
-//       } else {
-//         console.log("No object with billedmateriale property found");
-//       }
-//     }
-
-//     // console.log(imageArray);
-//     else if (size == "md") {
-//       console.log("md");
-
-//       const image = imageArray.find((item) =>
-//         Object.keys(item).some((key) => key == "billedmaterialemd")
-//       );
-
-//       if (image) {
-//         return image.billedmaterialemd;
-//       } else {
-//         console.log("No object with billedmateriale property found");
-//       }
-//     }
-
-//     // console.log(imageArray);
-//     else if (size == "lg") {
-//       console.log("lg");
-//       console.log(
-//         imageArray.find((item) =>
-//           Object.keys(item).some((key) => key == "billedmaterialelg")
-//         )
-//       );
-
-//       const image = imageArray.find((item) =>
-//         Object.keys(item).some((key) => key == "billedmaterialelg")
-//       );
-//       // console.log("image: " + image);
-
-//       if (image) {
-//         return image.billedmaterialelg;
-//       } else {
-//         console.log("No object with billedmateriale property found");
-//       }
-//     } else if (size == "xl") {
-//       console.log("xl");
-//       console.log(
-//         imageArray.find((item) =>
-//           Object.keys(item).some((key) => key == "billedmaterialexl")
-//         )
-//       );
-
-//       const image = imageArray.find((item) =>
-//         Object.keys(item).some((key) => key == "billedmaterialexl")
-//       );
-//       // console.log("image: " + image);
-
-//       if (image) {
-//         return image.billedmaterialexl;
-//       } else {
-//         console.log("No object with billedmateriale property found");
-//       }
-//     }
-//     else if (size == "xxl") {
-//       console.log("xxl");
-//       console.log(
-//         imageArray.find((item) =>
-//           Object.keys(item).some((key) => key == "billedmaterialexxl")
-//         )
-//       );
-
-//       const image = imageArray.find((item) =>
-//         Object.keys(item).some((key) => key == "billedmaterialexxl")
-//       );
-//       // console.log("image: " + image);
-
-//       if (image) {
-//         return image.billedmaterialexxl;
-//       } else {
-//         console.log("No object with billedmateriale property found");
-//       }
-//     }
-//     //short version no checks
-//     // console.log(
-//     //   imageArray.find((item) =>
-//     //     Object.keys(item).some((key) => key == "billedmateriale")
-//     //   ).billedmateriale
-//     // );
-
-//     // console.log(
-//     //   imageArray.filter((item) =>
-//     //     Object.keys(item).some((key) => key == "billedmateriale")
-//     //   )
-//     // );
-
-//     // return imageArray[0].billedmateriale;
-//     // return Object.values(product["997"].filter((item) => item.billedmateriale));
-//     // }
-
-//     // if (
-//     //   size == "wide" &&
-//     //   product["997"].find((item) => item.billedmaterialewide)
-//     // ) {
-//     //   return Object.values(
-//     //     product["997"].find((item) => item.billedmaterialewide)
-//     //   );
-//     // else {
-//     //   return Object.values(product["997"].find((item) => item.billedmateriale));
-//     // }
-//   } catch {
-//     console.log("no image");
-//     return "https://projekter.kea.dk/assets/SoMeCard.png";
-//   }
-//   // }
-// };
 //fælles function til andre properties
 export const getProperty = function getProperty(property, authorNumber) {
   try {

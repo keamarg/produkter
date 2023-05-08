@@ -5,64 +5,13 @@
     aria-label="Basic example"
   >
     <div class="col d-sm-flex justify-content-center mt-2 mt-xl-0">
-      <!-- <span v-if="materials">
-        <span
-          v-for="(material, index) in materials.slice(0, 8)"
-          v-bind:key="index"
-        >
-          <router-link
-            :to="{
-              name: 'Results',
-              params: { id: material.toLowerCase(), list: 'productlist' },
-            }"
-          >
-            <button
-              type="button"
-              class="btn btn-primary btn-custom-nav me-1 me-sm-3 mb-2 mt-2 py-1 px-1 px-sm-2 rounded-pill"
-            >
-              {{ material }}
-            </button>
-          </router-link>
-        </span>
-      </span> -->
       <span v-if="categories">
         <span
           v-for="(category, index) in categories.slice(0, 10)"
           v-bind:key="index"
           class="me-2 ms-2"
         >
-          <span v-if="category == 'OM'">
-            <!-- <span class="d-md-block sidebar-icons">
-              <i
-                class="bi bi-info-circle-fill"
-                data-bs-toggle="modal"
-                data-bs-target="#aboutModal"
-                title="Del"
-              ></i>
-              <div class="d-none d-md-block sidebar-icons-text">Om</div>
-            </span> -->
-            <!-- <button
-              type="button"
-              class="btn-circle me-0 me-xs1 px-3 py-2"
-              :class="[
-                category.toLowerCase() == $route.params.id
-                  ? category + 'ACTIVE'
-                  : '',
-                category,
-              ]"
-            > -->
-            <!-- <span class="btn-circle me-0 me-xs1 px-3 py-2"> -->
-            <!-- <i
-              class="bi bi-info-circle-fill btn-circle align-middle"
-              data-bs-toggle="modal"
-              data-bs-target="#aboutModal"
-              title="Om"
-              style="font-size: 2rem"
-            ></i> -->
-            <!-- </span> -->
-            <!-- {{ category }} -->
-            <!-- </button> -->
-          </span>
+          <span v-if="category == 'OM'"> </span>
 
           <router-link
             v-else
@@ -71,16 +20,6 @@
               params: { id: category.toLowerCase() }, //, list: 'productlist'
             }"
           >
-            <!-- <button
-              type="button"
-              class="btn btn-primary btn-custom-nav me-1 me-sm-3 py-1 px-1 px-sm-2 rounded-pill"
-            >
-              {{ category }}
-            </button> -->
-
-            <!-- { [category + 'ACTIVE']: category + 'isActive' }, -->
-            <!-- log(`${category + 'isActive'}`); -->
-
             <button
               type="button"
               class="btn-circle me-0 me-xs1 px-3 py-2"
@@ -109,7 +48,7 @@ export default {
     categories: Array,
   },
   data() {
-    return { store, isActive: null };
+    return { store };
   },
   methods: {
     log(item) {
