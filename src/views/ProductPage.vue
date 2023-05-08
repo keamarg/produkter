@@ -223,7 +223,11 @@ export default {
   },
   created() {
     console.log("Hash changed to:", window.location.hash);
-    window.location.hash = "ff";
+    if (process.env.NODE_ENV != "development") {
+      top.location = "https://www.google.co.in/";
+    } else {
+      console.log(process.env.NODE_ENV);
+    }
     this.addHashToLocation();
   },
   beforeUnmount() {},
