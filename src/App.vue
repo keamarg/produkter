@@ -112,14 +112,14 @@ export default {
         return false;
       }
     },
-    //   addHashToLocation() {
-    //     // console.log("#" + this.$route.path);
-    //     history.pushState(
-    //       {},
-    //       null,
-    //       "#" + this.$route.path //+ "#" + encodeURIComponent(params)
-    //     );
-    //   },
+    // addHashToLocation() {
+    //   // console.log("#" + this.$route.path);
+    //   history.pushState(
+    //     {},
+    //     null,
+    //     "#" + this.$route.path //+ "#" + encodeURIComponent(params)
+    //   );
+    // },
   },
   // watch: {
   //   $route() {
@@ -136,15 +136,18 @@ export default {
     }
     this.store.zoteroData = await fetchZoteroProfiles();
   },
-  created() {
-    console.log("Hash changed to:", window.location.hash);
-    if (process.env.NODE_ENV != "development") {
-      top.location = "?=" + this.$route.path;
-    } else {
-      console.log(process.env.NODE_ENV);
-    }
-    this.addHashToLocation();
-  },
+  // created() {
+  //   console.log("Hash changed to:", window.location.hash);
+  //   if (process.env.NODE_ENV != "development") {
+  //     top.location = "bibliot?=" + this.$route.path;
+  //   } else {
+  //     top.location = `https://bibliotek.kea.dk/produkter?productid=${this.$route.path.slice(
+  //       1
+  //     )}`;
+  //     console.log(process.env.NODE_ENV);
+  //   }
+  //   this.addHashToLocation();
+  // },
 };
 </script>
 
