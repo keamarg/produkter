@@ -224,7 +224,7 @@ export default {
   created() {
     console.log("Hash changed to:", window.location.hash);
     if (process.env.NODE_ENV != "development") {
-      top.location = "https://www.google.co.in/";
+      top.location = window.location + window.location.hash;
     } else {
       console.log(process.env.NODE_ENV);
     }
