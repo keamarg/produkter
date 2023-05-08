@@ -112,23 +112,21 @@ export default {
         return false;
       }
     },
-    // addHashToLocation() {
-    //   // console.log("#" + this.$route.path);
-    //   history.pushState(
-    //     {},
-    //     null,
-    //     "#" + this.$route.path //+ "#" + encodeURIComponent(params)
-    //   );
-    // },
+    //   addHashToLocation() {
+    //     // console.log("#" + this.$route.path);
+    //     history.pushState(
+    //       {},
+    //       null,
+    //       "#" + this.$route.path //+ "#" + encodeURIComponent(params)
+    //     );
+    //   },
   },
-  watch: {
-    $route() {
-      console.log("Hash changed to:", window.location.hash);
-      const data = this.$route.path;
-      parent.postMessage({ type: "updateURL", data }, "*");
-      // this.addHashToLocation();
-    },
-  },
+  // watch: {
+  //   $route() {
+  //     console.log("Hash changed to:", window.location.hash);
+  //     this.addHashToLocation();
+  //   },
+  // },
   async mounted() {
     let fd = await fetchData(this.fetchUrl);
     if (fd) {

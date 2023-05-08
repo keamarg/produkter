@@ -194,7 +194,22 @@ export default {
         localStorage.removeItem(product[245][0]);
       }
     },
+    addHashToLocation() {
+      console.log("#" + this.$route.path);
+      history.pushState(
+        {},
+        null,
+        "#" + this.$route.path //+ "#" + encodeURIComponent(params)
+      );
+    },
   },
+
+  // watch: {
+  //   $route() {
+  //     console.log("Hash changed to:", window.location.hash);
+  //     this.addHashToLocation();
+  //   },
+  // },
 
   async mounted() {
     Modal.getOrCreateInstance(
@@ -206,7 +221,11 @@ export default {
       this.store.currentProfileNumber = null;
     };
   },
-  created() {},
+  created() {
+    console.log("Hash changed to:", window.location.hash);
+    window.location.hash = "ff";
+    this.addHashToLocation();
+  },
   beforeUnmount() {},
   beforeRouteLeave(to, from, next) {
     let modal = Modal.getOrCreateInstance(
