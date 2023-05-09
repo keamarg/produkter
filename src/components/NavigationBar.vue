@@ -165,8 +165,6 @@ export default {
 
     //håndterer, at søgeresultat "dropdown" forsvinder, når man klikker et andet sted på siden.
     handleFocusOut(e) {
-      // console.log("related: " + e.relatedTarget);
-      // console.log(e.target);
       if (
         e.relatedTarget != null &&
         !e.relatedTarget.classList.contains("dropdownItem") &&
