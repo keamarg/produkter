@@ -24,8 +24,8 @@
         <div class="pulseLoader"></div>
       </div>
     </div>
+    <ProfileModal />
   </div>
-  <ProfileModal />
 </template>
 
 <script>

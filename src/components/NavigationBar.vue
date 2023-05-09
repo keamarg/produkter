@@ -5,6 +5,7 @@
         <img
           src="https://bibliotek.kea.dk/images/KEAprodukter/KEA_logo_EN_Web_red.png"
           class="logo d-inline"
+          id="logo"
           alt=""
         />
         <p class="navbar-title d-inline ps-2 m-0">Produkter</p>
@@ -45,6 +46,7 @@
         </div>
       </div>
       <button
+        tabindex="-1"
         @click="search(searchQuery)"
         class="btn-search btn btn-outline-light ms-1"
         type="button"
@@ -115,6 +117,7 @@ export default {
       console.log(item);
     },
     search(searchQuery) {
+      // console.log("ping: " + searchQuery);
       if (searchQuery) {
         this.$router.push({
           name: "Results",
@@ -162,9 +165,10 @@ export default {
 
     //håndterer, at søgeresultat "dropdown" forsvinder, når man klikker et andet sted på siden.
     handleFocusOut(e) {
-      if (e.relatedTarget == null) {
-        this.searchQuery = "";
-      } else if (
+      // console.log("related: " + e.relatedTarget);
+      // console.log(e.target);
+      if (
+        e.relatedTarget != null &&
         !e.relatedTarget.classList.contains("dropdownItem") &&
         !e.relatedTarget.classList.contains("btn-search")
       ) {

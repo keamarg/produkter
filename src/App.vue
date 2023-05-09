@@ -2,9 +2,9 @@
 <template>
   <!-- <button @click="addHashToLocation()">test replace</button> -->
   <div id="app" ref="app" class="px-3 py-2 px-sm-5 pt-5">
-    <TopBar :products="products" />
+    <TopBar :products="products" data-cy="top-bar" />
     <div class="row mb-5">
-      <SideBar />
+      <SideBar data-cy="side-bar" />
       <div
         v-if="store.fetchErrorAlma"
         class="col d-flex align-items-center justify-content-center"
@@ -42,6 +42,7 @@
         v-if="homePage() && !loading"
         :products="products"
         :loading="loading"
+        data-cy="card-group"
       />
     </transition>
   </div>

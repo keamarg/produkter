@@ -77,7 +77,7 @@
                 {{ getProperty("antologi") }}
               </p>
             </div>
-            <template
+            <span
               v-for="(item, index) in products[getIndex()][856]"
               :key="index"
             >
@@ -89,7 +89,7 @@
                 ><i class="bi bi-file-earmark-pdf"></i>&nbsp;
                 {{ Object.keys(item).toString() }}</a
               >
-            </template>
+            </span>
             <p v-if="getProperty('videotekst')" class="mb-1 mt-5 videotekst">
               {{ getProperty("videotekst") }}
             </p>

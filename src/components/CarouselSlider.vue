@@ -14,12 +14,12 @@
       >
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <picture>
-            <template v-for="(sizeData, index) in sizeDataArray" :key="index">
+            <span v-for="(sizeData, index) in sizeDataArray" :key="index">
               <source
                 :media="sizeData.media"
                 :srcset="getImage(product, sizeData.size)"
               />
-            </template>
+            </span>
             <img
               :src="getImage(product)"
               class="d-block w-100 border-0 rounded-custom carousel-img"
