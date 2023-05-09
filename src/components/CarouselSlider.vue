@@ -14,12 +14,12 @@
       >
         <router-link :to="{ name: 'Product', params: { id: product.id } }">
           <picture>
-            <span v-for="(sizeData, index) in sizeDataArray" :key="index">
-              <source
-                :media="sizeData.media"
-                :srcset="getImage(product, sizeData.size)"
-              />
-            </span>
+            <source
+              v-for="(sizeData, index) in sizeDataArray"
+              :key="index"
+              :media="sizeData.media"
+              :srcset="getImage(product, sizeData.size)"
+            />
             <img
               :src="getImage(product)"
               class="d-block w-100 border-0 rounded-custom carousel-img"
@@ -27,6 +27,7 @@
               @load="onImgLoad"
             />
           </picture>
+
           <div class="carousel-caption d-block border-0 rounded-custom">
             <h5>{{ getProductTitle(product) }}</h5>
             <p>
