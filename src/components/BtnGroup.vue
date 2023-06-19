@@ -62,7 +62,7 @@ export default {
 .btn-circle {
   // width: 6rem;
   // height: 3rem;
-  color: white;
+  color: $buttontext; //white;
   border: none;
   border-radius: 3rem;
   font-size: 1rem;

@@ -186,7 +186,7 @@ export default {
 
 <style lang="scss" scoped>
 p {
-  color: black;
+  color: $textcolor;
   display: inline;
 }
 textarea {
@@ -194,5 +194,27 @@ textarea {
   resize: none;
   border: none;
   font-size: 0.8rem;
+}
+.fbIcon {
+  color: #4267b2;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.twIcon {
+  color: #1da1f2;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.liIcon {
+  color: #0a66c2;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.mailIcon {
+  color: primary;
+  font-size: 2rem;
 }
 </style>

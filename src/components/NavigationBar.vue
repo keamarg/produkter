@@ -39,6 +39,7 @@
               @keydown.prevent.down="pick('down')"
               @keydown.enter="search(this.picked.innerText.slice(2))"
               class="w-100 ps-1 dropdownItem"
+              :title="`${keyword}`"
             >
               <i class="bi bi-search"></i> &nbsp;{{ keyword }}
             </div>
@@ -165,13 +166,21 @@ export default {
 
     //håndterer, at søgeresultat "dropdown" forsvinder, når man klikker et andet sted på siden.
     handleFocusOut(e) {
-      if (
-        e.relatedTarget != null &&
+      if (e.relatedTarget == null) {
+        this.searchQuery = "";
+      } else if (
         !e.relatedTarget.classList.contains("dropdownItem") &&
         !e.relatedTarget.classList.contains("btn-search")
       ) {
         this.searchQuery = "";
       }
+      // if (
+      //   e.relatedTarget != null &&
+      //   !e.relatedTarget.classList.contains("dropdownItem") &&
+      //   !e.relatedTarget.classList.contains("btn-search")
+      // ) {
+      //   this.searchQuery = "";
+      // }
     },
   },
   mounted() {
@@ -182,13 +191,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .btn-om {
-  color: #ced4da;
+  color: $iconbuttons; //#ced4da;
   font-size: 2rem;
-  opacity: 0.5;
+  opacity: $iconbuttonopacity;
+
   transition: all 0.3s ease-in-out;
 }
 .btn-om:hover {
-  color: white;
+  color: $iconbuttonshover;
   cursor: pointer;
   opacity: 1;
 }
@@ -214,10 +224,16 @@ export default {
 }
 /* @import "../styles/style.css"; */
 .highlight {
-  background-color: white;
+  background-color: $navdropdownitemhighlight;
+}
+
+.dropdownItem {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .dropdownItem:hover {
-  background-color: white;
+  background-color: $navdropdownitemhighlight;
 }
 /*search bar options*/
 .dropdown {
@@ -229,22 +245,30 @@ export default {
 .dropdown-content {
   /* display: none; */
   position: absolute;
-  background-color: rgba(256, 256, 256, 0.8);
+  background-color: rgba($navdropdowncontent, 0.8);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 0.25rem;
 }
-.dropdown-content p {
-  color: #343a40;
-  padding: 0.2rem;
-  text-decoration: none;
-  display: block;
-  z-index: 2;
+// .dropdown-content p {
+//   color: #343a40;
+//   padding: 0.2rem;
+//   text-decoration: none;
+//   display: block;
+//   z-index: 2;
+// }
+
+// .dropdown-content p:hover {
+//   background-color: #ddd;
+// }
+
+.btn-search {
+  $lighttextcolor: blue; //#f8f9fa;
 }
 
-.dropdown-content p:hover {
-  background-color: #ddd;
+.btn-search:hover {
+  color: $searchbuttontext; // #343a40;
 }
 </style>

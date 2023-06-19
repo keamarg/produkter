@@ -77,15 +77,15 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar-icons {
-  color: #ced4da;
+  color: $iconbuttons;
   font-size: 2.5rem; //4
   line-height: 2rem; //5
-  opacity: 0.5;
+  opacity: $iconbuttonopacity; //0.5;
   transition: all 0.3s ease-in-out;
 }
 
 .sidebar-icons:hover {
-  color: white;
+  color: $iconbuttonshover;
   cursor: pointer;
   opacity: 1;
 }

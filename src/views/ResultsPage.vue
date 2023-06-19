@@ -221,6 +221,7 @@ export default {
       filterType: "",
       displayChevron: true,
       styleObject: {
+        //cannot use scss variables in style object - so we have to do it like this
         backgroundColor: `${
           this.$route.params.id.toLocaleLowerCase() == "design"
             ? "#ea4360"
@@ -600,14 +601,14 @@ i {
   padding-right: 0.2rem;
 }
 .filterbar {
-  color: white;
+  color: $filterbar; //white;
   border-radius: 5px;
 }
 
 .btn-custom-filter {
-  background-color: #f8f9fa;
+  background-color: $filterbuttonbg; // #f8f9fa;
   border: none;
-  color: #343a40;
+  color: $filterbuttontext; // #343a40;
   /* padding: 0.5rem !important; */
   font-size: 0.7rem; //1
   cursor: pointer;
@@ -620,12 +621,12 @@ i {
 }
 
 .btn-custom-filter:hover {
-  background-color: #343a40;
-  color: #f8f9fa;
+  background-color: $filterbuttontext; // #343a40;
+  color: $filterbuttonbg; // #f8f9fa;
 }
 
 .btn-custom-filter i {
-  color: #343a40;
+  color: $filterbuttontext; // #343a40;
 }
 
 .btn-custom-filter:hover i {
@@ -633,7 +634,7 @@ i {
 }
 
 .btn-custom-and {
-  background-color: #343a40;
+  background-color: $filterbuttontext; // #343a40;
   border: none;
   color: #f8f9fa;
   font-size: 0.7rem; //1
@@ -641,7 +642,7 @@ i {
   border-radius: 0.7rem; //1
 }
 .btn-custom-and:hover {
-  color: #f8f9fa;
+  color: $filterbuttonbg; // #f8f9fa;
 }
 
 #btn-custom-and {
@@ -649,13 +650,13 @@ i {
 }
 
 .btn-custom-keyword {
-  color: white;
+  color: $buttontext; // white;
   // background-color: $teknik;
   background-color: v-bind("styleObject.backgroundColor");
 }
 
 .btn-custom-keyword i {
-  color: white;
+  color: $buttontext; //white;
 }
 
 .bi-chevron-down {
@@ -674,7 +675,7 @@ i {
   height: 50px;
   width: 50px;
   // background: red;
-  color: white;
+  color: $buttontext; // white;
   // -webkit-animation: bounce 1.5s infinite;
   // -moz-animation: bounce 1.5s infinite;
   // -o-animation: bounce 1.5s infinite;

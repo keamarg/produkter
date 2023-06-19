@@ -199,6 +199,7 @@ export default {
 <style lang="scss" scoped>
 /* Cards */
 .card-text {
+  color: $lighttextcolor;
   font-size: 0.7rem; //1
 }
 
@@ -217,6 +218,7 @@ export default {
 }
 
 .card-title {
+  color: $lighttextcolor;
   font-size: 1rem;
 }
 .card:hover .card-title {
@@ -224,7 +226,7 @@ export default {
 }
 
 .likeheart {
-  color: #eb5045;
+  color: $keared;
 }
 
 .likeheart-card {
@@ -232,7 +234,7 @@ export default {
   top: 0.5rem;
   right: 1rem;
   z-index: 1;
-  color: #eb5045;
+  color: $keared;
 }
 
 .likeheart:hover:before {

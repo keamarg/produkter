@@ -78,7 +78,7 @@ export default {
 }
 
 .connecterror {
-  color: white;
+  color: $lighttextcolor; //white;
   cursor: pointer;
 }
 
@@ -100,7 +100,7 @@ $pulseTiming: 1.2s;
   width: $pulseSize;
   height: $pulseSize;
   border-radius: $pulseSize;
-  background-color: white;
+  background-color: $pulseloader; //white;
   outline: 1px solid transparent;
   animation: pulseanim $pulseTiming ease-in-out infinite;
 }

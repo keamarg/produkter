@@ -132,11 +132,11 @@ export default {
 }
 .carousel-caption {
   transition: all 0.2s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba($carouselcaption, 0.5);
 }
 
 .carousel-caption:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba($carouselcaption, 0.8);
   transform: scale(1.05);
 }
 </style>

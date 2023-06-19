@@ -11813,41 +11813,6 @@ a {
   text-decoration: none;
 }
 
-.fbIcon {
-  color: #4267b2;
-  cursor: pointer;
-  font-size: 2rem;
-}
-
-.twIcon {
-  color: #1da1f2;
-  cursor: pointer;
-  font-size: 2rem;
-}
-
-.liIcon {
-  color: #0a66c2;
-  cursor: pointer;
-  font-size: 2rem;
-}
-
-.mailIcon {
-  color: primary;
-  font-size: 2rem;
-}
-
-.product-icon {
-  opacity: 0.8;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-.product-icon:hover {
-  opacity: 1;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
 /*Lagt i index.html*/
 /* Style buttons */
 .btn-custom-product {
@@ -11871,14 +11836,6 @@ a {
 
 .btn-custom-product:hover i {
   color: #f8f9fa;
-}
-
-.btn-search {
-  color: #f8f9fa;
-}
-
-.btn-search:hover {
-  color: #343a40;
 }
 
 .btn-custom-nav {

@@ -1,12 +1,33 @@
-//colors
+//opacities:
+$iconbuttonopacity: 0.5; //1
+//dark theme color sorted
 $body-bg: #212121;
 
-// $body-color: rgb(24, 240, 60);
+$keywordbutton: #343a40;
+$filterbuttontext: $keywordbutton;
+$searchbuttontext: $keywordbutton;
+
 $textcolor: #2c3e50;
 
+$author: darkgray;
+
 $lighttextcolor: #f8f9fa;
+$filterbuttonbg: $lighttextcolor;
+
+$buttontext: white;
+$iconbuttonshover: $buttontext;
+$filterbar: $buttontext;
+$navdropdownitemhighlight: $buttontext;
+$pulseloader: $buttontext;
+
+$iconbuttons: #ced4da;
+
+$navdropdowncontent: rgb(256, 256, 256);
 
 $keared: #eb5045;
+
+$productbackground: rgb(0, 0, 0);
+$carouselcaption: $productbackground;
 
 $byg: #017740;
 $bygdark: #01774075;
@@ -16,3 +37,71 @@ $digital: #e88334;
 $digitaldark: #e8833475;
 $teknik: #037dbb;
 $teknikdark: #037dbb75;
+
+//colors
+//color theme
+//dark theme color sorted
+// $body-bg: #212121;
+
+// $keywordbutton: #343a40;
+// $filterbuttontext: $keywordbutton;
+// $searchbuttontext: $keywordbutton;
+
+// $textcolor: #2c3e50;
+
+// $author: darkgray;
+
+// $lighttextcolor: #f8f9fa;
+// $filterbuttonbg: $lighttextcolor;
+
+// $buttontext: white;
+// $iconbuttonshover: $buttontext;
+// $filterbar: $buttontext;
+// $navdropdownitemhighlight: $buttontext;
+// $pulseloader: $buttontext;
+
+// $iconbuttons: #ced4da;
+
+// $navdropdowncontent: rgb(256, 256, 256);
+
+// $keared: #eb5045;
+
+// $productbackground: rgb(0, 0, 0);
+// $carouselcaption: $productbackground;
+
+// $byg: #017740;
+// $bygdark: #01774075;
+// $design: #ea4360;
+// $designdark: #ea436075;
+// $digital: #e88334;
+// $digitaldark: #e8833475;
+// $teknik: #037dbb;
+// $teknikdark: #037dbb75;kdark: #e76f5175;
+
+// //dark theme backup
+// $body-bg: #212121;
+// $textcolor: #2c3e50;
+// $lighttextcolor: #f8f9fa;
+// $keywordbutton: #343a40;
+// $buttontext: white;
+// $author: darkgray;
+// $iconbuttons: #ced4da;
+// $iconbuttonshover: white;
+// $filterbar: white;
+// $filterbuttonbg: #f8f9fa;
+// $filterbuttontext: #343a40;
+// $searchbuttontext: #343a40;
+// $navdropdownitemhighlight: white;
+// $navdropdowncontent: rgb(256, 256, 256);
+// $productbackground: rgb(0, 0, 0);
+// $carouselcaption: rgb(0, 0, 0);
+// $keared: #eb5045;
+// $pulseloader: white;
+// $byg: #017740;
+// $bygdark: #01774075;
+// $design: #ea4360;
+// $designdark: #ea436075;
+// $digital: #e88334;
+// $digitaldark: #e8833475;
+// $teknik: #037dbb;
+// $teknikdark: #037dbb75;

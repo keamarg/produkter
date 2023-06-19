@@ -68,7 +68,7 @@
                 {{ item }}
               </span>
             </span>
-            <p class="mt-5">
+            <p class="mt-5 product-text">
               {{ getProperty("text") }}
             </p>
             <div v-if="products[getIndex()][505]" class="mt-4 mb-0">
@@ -226,14 +226,14 @@ h2 {
 }
 .product-background {
   text-align: left;
-  color: white;
+  color: $lighttextcolor;
   background: linear-gradient(
       to right,
-      rgba(0, 0, 0, 1),
-      rgba(0, 0, 0, 0.9),
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.3)
+      rgba($productbackground, 1),
+      rgba($productbackground, 0.9),
+      rgba($productbackground, 0.8),
+      rgba($productbackground, 0.5),
+      rgba($productbackground, 0.3)
     ),
     var(--background-image) no-repeat;
   background-size: cover;
@@ -241,19 +241,19 @@ h2 {
   min-height: 35rem;
 }
 .videotekst {
-  color: darkgray;
+  color: $lighttextcolor;
 }
 
 .link-custom-author {
-  border-bottom: 2px solid darkgray;
+  border-bottom: 2px solid $author; // darkgray;
   transition: all 0.25s linear;
   position: relative;
-  color: darkgray;
+  color: $author; //darkgray;
   font-style: italic;
 }
 
 .link-custom-author:hover {
-  color: white;
+  color: $lighttextcolor; //white;
   cursor: pointer;
 }
 
@@ -282,7 +282,7 @@ h2 {
   z-index: 3;
   opacity: 0.5;
   font-size: 1.6rem;
-  color: white;
+  color: $lighttextcolor; //white
   cursor: pointer;
 }
 
@@ -291,19 +291,19 @@ h2 {
 }
 
 .btn-custom-keyword {
-  background-color: #343a40;
+  background-color: $keywordbutton; //#343a40;
   border: none;
-  color: #f8f9fa;
+  color: $lighttextcolor; //#f8f9fa;
   font-size: 0.7rem; //1
   cursor: default;
   border-radius: 0.7rem; //1
 }
 .btn-custom-keyword:hover {
-  color: #343a40;
-  background-color: #f8f9fa;
+  color: $keywordbutton;
+  background-color: $lighttextcolor;
 }
 .likeheart {
-  color: #eb5045;
+  color: $keared;
 }
 
 .likeheart:hover:before {
@@ -313,5 +313,20 @@ h2 {
 .unlikeheart:hover:before {
   /* content: "\F415"; */
   color: $keared;
+}
+
+.product-icon {
+  opacity: 0.8;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.product-icon:hover {
+  opacity: 1;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.product-text {
+  color: $lighttextcolor;
 }
 </style>

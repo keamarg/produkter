@@ -19,10 +19,14 @@
       </div>
       <div
         v-else-if="loading"
-        class="loading col d-flex align-items-center justify-content-center"
+        class="loading col d-flex align-items-center justify-content-center flex-column"
       >
         <div class="pulseLoader"></div>
+        <p style="margin-top: 10px; text-align: center; width: fit-content">
+          {{ loadingSentence }}
+        </p>
       </div>
+
       <router-view
         v-else
         :products="products"
@@ -72,9 +76,19 @@ export default {
       products: [],
       offSet: 0,
       loading: true,
+      loadingSentences: [
+        "henter profiler...",
+        "bygger siden...",
+        "brygger kaffen...",
+        "tæller til 10...",
+      ],
+      currentIndex: 0,
     };
   },
   computed: {
+    loadingSentence() {
+      return this.loadingSentences[this.currentIndex];
+    },
     fetchUrl() {
       return `${
         process.env.VUE_APP_ALMA_PROXY_PATH
@@ -129,6 +143,10 @@ export default {
   //   },
   // },
   async mounted() {
+    setInterval(() => {
+      this.currentIndex =
+        (this.currentIndex + 1) % this.loadingSentences.length;
+    }, 1000);
     let fd = await fetchData(this.fetchUrl);
     if (fd) {
       this.productCount = fd.total_record_count;
@@ -160,7 +178,7 @@ export default {
   min-height: "22rem";
 }
 .connecterror {
-  color: white;
+  color: $lighttextcolor; // white;
   cursor: pointer;
 }
 
@@ -182,7 +200,7 @@ $pulseTiming: 1.2s;
   width: $pulseSize;
   height: $pulseSize;
   border-radius: $pulseSize;
-  background-color: white;
+  background-color: $pulseloader; //white;
   outline: 1px solid transparent;
   animation: pulseanim $pulseTiming ease-in-out infinite;
 }

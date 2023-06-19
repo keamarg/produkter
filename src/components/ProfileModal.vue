@@ -43,7 +43,9 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
               <span v-for="collection in store.zoteroData" :key="collection">
                 <!-- {{ log(collection) }} -->
 
-                <span v-if="collection.keaId == store.currentProfile">
+                <span
+                  v-if="collection && collection.keaId == store.currentProfile"
+                >
                   <!-- <span v-for="collection in user" :key="collection.keaId"> -->
                   <div v-for="entry in collection" :key="entry">
                     <!-- {{ log(entry) }} -->
@@ -143,7 +145,11 @@ https://dev.to/shahednasser/how-to-easily-add-share-links-for-each-social-media-
                       </router-link>
                     </div>
                   </div>
-                  <div v-if="collection.keaId == store.currentProfile">
+                  <div
+                    v-if="
+                      collection && collection.keaId == store.currentProfile
+                    "
+                  >
                     <span
                       :id="item.data.date"
                       v-for="(item, index) in sortedCollection(collection)"
@@ -559,7 +565,7 @@ $pulseTiming: 1.2s;
   width: $pulseSize;
   height: $pulseSize;
   border-radius: $pulseSize;
-  background-color: white;
+  background-color: $pulseloader;
   outline: 1px solid transparent;
   animation: pulseanim $pulseTiming ease-in-out infinite;
 }
@@ -668,7 +674,7 @@ p {
 // }
 
 .obs {
-  color: red;
+  color: $keared;
   font-size: 1rem;
 }
 p,
